@@ -1,2 +1,2 @@
-# java-maps
+# 7map
 map data storage with pathfinding in java
