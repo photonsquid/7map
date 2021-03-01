@@ -2,8 +2,15 @@
 
 ## Sommaire
 
-- [Vision produit (discours de l'ascenseur)]()
-- Charte produit
+- [Vision produit (discours de l'ascenseur)](https://github.com/l3alr0g/7map/blob/main/doc/charte%20produit.md#vision-produit-discours-de-lascenseur)
+- [Charte produit](https://github.com/l3alr0g/7map/blob/main/doc/charte%20produit.md#charte-produit)
+- [Clients / utilisateurs](https://github.com/l3alr0g/7map/blob/main/doc/charte%20produit.md#clients--utilisateurs)
+- [Valeur métier](https://github.com/l3alr0g/7map/blob/main/doc/charte%20produit.md#valeur-m%C3%A9tier)
+- [Jalons : dates ou fonctionnalités](https://github.com/l3alr0g/7map/blob/main/doc/charte%20produit.md#jalons--dates-ou-fonctionnalit%C3%A9s)
+- [Critère de succès](https://github.com/l3alr0g/7map/blob/main/doc/charte%20produit.md#crit%C3%A8re-de-succ%C3%A8s)
+- [Risques](https://github.com/l3alr0g/7map/blob/main/doc/charte%20produit.md#risques)
+- [Performances](https://github.com/l3alr0g/7map/blob/main/doc/charte%20produit.md#performances)
+- [Tableau de compromis](https://github.com/l3alr0g/7map/blob/main/doc/charte%20produit.md#tableau-de-compromis)
 
 ## Vision produit (discours de l'ascenseur)
 
