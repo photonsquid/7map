@@ -1,0 +1,32 @@
+
+@startuml
+!define COMMENT(x) <color:grey>x</color>
+
+class App {
+    -window : long
+    +run() : void
+    -init() : void
+    -loop() : void
+    {static} +main() : void
+}
+
+class org.lwjgl.glfw.GLFW {
+    COMMENT(Ce diagramme est non exhaustif)
+    +glfwDestroyWindow(window : long) : void
+    +glfwTerminate() : void
+    +glfwSetErrorCallback() : GLFWErrorCallback
+}
+
+class org.lwjgl.glfw.Callbacks {
+    COMMENT(Ce diagramme est non exhaustif)
+    +glfwFreeCallbacks(window : long) : void
+
+}
+
+class org.lwjgl.system.Callback {
+    +free() : void
+}
+
+App o-- org.lwjgl.glfw.GLFW
+
+@enduml
