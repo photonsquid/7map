@@ -1,0 +1,23 @@
+[
+  {
+    "name": "batiment",
+    "fill-color": "#FFFFF",
+    "stroke-color": "#FFFFF",
+    "level": 4
+  },
+  {
+    "name": "ecole",
+    "extends": "batiment",
+    "stroke-color": "#FFFFE",
+    "displayName": true
+  },
+  {
+    "name": "route",
+    "stroke-color": "#FFFFE",
+    "displayName": false
+  },
+  {
+    "name": "route-velo",
+    "extends": "route"
+  }
+]

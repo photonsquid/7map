@@ -1,0 +1,49 @@
+@startuml diagram
+
+class Point{
+   + x
+   + y
+}
+
+enum Types{
+   + POINT
+   + POLYGON
+   + ...
+}
+class Feature{
+   - displayName: bool
+   - name: String
+   - p : Point[]
+   - type : Types
+   - cat : Category
+   - attribut : String[]
+}
+
+class Loader{
+   + updateChunk(p1:Point, p2:Point) : Chunk[]
+}
+
+class Chunk{
+
+}
+
+class Category{
+   - name : String
+   - fillColor : String
+   - strokeColor : String
+   - textColor : String
+   - police : String
+   - level : int
+   - icon : Image
+   - extends : String[]
+}
+class Image{
+   - path : String
+}
+
+Feature --o Point
+Feature -- Types
+Category -- Image
+Category --o Feature
+
+@enduml
