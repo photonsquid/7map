@@ -2,3 +2,5 @@
 LISEZ-MOI.txt
 .vscode
 .code-workspace
+# lwjgl auto-generated log files
+hs_err.* 
