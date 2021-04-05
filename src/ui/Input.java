@@ -1,5 +1,7 @@
 package ui;
 
+import ui.Window.eventType;
+
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
@@ -95,6 +97,22 @@ public class Input {
      */
     public boolean isButtonDown(int button) {
         return mouseBStates[button];
+    }
+
+    /**
+     * A generic method for detecting mouse button as well as keyboard 
+     * press events.
+     * @param event event type - (BUTTON | KEY)
+     * @param key key code
+     * @return
+     */
+    public boolean isDown(eventType event, int key) {
+        if (event == eventType.BUTTON) {
+            return isButtonDown(key);
+        } else if (event == eventType.KEY) {
+            return isKeyDown(key);
+        }
+        return false;
     }
 
 }

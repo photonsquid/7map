@@ -1,14 +1,28 @@
 package ui;
 
 import exceptions.InitError;
+import ui.Task;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
 
 public class Window {
+
+    public static enum eventType {
+        KEY,
+        BUTTON
+    }
+    
+    private Map<eventType, Map<Integer, List<Task>>> tasks = new HashMap<>();
     private int[] size = new int[2];
     private String title;
     private long windowElement;
-    public Input input;
+    private Input input;
 
     public Window(int width, int height, String title) {
         this.size[0] = width;
@@ -32,6 +46,10 @@ public class Window {
         if (windowElement == 0) {
             throw new InitError("Window was not properly initialized");
         }
+
+        // setup task map
+        tasks.put(eventType.KEY, new HashMap<>());
+        tasks.put(eventType.BUTTON, new HashMap<>());
 
         // center the window
         GLFWVidMode videoMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
@@ -57,6 +75,7 @@ public class Window {
      */
     public void update() {
         GLFW.glfwPollEvents();
+        runTasks();
     }
 
     /**
@@ -75,8 +94,58 @@ public class Window {
      */
     public void destroy() {
         input.destroy();
-        // GLFW.glfwWindowShouldClose(windowElement);
         GLFW.glfwDestroyWindow(windowElement);
         GLFW.glfwTerminate();
+    }
+
+    /**
+     * Schedule Runnable action executed on key press interrupt.
+     * @param key key code
+     * @param action lambda runnable
+     * @return generated {@code task} object
+     */
+    public Task onKeyDown(int key, Runnable action) {
+        return addTask(eventType.KEY, key, action);
+    }
+
+    /**
+     * Schedule Runnable action executed on mouse button press interrupt.
+     * @param key key code
+     * @param action lambda runnable
+     * @return generated {@code task} object
+     */
+    public Task onButtonDown(int key, Runnable action) {
+        return addTask(eventType.BUTTON, key, action);
+    }
+
+    /**
+     * Add a task to the {@code tasks} list.
+     * @param event event type
+     * @param key key code
+     * @param action lambda runnable
+     * @return generated {@code task} object
+     */
+    private Task addTask(eventType event, int key, Runnable action) {
+        Map<Integer, List<Task>> subTasks = tasks.get(event);
+        if (!subTasks.containsKey(key)) { // TODO : Replace this with a call to "Map.computeIfAbsent()" 
+            subTasks.put(key, new ArrayList<>());
+        }
+        Task taskAction = new Task(action, subTasks.get(key));
+        subTasks.get(key).add(taskAction);
+        return taskAction;
+    }
+
+    /**
+     * Execute all active tasks.
+     */
+    private void runTasks() {
+        for (eventType event : eventType.values()) {
+            Map<Integer, List<Task>> subTasks = tasks.get(event);
+            for (Map.Entry<Integer, List<Task>> entry: subTasks.entrySet()) {
+                if (input.isDown(event, entry.getKey())) {
+                    entry.getValue().forEach((Task taskAction) -> taskAction.run());
+                }
+            }
+        }
     }
 }

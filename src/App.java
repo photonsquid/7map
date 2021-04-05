@@ -3,6 +3,7 @@ import java.util.function.Consumer;
 import org.lwjgl.glfw.GLFW;
 
 import exceptions.ExitOverrideException;
+import ui.Task;
 import ui.Window;
 
 public class App implements Runnable {
@@ -16,14 +17,20 @@ public class App implements Runnable {
         app.start();
     }
 
+    /**
+     * App boot up sequence.
+     */
     public void init() {
         System.out.println("Booting up application...");
         window = new Window(SIZE[0], SIZE[1], "7map test application");
         window.create();
 
-        // Runnable close = action(() -> {
-        //     throw new ExitOverrideException("");
-        // });
+        // schedule window closing when escape is pressed
+        Task closeOnEsc = window.onKeyDown(GLFW.GLFW_KEY_ESCAPE, () -> {
+            throw new ExitOverrideException(0);
+        });
+        // testing remove() method
+        // closeOnEsc.remove(); 
     }
 
     /**
@@ -31,12 +38,13 @@ public class App implements Runnable {
      */
     public void run() {
         init();
-        while(!window.shouldClose()) {
+        try {
+            while(!window.shouldClose()) {
             update();
             render();
-
-            // closing condition
-            if (window.getInput().isKeyDown(GLFW.GLFW_KEY_ESCAPE)) break;
+            }
+        } catch (ExitOverrideException e) {
+            System.out.println(e.getMessage());
         }
         window.destroy(); // absolutely necessary
     }
