@@ -6,7 +6,7 @@ package exceptions;
 public class InitError extends Error {
 
     /**
-     * just so vs code can happily stop throwing warnings for no fucking reason
+     * just so vs code can happily stop throwing warnings for no fucking reason.
      */
     private static final long serialVersionUID = 1L;
 

@@ -2,10 +2,13 @@ package ui;
 
 import ui.Window.eventType;
 
+import javax.swing.plaf.metal.MetalBorders.ScrollPaneBorder;
+
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
+import org.lwjgl.glfw.GLFWScrollCallback;
 
 /**
  * @author @l3alr0g
@@ -14,10 +17,12 @@ public class Input {
     private GLFWKeyCallback keyCB;
     private GLFWCursorPosCallback cursorPosCB;
     private GLFWMouseButtonCallback mouseClickCB;
+    private GLFWScrollCallback mouseScrollCB;
 
     private boolean[] keyStates = new boolean[GLFW.GLFW_KEY_LAST];
     private boolean[] mouseBStates = new boolean[GLFW.GLFW_MOUSE_BUTTON_LAST];
     private double[] mousePos = new double[2];
+    private double[] scrollOffset = {0.0d, 0.0d};
 
     public Input() {
         keyCB = new GLFWKeyCallback(){ // invoke will be executed on any kb event
@@ -32,7 +37,6 @@ public class Input {
             public void invoke(long window, double xpos, double ypos) {
                 mousePos[0] = xpos;
                 mousePos[1] = ypos;
-                
             }
         };
 
@@ -40,6 +44,14 @@ public class Input {
             @Override
             public void invoke(long window, int button, int action, int mods) {
                 mouseBStates[button] = (action != GLFW.GLFW_RELEASE);
+            }
+        };
+
+        mouseScrollCB = new GLFWScrollCallback(){
+            @Override
+            public void invoke(long window, double xoffset, double yoffset) {
+                scrollOffset[0] += xoffset;
+                scrollOffset[1] += yoffset;
             }
         };
     }
@@ -51,6 +63,14 @@ public class Input {
 
     public double getMouseY() {
         return mousePos[1];
+    }
+
+    public double getScrollX() {
+        return scrollOffset[0];
+    }
+
+    public double getScrollY() {
+        return scrollOffset[1];
     }
 
     public double[] getMousePos() {
@@ -69,6 +89,10 @@ public class Input {
         return mouseClickCB;
     }
 
+    public GLFWScrollCallback getMouseScrollCB() {
+        return mouseScrollCB;
+    }
+
     // other methods
 
 
@@ -79,6 +103,7 @@ public class Input {
         keyCB.free();
         cursorPosCB.free();
         mouseClickCB.free();
+        mouseScrollCB.free();
     }
 
     /**

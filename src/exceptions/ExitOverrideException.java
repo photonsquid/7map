@@ -9,11 +9,11 @@ package exceptions;
 public class ExitOverrideException extends RuntimeException {
     
     /**
-     * default sVUID
+     * default sVUID.
      */
     private static final long serialVersionUID = 1L;
 
     public ExitOverrideException(int code) {
-        super(String.format("Application was forcefully stoped with code %d", code));
+        super(String.format("Application was %sstopped with code %d", (code != 0) ? "forcefully " : "", code));
     }
 }
