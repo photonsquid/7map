@@ -1,9 +1,5 @@
 package ui;
 
-import ui.Window.eventType;
-
-import javax.swing.plaf.metal.MetalBorders.ScrollPaneBorder;
-
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
@@ -11,9 +7,16 @@ import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
 /**
- * @author @l3alr0g
+ * @author l3alr0g
  */
 public class Input {
+    
+    public enum eventType {
+        KEY,
+        BUTTON,
+        NONE
+    }
+    
     private GLFWKeyCallback keyCB;
     private GLFWCursorPosCallback cursorPosCB;
     private GLFWMouseButtonCallback mouseClickCB;
@@ -95,7 +98,6 @@ public class Input {
 
     // other methods
 
-
     /**
      * Free all callbacks, thus destroying the window.
      */
@@ -132,10 +134,13 @@ public class Input {
      * @return
      */
     public boolean isDown(eventType event, int key) {
-        if (event == eventType.BUTTON) {
-            return isButtonDown(key);
-        } else if (event == eventType.KEY) {
-            return isKeyDown(key);
+        switch (event) { // @kingussopp @Mmzhk21 any suggestions welcome
+            case BUTTON:
+                return isButtonDown(key);
+            case KEY:
+                return isKeyDown(key);
+            case NONE:
+                return true;
         }
         return false;
     }

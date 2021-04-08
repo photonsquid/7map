@@ -49,9 +49,13 @@ public class App implements Runnable {
             throw new ExitOverrideException(0);
         });
 
-        Task Fullscreen = window.onKeyDown(GLFW.GLFW_KEY_F11, () -> {
+        Task fullscreen = window.onKeyDown(GLFW.GLFW_KEY_F11, () -> {
             window.setFullscreen(!window.isFullscreen());
         });
+
+        // Task dummy = window.scheduleTask(() -> {
+        //     System.out.println("Heyo");
+        // });
     }
 
     /**

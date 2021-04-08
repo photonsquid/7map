@@ -2,11 +2,7 @@ package ui;
 
 import exceptions.InitError;
 import ui.math.Vector3f;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
+import ui.Input.eventType;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -14,19 +10,16 @@ import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
-public class Window {
+public class Window extends FrameObject {
 
-    public enum eventType {
-        KEY,
-        BUTTON
-    }
+    
     
     // functional attributes
-    private Map<eventType, Map<Integer, List<Task>>> tasks = new HashMap<>();
     private int[] size = new int[2];
     private String title;
     private long windowElement;
     private Input input;
+    private TaskMgr taskManager = new TaskMgr(); // unused
     private int[] posX = new int[1];
     private int[] posY = new int[1];
 
@@ -36,6 +29,12 @@ public class Window {
     private boolean isResized;
     private boolean isFullscreen;
 
+    /**
+     * Create a new window element from scratch
+     * @param width width of the window (px)
+     * @param height height of the window (px)
+     * @param title title (displayed on top)
+     */
     public Window(int width, int height, String title) {
         this.size[0] = width;
         this.size[1] = height;
@@ -69,6 +68,7 @@ public class Window {
     /**
      * Create the window and initialize its components
      */
+    @Override
     public void create() {
         if (!GLFW.glfwInit()) { // glfw not initialized
             throw new InitError("Illegal attempt to create Window class while GLFW hasn't been initialized yet");
@@ -81,9 +81,8 @@ public class Window {
             throw new InitError("Window was not properly initialized");
         }
 
-        // setup task map
-        tasks.put(eventType.KEY, new HashMap<>());
-        tasks.put(eventType.BUTTON, new HashMap<>());
+        // initialize task manager
+        taskManager.create(input);
 
         // center the window
         GLFWVidMode videoMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
@@ -126,6 +125,7 @@ public class Window {
      * Should be called on each frame, as this method handles 
      * all the user inputs and graphical updating routines.
      */
+    @Override
     public void update() {
         if (isResized) {
             GL11.glViewport(0, 0, size[0], size[1]); // update the viewport
@@ -135,7 +135,8 @@ public class Window {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
         GLFW.glfwPollEvents();
-        runTasks();
+
+        taskManager.update();
     }
 
     /**
@@ -152,8 +153,10 @@ public class Window {
     /**
      * Destroy window element and its dependencies.
      */
+    @Override
     public void destroy() {
         input.destroy();
+        taskManager.destroy();
         sizeCB.free();
         GLFW.glfwDestroyWindow(windowElement);
         GLFW.glfwTerminate();
@@ -166,7 +169,7 @@ public class Window {
      * @return generated {@code task} object
      */
     public Task onKeyDown(int key, Runnable action) {
-        return addTask(eventType.KEY, key, action);
+        return taskManager.addTask(eventType.KEY, key, action);
     }
 
     /**
@@ -176,37 +179,10 @@ public class Window {
      * @return generated {@code task} object
      */
     public Task onButtonDown(int key, Runnable action) {
-        return addTask(eventType.BUTTON, key, action);
+        return taskManager.addTask(eventType.BUTTON, key, action);
     }
 
-    /**
-     * Add a task to the {@code tasks} list.
-     * @param event event type
-     * @param key key code
-     * @param action lambda runnable
-     * @return generated {@code task} object
-     */
-    private Task addTask(eventType event, int key, Runnable action) {
-        Map<Integer, List<Task>> subTasks = tasks.get(event);
-        if (!subTasks.containsKey(key)) { // TODO : Replace this with a call to "Map.computeIfAbsent()" 
-            subTasks.put(key, new ArrayList<>());
-        }
-        Task taskAction = new Task(action, subTasks.get(key));
-        subTasks.get(key).add(taskAction);
-        return taskAction;
-    }
-
-    /**
-     * Execute all active tasks.
-     */
-    private void runTasks() {
-        for (eventType event : eventType.values()) {
-            Map<Integer, List<Task>> subTasks = tasks.get(event);
-            for (Map.Entry<Integer, List<Task>> entry: subTasks.entrySet()) {
-                if (input.isDown(event, entry.getKey())) {
-                    entry.getValue().forEach((Task taskAction) -> taskAction.run());
-                }
-            }
-        }
+    public Task scheduleTask(Runnable action) {
+        return taskManager.addTask(eventType.NONE, 0, action);
     }
 }
