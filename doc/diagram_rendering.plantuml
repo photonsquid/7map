@@ -1,0 +1,135 @@
+@startuml diagram
+
+class App implements Runnable {
+    - SIZE
+    - main : Thread
+}
+
+interface Runnable {
+
+}
+
+package exceptions {
+    class ExitOverrideException {
+
+    }
+    class InitError {
+
+    }
+}
+package ui {
+    
+    class Window {
+        - size : int[2]
+        - title : String
+        - windowElement : long
+        - posX : int[1]
+        - posY : int[1]
+
+    }
+
+    enum eventType {
+        KEY
+        BUTTON
+        NONE
+    }
+
+    class Input {
+        - keyCB : GLFWKeyCallback
+        - cursorPosCB : GLFWCursorPosCallback
+        - mouseClickCB : GLFWMouseButtonCallback
+        - mouseScrollCB : GLFWScrollCallback
+        - keyStates : boolean[]
+        - mouseBStates : boolean[]
+        - mousePos : double[]
+        - scrollOffset : double[]
+        + getMouseX() : double
+        + getMouseY() : double
+        + getScrollX() : double
+        + getScrollY() : double
+        + getMousePos() : double[]
+        + getKeyCB() : GLFWKeyCallback
+        + getCursorPosCB() : GLFWCursorPosCallback
+        + getMouseClickCB() : GLFWMouseButtonCallback
+        + getMouseScrollCB() : GLFWScrollCallback
+        + destroy() : void
+        + isKeyDown(key : int) : boolean
+        + isButtonDown(button : int) : boolean
+        + isDown(event : eventType, key : int) : boolean
+
+        
+    }
+
+    class TaskMgr {
+        - tasks : Map<>
+        - inputStream : Input
+        + create(inputStream : Input) : void
+        + update() : void
+        + addTask(event : eventType, key : int, action : Runnable)
+        - runTasks() : void
+        
+    }
+
+    class Task implements Runnable {
+        - action : Runnable
+        - {static} lastId : int
+        - id : int
+        - parent : List<Task>
+        + run() : void
+        + remove() : void
+    }
+
+    package gfx {
+
+        class Renderer {
+            + render() : void
+        }
+
+        class Mesh {
+            - indices : int[]
+            - vertices : Vertex[]
+            - vao : int
+            - pbo : int
+            - ibo : int
+        }
+
+        class Vertex {
+            + SIZE : int
+            + getPos() : Vector3f
+        }
+    }
+    
+    package math {
+        class Vector3f {
+            - x : float
+            - y : float
+            - z : float
+        }
+    }
+
+
+    class FrameObject {
+        + create() : void
+        + update() : void
+        + destroy() : void
+
+    }
+}
+
+Window --* App
+Renderer --* App
+TaskMgr --* Window
+Input --* Window
+Vector3f --* Window
+Vertex --o Mesh
+Task --* TaskMgr
+TaskMgr --|> FrameObject
+Window --|> FrameObject
+Window -- InitError
+Input -- eventType
+TaskMgr -- eventType
+Input --* TaskMgr
+App -- ExitOverrideException
+Vector3f --|> Vertex
+
+@enduml
