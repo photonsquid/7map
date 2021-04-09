@@ -15,7 +15,7 @@ public class App implements Runnable {
     private Renderer renderer;
     private final int[] SIZE = {1600, 900};
 
-    public Mesh mesh = new Mesh(new Vertex[] {
+    private Mesh mesh = new Mesh(new Vertex[] {
         new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f)),
         new Vertex(new Vector3f(0.5f, 0.5f, 0.0f)),
         new Vertex(new Vector3f(0.5f, -0.5f, 0.0f)),

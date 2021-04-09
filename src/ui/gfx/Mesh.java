@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL30;
 import org.lwjgl.system.MemoryUtil;
 
 public class Mesh {
+    private Vertex[] vertices;
     private int[] indices;
     /**Vertex array object */
     private int vao; 
@@ -17,7 +18,6 @@ public class Mesh {
     private int pbo;
     /** */
     private int ibo;
-    private Vertex[] vertices;
 
     public Mesh(Vertex[] vertices, int[] indices) {
         this.vertices = vertices;
@@ -35,7 +35,7 @@ public class Mesh {
 
     // other methods
     /**
-     * Create the mesh.
+     * Generate the mesh from its vertices.
      */
     public void build() {
         vao = GL30.glGenVertexArrays();
