@@ -8,6 +8,9 @@ import ui.gfx.Vertex;
 import ui.gfx.Renderer;
 import ui.math.Vector3f;
 
+/**
+ * Main app class
+ */
 public class App implements Runnable {
 
     private Thread main; // main thread
@@ -21,6 +24,7 @@ public class App implements Runnable {
         new Vertex(new Vector3f(0.5f, -0.5f, 0.0f)),
         new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f))
     }, 
+    
     new int[] {
         0, 1, 2,
         0, 3, 2
