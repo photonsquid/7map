@@ -108,7 +108,7 @@ package ui {
     }
 
 
-    class FrameObject {
+    abstract class FrameObject {
         + create() : void
         + update() : void
         + destroy() : void
