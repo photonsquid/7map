@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="335px" preserveAspectRatio="none" style="width:416px;height:335px;" version="1.1" viewBox="0 0 416 335" width="416px" zoomAndPan="magnify"><defs/><g><!--MD5=[972bde5337b4335dd91fa5354c932445]
+class Point--><rect codeLine="8" fill="#FFFFFF" height="68.7656" id="Point" style="stroke:#2157AE;stroke-width:1.5;" width="34" x="109.5" y="225.5"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="28" x="112.5" y="242.957">Point</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="110.5" x2="142.5" y1="250.5938" y2="250.5938"/><ellipse cx="120.5" cy="261.5938" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="6" x="129.5" y="266.0127">x</text><ellipse cx="120.5" cy="275.4297" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="6" x="129.5" y="279.8486">y</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="110.5" x2="142.5" y1="286.2656" y2="286.2656"/><!--MD5=[ff5b00e4f788038bc8b9934b246a9c20]
+class Types--><rect codeLine="13" fill="#FFFFFF" height="82.6016" id="Types" style="stroke:#2157AE;stroke-width:1.5;" width="77" x="179" y="218.5"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="33" x="201" y="235.957">Types</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="180" x2="255" y1="243.5938" y2="243.5938"/><ellipse cx="190" cy="254.5938" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="29" x="199" y="259.0127">POINT</text><ellipse cx="190" cy="268.4297" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="199" y="272.8486">POLYGON</text><ellipse cx="190" cy="282.2656" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="21" x="199" y="286.6846">LINE</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="180" x2="255" y1="293.1016" y2="293.1016"/><!--MD5=[82c53a10f238a1092cf5f0b044477708]
+class Feature--><rect codeLine="18" fill="#FFFFFF" height="124.1094" id="Feature" style="stroke:#2157AE;stroke-width:1.5;" width="113" x="161" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="196.5" y="24.457">Feature</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="162" x2="273" y1="32.0938" y2="32.0938"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="169" y="40.0938"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="87" x="181" y="47.5127">displayName: bool</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="169" y="53.9297"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="181" y="61.3486">name: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="169" y="67.7656"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="181" y="75.1846">p : Point[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="169" y="81.6016"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="181" y="89.0205">type : Types</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="169" y="95.4375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="181" y="102.8564">cat : Category</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="169" y="109.2734"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="76" x="181" y="116.6924">attribut : String[]</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="162" x2="273" y1="123.1094" y2="123.1094"/><!--MD5=[4dfc6a72b8dd60daa1b635d583ff79da]
+class Map--><rect codeLine="36" fill="#FFFFFF" height="82.6016" id="Map" style="stroke:#2157AE;stroke-width:1.5;" width="119" x="7" y="27.5"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="23" x="55" y="44.957">Map</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="8" x2="125" y1="52.5938" y2="52.5938"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="60.5938"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="92" x="27" y="68.0127">Features[]: Feature</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="74.4297"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="27" y="81.8486">filePath: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="88.2656"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="27" y="95.6846">settingsPath: String</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="8" x2="125" y1="102.1016" y2="102.1016"/><!--MD5=[a96594a83e2ecdc78cbf17c2ddf01934]
+class Category--><rect codeLine="42" fill="#FFFFFF" height="137.9453" id="Category" style="stroke:#2157AE;stroke-width:1.5;" width="118" x="291.5" y="191"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="49" x="326" y="208.457">Category</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="292.5" x2="408.5" y1="216.0938" y2="216.0938"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="299.5" y="224.0938"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="311.5" y="231.5127">name : String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="299.5" y="237.9297"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="311.5" y="245.3486">fillColor : String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="299.5" y="251.7656"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="92" x="311.5" y="259.1846">strokeColor : String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="299.5" y="265.6016"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="311.5" y="273.0205">textColor : String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="299.5" y="279.4375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="65" x="311.5" y="286.8564">police : String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="299.5" y="293.2734"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="42" x="311.5" y="300.6924">level : int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="299.5" y="307.1094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="82" x="311.5" y="314.5283">extends : String[]</text><line style="stroke:#2157AE;stroke-width:1.5;" x1="292.5" x2="408.5" y1="320.9453" y2="320.9453"/><!--MD5=[f45b9b3a50f093fcc0ab09047e2b9dc7]
+link Map to Feature--><path codeLine="52" d="M126.07,69 C137.62,69 149.17,69 160.72,69 " fill="none" id="Map-Feature" style="stroke:#2157AE;stroke-width:1.0;"/><!--MD5=[725e216622fcb37e4d3ed3cf28171b66]
+link Feature to Point--><path codeLine="53" d="M188.08,131.1 C173.02,162.38 155.27,199.26 142.7,225.36 " fill="none" id="Feature-Point" style="stroke:#2157AE;stroke-width:1.0;"/><!--MD5=[bb64845016628392f7895a958b921c65]
+link Feature to Types--><path codeLine="54" d="M217.5,131.1 C217.5,159.68 217.5,192.94 217.5,218.38 " fill="none" id="Feature-Types" style="stroke:#2157AE;stroke-width:1.0;"/><!--MD5=[72eb44642f8cf04f34f7fa6127e15617]
+link Feature to Category--><path codeLine="55" d="M260.5,131.1 C273.93,150.19 288.83,171.37 302.58,190.91 " fill="none" id="Feature-Category" style="stroke:#2157AE;stroke-width:1.0;"/><!--MD5=[a2f46288a2abb7d2a8bc4551e3720061]
+@startuml diagram
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+skinparam class {
+BackgroundColor transparent
+ArrowColor #2157AE
+BorderColor #2157AE
+}
+class Point{
+   + x
+   + y
+}
+
+enum Types{
+   + POINT
+   + POLYGON
+   + LINE
+}
+class Feature{
+   - displayName: bool
+   - name: String
+   - p : Point[]
+   - type : Types
+   - cat : Category
+   - attribut : String[]
+}
+
+' class Loader{
+'    + updateChunk(p1:Point, p2:Point) : Chunk[]
+'    + loadMap(m: Map)
+' }
+
+' class Chunk{
+
+' }
+
+class Map{
+   - Features[]: Feature
+   - filePath: String
+   - settingsPath: String
+}
+
+class Category{
+   - name : String
+   - fillColor : String
+   - strokeColor : String
+   - textColor : String
+   - police : String
+   - level : int
+   - extends : String[]
+}
+
+Map - Feature
+Feature - - Point
+Feature - - Types
+Feature - - Category
+
+@enduml
+
+@startuml diagram
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+skinparam class {
+BackgroundColor transparent
+ArrowColor #2157AE
+BorderColor #2157AE
+}
+class Point{
+   + x
+   + y
+}
+
+enum Types{
+   + POINT
+   + POLYGON
+   + LINE
+}
+class Feature{
+   - displayName: bool
+   - name: String
+   - p : Point[]
+   - type : Types
+   - cat : Category
+   - attribut : String[]
+}
+
+
+
+
+class Map{
+   - Features[]: Feature
+   - filePath: String
+   - settingsPath: String
+}
+
+class Category{
+   - name : String
+   - fillColor : String
+   - strokeColor : String
+   - textColor : String
+   - police : String
+   - level : int
+   - extends : String[]
+}
+
+Map - Feature
+Feature - - Point
+Feature - - Types
+Feature - - Category
+
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 11:25:05 CET 2021)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: fr
+Country: FR
+--></g></svg>
