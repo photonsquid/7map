@@ -4,10 +4,6 @@ LISEZ-MOI.txt
 
 # VS Code config
 .vscode
-!.launch.json
-!.tasks.json
-# pour avoir les "conventionalCommits.scopes" mais il faudrait faire un script qui les met à jour automatiquement 
-!.settings.json 
 
 .code-workspace
 # lwjgl auto-generated log files

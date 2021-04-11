@@ -9,8 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>7map</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/7map/7map</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
