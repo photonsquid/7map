@@ -16,7 +16,7 @@ public class Mesh {
     private int vao; 
     /**Position buffer object */
     private int pbo;
-    /** */
+    /**Indices buffer object */
     private int ibo;
 
     public Mesh(Vertex[] vertices, int[] indices) {
@@ -42,7 +42,7 @@ public class Mesh {
         GL30.glBindVertexArray(vao);
 
         FloatBuffer positionBuffer = MemoryUtil.memAllocFloat(vertices.length * 3);
-        float[] positionData = new float[vertices.length * 3]; // write to array first, the convert to opengl format
+        float[] positionData = new float[vertices.length * 3]; // write to array first, then convert to opengl format
         for (int i = 0; i < vertices.length; i++) {
             positionData[3 * i] = vertices[i].getPos().getX();
             positionData[3 * i + 1] = vertices[i].getPos().getY();
@@ -53,15 +53,15 @@ public class Mesh {
         pbo = GL15.glGenBuffers();
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, pbo); // bind to pbo
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, positionBuffer, GL15.GL_STATIC_DRAW); // store
-        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0); // cf shader code
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0); // unbind
 
         IntBuffer indicesBuffer = MemoryUtil.memAllocInt(indices.length);
         indicesBuffer.put(indices).flip();
 
         ibo = GL15.glGenBuffers();
-        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, ibo); // cf https://youtu.be/1F9shq6KubY
-        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL15.GL_STATIC_DRAW);
-        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, ibo); // bind buffer (cf https://youtu.be/1F9shq6KubY)
+        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL15.GL_STATIC_DRAW); // edit buffer data
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0); // unbind before next usage
     }
 }

@@ -1,0 +1,1 @@
+This folder contains the shader code atm, if you think it should be reorganized to improve the repository's structure, please create an issue and mention @l3alr0g, I'll tackle it as soon as I can.

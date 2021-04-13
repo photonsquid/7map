@@ -6,6 +6,7 @@ import ui.Window;
 import ui.gfx.Mesh;
 import ui.gfx.Vertex;
 import ui.gfx.Renderer;
+import ui.gfx.Shader;
 import ui.math.Vector3f;
 
 /**
@@ -18,6 +19,7 @@ public class App implements Runnable {
     private Renderer renderer;
     private final int[] windowSize = {1600, 900};
 
+    // testing code ##########################
     private Mesh mesh = new Mesh(new Vertex[] {
         new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f)),
         new Vertex(new Vector3f(0.5f, 0.5f, 0.0f)),
@@ -30,6 +32,9 @@ public class App implements Runnable {
         0, 3, 2
     });
 
+    private Shader testShader = new Shader("./src/main/java/resources/shaders/Vertex.glsl", "./src/main/java/resources/shaders/Fragment.glsl");
+
+    // ###############################
 
     public void start() {
         main = new Thread(this, "main");
@@ -41,12 +46,18 @@ public class App implements Runnable {
      */
     public void init() {
         System.out.println("Booting up application...");
-        renderer = new Renderer();
+
+        renderer = new Renderer(testShader);
         window = new Window(windowSize[0], windowSize[1], "7map test application");
         window.setBackgroundColor(0.1f, 0.1f, 0.1f);
         window.create();
 
+        // testing code goes here #################
         mesh.build();
+
+        testShader.create();
+        // ############################
+
 
         // schedule window closing when escape is pressed
         Task closeOnEsc = window.onKeyDown(GLFW.GLFW_KEY_ESCAPE, () -> {
@@ -84,7 +95,7 @@ public class App implements Runnable {
     }
 
     private void render() {
-        renderer.render(mesh);
+        renderer.renderMesh(mesh);
         window.swap();
     }
 
