@@ -1,3 +1,5 @@
+package data_handler;
+
 public class Image {
     private String path;
 

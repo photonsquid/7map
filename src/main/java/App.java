@@ -16,7 +16,7 @@ public class App implements Runnable {
     private Thread main; // main thread
     private Window window;
     private Renderer renderer;
-    private final int[] SIZE = {1600, 900};
+    private final int[] windowSize = {1600, 900};
 
     private Mesh mesh = new Mesh(new Vertex[] {
         new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f)),
@@ -42,7 +42,7 @@ public class App implements Runnable {
     public void init() {
         System.out.println("Booting up application...");
         renderer = new Renderer();
-        window = new Window(SIZE[0], SIZE[1], "7map test application");
+        window = new Window(windowSize[0], windowSize[1], "7map test application");
         window.setBackgroundColor(0.1f, 0.1f, 0.1f);
         window.create();
 

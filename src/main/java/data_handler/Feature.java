@@ -1,3 +1,5 @@
+package data_handler;
+
 public class Feature{
     private boolean displayName;
     private String name;

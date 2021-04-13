@@ -1,4 +1,4 @@
-package dataHandler;
+package data_handler;
 
 public class Category {
     private String name;
