@@ -5,18 +5,11 @@ class Point{
    + y
 }
 
-enum Types{
-   + POINT
-   + POLYGON
-   + ...
-}
 class Feature{
-   - displayName: bool
    - name: String
    - p : Point[]
    - type : Types
    - cat : Category
-   - attribut : String[]
 }
 
 class Loader{
@@ -35,7 +28,11 @@ class Category{
    - police : String
    - level : int
    - icon : Image
-   - extends : String[]
+   - zoomable: bool
+   - displayName: bool
+   - extendsFrom : String[]
+   'pour le pathfinding
+   - attribut: String[] 
 }
 class Image{
    - path : String

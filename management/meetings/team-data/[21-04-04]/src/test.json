@@ -3,7 +3,7 @@
     "name": "batiment",
     "fill-color": "#FFFFF",
     "stroke-color": "#FFFFF",
-    "level": 4
+    "level": -1
   },
   {
     "name": "ecole",
