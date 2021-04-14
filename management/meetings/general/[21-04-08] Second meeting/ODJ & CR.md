@@ -19,5 +19,4 @@ Prise de note : Sébastien
 
 ## Ordre du jour
 
-
 ## Compte rendu
