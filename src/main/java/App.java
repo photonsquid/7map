@@ -3,16 +3,22 @@ import org.lwjgl.glfw.GLFW;
 import exceptions.ExitOverrideException;
 import ui.Task;
 import ui.Window;
+import ui.gfx.Material;
 import ui.gfx.Mesh;
 import ui.gfx.Vertex;
 import ui.gfx.Renderer;
 import ui.gfx.Shader;
+import ui.math.Vector2f;
 import ui.math.Vector3f;
+
 
 /**
  * Main app class
  */
 public class App implements Runnable {
+
+    public static String shaderPath = "./src/main/java/resources/shaders";
+    public static String texturePath = "./src/main/java/resources/textures";
 
     private Thread main; // main thread
     private Window window;
@@ -21,18 +27,19 @@ public class App implements Runnable {
 
     // testing code ##########################
     private Mesh mesh = new Mesh(new Vertex[] {
-        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f)),
-        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f)),
-        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f)),
-        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f))
+        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
+        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(0.0f, 1.0f)),
+        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(1.0f, 1.0f)),
+        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0f, 0.0f, 1.0f), new Vector2f(1.0f, 0.0f))
     }, 
     
     new int[] {
         0, 1, 2,
         0, 3, 2
-    });
+    },
+    new Material(texturePath + "/ropes.jpg"));
 
-    private Shader testShader = new Shader("./src/main/java/resources/shaders/Vertex.glsl", "./src/main/java/resources/shaders/Fragment.glsl");
+    private Shader testShader = new Shader(shaderPath + "/Vertex.glsl", shaderPath + "/Fragment.glsl");
 
     // ###############################
 
@@ -86,8 +93,7 @@ public class App implements Runnable {
         } catch (ExitOverrideException e) {
             System.out.println(e.getMessage());
         }
-        window.destroy(); // absolutely necessary
-        main.interrupt();
+        stop(); // absolutely necessary
     }
 
     private void update() {
@@ -97,6 +103,20 @@ public class App implements Runnable {
     private void render() {
         renderer.renderMesh(mesh);
         window.swap();
+    }
+
+    /**
+     * Clean shutdown
+     */
+    private void stop() {
+        window.destroy(); 
+        main.interrupt();
+
+        // testing code goes here #################
+
+        testShader.destroy();
+
+        // ######################
     }
 
     public static void main(String[] args) {

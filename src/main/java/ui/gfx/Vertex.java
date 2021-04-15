@@ -1,15 +1,23 @@
 package ui.gfx;
 
+import ui.math.Vector2f;
 import ui.math.Vector3f;
 
 public class Vertex {
-    /**The position of the vertex */
     private Vector3f pos;
+    private Vector3f color;
+    private Vector2f textureCoord;
     public static final int SIZE = 3;
 
-    public Vertex(Vector3f position) {
-        pos = position;
+    public Vertex(Vector3f position, Vector3f color, Vector2f textureCoord) {
+        this.pos = position;
+        this.color = color;
+        this.textureCoord = textureCoord;
     }
 
     public Vector3f getPos() {return pos;}
+
+    public Vector3f getColor() {return color;}
+
+    public Vector2f getTexCoord() {return textureCoord;}
 }
