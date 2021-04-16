@@ -1,5 +1,8 @@
 package ui.math;
 
+/**
+ * A four-dimensional mathematical vector.
+ */
 public class Vector4f {
     private float w, x, y, z;
 

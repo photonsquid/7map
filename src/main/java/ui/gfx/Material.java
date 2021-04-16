@@ -1,13 +1,10 @@
 package ui.gfx;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 
 import ui.utils.FileUtils;
 
