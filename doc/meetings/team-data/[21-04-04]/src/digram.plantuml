@@ -1,46 +1,63 @@
 @startuml diagram
 
+class Map{
+   - features[]: Feature
+   - filePath: String
+   - settingsPath: String
+   + update(p1:Point, p2:Point) : Mesh[]
+   ---
+   + Map(filePath: String, settingsPath: String)
+}
+
 class Point{
-   + x
-   + y
+   - x
+   - y
+   ---
+   + Point(x: int, y: int)
 }
 
 class Feature{
    - name: String
    - p : Point[]
-   - type : Types
    - cat : Category
+   ---
+   + Feature(name: String, p: Point[], cat : Category)
 }
 
-class Loader{
-   + updateChunk(p1:Point, p2:Point) : Chunk[]
-}
-
-class Chunk{
-
-}
 
 class Category{
-   - name : String
-   - fillColor : String
-   - strokeColor : String
-   - textColor : String
-   - police : String
-   - level : int
-   - icon : Image
+   - name: String
+   - fillColor: String
+   - strokeColor: String
+   - textColor: String
+   - police: String
+   - level: int
+   - icon: Image
    - zoomable: bool
    - displayName: bool
-   - extendsFrom : String[]
+   - extendsFrom: String[]
    'pour le pathfinding
-   - attribut: String[] 
+   - attribut: String[]
+   ---
+   + Category(name: String,
+   fillColor: String,
+   strokeColor: String,
+   textColor: String,
+   police: String,
+   level: int,
+   icon: Image,
+   zoomable: bool,
+   displayName: bool)
 }
 class Image{
    - path : String
+   ---
+   + Image(path: String)
 }
 
 Feature --o Point
-Feature -- Types
-Category -- Image
+Feature - Map
+Category - Image
 Category --o Feature
 
 @enduml
