@@ -128,6 +128,7 @@ public class Window extends FrameObject {
      * <p>
      * Should be called on each frame, as this method handles 
      * all the user inputs and graphical updating routines.
+     * </p>
      */
     @Override
     public void update() {
@@ -150,6 +151,9 @@ public class Window extends FrameObject {
         GLFW.glfwSwapBuffers(windowElement);
     }
 
+    /**
+     * @see {@code GLFW.glfwWindowShouldClose()}
+     */
     public boolean shouldClose() {
         return GLFW.glfwWindowShouldClose(windowElement);
     }

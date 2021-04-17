@@ -28,17 +28,16 @@ public class App implements Runnable {
     // testing code ##########################
 
     private Mesh mesh = new Mesh(new Vertex[] {
-        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
-        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(1.0f, 0.0f)),
-        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(1.0f, 1.0f)),
-        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0f, 0.0f, 1.0f), new Vector2f(0.0f, 1.0f))
+        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
+        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f)),
+        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f)),
+        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0.0f, 0.0f, 1.0f))
     }, 
     
     new int[] {
         0, 1, 2,
         0, 3, 2
-    },
-    new Material(PATH + "textures/ropes.jpg"));
+    });
 
     private Item testElement = new Item(new Vector3f(0, 0, -1.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
 

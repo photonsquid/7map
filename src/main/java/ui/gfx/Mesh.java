@@ -25,11 +25,38 @@ public class Mesh {
     private int tbo;
     
     
+    /**
+     * Define a mesh with no material.
+     * @param vertices an array containing all the vertices of the mesh
+     * @param indices an array of indices which is used to link the vertices 
+     * and form triangles
+     * <p>
+     * structure : 
+     * [vertex_index1_triangle1, vertex_index2_triangle1, vertex_index3_triangle1,
+     * vertex_index1_triangle2, vertex_index2_triangle2, vertex_index3_triangle2,
+     * etc...]
+     * </p>
+     * the vertex indices depend on the order of the vertices provided in the first place
+     */
     public Mesh(Vertex[] vertices, int[] indices) {
         this.vertices = vertices;
         this.indices = indices;
     }
 
+    /**
+     * Define a mesh with a material.
+     * @param vertices an array containing all the vertices of the mesh
+     * @param indices an array of indices which is used to link the vertices 
+     * and form triangles
+     * <p>
+     * structure : 
+     * [vertex_index1_triangle1, vertex_index2_triangle1, vertex_index3_triangle1,
+     * vertex_index1_triangle2, vertex_index2_triangle2, vertex_index3_triangle2,
+     * etc...]
+     * </p>
+     * the vertex indices depend on the order of the vertices provided in the first place
+     * @param material a material which may contain a texture
+     */
     public Mesh(Vertex[] vertices, int[] indices, Material material) {
         this(vertices, indices);
         this.material = material;
@@ -50,6 +77,7 @@ public class Mesh {
 
 
     // other methods
+
     /**
      * Generate the mesh from its vertices.
      */
@@ -108,6 +136,13 @@ public class Mesh {
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0); // unbind before next usage
     }
 
+    /**
+     * Store the data contained in the provided buffer.
+     * @param buffer FloatBuffer object containing the data
+     * @param index the index at which the data should be stored
+     * @param size the size of the data inside the buffer
+     * @return buffer ID
+     */
     private int storeData(FloatBuffer buffer, int index, int size) {
         int bufferID = GL15.glGenBuffers();
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, bufferID); // bind to buffer
@@ -118,6 +153,10 @@ public class Mesh {
         return bufferID;
     }
 
+    /**
+     * Free all the buffers, the vertex array object and the material, 
+     * if present.
+     */
     public void destroy() {
         GL15.glDeleteBuffers(pbo);
         GL15.glDeleteBuffers(cbo);

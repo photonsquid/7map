@@ -99,7 +99,7 @@ public class Input {
     // other methods
 
     /**
-     * Free all callbacks, thus destroying the window.
+     * Free all callbacks, thus destroying the input object.
      */
     public void destroy() {
         keyCB.free();
