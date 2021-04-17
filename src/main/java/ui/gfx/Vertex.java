@@ -2,6 +2,7 @@ package ui.gfx;
 
 import ui.math.Vector2f;
 import ui.math.Vector3f;
+import ui.utils.Color;
 
 
 public class Vertex {
@@ -36,6 +37,11 @@ public class Vertex {
      */
     public Vertex(Vector3f position, Vector3f color, Vector2f textureCoord) {
         this(position, color);
+        this.textureCoord = textureCoord;
+    }
+      public Vertex(Vector3f position, Color color, Vector2f textureCoord) {
+        this.pos = position;
+        this.color = color.toVector3f();
         this.textureCoord = textureCoord;
     }
 
