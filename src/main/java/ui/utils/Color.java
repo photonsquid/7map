@@ -1,5 +1,9 @@
 package ui.utils;
 
+/** Classe Color.
+  * @author	@seba1204
+  * @version	1.0
+  */
 public class Color {
    private int r;
    private int g;
@@ -17,4 +21,5 @@ public class Color {
       // // replace all whitespace with tabs
       // System.out.println(EXAMPLE_TEST.replaceAll("\\s+", "\t"));
    }
+
 }
