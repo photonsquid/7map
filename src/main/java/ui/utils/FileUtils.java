@@ -12,6 +12,11 @@ import javax.imageio.ImageIO;
  * File opening routine manager.
  */
 public class FileUtils {
+    /**
+     * Load a text file to a string.
+     * @param path path to file
+     * @return string containing the file's content
+     */
     public static String loadString(String path) {
         String output = "default";
         try {
@@ -22,6 +27,12 @@ public class FileUtils {
         }
         return output;
     }
+
+    /**
+     * Load an Image to a {@code BufferedImage} object
+     * @param path path to image
+     * @return BufferedImage object containing the color data
+     */
     public static BufferedImage loadImage(String path) {
         try {
             return ImageIO.read(new File(path));

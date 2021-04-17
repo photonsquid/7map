@@ -1,6 +1,7 @@
 package ui;
 
 import exceptions.InitError;
+import ui.math.Matrix4f;
 import ui.math.Vector3f;
 import ui.Input.eventType;
 
@@ -15,11 +16,15 @@ public class Window extends FrameObject {
     
     
     // functional attributes
-    private int[] size = new int[2];
     private String title;
     private long windowElement;
     private Input input;
     private TaskMgr taskManager = new TaskMgr(); // unused
+    private Matrix4f projector;
+
+    private float fov = 70.0f; // projection matrix parameters
+    private float[] nearfar = {0.15f, 10_000.0f};
+    private int[] size = new int[2];
     private int[] posX = new int[1];
     private int[] posY = new int[1];
 
@@ -39,17 +44,16 @@ public class Window extends FrameObject {
         this.size[0] = width;
         this.size[1] = height;
         this.title = title;
-
+        projector = Matrix4f.project((float) width / (float) height, fov, nearfar[0], nearfar[1]);
     }
 
     // getters and setters
 
     public Input getInput() {return input;}
-
     public Vector3f getBgColor() {return bgColor;}
-    public void setBackgroundColor(float r, float g, float b) {
-        bgColor.set(r, g, b);
-    }
+    public Matrix4f getProjector() {return projector;}
+    public void setBgColor(float r, float g, float b) {bgColor.set(r, g, b);}
+    public void setProjector(Matrix4f projector) {this.projector = projector;}
 
     public boolean isFullscreen() {return isFullscreen;}
     public void setFullscreen(boolean value) {
@@ -124,6 +128,7 @@ public class Window extends FrameObject {
      * <p>
      * Should be called on each frame, as this method handles 
      * all the user inputs and graphical updating routines.
+     * </p>
      */
     @Override
     public void update() {
@@ -146,6 +151,9 @@ public class Window extends FrameObject {
         GLFW.glfwSwapBuffers(windowElement);
     }
 
+    /**
+     * @see {@code GLFW.glfwWindowShouldClose()}
+     */
     public boolean shouldClose() {
         return GLFW.glfwWindowShouldClose(windowElement);
     }

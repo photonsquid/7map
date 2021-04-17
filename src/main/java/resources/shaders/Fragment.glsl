@@ -6,8 +6,12 @@ in vec2 passTexCoord;
 varying out vec4 outColor;
 
 uniform sampler2D tex; // texture
+uniform int textureSample;
 
 void main() {
-    // outColor = vec4(passColor, 1.0);
-    outColor = texture(tex, passTexCoord);
+    if (textureSample == 1) {
+        outColor = texture(tex, passTexCoord);
+    } else {
+        outColor = vec4(passColor, 1.0);
+    }
 }

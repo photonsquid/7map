@@ -25,6 +25,17 @@ package ui {
         - windowElement : long
         - posX : int[1]
         - posY : int[1]
+        + getInput() : Input
+        + getBgColor() : Vector3f
+        + setBgColor(r : float, g : float, b : float) : void
+        + **create()** : void
+        + **update()** : void
+        + **swap()** : void
+        + souldClose() : boolean
+        - createCallBacks() : void
+
+
+
 
     }
 

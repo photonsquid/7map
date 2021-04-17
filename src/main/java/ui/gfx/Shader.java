@@ -1,8 +1,14 @@
 package ui.gfx;
 
+import java.nio.FloatBuffer;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.system.MemoryUtil;
 
+import ui.math.Matrix4f;
+import ui.math.Vector2f;
+import ui.math.Vector3f;
 import ui.utils.FileUtils;
 
 public class Shader {
@@ -59,9 +65,34 @@ public class Shader {
             System.err.printf("Program validation : %s", GL20.glGetProgramInfoLog(programID));
             System.exit(1);
         }
+    }
 
-        GL20.glDeleteShader(vertexShaderID);
-        GL20.glDeleteShader(fragmentShaderID);
+    /**
+     * Get the uniform's location.
+     */
+    public int getUniformLoc(String name) {
+        return GL20.glGetUniformLocation(programID, name);
+    }
+
+    public void setUniform(String name, float value) {
+        GL20.glUniform1f(getUniformLoc(name), value);
+    }
+    public void setUniform(String name, int value) {
+        GL20.glUniform1i(getUniformLoc(name), value);
+    }
+    public void setUniform(String name, boolean value) {
+        GL20.glUniform1i(getUniformLoc(name), value ? 1 : 0);
+    }
+    public void setUniform(String name, Vector2f value) {
+        GL20.glUniform2f(getUniformLoc(name), value.getX(), value.getY());
+    }
+    public void setUniform(String name, Vector3f value) {
+        GL20.glUniform3f(getUniformLoc(name), value.getX(), value.getY(), value.getZ());
+    }
+    public void setUniform(String name, Matrix4f value) {
+        FloatBuffer matrix = MemoryUtil.memAllocFloat(value.SIZE * value.SIZE);
+        matrix.put(value.getContent()).flip();
+        GL20.glUniformMatrix4fv(getUniformLoc(name), true, matrix);
     }
 
     /**
@@ -79,6 +110,8 @@ public class Shader {
     }
 
     public void destroy() {
+        GL20.glDetachShader(programID, vertexShaderID);
+        GL20.glDetachShader(programID, fragmentShaderID);
         GL20.glDeleteProgram(programID);
     }
 }

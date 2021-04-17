@@ -1,13 +1,10 @@
 package ui.gfx;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 
 import ui.utils.FileUtils;
 
@@ -17,6 +14,11 @@ public class Material {
     private int width;
     private int height;
 
+    /**
+     * Create a new Material and load its texture from an image.
+     * @param path path to the image
+     * @apiNote currently supported formats (more will be added in the future) : jpg
+     */
     public Material(String path) {
         this.path = path;
     }
@@ -29,6 +31,12 @@ public class Material {
 
     /**
      * Load data from the image at the provided path.
+     * <p>
+     * There seems to be a weird behaviour when loading large images
+     * (weird decoloration and/or crashes) which has to be fixed.
+     * </p>
+     * Also png format and all alpha channel formats in general aren't supported
+     * atm, so this clearly is a work in progress.
      */
     public void create() {
         BufferedImage bi = FileUtils.loadImage(path);
@@ -36,7 +44,6 @@ public class Material {
         height = bi.getHeight();
         int[] pixels = bi.getRGB(0, 0, width, height, null, 0, width);
 
-        // TODO: understand what the f*ck this does because I basically just copy pasted it
         // cf http://y2u.be/0cN3hJ6LphM at 17:31
 
         ByteBuffer b = BufferUtils.createByteBuffer((width * height) * 3);
@@ -62,6 +69,9 @@ public class Material {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0); // unbind
     }
 
+    /**
+     * Destroy the material and free its child elements.
+     */
     public void destroy() {
         GL11.glDeleteTextures(texID);
     }

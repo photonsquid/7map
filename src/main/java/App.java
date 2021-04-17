@@ -1,8 +1,9 @@
 import org.lwjgl.glfw.GLFW;
 
 import exceptions.ExitOverrideException;
-import ui.Task;
 import ui.Window;
+import ui.elements.Camera;
+import ui.elements.Item;
 import ui.gfx.Material;
 import ui.gfx.Mesh;
 import ui.gfx.Renderer;
@@ -18,30 +19,33 @@ import ui.utils.Color;
  */
 public class App implements Runnable {
 
-    public static String shaderPath = "./src/main/java/resources/shaders";
-    public static String texturePath = "./src/main/java/resources/textures";
+    public static final String PATH = "./src/main/java/resources/";
 
     private Thread main; // main thread
     private Window window;
     private Renderer renderer;
-    private final int[] windowSize = {1600, 900};
+    private final int[] windowSize = {1920, 1080};
 
     // testing code ##########################
+
     private Mesh mesh = new Mesh(new Vertex[] {
-        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Color("#2ecc71"), new Vector2f(0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
-        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Color("#2980b9"), new Vector2f(0.0f, 1.0f)),
-        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Color("#e67e22"), new Vector2f(1.0f, 1.0f)),
-        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Color("#c0392b"), new Vector2f(1.0f, 0.0f))
+        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
+        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f)),
+        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f)),
+        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0.0f, 0.0f, 1.0f))
     }, 
     
     new int[] {
         0, 1, 2,
         0, 3, 2
-    },
-    new Material(texturePath + "/ropes.jpg"));
+    });
 
-    private Shader testShader = new Shader(shaderPath + "/Vertex.glsl", shaderPath + "/Fragment.glsl");
+    private Item testElement = new Item(new Vector3f(0, 0, -1.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
 
+    private Shader testShader = new Shader(PATH + "shaders/Vertex.glsl", PATH + "shaders/Fragment.glsl");
+
+    private Camera testCam = new Camera(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
+    
     // ###############################
 
     public void start() {
@@ -55,35 +59,65 @@ public class App implements Runnable {
     public void init() {
         System.out.println("Booting up application...");
 
-        renderer = new Renderer(testShader);
         window = new Window(windowSize[0], windowSize[1], "7map test application");
-        window.setBackgroundColor(0.1f, 0.1f, 0.1f);
+        renderer = new Renderer(window, testShader);
+        window.setBgColor(0.1f, 0.1f, 0.1f);
         window.create();
 
         // testing code goes here #################
         mesh.build();
 
         testShader.create();
+
+        // schedule movement macros
+        window.onKeyDown(GLFW.GLFW_KEY_A, () -> {
+            testCam.setPos(testCam.getPos().getX() - 0.05f, testCam.getPos().getY(), testCam.getPos().getZ());
+        });
+        window.onKeyDown(GLFW.GLFW_KEY_D, () -> {
+            testCam.setPos(testCam.getPos().getX() + 0.05f, testCam.getPos().getY(), testCam.getPos().getZ());
+        });
+        window.onKeyDown(GLFW.GLFW_KEY_W, () -> {
+            testCam.setPos(testCam.getPos().getX(), testCam.getPos().getY(), testCam.getPos().getZ() - 0.05f);
+        });
+        window.onKeyDown(GLFW.GLFW_KEY_S, () -> {
+            testCam.setPos(testCam.getPos().getX(), testCam.getPos().getY(), testCam.getPos().getZ() + 0.05f);
+        });
+
+        window.onKeyDown(GLFW.GLFW_KEY_E, () -> {
+            testCam.setRot(testCam.getRot().getX(), testCam.getRot().getY(), testCam.getRot().getZ() + 1f);
+        });
+        window.onKeyDown(GLFW.GLFW_KEY_Q, () -> {
+            testCam.setRot(testCam.getRot().getX(), testCam.getRot().getY(), testCam.getRot().getZ() - 1f);
+        });
+        window.onKeyDown(GLFW.GLFW_KEY_UP, () -> {
+            testCam.setRot(testCam.getRot().getX() + 1f, testCam.getRot().getY(), testCam.getRot().getZ());
+        });
+        window.onKeyDown(GLFW.GLFW_KEY_DOWN, () -> {
+            testCam.setRot(testCam.getRot().getX() - 1f, testCam.getRot().getY(), testCam.getRot().getZ());
+        });
+        window.onKeyDown(GLFW.GLFW_KEY_LEFT, () -> {
+            testCam.setRot(testCam.getRot().getX(), testCam.getRot().getY() + 1f, testCam.getRot().getZ());
+        });
+        window.onKeyDown(GLFW.GLFW_KEY_RIGHT, () -> {
+            testCam.setRot(testCam.getRot().getX(), testCam.getRot().getY() - 1f, testCam.getRot().getZ());
+        });
+
+
         // ############################
 
 
         // schedule window closing when escape is pressed
-        Task closeOnEsc = window.onKeyDown(GLFW.GLFW_KEY_ESCAPE, () -> {
+        window.onKeyDown(GLFW.GLFW_KEY_ESCAPE, () -> {
             throw new ExitOverrideException(0);
         });
 
-        Task fullscreen = window.onKeyDown(GLFW.GLFW_KEY_F11, () -> {
+        // fullscreen
+        window.onKeyDown(GLFW.GLFW_KEY_F11, () -> {
             window.setFullscreen(!window.isFullscreen());
         });
 
-        // Task dummy = window.scheduleTask(() -> {
-        //     System.out.println("Heyo");
-        // });
     }
 
-    /**
-     * Implementation of the Interface-specific method Runnable.run
-     */
     public void run() {
         init();
         try {
@@ -102,7 +136,7 @@ public class App implements Runnable {
     }
 
     private void render() {
-        renderer.renderMesh(mesh);
+        renderer.render(testElement, testCam);
         window.swap();
     }
 
@@ -116,6 +150,7 @@ public class App implements Runnable {
         // testing code goes here #################
 
         testShader.destroy();
+        testElement.destroy();
 
         // ######################
     }

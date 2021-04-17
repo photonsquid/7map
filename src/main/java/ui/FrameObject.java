@@ -8,6 +8,7 @@ public abstract class FrameObject {
      * Initialize all components inside the object.
      * <p>
      * Must necessarily be executed after calling the constructor
+     * </p>
      */
     public void create() {
         
@@ -17,6 +18,7 @@ public abstract class FrameObject {
      * Update the object.
      * <p>
      * Must be called on each frame while active
+     * </p>
      */
     public void update() {
 

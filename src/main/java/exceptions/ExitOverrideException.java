@@ -5,6 +5,7 @@ package exceptions;
  * <p>
  * This exception should always be handled by the main thread at some point 
  * in the loop.
+ * </p>
  */
 public class ExitOverrideException extends RuntimeException {
     
