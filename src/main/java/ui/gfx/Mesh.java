@@ -23,12 +23,19 @@ public class Mesh {
     private int cbo;
     /**Texture buffer object */
     private int tbo;
-
-    public Mesh(Vertex[] vertices, int[] indices, Material material) {
+    
+    
+    public Mesh(Vertex[] vertices, int[] indices) {
         this.vertices = vertices;
         this.indices = indices;
+    }
+
+    public Mesh(Vertex[] vertices, int[] indices, Material material) {
+        this(vertices, indices);
         this.material = material;
     }
+
+    
 
     // getters and setters
 
@@ -47,7 +54,9 @@ public class Mesh {
      * Generate the mesh from its vertices.
      */
     public void build() {
-        material.create();
+        if (material != null) {
+            material.create();
+        }
 
         vao = GL30.glGenVertexArrays();
         GL30.glBindVertexArray(vao);
@@ -115,6 +124,8 @@ public class Mesh {
         GL15.glDeleteBuffers(ibo);
         GL15.glDeleteBuffers(tbo);
         GL30.glDeleteVertexArrays(vao);
-        material.destroy();
+        if (material != null){
+            material.destroy();
+        }
     }
 }

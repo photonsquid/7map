@@ -23,15 +23,15 @@ public class App implements Runnable {
     private Thread main; // main thread
     private Window window;
     private Renderer renderer;
-    private final int[] windowSize = {1600, 900};
+    private final int[] windowSize = {1920, 1080};
 
     // testing code ##########################
 
     private Mesh mesh = new Mesh(new Vertex[] {
         new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
-        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(0.0f, 1.0f)),
+        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(1.0f, 0.0f)),
         new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(1.0f, 1.0f)),
-        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0f, 0.0f, 1.0f), new Vector2f(1.0f, 0.0f))
+        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0f, 0.0f, 1.0f), new Vector2f(0.0f, 1.0f))
     }, 
     
     new int[] {
@@ -93,7 +93,7 @@ public class App implements Runnable {
             testCam.setRot(testCam.getRot().getX() + 1f, testCam.getRot().getY(), testCam.getRot().getZ());
         });
         window.onKeyDown(GLFW.GLFW_KEY_DOWN, () -> {
-            testCam.setRot(testCam.getRot().getX() - 1f, testCam.getRot().getY(), testCam.getRot().getZ() - 1f);
+            testCam.setRot(testCam.getRot().getX() - 1f, testCam.getRot().getY(), testCam.getRot().getZ());
         });
         window.onKeyDown(GLFW.GLFW_KEY_LEFT, () -> {
             testCam.setRot(testCam.getRot().getX(), testCam.getRot().getY() + 1f, testCam.getRot().getZ());

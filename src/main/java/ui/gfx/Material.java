@@ -26,6 +26,8 @@ public class Material {
 
     /**
      * Load data from the image at the provided path.
+     * @apiNote There seems to be a weird behaviour when loading large images
+     * (weird decoloration and/or crashes) which has to be fixed
      */
     public void create() {
         BufferedImage bi = FileUtils.loadImage(path);

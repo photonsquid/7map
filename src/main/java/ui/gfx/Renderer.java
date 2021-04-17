@@ -38,8 +38,13 @@ public class Renderer {
 
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, element.getMesh().getIBO());
         
-        GL13.glActiveTexture(GL13.GL_TEXTURE0); 
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, element.getMesh().getMaterial().getTextureID()); // bind texture
+        if (element.getMesh().getMaterial() != null) {
+            shader.setUniform("textureSample", 1);
+            GL13.glActiveTexture(GL13.GL_TEXTURE0); 
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, element.getMesh().getMaterial().getTextureID()); // bind texture
+        } else {
+            shader.setUniform("textureSample", 0);
+        }
         
         shader.bind(); // bind before drawing 
         shader.setUniform("model", Matrix4f.transform(element.getPos(), element.getRot(), element.getScale()));
