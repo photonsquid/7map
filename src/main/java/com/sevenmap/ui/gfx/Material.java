@@ -25,7 +25,7 @@ public class Material {
 
     // setters and getters
 
-    public int getTextureID() {return texID;}
+    public int getTexID() {return texID;}
 
     // other methods
 

@@ -9,7 +9,7 @@ interface Runnable {
 
 }
 
-package exceptions {
+package com.sevenmap.exceptions {
     class ExitOverrideException {
 
     }
@@ -17,7 +17,7 @@ package exceptions {
 
     }
 }
-package ui {
+package com.sevenmap.ui {
     
     class Window {
         - size : int[2]
@@ -25,6 +25,7 @@ package ui {
         - windowElement : long
         - posX : int[1]
         - posY : int[1]
+        + **Window(width : int, height : int, title : String)**
         + getInput() : Input
         + getBgColor() : Vector3f
         + setBgColor(r : float, g : float, b : float) : void
@@ -54,6 +55,7 @@ package ui {
         - mouseBStates : boolean[]
         - mousePos : double[]
         - scrollOffset : double[]
+        + **Input()**
         + getMouseX() : double
         + getMouseY() : double
         + getScrollX() : double
@@ -76,9 +78,8 @@ package ui {
         - inputStream : Input
         + create(inputStream : Input) : void
         + update() : void
-        + addTask(event : eventType, key : int, action : Runnable)
+        + addTask(event : eventType, key : int, action : Runnable) : Task
         - runTasks() : void
-        
     }
 
     class Task implements Runnable {
@@ -86,13 +87,24 @@ package ui {
         - {static} lastId : int
         - id : int
         - parent : List<Task>
+        + **Task(action : Runnable, List<Task> parent)**
         + run() : void
         + remove() : void
     }
 
-    package gfx {
+    abstract class FrameObject {
+        + create() : void
+        + update() : void
+        + destroy() : void
+
+    }
+
+    package com.sevenmap.ui.gfx {
 
         class Renderer {
+            - shader : Shader
+            - window : Window
+            + **Renderer(window : Window, shader : Shader)**
             + render() : void
         }
 
@@ -102,36 +114,172 @@ package ui {
             - vao : int
             - pbo : int
             - ibo : int
+            + **Mesh(vertices : Vertex[], indices : int[])**
+            + **Mesh(vertices : Vertex[], indices : int[], material : Material)**
+            + getVAO() : int
+            + getPBO() : int
+            + getIBO() : int
+            + getCBO() : int
+            + getTBO() : int
+            + getMaterial() : Material
+            + getVertices() : Vertex[]
+            + getIndices() : int[]
+            + **build()** : void
         }
 
         class Vertex {
-            + SIZE : int
+            - pos : Vector3f
+            - color : Vector3f
+            - textureCoord : Vector2f
+            + **Vertex(position : Vector3f, color : Vector3f)**
+            + **Vertex(position : Vector3f, color : Vector3f, textureCoord : Vector2f)**
             + getPos() : Vector3f
+            + getColor() : Vector3f
+            + getTexCoord() : Vector2f
+        }
+
+        class Material {
+            - texID : int
+            - path : String
+            - width : int
+            - height : int
+            + **Material(path : string)**
+            + getTexID() : int
+            + **create()** : void
+            + **destroy()** : void
+        }
+
+        class Shader {
+            - vertexFile : String
+            - fragmentFile : String
+            - vertexShaderID : int
+            - fragmentShaderID : int
+            - programID : int
+            + **Shader(vertexPath : String, fragmentPath : String)**
+            + **create()** : void
+            + bind() : void
+            + unbind() : void
+            + **destroy()** : void
         }
     }
     
-    package math {
-        class Vector3f {
+    package com.sevenmap.ui.math {
+        interface Vector {
+            <V extends Vector<V>>
+            + add(vec : V) : V
+            + sub(vec : V) : V
+            + dot(vec : V) : V
+            + norm() : float
+            + multiply(vec : V) : V
+            + divide(vec : V) : V
+            + normalize() : V
+        }
+
+        class Vector2f implements Vector {
+            - x : float
+            - y : float
+            + **Vector2f(x : float, y : float)**
+            + getX() : float
+            + getY() : float
+            + setX(x : float) : void
+            + setY(y : float) : void
+            + set(x : float, y : float)
+            + set(vector : Vector2f)
+        }
+        class Vector3f implements Vector {
             - x : float
             - y : float
             - z : float
+            + **Vector3f(x : float, y : float, z : float)**
+            + getX() : float
+            + getY() : float
+            + getZ() : float
+            + setX(x : float) : void
+            + setY(y : float) : void
+            + setZ(z : float) : void
+            + set(x : float, y : float, z : float)
+            + set(vector : Vector3f)
+        }
+
+        class Vector4f implements Vector {
+            - x : float
+            - y : float
+            - z : float
+            - w : float
+            + **Vector4f(x : float, y : float, z : float, w : float)**
+            + getX() : float
+            + getY() : float
+            + getZ() : float
+            + getW() : float
+            + setX(x : float) : void
+            + setY(y : float) : void
+            + setZ(z : float) : void
+            + setW(w : float) : void
+            + set(x : float, y : float, z : float, w : float)
+        }
+
+        
+    }
+
+    package com.sevenmap.ui.elements {
+        
+        class Item {
+            # position : Vector3f
+            # rotation : Vector3f
+            # scale : Vector3f
+            + **Item(position : Vector3f, rotation : Vector3f)**
+            + **Item(position : Vector3f, rotation : Vector3f, scale : Vector3f, mesh : Mesh)**
+            + getPos() : Vector3f
+            + getRot() : Vector3f
+            + getScale() : Vector3f
+            + getMesh() : Mesh
+            + setPos(x : float, y : float, z : float) : void
+            + setRot(l : float, m : float, n : float) : void
+            + setScale(sx : float, sy : float, sz : float) : void
+            + destroy() : void
+
+
+        }
+
+        class Camera extends Item{
+            + **Camera(position : Vector3f, rotation : Vector3f)**
+        }
+
+        
+    }
+
+    package com.sevenmap.ui.utils {
+        class Color {
+            - r : int
+            - g : int
+            - b : int
+            + **Color(r : int, g : int)**
+            + **Color(r : double, g : double, b : double)**
+            + **Color(str : String)**
+            + toVector3f() : Vector3f
+            + {static} fromHsl(h : int, s : int, l : int) : Color
+            + toString() : String
+            - affectRgbFloat(r : double, g : double, b : double) : void
+            - affectHsl(hi : int, si : int, li : int) : void
+            - affectRGB(r : int, g : int, b : int) : void
+            - parseHex(str : String, start : int) : int
+            - hue2rgb(p : double, q : double, t : double) : double
+        }
+        note right: pull request <u>#26</u> by @seba1204
+
+        class FileUtils {
+            + {static} loadString(path : String) : String
+            + {static} loadImage(path : String) : BufferedImage
         }
     }
 
 
-    abstract class FrameObject {
-        + create() : void
-        + update() : void
-        + destroy() : void
-
-    }
 }
 
 Window --* App
 Renderer --* App
 TaskMgr --* Window
 Input --* Window
-Vector3f --* Window
 Vertex --o Mesh
 Task --* TaskMgr
 TaskMgr --|> FrameObject
@@ -142,5 +290,8 @@ TaskMgr -- eventType
 Input --* TaskMgr
 App -- ExitOverrideException
 Vector3f --|> Vertex
+Renderer *-- Shader
+Material --* Mesh
+Mesh --o Item
 
 @enduml

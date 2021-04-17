@@ -32,7 +32,7 @@ Nous avons étudié en détail l'API de [LWJGL](https://www.lwjgl.org/) (librair
 
 En l'état actuel des choses, l'application est une démonstration simple des capacités du moteur.
 
-Voici le diagramme UML qui lui est associé.
+Voici le diagramme UML qui lui est associé (pour plus de détail, il est préférable de s'appuyer sur la javadoc).
 
 ![diagramm](./meetings/team-rendering/diagram.png)
 

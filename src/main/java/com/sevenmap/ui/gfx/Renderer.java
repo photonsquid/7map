@@ -41,7 +41,7 @@ public class Renderer {
         if (element.getMesh().getMaterial() != null) {
             shader.setUniform("textureSample", 1);
             GL13.glActiveTexture(GL13.GL_TEXTURE0); 
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, element.getMesh().getMaterial().getTextureID()); // bind texture
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, element.getMesh().getMaterial().getTexID()); // bind texture
         } else {
             shader.setUniform("textureSample", 0);
         }

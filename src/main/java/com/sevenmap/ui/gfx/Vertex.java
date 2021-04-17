@@ -9,7 +9,6 @@ public class Vertex {
     private Vector3f pos;
     private Vector3f color;
     private Vector2f textureCoord;
-    public static final int SIZE = 3;
 
     /**
      * Define a vertex with no texture coordinates.
@@ -39,7 +38,8 @@ public class Vertex {
         this(position, color);
         this.textureCoord = textureCoord;
     }
-      public Vertex(Vector3f position, Color color, Vector2f textureCoord) {
+    // @l3alr0g something has to be done about this
+    public Vertex(Vector3f position, Color color, Vector2f textureCoord) {
         this.pos = position;
         this.color = color.toVector3f();
         this.textureCoord = textureCoord;
