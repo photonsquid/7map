@@ -135,7 +135,7 @@ public class Color {
     *  - z: blue double color from 0 to 1
     * @return Vector3F of colors (r, g, b)
     */ 
-   public Vector3f tVector3f(){
+   public Vector3f toVector3f(){
       return new Vector3f(this.r/255f, this.g/255f, this.b/255f);
    }
 

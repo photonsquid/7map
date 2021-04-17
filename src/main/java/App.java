@@ -5,11 +5,12 @@ import ui.Task;
 import ui.Window;
 import ui.gfx.Material;
 import ui.gfx.Mesh;
-import ui.gfx.Vertex;
 import ui.gfx.Renderer;
 import ui.gfx.Shader;
+import ui.gfx.Vertex;
 import ui.math.Vector2f;
 import ui.math.Vector3f;
+import ui.utils.Color;
 
 
 /**
@@ -27,10 +28,10 @@ public class App implements Runnable {
 
     // testing code ##########################
     private Mesh mesh = new Mesh(new Vertex[] {
-        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
-        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(0.0f, 1.0f)),
-        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(1.0f, 1.0f)),
-        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0f, 0.0f, 1.0f), new Vector2f(1.0f, 0.0f))
+        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Color("#2ecc71"), new Vector2f(0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
+        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Color("#2980b9"), new Vector2f(0.0f, 1.0f)),
+        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Color("#e67e22"), new Vector2f(1.0f, 1.0f)),
+        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Color("#c0392b"), new Vector2f(1.0f, 0.0f))
     }, 
     
     new int[] {
