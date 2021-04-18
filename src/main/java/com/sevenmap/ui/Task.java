@@ -5,22 +5,34 @@ import java.util.List;
 public class Task implements Runnable {
     
     private Runnable action;
-    private static int lastId = 0;
-    private int id;
-    private List<Task> parent;
+    private List<Task> parentList;
+    private static Integer lastId = 0;
+    private String id;
 
-    public Task(Runnable action, List<Task> parent) {
-        lastId++;
-        id = lastId;
+    public Task(Runnable action, List<Task> parentList) {
+        id = String.format("T%s", lastId++);
         this.action = action;
-        this.parent = parent;
+        this.parentList = parentList;
     }
 
     public void run() {
         action.run();
     }
 
+    /**
+     * Delete the {@link Task} object from the task tree.
+     */
     public void remove() {
-        parent.remove(this);
+        parentList.remove(this);
+    }
+
+    /**
+     * Get the task's unique ID.
+     * <p>
+     * A task's ID matches the following format : {@code ^T\d+$}
+     * @return
+     */
+    public String getID() {
+        return id;
     }
 }

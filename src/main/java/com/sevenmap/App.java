@@ -60,7 +60,7 @@ public class App implements Runnable {
 
         window = new Window(windowSize[0], windowSize[1], "7map test application");
         renderer = new Renderer(window, testShader);
-        window.setBgColor(0.1f, 0.1f, 0.1f);
+        window.setBgColor(0.1, 0.1, 0.1);
         window.create();
 
         // testing code goes here #################

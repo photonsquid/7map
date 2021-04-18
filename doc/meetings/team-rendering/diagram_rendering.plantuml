@@ -19,6 +19,11 @@ package com.sevenmap.exceptions {
 }
 package com.sevenmap.ui {
     
+    class Engine implements Runnable {
+        + engine()
+        + start(target : Runnable)
+    }
+    
     class Window {
         - size : int[2]
         - title : String

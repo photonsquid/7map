@@ -1,18 +1,19 @@
 package com.sevenmap.ui.gfx;
 
-import org.lwjgl.opengl.GL30;
 
 import com.sevenmap.ui.Window;
 import com.sevenmap.ui.elements.Camera;
 import com.sevenmap.ui.elements.Item;
+import com.sevenmap.ui.elements.RootNode;
 import com.sevenmap.ui.math.Matrix4f;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
 
-public class Renderer {
+public class Renderer extends RootNode {
     private Shader shader;
     private Window window;
 

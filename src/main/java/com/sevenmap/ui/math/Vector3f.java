@@ -18,6 +18,16 @@ public class Vector3f implements Vector<Vector3f> {
         this.z = z;
     }
 
+    /**
+     * Generate a three-dimensional vector object.
+     * @param vect vector to be read
+     */
+    public Vector3f(Vector3f vect) {
+        this.x = vect.getX();
+        this.y = vect.getY();
+        this.z = vect.getZ();
+    }
+
     // getters and setters
     
     public float getX() {return x;}
