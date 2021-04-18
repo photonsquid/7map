@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 import javax.imageio.ImageIO;
 
@@ -20,7 +19,10 @@ public class FileUtils {
     public static String loadString(String path) {
         String output = "default";
         try {
-            output =  Files.readString(Path.of(path));
+            ClassLoader cl = FileUtils.class.getClassLoader();
+            File file = new File(cl.getResource(path).getPath());
+
+            output =  new String(Files.readAllBytes(file.toPath()));
         } catch (IOException e) {
             System.err.printf("File at path %s could not be found", path);
             System.exit(1);
@@ -35,7 +37,9 @@ public class FileUtils {
      */
     public static BufferedImage loadImage(String path) {
         try {
-            return ImageIO.read(new File(path));
+            ClassLoader cl = FileUtils.class.getClassLoader();
+
+            return ImageIO.read(new File(cl.getResource(path).getFile()));
         } catch(IOException e) {
             System.err.printf("File at path %s could not be found", path);
             System.exit(1);
