@@ -20,9 +20,6 @@ import com.sevenmap.ui.utils.Color;
  * Main app class
  */
 public class App implements Runnable {
-
-    public static final String PATH = "./src/main/resources/";
-
     private Thread main; // main thread
     private Window window;
     private Renderer renderer;
@@ -44,7 +41,7 @@ public class App implements Runnable {
 
     private Item testElement = new Item(new Vector3f(0, 0, -1.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
 
-    private Shader testShader = new Shader(PATH + "shaders/Vertex.glsl", PATH + "shaders/Fragment.glsl");
+    private Shader testShader = new Shader("shaders/Vertex.glsl", "shaders/Fragment.glsl");
 
     private Camera testCam = new Camera(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
     
