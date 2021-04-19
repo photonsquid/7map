@@ -42,6 +42,7 @@ public class Mesh {
         this.vertices = vertices;
         this.indices = indices;
     }
+    public Mesh(){}
 
     /**
      * Define a mesh with a material.
