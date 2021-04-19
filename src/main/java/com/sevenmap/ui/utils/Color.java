@@ -128,6 +128,16 @@ public class Color {
             return p;
    }
    
+   public void set(Color c) {
+      r = c.getR();
+      g = c.getG();
+      b = c.getB();
+   }
+
+   public void set(Double r, Double g, Double b) {
+      affectRgbFloat(r, g, b);
+   }
+
    /** 
     * Convert a color to a Vector3F with the following properties:
     *  - x: red double color from 0 to 1
@@ -162,6 +172,30 @@ public class Color {
    }
 
    
+   public int getR() {
+      return r;
+   }
+
+   public void setR(int r) {
+      this.r = r;
+   }
+
+   public int getG() {
+      return g;
+   }
+
+   public void setG(int g) {
+      this.g = g;
+   }
+
+   public int getB() {
+      return b;
+   }
+
+   public void setB(int b) {
+      this.b = b;
+   }
+
    /**
     * Test function awaiting a great Test class from @Mmzhk21
     */

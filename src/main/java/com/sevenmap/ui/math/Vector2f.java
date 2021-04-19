@@ -6,9 +6,23 @@ package com.sevenmap.ui.math;
 public class Vector2f implements Vector<Vector2f> {
     private float x, y;
 
+    /**
+     * Generate a two-dimensional vector object.
+     * @param x coordinate on the X axis
+     * @param y coordinate on the Y axis
+     */
     public Vector2f(float x, float y) {
         this.x = x;
         this.y = y;
+    }
+    
+    /**
+     * Generate a two-dimensional vector object.
+     * @param vect vector to be read
+     */
+    public Vector2f(Vector2f vect) {
+        this.x = vect.getX();
+        this.y = vect.getY();
     }
 
     // getters and setters
