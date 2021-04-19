@@ -3,6 +3,7 @@ package com.sevenmap.ui;
 import com.sevenmap.exceptions.InitError;
 import com.sevenmap.ui.math.Matrix4f;
 import com.sevenmap.ui.math.Vector3f;
+import com.sevenmap.ui.utils.Color;
 import com.sevenmap.ui.Input.eventType;
 
 import org.lwjgl.glfw.GLFW;
@@ -29,7 +30,7 @@ public class Window extends FrameObject {
     private int[] posY = new int[1];
 
     // graphical attributes
-    private Vector3f bgColor = new Vector3f(0, 0, 0);
+    private Color bgColor = new Color(0, 0, 0);
     private GLFWWindowSizeCallback sizeCB;
     private boolean isResized;
     private boolean isFullscreen;
@@ -45,17 +46,35 @@ public class Window extends FrameObject {
         this.size[1] = height;
         this.title = title;
         projector = Matrix4f.project((float) width / (float) height, fov, nearfar[0], nearfar[1]);
+        // initialize input
+        input = new Input();
+        // initialize task manager
+        taskManager.create(input);
     }
 
     // getters and setters
 
-    public Input getInput() {return input;}
-    public Vector3f getBgColor() {return bgColor;}
-    public Matrix4f getProjector() {return projector;}
-    public void setBgColor(float r, float g, float b) {bgColor.set(r, g, b);}
-    public void setProjector(Matrix4f projector) {this.projector = projector;}
-
-    public boolean isFullscreen() {return isFullscreen;}
+    public Input getInput() {
+        return input;
+    }
+    public Color getBgColor() {
+        return bgColor;
+    }
+    public Matrix4f getProjector() {
+        return projector;
+    }
+    public void setBgColor(double r, double g, double b) {
+        bgColor.set(r, g, b);
+    }
+    public void setBgColor(Color color) {
+        bgColor.set(color);
+    }
+    public void setProjector(Matrix4f projector) {
+        this.projector = projector;
+    }
+    public boolean isFullscreen() {
+        return isFullscreen;
+    }
     public void setFullscreen(boolean value) {
         isFullscreen = value;
         isResized = true;
@@ -77,16 +96,11 @@ public class Window extends FrameObject {
         if (!GLFW.glfwInit()) { // glfw not initialized
             throw new InitError("Illegal attempt to create Window class while GLFW hasn't been initialized yet");
         }
-
         windowElement = GLFW.glfwCreateWindow(size[0], size[1], title, isFullscreen ? GLFW.glfwGetPrimaryMonitor() : 0, 0); // actually create the window element
-        input = new Input();
 
         if (windowElement == 0) {
             throw new InitError("Window was not properly initialized");
         }
-
-        // initialize task manager
-        taskManager.create(input);
 
         // center the window
         GLFWVidMode videoMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
@@ -136,7 +150,8 @@ public class Window extends FrameObject {
             GL11.glViewport(0, 0, size[0], size[1]); // update the viewport
             isResized = false;
         }
-        GL11.glClearColor(bgColor.getX(), bgColor.getY(), bgColor.getZ(), 1.0f);
+        Vector3f color = bgColor.toVector3f();
+        GL11.glClearColor(color.getX(), color.getY(), color.getY(), 1.0f);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
         GLFW.glfwPollEvents();
