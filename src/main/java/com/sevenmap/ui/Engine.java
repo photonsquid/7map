@@ -24,11 +24,7 @@ public class Engine implements Runnable {
      * Create a new Engine object which can be started up using {@link #start()}
      */
     public Engine() {
-<<<<<<< Updated upstream
-        main = new Thread(this, "com.sevenmap.ui.Engine");
-=======
         main = new Thread(this, this.getClass().getSimpleName());
->>>>>>> Stashed changes
         window = new Window(windowSize[0], windowSize[1], title);
         root = new Renderer(window, shader);
     }
