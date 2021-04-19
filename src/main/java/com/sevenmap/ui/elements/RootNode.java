@@ -40,9 +40,17 @@ public abstract class RootNode {
      * Get the Node's unique ID.
      * <p>
      * An Node's ID matches the following format : {@code ^N\d+$}
+     * </p>
      * @return
      */
     public String getID() {
         return id;
+    }
+
+    /**
+     * Destoy all child elements and the node itself.
+     */
+    public void destroy() {
+        this.children.forEach(Node::destroy);
     }
 }

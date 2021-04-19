@@ -46,6 +46,10 @@ public class Window extends FrameObject {
         this.size[1] = height;
         this.title = title;
         projector = Matrix4f.project((float) width / (float) height, fov, nearfar[0], nearfar[1]);
+        // initialize input
+        input = new Input();
+        // initialize task manager
+        taskManager.create(input);
     }
 
     // getters and setters
@@ -92,16 +96,11 @@ public class Window extends FrameObject {
         if (!GLFW.glfwInit()) { // glfw not initialized
             throw new InitError("Illegal attempt to create Window class while GLFW hasn't been initialized yet");
         }
-
         windowElement = GLFW.glfwCreateWindow(size[0], size[1], title, isFullscreen ? GLFW.glfwGetPrimaryMonitor() : 0, 0); // actually create the window element
-        input = new Input();
 
         if (windowElement == 0) {
             throw new InitError("Window was not properly initialized");
         }
-
-        // initialize task manager
-        taskManager.create(input);
 
         // center the window
         GLFWVidMode videoMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());

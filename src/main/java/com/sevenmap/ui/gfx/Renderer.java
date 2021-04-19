@@ -6,6 +6,7 @@ import com.sevenmap.ui.elements.Camera;
 import com.sevenmap.ui.elements.Item;
 import com.sevenmap.ui.elements.RootNode;
 import com.sevenmap.ui.math.Matrix4f;
+import com.sevenmap.ui.elements.Node;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
@@ -27,7 +28,7 @@ public class Renderer extends RootNode {
     }
 
     /**
-     * Render an element.
+     * Render a specific element.
      * @param element
      */
     public void render(Item element, Camera camera) {
@@ -57,5 +58,52 @@ public class Renderer extends RootNode {
         GL20.glDisableVertexAttribArray(1);
         GL20.glDisableVertexAttribArray(2);
         GL30.glBindVertexArray(0);
+    }
+
+    /**
+     * Render all children.
+     * @param camera camera on which the children have to be rendered
+     */
+    public void render(Camera camera) {
+        children.forEach((Node node) -> {
+            renderChildren(node, camera);
+        });
+    }
+
+    /**
+     * Render all children recursively.
+     * @param node starting node
+     * @param camera camera on which the children have to be rendered
+     */
+    private void renderChildren(Node node, Camera camera) {
+        if (node.hasMesh()) {
+            render((Item) node, camera);
+        } else {
+            node.getChildren().forEach((Node childnode) -> 
+                renderChildren(childnode, camera));
+        }
+    }
+
+    /**
+     * Build all children meshes.
+     */
+    public void buildAll() {
+        children.forEach((Node node) -> {
+            buildChildren(node);
+        });
+    }
+
+    /**
+     * Build all children meshes recursively.
+     * @param node starting node
+     */
+    public void buildChildren(Node node) {
+        if (node.hasMesh()) {
+            ((Item) node).getMesh().build();
+        } else {
+            node.getChildren().forEach((Node childnode) -> {
+                buildChildren(childnode);
+            });
+        }
     }
 }

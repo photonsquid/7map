@@ -50,6 +50,12 @@ public class Item extends Node {
     
     // other methods
 
+    @Override
+    public boolean hasMesh() {
+        return true;
+    }
+
+    @Override
     public void destroy() {
         mesh.destroy();
     }

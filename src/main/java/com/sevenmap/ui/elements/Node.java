@@ -13,6 +13,19 @@ public class Node extends RootNode {
     }
 
     /**
+     * The renderer uses this method to distinguish a Node from an
+     * Item.
+     * <p> 
+     * This isn't the most elegant solution ever, so suggestions are
+     * welcome.
+     * </p>
+     * @return
+     */
+    public boolean hasMesh() {
+        return false;
+    }
+
+    /**
      * Reparent an Node to another Node element.
      * @param parent the parent Node
      */
