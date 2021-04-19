@@ -2,13 +2,13 @@ package com.sevenmap.ui.elements;
 
 import static org.junit.Assert.assertEquals;
 
-import com.sevenmap.TestFile;
 import com.sevenmap.ui.gfx.Mesh;
+import com.sevenmap.ui.gfx.Vertex;
 import com.sevenmap.ui.math.Vector3f;
 
 import org.junit.Test;
 
-public class ItemTest extends TestFile{
+public class ItemTest{
  
   public static void verifyConstructor(Item i){
       
@@ -40,8 +40,14 @@ public class ItemTest extends TestFile{
         Vector3f v1 = new Vector3f(a, b, b);
         Vector3f v2 = new Vector3f(c,c,a);
         Vector3f v3 = new Vector3f(a,c,b);
-        Mesh m = new Mesh();
-        Item i = new Item(v1,v2,v3,m);
+        // Mesh m = new Mesh();
+        private Mesh mesh = new Mesh(new Vertex[] {
+            new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
+            new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f)),
+            new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f)),
+            new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0.0f, 0.0f, 1.0f))
+        }, 
+        Item i = new Item(v1, v2, v3, mesh);
         verifyConstructor(i);
         VerifySet(i, 0.4f, 0.4f, 56f);
 

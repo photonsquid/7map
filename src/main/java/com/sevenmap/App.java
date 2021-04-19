@@ -16,6 +16,7 @@ import com.sevenmap.ui.math.Vector3f;
 public class App {
 
     private Engine engine = new Engine();
+
     private Mesh mesh = new Mesh(new Vertex[] {
         new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
         new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f)),
@@ -39,7 +40,7 @@ public class App {
      */
     public void init() {
         testElement.setParent(engine.getRoot());
-                
+        
         // schedule movement macros
         engine.getWindow().onKeyDown(GLFW.GLFW_KEY_A, () -> {
             engine.getCamera().setPos(engine.getCamera().getPos().getX() - 0.05f, engine.getCamera().getPos().getY(), engine.getCamera().getPos().getZ());

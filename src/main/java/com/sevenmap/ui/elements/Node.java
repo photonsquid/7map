@@ -4,6 +4,7 @@ import com.sevenmap.ui.math.Vector3f;
 
 public class Node extends RootNode {
     protected RootNode parent;
+    
     protected Vector3f position;
     protected Vector3f rotation;
     
