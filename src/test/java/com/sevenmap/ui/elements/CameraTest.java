@@ -11,32 +11,32 @@ public class CameraTest {
 
     private Camera cam0;
     private Camera cam1;
-    private Vector3f v0, v1, v2, v3;
+    private Vector3f pos0, rot0, pos1, rot1;
 
 
     @Before
     public void init() {
         // Declaring vectors
-        v0 = new Vector3f(3.5f, 2.5f, 1.5f);
-        v1 = new Vector3f(2.0f, 3.0f, 4.0f);
-        v2 = new Vector3f(0.0f, 0.0f, 0.0f);
-        v3 = new Vector3f(0.0f, 0.0f, 0.0f);
+        pos0 = new Vector3f(3.5f, 2.5f, 1.5f);
+        rot0 = new Vector3f(2.0f, 3.0f, 4.0f);
+        pos1 = new Vector3f(0.1f, 5.0f, 0.4f);
+        rot1 = new Vector3f(7.0f, 0.5f, 6.1f);
 
         // Declaring Cameras
-        cam0 = new Camera(v0 , v1);
-        cam1 = new Camera(v2 , v3);
+        cam0 = new Camera(pos0 , rot0);
+        cam1 = new Camera(pos1 , rot1);
     }
     
     @Test
     public void testPos(){
-        assertEquals(cam0.position, v0);
-        assertEquals(cam1.position, v2);
+        assertEquals(cam0.position, pos0);
+        assertEquals(cam1.position, pos1);
     }
 
     @Test
     public void testRot() {
-        assertEquals(cam1.rotation, v3);
-        assertEquals(cam0.rotation, v1);
+        assertEquals(cam1.rotation, rot1);
+        assertEquals(cam0.rotation, rot0);
     }
     
 }
