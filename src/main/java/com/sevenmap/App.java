@@ -83,8 +83,7 @@ public class App {
             engine.getWindow().setFullscreen(!engine.getWindow().isFullscreen());
         });
 
-        engine.start();
-
+        engine.start(); 
     }
 
     public static void main(String[] args) {
