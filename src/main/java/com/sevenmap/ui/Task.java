@@ -30,7 +30,7 @@ public class Task implements Runnable {
      * Get the task's unique ID.
      * <p>
      * A task's ID matches the following format : {@code ^T\d+$}
-     * @return
+     * @return the task's ID
      */
     public String getID() {
         return id;

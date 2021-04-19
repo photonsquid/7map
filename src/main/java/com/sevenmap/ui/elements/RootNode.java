@@ -41,7 +41,7 @@ public abstract class RootNode {
      * <p>
      * An Node's ID matches the following format : {@code ^N\d+$}
      * </p>
-     * @return
+     * @return the node's ID
      */
     public String getID() {
         return id;
