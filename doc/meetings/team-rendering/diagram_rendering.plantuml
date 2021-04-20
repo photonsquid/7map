@@ -83,7 +83,7 @@ package com.sevenmap.ui {
         - inputStream : Input
         + create(inputStream : Input) : void
         + update() : void
-        + addTask(event : eventType, key : int, action : Runnable) : Task
+        + add(event : eventType, key : int, action : Runnable) : Task
         - runTasks() : void
     }
 

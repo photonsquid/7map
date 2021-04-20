@@ -6,16 +6,8 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
-/**
- * @author l3alr0g
- */
+
 public class Input {
-    
-    public enum eventType {
-        KEY,
-        BUTTON,
-        NONE
-    }
     
     private GLFWKeyCallback keyCB;
     private GLFWCursorPosCallback cursorPosCB;
@@ -124,25 +116,6 @@ public class Input {
      */
     public boolean isButtonDown(int button) {
         return mouseBStates[button];
-    }
-
-    /**
-     * A generic method for detecting mouse button as well as keyboard 
-     * press events.
-     * @param event event type - (BUTTON | KEY)
-     * @param key key code
-     * @return
-     */
-    public boolean isDown(eventType event, int key) {
-        switch (event) { // @kingussopp @Mmzhk21 any suggestions welcome
-            case BUTTON:
-                return isButtonDown(key);
-            case KEY:
-                return isKeyDown(key);
-            case NONE:
-                return true;
-        }
-        return false;
     }
 
 }
