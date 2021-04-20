@@ -90,4 +90,12 @@ public class TaskMgr extends FrameObject {
         }
         return null;
     }
+
+    /**
+     * Get the Task manager's task Map.
+     * @return task map
+     */
+    public Map<Event, List<Task>> getTasks() {
+        return tasks;
+    }
 }

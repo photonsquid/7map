@@ -8,6 +8,7 @@ import com.sevenmap.ui.elements.Item;
 import com.sevenmap.ui.gfx.Mesh;
 import com.sevenmap.ui.gfx.Vertex;
 import com.sevenmap.ui.math.Vector3f;
+import com.sevenmap.ui.scheduling.events.MoveEvent;
 
 
 /**
@@ -82,6 +83,11 @@ public class App {
         // fullscreen
         engine.getWindow().onKeyDown(GLFW.GLFW_KEY_F11, () -> {
             engine.getWindow().setFullscreen(!engine.getWindow().isFullscreen());
+        });
+
+        // event showcase
+        engine.getWindow().onEvent(new MoveEvent(engine), () -> {
+            System.out.println("moving...");
         });
 
         engine.start(); 

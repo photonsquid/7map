@@ -5,7 +5,7 @@ import com.sevenmap.ui.Window;
 
 public class Event {
     private static Integer lastID = 0;
-    private String id;
+    protected final String id;
     protected Window windowInstance;
 
     public Event(Window window) {
