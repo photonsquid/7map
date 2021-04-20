@@ -87,7 +87,7 @@ public class App {
 
         // event showcase
         engine.getWindow().onEvent(new MoveEvent(engine), () -> {
-            System.out.println("moving...");
+            System.out.println(String.format("Movement detected, Camera has id %s", engine.getCamera().getID()));
         });
 
         engine.start(); 

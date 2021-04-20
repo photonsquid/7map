@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.sevenmap.ui.FrameObject;
 import com.sevenmap.ui.Input;
@@ -67,9 +68,9 @@ public class TaskMgr extends FrameObject {
      * @return true if the record contained the specified task
      */
     public boolean remove(Task task) {
-        for (Event e : tasks.keySet()) {
-            if (tasks.get(e).remove(task)) {
-                if (tasks.get(e).isEmpty()) tasks.remove(e);
+        for (Entry<Event,List<Task>> e : tasks.entrySet()) {
+            if (e.getValue().remove(task)) {
+                if (e.getValue().isEmpty()) tasks.remove(e.getKey());
                 return true;
             }
         }
