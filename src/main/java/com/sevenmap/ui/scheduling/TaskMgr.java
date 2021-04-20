@@ -1,13 +1,13 @@
 package com.sevenmap.ui.scheduling;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.sevenmap.ui.FrameObject;
 import com.sevenmap.ui.Input;
+import com.sevenmap.ui.scheduling.events.Event;
 
 /**
  * A task manager utility to schedule tasks executed on certain events
@@ -46,12 +46,19 @@ public class TaskMgr extends FrameObject {
      * @return generated {@code task} object
      */
     public Task addTask(Event event, Runnable action) {
-        events.add(event);
-        tasks.putIfAbsent(event, new ArrayList<>());
-        List<Task> eventTasks = tasks.get(event);
+        Event duplicate = findDuplicate(event);
+        List<Task> eventTasks;
+        if (duplicate == null) { // no duplicate event
+            events.add(event);
+            tasks.putIfAbsent(event, new ArrayList<>());
+            eventTasks = tasks.get(event);
+        } else { // duplicate event found
+            eventTasks = tasks.get(duplicate);
+        }
         Task taskAction = new Task(action, eventTasks);
         eventTasks.add(taskAction);
         return taskAction;
+        
     }
     
     /**
@@ -64,5 +71,23 @@ public class TaskMgr extends FrameObject {
                 eventTasks.forEach(Task::run);
             }
         }
+    }
+
+    /**
+     * Find a duplicate event.
+     * <p>
+     * This method assumes that the default equals() method from the 
+     * Object class has been overriden in the Event subclass, as comparing
+     * handles will always result in this method not finding any duplicates.
+     * </p>
+     * @param event the potential duplicate
+     * @return the already existing event in the {@link #tasks} Map, returns
+     * null if there is none
+     */
+    public Event findDuplicate(Event event) {
+        for (Event e : tasks.keySet()) {
+            if (e.equals(event)) return e;
+        }
+        return null;
     }
 }

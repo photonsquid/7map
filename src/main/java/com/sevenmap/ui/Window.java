@@ -3,11 +3,11 @@ package com.sevenmap.ui;
 import com.sevenmap.exceptions.InitError;
 import com.sevenmap.ui.math.Matrix4f;
 import com.sevenmap.ui.math.Vector3f;
-import com.sevenmap.ui.scheduling.ButtonEvent;
-import com.sevenmap.ui.scheduling.Event;
-import com.sevenmap.ui.scheduling.KeyEvent;
 import com.sevenmap.ui.scheduling.Task;
 import com.sevenmap.ui.scheduling.TaskMgr;
+import com.sevenmap.ui.scheduling.events.ButtonEvent;
+import com.sevenmap.ui.scheduling.events.Event;
+import com.sevenmap.ui.scheduling.events.KeyEvent;
 import com.sevenmap.ui.utils.Color;
 
 import org.lwjgl.glfw.GLFW;
@@ -194,9 +194,7 @@ public class Window extends FrameObject {
      * @param key key code
      * @param action lambda runnable
      * @return generated {@code task} object
-     * @deprecated
      */
-    @Deprecated
     public Task onKeyDown(int key, Runnable action) {
         return taskManager.addTask(new KeyEvent(this, key), action);
     }
@@ -206,13 +204,17 @@ public class Window extends FrameObject {
      * @param button key code
      * @param action lambda runnable
      * @return generated {@code task} object
-     * @deprecated
      */
-    @Deprecated
     public Task onButtonDown(int button, Runnable action) {
         return taskManager.addTask(new ButtonEvent(this, button), action);
     }
 
+    /**
+     * Schedule Runnable action executed on event activity.
+     * @param event the triggering event
+     * @param action lambda runnable
+     * @return generated {@code task} object
+     */
     public Task onEvent(Event event, Runnable action) {
         return taskManager.addTask(event, action);
     }

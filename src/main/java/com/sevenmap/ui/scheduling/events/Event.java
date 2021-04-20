@@ -1,4 +1,4 @@
-package com.sevenmap.ui.scheduling;
+package com.sevenmap.ui.scheduling.events;
 
 import com.sevenmap.ui.Engine;
 import com.sevenmap.ui.Window;
@@ -35,4 +35,5 @@ public class Event {
     public String getID() {
         return id;
     }
+    
 }
