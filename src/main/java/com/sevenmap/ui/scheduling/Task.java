@@ -20,8 +20,15 @@ public class Task implements Runnable {
     }
 
     /**
-     * Delete the {@link Task} object from the task tree.
+     * Delete the {@link Task} object from the Task Manager's records.
+     * @apiNote this method should not be used, as creating a lot
+     * of tasks and removing them using Task.remove() causes the
+     * TaskMgr to not empty properly, thus leading to performance 
+     * issues.
+     * Use {@link TaskMgr#remove(Task)} instead
+     * @deprecated
      */
+    @Deprecated
     public void remove() {
         parentList.remove(this);
     }

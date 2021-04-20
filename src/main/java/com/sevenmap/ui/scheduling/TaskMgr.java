@@ -45,7 +45,7 @@ public class TaskMgr extends FrameObject {
      * @param action lambda runnable
      * @return generated {@code task} object
      */
-    public Task addTask(Event event, Runnable action) {
+    public Task add(Event event, Runnable action) {
         Event duplicate = findDuplicate(event);
         List<Task> eventTasks;
         if (duplicate == null) { // no duplicate event
@@ -59,6 +59,21 @@ public class TaskMgr extends FrameObject {
         eventTasks.add(taskAction);
         return taskAction;
         
+    }
+
+    /**
+     * Remove a specified task from the Task manager's records.
+     * @param task the task which has to be removed
+     * @return true if the record contained the specified task
+     */
+    public boolean remove(Task task) {
+        for (Event e : tasks.keySet()) {
+            if (tasks.get(e).remove(task)) {
+                if (tasks.get(e).isEmpty()) tasks.remove(e);
+                return true;
+            }
+        }
+        return false;
     }
     
     /**

@@ -196,7 +196,7 @@ public class Window extends FrameObject {
      * @return generated {@code task} object
      */
     public Task onKeyDown(int key, Runnable action) {
-        return taskManager.addTask(new KeyEvent(this, key), action);
+        return taskManager.add(new KeyEvent(this, key), action);
     }
 
     /**
@@ -206,7 +206,7 @@ public class Window extends FrameObject {
      * @return generated {@code task} object
      */
     public Task onButtonDown(int button, Runnable action) {
-        return taskManager.addTask(new ButtonEvent(this, button), action);
+        return taskManager.add(new ButtonEvent(this, button), action);
     }
 
     /**
@@ -216,10 +216,10 @@ public class Window extends FrameObject {
      * @return generated {@code task} object
      */
     public Task onEvent(Event event, Runnable action) {
-        return taskManager.addTask(event, action);
+        return taskManager.add(event, action);
     }
 
     public Task scheduleTask(Runnable action) {
-        return taskManager.addTask(new Event(this), action);
+        return taskManager.add(new Event(this), action);
     }
 }
