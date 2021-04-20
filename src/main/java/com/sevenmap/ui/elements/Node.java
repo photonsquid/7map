@@ -49,7 +49,7 @@ public class Node extends RootNode {
     }
 
     /**
-     * Get the CartesianNode's position.
+     * Get the Node's position.
      * @return position vector
      */
     public Vector3f getPos() {
@@ -57,7 +57,7 @@ public class Node extends RootNode {
     }
 
     /**
-     * Get the CartesianNode's rotation.
+     * Get the Node's rotation.
      * @return rotation angle vector
      */
     public Vector3f getRot() {
@@ -65,7 +65,7 @@ public class Node extends RootNode {
     }
 
     /**
-     * Set the CartesianNode's position.
+     * Set the Node's position.
      * @param x coordinate on the X axis
      * @param y coordinate on the Y axis
      * @param z coordinate on the Z axis
@@ -81,7 +81,7 @@ public class Node extends RootNode {
     }
 
     /**
-     * Set the CartesianNode's position.
+     * Set the Node's position.
      * @param vect the position vector to be read
      */
     public void setPos(Vector3f vect) {
@@ -89,7 +89,7 @@ public class Node extends RootNode {
     }
 
     /**
-     * Set the CartesianNode's rotation.
+     * Set the Node's rotation.
      * @param l coordinate on the X axis
      * @param m coordinate on the Y axis
      * @param n coordinate on the Z axis
@@ -105,7 +105,7 @@ public class Node extends RootNode {
     }
 
     /**
-     * Set the CartesianNode's rotation.
+     * Set the Node's rotation.
      * @param vect the rotation vector to be read
      */
     public void setRot(Vector3f vect) {
