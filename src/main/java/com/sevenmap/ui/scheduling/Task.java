@@ -1,4 +1,4 @@
-package com.sevenmap.ui;
+package com.sevenmap.ui.scheduling;
 
 import java.util.List;
 
@@ -30,6 +30,7 @@ public class Task implements Runnable {
      * Get the task's unique ID.
      * <p>
      * A task's ID matches the following format : {@code ^T\d+$}
+     * </p>
      * @return the task's ID
      */
     public String getID() {
