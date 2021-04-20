@@ -11,7 +11,7 @@ import com.sevenmap.ui.math.Vector3f;
 
 
 /**
- * Main app class
+ * Main application class.
  */
 public class App {
 
