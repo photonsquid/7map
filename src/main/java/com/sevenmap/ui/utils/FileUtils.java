@@ -44,9 +44,9 @@ public class FileUtils {
             System.err.printf("File at path %s could not be found", path);
             System.exit(1);
         } catch(Exception e) {
-            System.err.printf("Something went terribly wrong...");
+            System.err.printf("Loading image at path %s failed : %s%n%s", path, e.getMessage(), e.getStackTrace());
             System.exit(1);
         }
-        return new BufferedImage(0, 0, BufferedImage.TYPE_INT_RGB); // unreachable code
+        return null;
     }
 }

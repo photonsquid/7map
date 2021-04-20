@@ -5,8 +5,10 @@ import org.lwjgl.glfw.GLFW;
 import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.ui.Engine;
 import com.sevenmap.ui.elements.Item;
+import com.sevenmap.ui.gfx.Material;
 import com.sevenmap.ui.gfx.Mesh;
 import com.sevenmap.ui.gfx.Vertex;
+import com.sevenmap.ui.math.Vector2f;
 import com.sevenmap.ui.math.Vector3f;
 import com.sevenmap.ui.scheduling.events.MoveEvent;
 
@@ -19,16 +21,32 @@ public class App {
     private Engine engine = new Engine();
 
     private Mesh mesh = new Mesh(new Vertex[] {
-        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
-        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f)),
-        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f)),
-        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0.0f, 0.0f, 1.0f))
+        new Vertex(new Vector3f(-0.5f, 0.5f, 0.5f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)), // texture coordinates must be defined counter clockwise
+        new Vertex(new Vector3f(0.5f, 0.5f, 0.5f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(0.0f, 1.0f)),
+        new Vertex(new Vector3f(0.5f, -0.5f, 0.5f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(1.0f, 1.0f)),
+        new Vertex(new Vector3f(-0.5f, -0.5f, 0.5f), new Vector3f(0.0f, 0.0f, 1.0f), new Vector2f(1.0f, 0.0f)),
+        new Vertex(new Vector3f(-0.5f, 0.5f, -0.5f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)),
+        new Vertex(new Vector3f(0.5f, 0.5f, -0.5f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(1.0f, 0.0f)),
+        new Vertex(new Vector3f(0.5f, -0.5f, -0.5f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 1.0f)),
+        new Vertex(new Vector3f(-0.5f, -0.5f, -0.5f), new Vector3f(0.0f, 0.0f, 1.0f), new Vector2f(1.0f, 1.0f))
+    
     },
     
     new int[] {
         0, 1, 2,
-        0, 3, 2
-    });
+        0, 3, 2,
+        0, 1, 4,
+        5, 1, 4,
+        5, 4, 7,
+        5, 6, 7,
+        6, 7, 3,
+        6, 2, 3,
+        2, 5, 6,
+        2, 5, 1,
+        7, 3, 4,
+        3, 4, 0
+    },
+    new Material("textures/logo.png"));
 
     private Item testElement = new Item(new Vector3f(0, 0, -1.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
 
@@ -87,7 +105,7 @@ public class App {
 
         // event showcase
         engine.getWindow().onEvent(new MoveEvent(engine), () -> {
-            System.out.println(String.format("Movement detected, Camera has id %s", engine.getCamera().getID()));
+            // System.out.println(String.format("Movement detected, Camera has id %s", engine.getCamera().getID()));
         });
 
         engine.start(); 
