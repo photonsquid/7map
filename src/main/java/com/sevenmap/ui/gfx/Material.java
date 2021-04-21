@@ -1,14 +1,17 @@
 package com.sevenmap.ui.gfx;
 
 import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import com.sevenmap.ui.utils.FileUtils;
 
 public class Material {
+    private final int BYTES_PER_PIXEL = 4;
     private int texID;
     private String path;
     private int width;
@@ -17,7 +20,6 @@ public class Material {
     /**
      * Create a new Material and load its texture from an image.
      * @param path path to the image
-     * @apiNote currently supported formats (more will be added in the future) : jpg
      */
     public Material(String path) {
         this.path = path;
@@ -31,42 +33,41 @@ public class Material {
 
     /**
      * Load data from the image at the provided path.
-     * <p>
-     * There seems to be a weird behaviour when loading large images
-     * (weird decoloration and/or crashes) which has to be fixed.
-     * </p>
-     * Also png format and all alpha channel formats in general aren't supported
-     * atm, so this clearly is a work in progress.
+     * @apiNote this method now fully supports png format and alpha channel transparency
      */
     public void create() {
         BufferedImage bi = FileUtils.loadImage(path);
-        width = bi.getWidth();
-        height = bi.getHeight();
-        int[] pixels = bi.getRGB(0, 0, width, height, null, 0, width);
+        int[] pixels = new int[bi.getWidth() * bi.getHeight()];
+        bi.getRGB(0, 0, bi.getWidth(), bi.getHeight(), pixels, 0, bi.getWidth());
 
-        // cf http://y2u.be/0cN3hJ6LphM at 17:31
+        ByteBuffer buffer = BufferUtils.createByteBuffer(bi.getWidth() * bi.getHeight() * BYTES_PER_PIXEL);
 
-        ByteBuffer b = BufferUtils.createByteBuffer((width * height) * 3);
-        texID = GL11.glGenTextures();
-
-        for (int i = 0; i < pixels.length; i++) {
-            byte rr = (byte) ((pixels[i] >> 16) & 0xFF);
-            byte gg = (byte) ((pixels[i] >> 8) & 0xFF);
-            byte bb = (byte) ((pixels[i]) & 0xFF);
-
-            b.put(rr);
-            b.put(gg);
-            b.put(bb);
+        for(int y = 0; y < bi.getHeight(); y++) {
+            for (int x = 0; x < bi.getWidth(); x++) {
+                int pixel = pixels[y * bi.getWidth() + x];
+                buffer.put((byte) ((pixel >> 16) & 0xFF)); // Red
+                buffer.put((byte) ((pixel >> 8) & 0xFF));  // Green
+                buffer.put((byte) (pixel & 0xFF));         // Blue
+                buffer.put((byte) ((pixel >> 24) & 0xFF)); // Alpha
+            }
         }
-        b.flip();
 
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texID); // bind
+        buffer.flip();
 
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
-        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, width, height, 0, GL11.GL_RGB, GL11.GL_UNSIGNED_BYTE, b);
+        // We need to create a new texture ID and bind the buffer to it
 
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0); // unbind
+        texID = GL11.glGenTextures();
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texID);
+
+        // wrap mode
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
+        
+        // scaling and filtering
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+        
+        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA8, bi.getWidth(), bi.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer);
     }
 
     /**

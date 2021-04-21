@@ -3,8 +3,12 @@ package com.sevenmap.ui;
 import com.sevenmap.exceptions.InitError;
 import com.sevenmap.ui.math.Matrix4f;
 import com.sevenmap.ui.math.Vector3f;
+import com.sevenmap.ui.scheduling.Task;
+import com.sevenmap.ui.scheduling.TaskMgr;
+import com.sevenmap.ui.scheduling.events.ButtonEvent;
+import com.sevenmap.ui.scheduling.events.Event;
+import com.sevenmap.ui.scheduling.events.KeyEvent;
 import com.sevenmap.ui.utils.Color;
-import com.sevenmap.ui.Input.eventType;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -108,6 +112,8 @@ public class Window extends FrameObject {
         GLFW.glfwMakeContextCurrent(windowElement); // make the window the current context
         GL.createCapabilities();
         GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         
         // set up callbacks
         createCallBacks();
@@ -192,20 +198,30 @@ public class Window extends FrameObject {
      * @return generated {@code task} object
      */
     public Task onKeyDown(int key, Runnable action) {
-        return taskManager.addTask(eventType.KEY, key, action);
+        return taskManager.add(new KeyEvent(this, key), action);
     }
 
     /**
      * Schedule Runnable action executed on mouse button press interrupt.
-     * @param key key code
+     * @param button key code
      * @param action lambda runnable
      * @return generated {@code task} object
      */
-    public Task onButtonDown(int key, Runnable action) {
-        return taskManager.addTask(eventType.BUTTON, key, action);
+    public Task onButtonDown(int button, Runnable action) {
+        return taskManager.add(new ButtonEvent(this, button), action);
+    }
+
+    /**
+     * Schedule Runnable action executed on event activity.
+     * @param event the triggering event
+     * @param action lambda runnable
+     * @return generated {@code task} object
+     */
+    public Task onEvent(Event event, Runnable action) {
+        return taskManager.add(event, action);
     }
 
     public Task scheduleTask(Runnable action) {
-        return taskManager.addTask(eventType.NONE, 0, action);
+        return taskManager.add(new Event(this), action);
     }
 }

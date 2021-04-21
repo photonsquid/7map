@@ -11,5 +11,6 @@ LISEZ-MOI.txt
 
 .code-workspace
 # lwjgl auto-generated log files
-hs_err.*
+hs_err*
+.log
 # 
