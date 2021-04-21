@@ -23,8 +23,8 @@ public class Matrix4f {
 
     /**
      * Set data at coordinates (a, b).
-     * @param a index
-     * @param b index
+     * @param a column's index 
+     * @param b line's index
      * @param val value
      */
     public void set(int a, int b, float val) {
@@ -131,7 +131,13 @@ public class Matrix4f {
 
         return output;
     }
-
+     /**
+     * Generate a scaling matrix.
+     * @param position position vector
+     * @param rotation rotation vector
+     * @param scale scaling factor
+     * @return scaling matrix
+     */
     public static Matrix4f transform(Vector3f position, Vector3f rotation, Vector3f scale) {
         Matrix4f output;
 
