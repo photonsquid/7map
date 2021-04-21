@@ -2,6 +2,7 @@ package com.sevenmap.ui.gfx;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
@@ -42,6 +43,17 @@ public class Mesh {
         this.vertices = vertices;
         this.indices = indices;
     }
+    
+    /**
+     * Define a mesh with no material.
+     * @param vertices a List of {@link Vertex} objects containing all the vertices of the mesh
+     * @param indices a List of Integer ojects containing the indices which are used to link the vertices 
+     * @see #Mesh(Vertex[], int[])
+     */
+    public Mesh(List<Vertex> vertices, List<Integer> indices) {
+        this.vertices = vertices.toArray(new Vertex[0]);
+        this.indices = indices.stream().mapToInt(i -> i).toArray();
+    }
 
     /**
      * Define a mesh with a material.
@@ -62,7 +74,17 @@ public class Mesh {
         this.material = material;
     }
 
-    
+    /**
+     * Define a mesh with a material.
+     * @param vertices a List of {@link Vertex} objects containing all the vertices of the mesh
+     * @param indices a List of Integers containing the indices which are used to link the vertices 
+     * @param material a material which may contain a texture
+     * @see #Mesh(Vertex[], int[], Material)
+     */
+    public Mesh(List<Vertex> vertices, List<Integer> indices, Material material) {
+        this(vertices, indices);
+        this.material = material;
+    }
 
     // getters and setters
 

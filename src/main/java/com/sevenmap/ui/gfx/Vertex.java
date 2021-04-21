@@ -28,6 +28,25 @@ public class Vertex {
         this.textureCoord = new Vector2f(0.0f, 0.0f);
     }
 
+    
+    /**
+     * Define a vertex with no texture coordinates.
+     * <p> 
+     * Warning : trying to add a texture to a mesh with no texture coordinates
+     * may cause unexpected results.
+     * </p>
+     * <p>
+     * By default, the texture coordinates will be initialized as {@code new Vector2f(0.0f, 0.0f)}.
+     * </p>
+     * @param position position vector (3D)
+     * @param color color vector (7map.ui.utils.Color)
+     */
+    public Vertex(Vector3f position, Color color) {
+        this.pos = position;
+        this.color = color.toVector3f();
+        this.textureCoord = new Vector2f(0.0f, 0.0f);
+    }
+
     /**
      * Define a vertex with texture coordinates.
      * @param position position vector (3D)
