@@ -273,7 +273,7 @@ package com.sevenmap.ui {
         note right: pull request <u>#26</u> by @seba1204
 
         class FileUtils {
-            + {static} loadString(path : String) : String
+            + {static} loadFile(path : String) : String
             + {static} loadImage(path : String) : BufferedImage
         }
     }

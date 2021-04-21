@@ -76,10 +76,12 @@ public class Engine implements Runnable {
      * Clean shutdown
      */
     private void stop() {
-        window.destroy(); 
         main.interrupt();
 
-        // destroy stuff
+        // Hulk smash
+        window.destroy(); 
+        shader.destroy();
+        root.destroy();
     }
 
     /**
