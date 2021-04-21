@@ -11,6 +11,10 @@ import javax.imageio.ImageIO;
  * File opening routine manager.
  */
 public class FileUtils {
+
+    private FileUtils() {
+    }
+
     /**
      * Load a text file to a string.
      * @param path path to file
