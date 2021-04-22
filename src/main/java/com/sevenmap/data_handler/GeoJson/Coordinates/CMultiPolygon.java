@@ -3,15 +3,20 @@ package com.sevenmap.data_handler.GeoJson.Coordinates;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MultiPolygon extends ArrayList<Polygon> {
+import com.sevenmap.data_handler.GeoJson.Type;
+
+public class CMultiPolygon extends Coordinates {
   
   private ArrayList<Polygon> polygons;
 
-
-  public MultiPolygon() {
+  public CMultiPolygon() {
   }
 
-  public MultiPolygon(ArrayList<Polygon> polygons) {
+  public Type getType(){
+    return new Type("MultiPolygon");
+  }
+
+  public CMultiPolygon(ArrayList<Polygon> polygons) {
     this.polygons = polygons;
   }
 
@@ -23,7 +28,7 @@ public class MultiPolygon extends ArrayList<Polygon> {
     this.polygons = polygons;
   }
 
-  public MultiPolygon polygons(ArrayList<Polygon> polygons) {
+  public CMultiPolygon polygons(ArrayList<Polygon> polygons) {
     setPolygons(polygons);
     return this;
   }
@@ -32,10 +37,10 @@ public class MultiPolygon extends ArrayList<Polygon> {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof MultiPolygon)) {
+        if (!(o instanceof CMultiPolygon)) {
             return false;
         }
-        MultiPolygon multiPolygon = (MultiPolygon) o;
+        CMultiPolygon multiPolygon = (CMultiPolygon) o;
         return Objects.equals(polygons, multiPolygon.polygons);
   }
 

@@ -3,7 +3,9 @@ package com.sevenmap.data_handler.GeoJson.Coordinates;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Point extends ArrayList<Float> {
+import com.sevenmap.data_handler.GeoJson.Type;
+
+public class Point extends Coordinates {
   private ArrayList<Float> coordinates;
 
 
@@ -14,6 +16,10 @@ public class Point extends ArrayList<Float> {
     this.coordinates = coordinates;
   }
 
+  public Type getType(){
+    return new Type("Point");
+  }
+  
   public ArrayList<Float> getCoordinates() {
     return this.coordinates;
   }

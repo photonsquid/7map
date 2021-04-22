@@ -3,7 +3,9 @@ package com.sevenmap.data_handler.GeoJson.Coordinates;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Polygon extends ArrayList<LineString> {
+import com.sevenmap.data_handler.GeoJson.Type;
+
+public class Polygon extends Coordinates {
   private ArrayList<LineString> linestrings;
 
 
@@ -14,6 +16,10 @@ public class Polygon extends ArrayList<LineString> {
     this.linestrings = linestrings;
   }
 
+  public Type getType(){
+    return new Type("Polygon");
+  }
+  
   public ArrayList<LineString> getLinestrings() {
     return this.linestrings;
   }

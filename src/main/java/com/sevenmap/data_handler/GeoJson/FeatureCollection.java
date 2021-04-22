@@ -1,17 +1,17 @@
 
 package com.sevenmap.data_handler.GeoJson;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class FeatureCollection {
   private Type type;
-  private List<Feature> features;
+  private ArrayList<Feature> features;
 
   public FeatureCollection() {
   }
 
-  public FeatureCollection(Type type, List<Feature> features) {
+  public FeatureCollection(Type type, ArrayList<Feature> features) {
     this.type = type;
     this.features = features;
   }
@@ -24,11 +24,11 @@ public class FeatureCollection {
     this.type = type;
   }
 
-  public List<Feature> getFeatures() {
+  public ArrayList<Feature> getFeatures() {
     return this.features;
   }
 
-  public void setFeatures(List<Feature> features) {
+  public void setFeatures(ArrayList<Feature> features) {
     this.features = features;
   }
 
@@ -37,7 +37,7 @@ public class FeatureCollection {
     return this;
   }
 
-  public FeatureCollection features(List<Feature> features) {
+  public FeatureCollection features(ArrayList<Feature> features) {
     setFeatures(features);
     return this;
   }

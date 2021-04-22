@@ -3,6 +3,7 @@ package com.sevenmap.data_handler.GeoJson.Geometry;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.sevenmap.data_handler.GeoJson.Coordinates.Coordinates;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, 
       include = As.PROPERTY, property = "type") @JsonSubTypes({
@@ -13,5 +14,5 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
    })
 
 public abstract class Geometry {
-  
+   public abstract Coordinates getCoordinates();
 }
