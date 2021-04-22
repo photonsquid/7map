@@ -1,35 +1,26 @@
-package com.sevenmap.data_handler.GeoJson.Geometry;
+package com.sevenmap.data_handler.GeoJson.Coordinates;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+public class MultiPolygon extends ArrayList<Polygon> {
+  
+  private ArrayList<Polygon> polygons;
 
-@JsonTypeName("MultiPolygon")
-public class MultiPolygon extends Geometry {
-  @JsonProperty("coordinates")
-  private ArrayList<Polygon> coordinates;
 
   public MultiPolygon() {
   }
 
-  /**
-   * Create a multi polygon from a list of several polygons
-   * @param polygons list of polygons
-   */
-  public MultiPolygon(ArrayList<Polygon> coordinates) {
-      this.coordinates = coordinates;
+  public MultiPolygon(ArrayList<Polygon> polygons) {
+    this.polygons = polygons;
   }
 
-  
-
   public ArrayList<Polygon> getPolygons() {
-    return this.coordinates;
+    return this.polygons;
   }
 
   public void setPolygons(ArrayList<Polygon> polygons) {
-    this.coordinates = polygons;
+    this.polygons = polygons;
   }
 
   public MultiPolygon polygons(ArrayList<Polygon> polygons) {
@@ -45,12 +36,12 @@ public class MultiPolygon extends Geometry {
             return false;
         }
         MultiPolygon multiPolygon = (MultiPolygon) o;
-        return Objects.equals(coordinates, multiPolygon.coordinates);
+        return Objects.equals(polygons, multiPolygon.polygons);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(coordinates);
+    return Objects.hashCode(polygons);
   }
 
   @Override

@@ -1,27 +1,33 @@
 package com.sevenmap.data_handler.GeoJson.Geometry;
 
-import java.util.ArrayList;
+
 import java.util.Objects;
 
-public class LineString extends ArrayList<Point> {
-  private ArrayList<LineString> coordinates;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.sevenmap.data_handler.GeoJson.Coordinates.Point;
 
-  public LineString() {
+@JsonTypeName("Point")
+public class GPoint extends Geometry {
+  private Point coordinates;
+
+
+
+  public GPoint() {
   }
 
-  public LineString(ArrayList<LineString> coordinates) {
+  public GPoint(Point coordinates) {
     this.coordinates = coordinates;
   }
 
-  public ArrayList<LineString> getCoordinates() {
+  public Point getCoordinates() {
     return this.coordinates;
   }
 
-  public void setCoordinates(ArrayList<LineString> coordinates) {
+  public void setCoordinates(Point coordinates) {
     this.coordinates = coordinates;
   }
 
-  public LineString coordinates(ArrayList<LineString> coordinates) {
+  public GPoint coordinates(Point coordinates) {
     setCoordinates(coordinates);
     return this;
   }
@@ -30,11 +36,11 @@ public class LineString extends ArrayList<Point> {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof LineString)) {
+        if (!(o instanceof GPoint)) {
             return false;
         }
-        LineString lineString = (LineString) o;
-        return Objects.equals(coordinates, lineString.coordinates);
+        GPoint gPoint = (GPoint) o;
+        return Objects.equals(coordinates, gPoint.coordinates);
   }
 
   @Override
@@ -49,4 +55,5 @@ public class LineString extends ArrayList<Point> {
       "}";
   }
 
+  
 }

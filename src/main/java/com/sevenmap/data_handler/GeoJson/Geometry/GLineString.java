@@ -1,30 +1,28 @@
 package com.sevenmap.data_handler.GeoJson.Geometry;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.sevenmap.data_handler.GeoJson.Coordinates.LineString;
 
-@JsonTypeName("Polygon")
-public class Polygon extends ArrayList<LineString> {
-  private ArrayList<LineString> coordinates;
+public class GLineString extends Geometry {
+  private LineString coordinates;
 
-  public Polygon() {
+  public GLineString() {
   }
 
-  public Polygon(ArrayList<LineString> coordinates) {
+  public GLineString(LineString coordinates) {
     this.coordinates = coordinates;
   }
 
-  public ArrayList<LineString> getCoordinates() {
+  public LineString getCoordinates() {
     return this.coordinates;
   }
 
-  public void setCoordinates(ArrayList<LineString> coordinates) {
+  public void setCoordinates(LineString coordinates) {
     this.coordinates = coordinates;
   }
 
-  public Polygon coordinates(ArrayList<LineString> coordinates) {
+  public GLineString coordinates(LineString coordinates) {
     setCoordinates(coordinates);
     return this;
   }
@@ -33,11 +31,11 @@ public class Polygon extends ArrayList<LineString> {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Polygon)) {
+        if (!(o instanceof GLineString)) {
             return false;
         }
-        Polygon polygon = (Polygon) o;
-        return Objects.equals(coordinates, polygon.coordinates);
+        GLineString gLineString = (GLineString) o;
+        return Objects.equals(coordinates, gLineString.coordinates);
   }
 
   @Override
@@ -51,5 +49,6 @@ public class Polygon extends ArrayList<LineString> {
       " coordinates='" + getCoordinates() + "'" +
       "}";
   }
+
 
 }

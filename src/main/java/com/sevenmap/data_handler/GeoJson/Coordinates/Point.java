@@ -1,11 +1,8 @@
-package com.sevenmap.data_handler.GeoJson.Geometry;
+package com.sevenmap.data_handler.GeoJson.Coordinates;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
-@JsonTypeName("Point")
 public class Point extends ArrayList<Float> {
   private ArrayList<Float> coordinates;
 
