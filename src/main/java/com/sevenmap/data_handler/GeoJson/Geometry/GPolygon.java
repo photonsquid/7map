@@ -3,29 +3,29 @@ package com.sevenmap.data_handler.GeoJson.Geometry;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.sevenmap.data_handler.GeoJson.Coordinates.Polygon;
+import com.sevenmap.data_handler.GeoJson.Coordinates.CPolygon;
 
 @JsonTypeName("Polygon")
 public class GPolygon extends Geometry {
-  private Polygon coordinates;
+  private CPolygon coordinates;
 
 
   public GPolygon() {
   }
 
-  public GPolygon(Polygon coordinates) {
+  public GPolygon(CPolygon coordinates) {
     this.coordinates = coordinates;
   }
 
-  public Polygon getCoordinates() {
+  public CPolygon getCoordinates() {
     return this.coordinates;
   }
 
-  public void setCoordinates(Polygon coordinates) {
+  public void setCoordinates(CPolygon coordinates) {
     this.coordinates = coordinates;
   }
 
-  public GPolygon coordinates(Polygon coordinates) {
+  public GPolygon coordinates(CPolygon coordinates) {
     setCoordinates(coordinates);
     return this;
   }

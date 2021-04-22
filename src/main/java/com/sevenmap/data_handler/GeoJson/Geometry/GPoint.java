@@ -4,30 +4,30 @@ package com.sevenmap.data_handler.GeoJson.Geometry;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.sevenmap.data_handler.GeoJson.Coordinates.Point;
+import com.sevenmap.data_handler.GeoJson.Coordinates.CPoint;
 
 @JsonTypeName("Point")
 public class GPoint extends Geometry {
-  private Point coordinates;
+  private CPoint coordinates;
 
 
 
   public GPoint() {
   }
 
-  public GPoint(Point coordinates) {
+  public GPoint(CPoint coordinates) {
     this.coordinates = coordinates;
   }
 
-  public Point getCoordinates() {
+  public CPoint getCoordinates() {
     return this.coordinates;
   }
 
-  public void setCoordinates(Point coordinates) {
+  public void setCoordinates(CPoint coordinates) {
     this.coordinates = coordinates;
   }
 
-  public GPoint coordinates(Point coordinates) {
+  public GPoint coordinates(CPoint coordinates) {
     setCoordinates(coordinates);
     return this;
   }

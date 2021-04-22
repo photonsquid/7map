@@ -4,30 +4,30 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.sevenmap.data_handler.GeoJson.Coordinates.CMultiPolygon;
+import com.sevenmap.data_handler.GeoJson.Coordinates.CPolygon;
 
 @JsonTypeName("MultiPolygon")
 public class GMultiPolygon extends Geometry {
   @JsonProperty("coordinates")
-  private CMultiPolygon coordinates;
+  private CPolygon[] coordinates;
 
 
   public GMultiPolygon() {
   }
 
-  public GMultiPolygon(CMultiPolygon coordinates) {
+  public GMultiPolygon(CPolygon[] coordinates) {
     this.coordinates = coordinates;
   }
 
-  public CMultiPolygon getCoordinates() {
+  public CPolygon[] getCoordinates() {
     return this.coordinates;
   }
 
-  public void setCoordinates(CMultiPolygon coordinates) {
+  public void setCoordinates(CPolygon[] coordinates) {
     this.coordinates = coordinates;
   }
 
-  public GMultiPolygon coordinates(CMultiPolygon coordinates) {
+  public GMultiPolygon coordinates(CPolygon[] coordinates) {
     setCoordinates(coordinates);
     return this;
   }
@@ -54,6 +54,7 @@ public class GMultiPolygon extends Geometry {
       " coordinates='" + getCoordinates() + "'" +
       "}";
   }
+
 
   
 }

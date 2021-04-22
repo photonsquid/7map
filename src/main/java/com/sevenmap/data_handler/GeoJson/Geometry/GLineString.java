@@ -2,27 +2,27 @@ package com.sevenmap.data_handler.GeoJson.Geometry;
 
 import java.util.Objects;
 
-import com.sevenmap.data_handler.GeoJson.Coordinates.LineString;
+import com.sevenmap.data_handler.GeoJson.Coordinates.CLineString;
 
 public class GLineString extends Geometry {
-  private LineString coordinates;
+  private CLineString coordinates;
 
   public GLineString() {
   }
 
-  public GLineString(LineString coordinates) {
+  public GLineString(CLineString coordinates) {
     this.coordinates = coordinates;
   }
 
-  public LineString getCoordinates() {
+  public CLineString getCoordinates() {
     return this.coordinates;
   }
 
-  public void setCoordinates(LineString coordinates) {
+  public void setCoordinates(CLineString coordinates) {
     this.coordinates = coordinates;
   }
 
-  public GLineString coordinates(LineString coordinates) {
+  public GLineString coordinates(CLineString coordinates) {
     setCoordinates(coordinates);
     return this;
   }

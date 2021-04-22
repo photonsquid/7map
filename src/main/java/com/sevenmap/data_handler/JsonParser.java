@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sevenmap.data_handler.GeoJson.Feature;
 import com.sevenmap.data_handler.GeoJson.FeatureCollection;
-import com.sevenmap.data_handler.GeoJson.Coordinates.CMultiPolygon;
-import com.sevenmap.data_handler.GeoJson.Coordinates.Polygon;
-import com.sevenmap.data_handler.GeoJson.Geometry.Geometry;
+import com.sevenmap.data_handler.GeoJson.Coordinates.CLineString;
+import com.sevenmap.data_handler.GeoJson.Coordinates.CPolygon;
+import com.sevenmap.data_handler.GeoJson.Geometry.GMultiPolygon;
 
 public class JsonParser {
 
@@ -20,12 +20,19 @@ public class JsonParser {
 
             // JSON file to Java object
             FeatureCollection feats = mapper.readValue(new File(src), FeatureCollection.class);
+
+            
             Feature f = feats.getFeatures().get(0);
-            Geometry g = f.getGeometry();
-            CMultiPolygon c = (CMultiPolygon) g.getCoordinates();
-            ArrayList<Polygon> pG = c.getPolygons();
-            System.out.println(c.getType());
-            System.out.println(c.getType());
+            GMultiPolygon g = (GMultiPolygon) f.getGeometry();
+            CPolygon[] cp =  g.getCoordinates();
+            ArrayList<ArrayList<CLineString>> ln = cp[0].getPolygons();
+
+            System.out.println("Coucou");
+            System.out.println(ln);
+            // CMultiPolygon c = (CMultiPolygon) g.getCoordinates();
+            // ArrayList<CPolygon> pG = c.getPolygons();
+            // System.out.println(c.getType());
+            // System.out.println(c.getType());
 
 
             
@@ -37,7 +44,7 @@ public class JsonParser {
     
 
     public static void main(String[] args) {
-        String path = "src/main/resources/maps/custom.geo.json";
+        String path = "src/main/resources/maps/test.geo.json";
         parse(path);
 
     }
