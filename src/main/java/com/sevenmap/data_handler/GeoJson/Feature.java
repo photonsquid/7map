@@ -4,9 +4,13 @@ import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sevenmap.data_handler.GeoJson.Geometry.Geometry;
 
 public class Feature {
+  @JsonProperty("type")
   private Type type;
+  @JsonProperty("geometry")
   private Geometry geometry;
   
   // Let's ignore properties for now

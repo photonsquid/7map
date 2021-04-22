@@ -5,22 +5,22 @@ import java.util.List;
 import java.util.Objects;
 
 public class FeatureCollection {
-  private String type;
+  private Type type;
   private List<Feature> features;
 
   public FeatureCollection() {
   }
 
-  public FeatureCollection(String type, List<Feature> features) {
+  public FeatureCollection(Type type, List<Feature> features) {
     this.type = type;
     this.features = features;
   }
 
-  public String getType() {
+  public Type getType() {
     return this.type;
   }
 
-  public void setType(String type) {
+  public void setType(Type type) {
     this.type = type;
   }
 
@@ -32,7 +32,7 @@ public class FeatureCollection {
     this.features = features;
   }
 
-  public FeatureCollection type(String type) {
+  public FeatureCollection type(Type type) {
     setType(type);
     return this;
   }
