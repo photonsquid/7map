@@ -16,4 +16,8 @@ public class Feature{
         this.cat = cat;
         this.attribut = attribut;
     }
+    
+    public Point[] getPoints() {
+        return this.p;
+    }
 }
