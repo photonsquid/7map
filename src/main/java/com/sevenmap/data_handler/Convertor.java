@@ -8,7 +8,10 @@ import java.util.*;
 
 public class Convertor {
 
-
+    /**
+     * crée un item à partir d'une feature avec une épaisseur de trait
+     * @return un item 
+     */
     public Item epaisseur(Feature feature, float epaisseur) {
         Vector3f position = new Vector3f(0,0,0);
         Vector3f rotation = new Vector3f(0,0,0);
