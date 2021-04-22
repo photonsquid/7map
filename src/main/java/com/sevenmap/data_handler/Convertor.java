@@ -9,7 +9,7 @@ import java.util.*;
 public class Convertor {
 
     /**
-     * crée un item à partir d'une feature avec une épaisseur de trait
+     * crée un item à partir d'une feature en lui mettant une épaisseur de trait
      * @return un item 
      */
     public Item epaisseur(Feature feature, float epaisseur) {
