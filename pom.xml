@@ -18,6 +18,8 @@
     
     <lwjgl.version>3.2.3</lwjgl.version>
     <lwjgl.natives>natives-windows</lwjgl.natives>
+    
+    <jackson.version>2.12.3</jackson.version>
   </properties>
 
   <dependencyManagement>
@@ -39,7 +41,6 @@
       <artifactId>maven-assembly-plugin</artifactId>
       <version>3.3.0</version>
     </dependency>
-
     <dependency>
         <groupId>org.mongodb</groupId>
         <artifactId>mongo-java-driver</artifactId>
@@ -365,14 +366,19 @@
     </dependency>
     <!-- jackson parser -->
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>2.9.9</version>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.12.3</version>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.version}</version>
     </dependency>
   </dependencies>
 
