@@ -12,7 +12,7 @@ public class Convertor {
      * crée un item à partir d'une feature en lui mettant une épaisseur de trait
      * @return un item 
      */
-    public Item epaisseur(Feature feature, float epaisseur) {
+    public Item convertirRoute(Feature feature, float epaisseur) {
         Vector3f position = new Vector3f(0,0,0);
         Vector3f rotation = new Vector3f(0,0,0);
         Vector3f scale = new Vector3f(0,0,0);
@@ -48,6 +48,41 @@ public class Convertor {
             indices.add(2*i+2);
             indices.add(2*i+3);
         }
+        Mesh mesh = new Mesh(vertices, indices);
+        return new Item(position, rotation, scale, mesh);
+    }
+
+
+    /**
+     * convertit une feature en item
+     * @return un item 
+     */
+    public Item convertirFeature(Feature feature) {
+        Vector3f position = new Vector3f(0,0,0);
+        Vector3f rotation = new Vector3f(0,0,0);
+        Vector3f scale = new Vector3f(0,0,0);
+        Point[] points = feature.getPoints();
+        int nbPoints = points.length;
+
+        Point barycentre = new Point(0.0F, 0.0F);
+        for (int i=0; i < nbPoints; i++) {
+            barycentre.add(points[i]);
+        }
+        barycentre.divide(nbPoints);
+
+        List<Vertex> vertices = new ArrayList<Vertex>();
+        for (int i = 0; i <= nbPoints - 1; i++) {
+            vertices.add(new Vertex((new Vector3f(points[i].getX(),points[i].getY(),0.0F)), new Vector3f(0.0f,0.0f,0.0f)));
+        }
+        vertices.add(new Vertex((new Vector3f(barycentre.getX(),barycentre.getY(),0.0F)), new Vector3f(0.0f,0.0f,0.0f)));
+
+        List<Integer> indices = new ArrayList<Integer>();
+        for (int i = 0; i <= nbPoints - 2; i++) {
+            indices.add(i);
+            indices.add(i+1);
+            indices.add(nbPoints);
+        }
+
         Mesh mesh = new Mesh(vertices, indices);
         return new Item(position, rotation, scale, mesh);
     }

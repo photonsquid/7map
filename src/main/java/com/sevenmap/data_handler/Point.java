@@ -16,4 +16,14 @@ public class Point {
     public float getY() {
         return this.y;
     }
+
+    public void add(Point p) {
+        this.x += p.getX();
+        this.y += p.getY();
+    }
+
+    public void divide(float divider) {
+        this.x /= divider;
+        this.y /= divider;
+    }
 }
