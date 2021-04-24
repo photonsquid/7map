@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT osm ((node|relation|way|bounds)*)>
+<!ATTLIST osm version (0.6) #REQUIRED>
+<!ATTLIST osm generator CDATA #REQUIRED>
 <!-- decimal floating point -->
 <!ATTLIST osm generator CDATA #IMPLIED>
 <!-- UTF-8 encoded, informative -->
@@ -161,3 +164,9 @@
 <!-- UTF-8 encoded, shorter than 256 characters, should be documented on the OSM wiki -->
 <!ATTLIST tag v CDATA #REQUIRED>
 <!-- UTF-8 encoded, shorter than 256 characters -->
+<!ELEMENT bounds (tag*)>
+<!ATTLIST bounds minlat CDATA #REQUIRED>
+<!ATTLIST bounds maxlat CDATA #REQUIRED>
+<!ATTLIST bounds minlon CDATA #REQUIRED>
+<!ATTLIST bounds maxlon CDATA #REQUIRED>
+<!ATTLIST bounds origin CDATA #IMPLIED>
