@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- decimal floating point -->
+<!ATTLIST osm generator CDATA #IMPLIED>
+<!-- UTF-8 encoded, informative -->
+<!-- response to request message api/capabilities -->
+<!ELEMENT api ((version|area|tracepoints|waynodes|changesets|timeout|status)+)>
+<!ELEMENT version EMPTY>
+<!ATTLIST version minimum CDATA #REQUIRED>
+<!-- decimal floating point <= "0.6" -->
+<!ATTLIST version maximum CDATA #REQUIRED>
+<!-- decimal floating point >= "0.6" -->
+<!ELEMENT area EMPTY>
+<!ATTLIST area maximum CDATA #REQUIRED>
+<!-- decimal floating point, in square degrees, e.g. "0.25" -->
+<!ELEMENT tracepoints EMPTY>
+<!ATTLIST tracepoints per_page CDATA #REQUIRED>
+<!-- decimal integer, e.g. "5000" -->
+<!ELEMENT waynodes EMPTY>
+<!ATTLIST waynodes maximum CDATA #REQUIRED>
+<!-- decimal integer, e.g. "2000" -->
+<!ELEMENT changesets EMPTY>
+<!ATTLIST changesets maximum_elements CDATA #REQUIRED>
+<!-- decimal integer (nodes+ways+relations), e.g. "50000" -->
+<!ELEMENT timeout EMPTY>
+<!ATTLIST timeout seconds CDATA #REQUIRED>
+<!-- decimal integer, e.g. "300" -->
+<!ELEMENT status EMPTY>
+<!ATTLIST status api CDATA #REQUIRED>
+<!-- UTF-8 encoded, e.g. "online", "readonly" or "offline" -->
+<!ATTLIST status database CDATA #IMPLIED>
+<!-- UTF-8 encoded, e.g. "online", "readonly" or "offline" -->
+<!ATTLIST status gpx CDATA #IMPLIED>
+<!-- UTF-8 encoded, e.g. "online", "readonly" or "offline" -->
+<!-- response to request message api/0.6/permissions -->
+<!ELEMENT permissions (permission*)>
+<!ELEMENT permission EMPTY>
+<!ATTLIST permission name CDATA #REQUIRED>
+<!-- UTF-8 encoded, e.g. "allow_read_prefs" -->
+<!-- response to request message api/0.6/user/details -->
+<!ELEMENT user (home?)>
+<!ATTLIST user display_name CDATA #REQUIRED>
+<!-- UTF-8 encoded -->
+<!ATTLIST user account_created CDATA #REQUIRED>
+<!-- ISO 8601 format -->
+<!ELEMENT home EMPTY>
+<!-- informative only, most users don't publicly define their home -->
+<!ATTLIST home lat CDATA #REQUIRED>
+<!-- decimal floating point, in [-90 .. 90] degrees on the WGS84 spheroid -->
+<!ATTLIST home lon CDATA #REQUIRED>
+<!-- decimal floating point, in [-180 .. 180] degrees on the WGS84 spheroid -->
+<!ATTLIST home zoom CDATA #REQUIRED>
+<!-- decimal integer -->
+<!-- response to request message api/0.6/user/preferences -->
+<!ELEMENT preferences (tag*)>
+<!-- response to request message api/0.6/user/gpx -->
+<!ELEMENT gpx_file EMPTY>
+<!ATTLIST gpx_file id CDATA #REQUIRED>
+<!ATTLIST gpx_file name CDATA #REQUIRED>
+<!-- UTF-8 encoded -->
+<!ATTLIST gpx_file lat CDATA #REQUIRED>
+<!-- decimal floating point, in [-90 .. 90] degrees on the WGS84 spheroid -->
+<!ATTLIST gpx_file lon CDATA #REQUIRED>
+<!-- decimal floating point, in [-180 .. 180] degrees on the WGS84 spheroid -->
+<!ATTLIST gpx_file user CDATA #REQUIRED>
+<!ATTLIST gpx_file public (true|false) "false">
+<!ATTLIST gpx_file pending (true|false) "false">
+<!ATTLIST gpx_file timestamp CDATA #REQUIRED>
+<!-- response to request message api/0.6/changeset/ -->
+<!ELEMENT changeset (tag*)>
+<!ATTLIST changeset id CDATA #REQUIRED>
+<!-- 64-bit decimal integer -->
+<!ATTLIST changeset uid CDATA #IMPLIED>
+<!-- decimal integer -->
+<!ATTLIST changeset user CDATA #IMPLIED>
+<!-- UTF-8 encoded -->
+<!ATTLIST changeset created_at CDATA #IMPLIED>
+<!-- ISO 8601 format -->
+<!ATTLIST changeset open (false|true) #REQUIRED>
+<!ATTLIST changeset min_lat CDATA #IMPLIED>
+<!-- decimal floating point, in [-90 .. 90] degrees on the WGS84 spheroid -->
+<!ATTLIST changeset min_lon CDATA #IMPLIED>
+<!-- decimal floating point, in [-180 .. 180] degrees on the WGS84 spheroid -->
+<!ATTLIST changeset max_lat CDATA #IMPLIED>
+<!-- decimal floating point, in [-90 .. 90] degrees on the WGS84 spheroid -->
+<!ATTLIST changeset max_lon CDATA #IMPLIED>
+<!-- decimal floating point, in [-180 .. 180] degrees on the WGS84 spheroid -->
+<!ELEMENT discussion (comment*)>
+<!ELEMENT comment (text*)>
+<!ATTLIST comment date CDATA #REQUIRED>
+<!-- ISO 8601 format -->
+<!ATTLIST comment uid CDATA #IMPLIED>
+<!-- decimal integer -->
+<!ATTLIST comment user CDATA #IMPLIED>
+<!-- UTF-8 encoded -->
+<!ELEMENT text (#PCDATA)>
+<!-- UTF-8 encoded -->
+<!-- response to core data request messages api/0.6/(create|delete|update)/ -->
+<!ELEMENT node (tag*)>
+<!ATTLIST node id CDATA #IMPLIED>
+<!-- 64-bit decimal integer, negative when creating a new node with a placeholder -->
+<!ATTLIST node lat CDATA #REQUIRED>
+<!-- decimal floating point, in [-90 .. 90] degrees on the WGS84 spheroid -->
+<!ATTLIST node lon CDATA #REQUIRED>
+<!-- decimal floating point, in [-180 .. 180] degrees on the WGS84 spheroid -->
+<!ATTLIST node version CDATA #IMPLIED>
+<!-- decimal integer, required when id > 0 -->
+<!ATTLIST node changeset CDATA #IMPLIED>
+<!-- 64-bit decimal integer -->
+<!ATTLIST node visible (true|false) #REQUIRED>
+<!-- false requires a request by a user with permission -->
+<!ATTLIST node uid CDATA #IMPLIED>
+<!-- decimal integer -->
+<!ATTLIST node user CDATA #IMPLIED>
+<!-- UTF-8 encoded -->
+<!ATTLIST node timestamp CDATA #IMPLIED>
+<!-- ISO 8601 format -->
+<!ELEMENT way ((tag|nd)*)>
+<!-- should contain at least two nd elements -->
+<!ATTLIST way id CDATA #IMPLIED>
+<!-- 64-bit decimal integer, negative when creating a new way with a placeholder -->
+<!ATTLIST way version CDATA #IMPLIED>
+<!-- decimal integer, required when id > 0 -->
+<!ATTLIST way changeset CDATA #IMPLIED>
+<!-- 64-bit decimal integer -->
+<!ATTLIST way visible (true|false) #REQUIRED>
+<!-- false requires a request by a user with permission -->
+<!ATTLIST way uid CDATA #IMPLIED>
+<!-- decimal integer -->
+<!ATTLIST way user CDATA #IMPLIED>
+<!-- UTF-8 encoded -->
+<!ATTLIST way timestamp CDATA #IMPLIED>
+<!-- ISO 8601 format -->
+<!ELEMENT nd EMPTY>
+<!ATTLIST nd ref CDATA #REQUIRED>
+<!-- 64-bit decimal integer, must match the id of an existing node element -->
+<!ELEMENT relation ((tag|member)*)>
+<!-- should contain at least one member element -->
+<!ATTLIST relation id CDATA #IMPLIED>
+<!-- 64-bit decimal integer, negative when creating a new relation -->
+<!ATTLIST relation version CDATA #IMPLIED>
+<!-- decimal integer, required when id > 0 -->
+<!ATTLIST relation changeset CDATA #IMPLIED>
+<!-- 64-bit decimal integer -->
+<!ATTLIST relation visible (true|false) #REQUIRED>
+<!-- false requires a request by a user with permission -->
+<!ATTLIST relation uid CDATA #IMPLIED>
+<!-- decimal integer -->
+<!ATTLIST relation user CDATA #IMPLIED>
+<!-- UTF-8 encoded -->
+<!ATTLIST relation timestamp CDATA #IMPLIED>
+<!-- ISO 8601 format -->
+<!ELEMENT member EMPTY>
+<!ATTLIST member type (way|node|relation) #REQUIRED>
+<!ATTLIST member ref CDATA #REQUIRED>
+<!-- 64-bit decimal integer, must match the id of an existing element of this type -->
+<!ATTLIST member role CDATA #IMPLIED>
+<!-- UTF-8 encoded, shorter than 256 characters, should be documented on the OSM wiki -->
+<!-- complements to various request messages api/0.6/(user/preferences|changeset|create|delete|update)/ -->
+<!ELEMENT tag EMPTY>
+<!ATTLIST tag k CDATA #REQUIRED>
+<!-- UTF-8 encoded, shorter than 256 characters, should be documented on the OSM wiki -->
+<!ATTLIST tag v CDATA #REQUIRED>
+<!-- UTF-8 encoded, shorter than 256 characters -->

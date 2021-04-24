@@ -14,3 +14,7 @@ LISEZ-MOI.txt
 hs_err*
 .log
 # 
+
+# big data files (contact @seba1204)
+src/main/resources/maps/osm/map.osm
+src/main/resources/maps/geojson/countries.geojson
