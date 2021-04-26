@@ -17,7 +17,7 @@ public class Engine implements Runnable {
     private Color bgColor = new Color(0.1d, 0.1d, 0.1d);
     private String title = "default title";
     private Shader shader = new Shader("shaders/Vertex.glsl", "shaders/Fragment.glsl");
-    private Camera camera = new Camera(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
+    private Camera camera = new Camera(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), (float) windowSize[0] / (float) windowSize[1]);
 
 
     /**

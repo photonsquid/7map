@@ -25,10 +25,7 @@ public class Window extends FrameObject {
     private long windowElement;
     private Input input;
     private TaskMgr taskManager = new TaskMgr(); // unused
-    private Matrix4f projector;
 
-    private float fov = 70.0f; // projection matrix parameters
-    private float[] nearfar = {0.15f, 10_000.0f};
     private int[] size = new int[2];
     private int[] posX = new int[1];
     private int[] posY = new int[1];
@@ -49,7 +46,6 @@ public class Window extends FrameObject {
         this.size[0] = width;
         this.size[1] = height;
         this.title = title;
-        projector = Matrix4f.project((float) width / (float) height, fov, nearfar[0], nearfar[1]);
         // initialize input
         input = new Input();
         // initialize task manager
@@ -64,17 +60,11 @@ public class Window extends FrameObject {
     public Color getBgColor() {
         return bgColor;
     }
-    public Matrix4f getProjector() {
-        return projector;
-    }
     public void setBgColor(double r, double g, double b) {
         bgColor.set(r, g, b);
     }
     public void setBgColor(Color color) {
         bgColor.set(color);
-    }
-    public void setProjector(Matrix4f projector) {
-        this.projector = projector;
     }
     public boolean isFullscreen() {
         return isFullscreen;

@@ -50,8 +50,6 @@ public class FileUtils {
      */
     public static BufferedImage loadImage(String path) {
         try {
-            // ClassLoader classLoader = FileUtils.class.getClassLoader();
-
             return ImageIO.read(FileUtils.class.getClassLoader().getResourceAsStream(path));
         } catch(IOException e) {
             System.err.printf("File at path %s could not be found", path);

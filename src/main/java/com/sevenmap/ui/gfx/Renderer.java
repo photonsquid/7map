@@ -51,7 +51,7 @@ public class Renderer extends RootNode {
         shader.bind(); // bind before drawing 
         shader.setUniform("model", Matrix4f.transform(element.getPos(), element.getRot(), element.getScale()));
         shader.setUniform("view", Matrix4f.view(camera.getPos(), camera.getRot()));
-        shader.setUniform("projection", window.getProjector());
+        shader.setUniform("projection", camera.getProjector());
         GL11.glDrawElements(GL11.GL_TRIANGLES, element.getMesh().getIndices().length, GL11.GL_UNSIGNED_INT, 0);
         shader.unbind(); // unbind after drawing (ready for the next shader to be applied)
         GL20.glDisableVertexAttribArray(0);
