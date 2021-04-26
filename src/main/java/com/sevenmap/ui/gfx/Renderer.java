@@ -1,7 +1,6 @@
 package com.sevenmap.ui.gfx;
 
 
-import com.sevenmap.ui.Window;
 import com.sevenmap.ui.elements.Camera;
 import com.sevenmap.ui.elements.Item;
 import com.sevenmap.ui.elements.RootNode;
@@ -16,15 +15,13 @@ import org.lwjgl.opengl.GL30;
 
 public class Renderer extends RootNode {
     private Shader shader;
-    private Window window;
 
     /**
      * Create a new Renderer object.
      * @param shader the shader which will be applied on each render call.
      */
-    public Renderer(Window window, Shader shader) {
+    public Renderer(Shader shader) {
         this.shader = shader;
-        this.window = window;
     }
 
     /**

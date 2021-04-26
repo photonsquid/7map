@@ -2,13 +2,9 @@ package com.sevenmap.ui.utils;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
-import java.nio.file.Files;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
@@ -27,7 +23,6 @@ public class FileUtils {
      * @return string containing the file's content
      */
     public static String loadFile(String path) {
-        String output = "default";
         ClassLoader classLoader = FileUtils.class.getClassLoader();
         try (InputStream iS = classLoader.getResourceAsStream(path)) {
             if (iS == null) return null;

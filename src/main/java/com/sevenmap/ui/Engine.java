@@ -26,7 +26,7 @@ public class Engine implements Runnable {
     public Engine() {
         main = new Thread(this, this.getClass().getSimpleName());
         window = new Window(windowSize[0], windowSize[1], title);
-        root = new Renderer(window, shader);
+        root = new Renderer(shader);
     }
 
     /**

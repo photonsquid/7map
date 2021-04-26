@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.sevenmap.ui.FrameObject;
-import com.sevenmap.ui.Input;
 import com.sevenmap.ui.scheduling.events.Event;
 
 /**
@@ -16,7 +15,6 @@ import com.sevenmap.ui.scheduling.events.Event;
 public class TaskMgr extends FrameObject {
     
     private Map<Event, List<Task>> tasks = new HashMap<>();
-    private Input inputStream;
     private List<Event> events;
 
     public TaskMgr() {
@@ -27,8 +25,8 @@ public class TaskMgr extends FrameObject {
         this.events = defaultEvents;
     }
 
-    public void create(Input inputStream) {
-        this.inputStream = inputStream;
+    @Override
+    public void create() {
         for (Event event: events) {
             tasks.put(event, new ArrayList<>());
         }

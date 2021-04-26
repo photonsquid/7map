@@ -1,7 +1,6 @@
 package com.sevenmap.ui;
 
 import com.sevenmap.exceptions.InitError;
-import com.sevenmap.ui.math.Matrix4f;
 import com.sevenmap.ui.math.Vector3f;
 import com.sevenmap.ui.scheduling.Task;
 import com.sevenmap.ui.scheduling.TaskMgr;
@@ -49,7 +48,7 @@ public class Window extends FrameObject {
         // initialize input
         input = new Input();
         // initialize task manager
-        taskManager.create(input);
+        taskManager.create();
     }
 
     // getters and setters

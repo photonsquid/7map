@@ -16,7 +16,9 @@ public class Shader {
     private String fragmentFile;
 
     /**pointers to actual elements */
-    private int vertexShaderID, fragmentShaderID, programID;
+    private int vertexShaderID;
+    private int fragmentShaderID;
+    private int programID;
 
     public Shader(String vertexPath, String fragmentPath) {
         vertexFile = FileUtils.loadFile(vertexPath);
@@ -90,7 +92,7 @@ public class Shader {
         GL20.glUniform3f(getUniformLoc(name), value.getX(), value.getY(), value.getZ());
     }
     public void setUniform(String name, Matrix4f value) {
-        FloatBuffer matrix = MemoryUtil.memAllocFloat(value.SIZE * value.SIZE);
+        FloatBuffer matrix = MemoryUtil.memAllocFloat(Matrix4f.SIZE * Matrix4f.SIZE);
         matrix.put(value.getContent()).flip();
         GL20.glUniformMatrix4fv(getUniformLoc(name), true, matrix);
     }
