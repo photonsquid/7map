@@ -30,7 +30,6 @@ public class FileUtils {
                 BufferedReader reader = new BufferedReader(iSR)) {
                     return reader.lines().collect(Collectors.joining(System.lineSeparator()));
             }
-        
         } catch (IOException e) {
             System.err.printf("File at path %s could not be found", path);
             System.exit(1);

@@ -62,7 +62,7 @@ public class Renderer extends RootNode {
      * @param camera camera on which the children have to be rendered
      */
     public void render(Camera camera) {
-        children.forEach((Node node) -> {
+        shownChildren.forEach((Node node) -> {
             renderChildren(node, camera);
         });
     }
@@ -76,7 +76,7 @@ public class Renderer extends RootNode {
         if (node.hasMesh()) {
             render((Item) node, camera);
         } else {
-            node.getChildren().forEach((Node childnode) -> 
+            node.getShownChildren().forEach((Node childnode) -> 
                 renderChildren(childnode, camera));
         }
     }
@@ -85,9 +85,7 @@ public class Renderer extends RootNode {
      * Build all children meshes.
      */
     public void buildAll() {
-        children.forEach((Node node) -> {
-            buildChildren(node);
-        });
+        shownChildren.forEach(this::buildChildren);
     }
 
     /**
@@ -98,9 +96,7 @@ public class Renderer extends RootNode {
         if (node.hasMesh()) {
             ((Item) node).getMesh().build();
         } else {
-            node.getChildren().forEach((Node childnode) -> {
-                buildChildren(childnode);
-            });
+            node.getShownChildren().forEach(this::buildChildren);
         }
     }
 }
