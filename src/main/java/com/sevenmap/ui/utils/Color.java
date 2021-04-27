@@ -196,28 +196,28 @@ public class Color {
       this.b = b;
    }
 
-   /**
-    * Test function awaiting a great Test class from @Mmzhk21
-    */
-   public static void main(String[] args) {
-      Color hexaMajColor = new Color("#8E44AD");
-      Color hexaMinColor = new Color("#1abc9c");
-      Color rgbStringColor = new Color("rgb(41, 128, 185)");
-      Color rgbColor = new Color(41, 128, 185); 
-      Color rgbfStringColor = new Color("rgb(0.75, 0.22, 0.17)"); // excpected: rgb(192, 57, 43)
-      Color rgbfColor = new Color(0.75, 0.22, 0.17); // excpected: rgb(192, 57, 43)
-      Color hslStringColor = new Color("hsl(37, 90%, 51%)");
-      Color hslColor = Color.fromHsl(37, 90, 51);
+   // /**
+   //  * Test function awaiting a great Test class from @Mmzhk21
+   //  */
+   // public static void main(String[] args) {
+   //    Color hexaMajColor = new Color("#8E44AD");
+   //    Color hexaMinColor = new Color("#1abc9c");
+   //    Color rgbStringColor = new Color("rgb(41, 128, 185)");
+   //    Color rgbColor = new Color(41, 128, 185); 
+   //    Color rgbfStringColor = new Color("rgb(0.75, 0.22, 0.17)"); // excpected: rgb(192, 57, 43)
+   //    Color rgbfColor = new Color(0.75, 0.22, 0.17); // excpected: rgb(192, 57, 43)
+   //    Color hslStringColor = new Color("hsl(37, 90%, 51%)");
+   //    Color hslColor = Color.fromHsl(37, 90, 51);
 
 
-      System.out.println("\"#8E44AD\"                 => " + hexaMajColor.toString());
-      System.out.println("\"#1abc9c\"                 => " + hexaMinColor.toString());
-      System.out.println("\"rgb(41, 128, 185)\"       => " + rgbStringColor.toString());
-      System.out.println("41, 128, 185              => " + rgbColor.toString());
-      System.out.println("\"rgb(0.75, 0.22, 0.17)\"   => " + rgbfStringColor.toString());
-      System.out.println("0.75, 0.22, 0.17          => " + rgbfColor.toString());
-      System.out.println("\"hsl(37, 90%, 51%)\"       => " + hslStringColor.toString());
-      System.out.println("fromHsl(37, 90, 51)       => " + hslColor.toString());
-   }
+   //    System.out.println("\"#8E44AD\"                 => " + hexaMajColor.toString());
+   //    System.out.println("\"#1abc9c\"                 => " + hexaMinColor.toString());
+   //    System.out.println("\"rgb(41, 128, 185)\"       => " + rgbStringColor.toString());
+   //    System.out.println("41, 128, 185              => " + rgbColor.toString());
+   //    System.out.println("\"rgb(0.75, 0.22, 0.17)\"   => " + rgbfStringColor.toString());
+   //    System.out.println("0.75, 0.22, 0.17          => " + rgbfColor.toString());
+   //    System.out.println("\"hsl(37, 90%, 51%)\"       => " + hslStringColor.toString());
+   //    System.out.println("fromHsl(37, 90, 51)       => " + hslColor.toString());
+   // }
 
 }
