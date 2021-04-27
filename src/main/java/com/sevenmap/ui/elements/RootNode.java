@@ -13,11 +13,13 @@ public abstract class RootNode {
 
     private static Integer lastId = 0;
     private String id;
+    protected String name;
 
     protected RootNode() {
         id = String.format("N%s", lastId++);
         this.hiddenChildren = new ArrayList<>();
         this.shownChildren = new ArrayList<>();
+        name = "RootNode";
     }
 
     /**
@@ -69,6 +71,14 @@ public abstract class RootNode {
     }
 
     /**
+     * Determine if the node has children or if not.
+     * @return true if the node does have children
+     */
+    public boolean hasChildren() {
+        return (shownChildren.size() + hiddenChildren.size() )> 0;
+    }
+
+    /**
      * Get the Node's unique ID.
      * <p>
      * A Node's ID matches the following format : {@code ^N\d+$}
@@ -103,5 +113,23 @@ public abstract class RootNode {
     public void destroy() {
         this.hiddenChildren.forEach(Node::destroy);
         this.shownChildren.forEach(Node::destroy);
+    }
+
+    /**
+     * Display a nice tree showing the node structure beneath 
+     * the current node.
+     */
+    public void tree() {
+        System.out.printf("%s %s%n", this.getID(), this.name);
+        tree("");
+    }
+
+    public void tree(String shift) {
+        List<Node> children = getChildren();
+        for (int i = 0; i < children.size(); i++) {
+            Node child = children.get(i);
+            System.out.printf("%s%s %s %s%n", shift, (i + 1 == children.size() && !child.hasChildren()) ? "└":"├", child.getID(), child.name);
+            child.tree(shift + "│ ");
+        }
     }
 }

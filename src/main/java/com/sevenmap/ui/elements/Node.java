@@ -11,6 +11,13 @@ public class Node extends RootNode {
     public Node(Vector3f position, Vector3f rotation) {
         this.position = position;
         this.rotation = rotation;
+        name = "Node";
+    }
+
+    public Node(Vector3f position, Vector3f rotation, String name) {
+        this.position = position;
+        this.rotation = rotation;
+        this.name = name;
     }
 
     /**

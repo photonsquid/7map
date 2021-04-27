@@ -9,7 +9,7 @@ public class Camera extends Node {
     private Matrix4f projector;
 
     public Camera(Vector3f position, Vector3f rotation, float aspect) {
-        super(position, rotation);
+        super(position, rotation, "Camera");
         projector = Matrix4f.project(aspect, fov, nearfar[0], nearfar[1]); // (float) width / (float) height
     }
     

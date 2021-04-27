@@ -43,13 +43,15 @@ public class App {
     new Material("textures/logo.png"));
 
     private Item testElement = new Item(new Vector3f(0, 0, -1.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
+    private Item testElement2 = new Item(new Vector3f(0, 0, -4.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
 
     public void start() {
         init();
     }
 
     private Node parentTestNode = new Node(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
-    
+    private Node parentTestNode2 = new Node(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
+
     // testing only ---------------------------------
     
     /**
@@ -57,8 +59,12 @@ public class App {
      */
     public void init() {
 
+        // test out node structure
         testElement.setParent(parentTestNode);
+        testElement2.setParent(parentTestNode);
         parentTestNode.setParent(engine.getRoot());
+        parentTestNode2.setParent(testElement);
+        engine.getRoot().tree();
         
         // schedule movement macros
         engine.getWindow().onKeyDown(GLFW.GLFW_KEY_A, () -> 
@@ -104,9 +110,9 @@ public class App {
         );
 
         // event showcase
-        engine.getWindow().onEvent(new MoveEvent(engine), () -> {
-            parentTestNode.setRot(testElement.getRot().add(new Vector3f(0, 0, 0.3f)));
-        });
+        engine.getWindow().onEvent(new MoveEvent(engine), () -> 
+            parentTestNode.setRot(testElement.getRot().add(new Vector3f(0, 0, 0.3f)))
+        );
 
         engine.start(); 
     }

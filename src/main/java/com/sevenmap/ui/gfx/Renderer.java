@@ -62,9 +62,7 @@ public class Renderer extends RootNode {
      * @param camera camera on which the children have to be rendered
      */
     public void render(Camera camera) {
-        shownChildren.forEach((Node node) -> {
-            renderChildren(node, camera);
-        });
+        shownChildren.forEach((Node node) -> renderChildren(node, camera));
     }
 
     /**

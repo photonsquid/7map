@@ -12,11 +12,21 @@ public class Item extends Node {
     protected Mesh mesh;
 
     public Item (Vector3f position, Vector3f rotation) {
-        super(position, rotation);
+        super(position, rotation, "Item");
     }
 
     public Item (Vector3f position, Vector3f rotation, Vector3f scale, Mesh mesh) {
         this(position, rotation);
+        this.scale = scale;
+        this.mesh = mesh;
+    }
+
+    public Item (Vector3f position, Vector3f rotation, String name) {
+        super(position, rotation, name);
+    }
+
+    public Item (Vector3f position, Vector3f rotation, Vector3f scale, Mesh mesh, String name) {
+        this(position, rotation, name);
         this.scale = scale;
         this.mesh = mesh;
     }
