@@ -128,8 +128,8 @@ public abstract class RootNode {
         List<Node> children = getChildren();
         for (int i = 0; i < children.size(); i++) {
             Node child = children.get(i);
-            System.out.printf("%s%s %s %s%n", shift, (i + 1 == children.size() && !child.hasChildren()) ? "└":"├", child.getID(), child.name);
-            child.tree(shift + "│ ");
+            System.out.printf("%s%s %s %s%n", shift, (i + 1 == children.size()) ? "└":"├", child.getID(), child.name);
+            child.tree(String.format("%s%s", shift, (i < children.size() - 1) ? "│ ":"  "));
         }
     }
 }
