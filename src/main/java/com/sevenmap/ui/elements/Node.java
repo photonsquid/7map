@@ -11,6 +11,13 @@ public class Node extends RootNode {
     public Node(Vector3f position, Vector3f rotation) {
         this.position = position;
         this.rotation = rotation;
+        name = "Node";
+    }
+
+    public Node(Vector3f position, Vector3f rotation, String name) {
+        this.position = position;
+        this.rotation = rotation;
+        this.name = name;
     }
 
     /**
@@ -27,7 +34,7 @@ public class Node extends RootNode {
     }
 
     /**
-     * Reparent an Node to another Node element.
+     * Reparent a Node to another Node element.
      * @param parent the parent Node
      */
     public void setParent(RootNode parent) {
@@ -41,7 +48,7 @@ public class Node extends RootNode {
     }
 
     /**
-     * Get an Node's parent Node.
+     * Get a Node's parent Node.
      * @return the parent Node
      */
     public RootNode getParent() {
@@ -73,7 +80,12 @@ public class Node extends RootNode {
     public void setPos(float x, float y, float z) {
         Vector3f delta = new Vector3f(x, y, z).sub(new Vector3f(position));
         position.set(x, y, z);
-        children.forEach((Node cNode) -> {
+        hiddenChildren.forEach((Node cNode) -> {
+            Vector3f current = cNode.getPos();
+            Vector3f next = current.add(delta);
+            cNode.setPos(next);
+        });
+        shownChildren.forEach((Node cNode) -> {
             Vector3f current = cNode.getPos();
             Vector3f next = current.add(delta);
             cNode.setPos(next);
@@ -97,7 +109,12 @@ public class Node extends RootNode {
     public void setRot(float l, float m, float n) {
         Vector3f delta = new Vector3f(l, m, n).sub(new Vector3f(rotation));
         rotation.set(l, m, n);
-        children.forEach((Node cNode) -> {
+        hiddenChildren.forEach((Node cNode) -> {
+            Vector3f current = cNode.getRot();
+            Vector3f next = current.add(delta);
+            cNode.setRot(next);
+        });
+        shownChildren.forEach((Node cNode) -> {
             Vector3f current = cNode.getRot();
             Vector3f next = current.add(delta);
             cNode.setRot(next);
@@ -110,6 +127,14 @@ public class Node extends RootNode {
      */
     public void setRot(Vector3f vect) {
         setRot(vect.getX(), vect.getY(), vect.getZ());
+    }
+
+    public void show() {
+        parent.showChild(this);
+    }
+
+    public void hide() {
+        parent.hideChild(this);
     }
 
 }

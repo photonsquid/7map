@@ -10,14 +10,14 @@ import com.sevenmap.ui.utils.Color;
 public class Engine implements Runnable {
     private Thread main;
     private Window window;
-    private Renderer root;
 
     // default settings
     private int[] windowSize = {1920, 1080};
     private Color bgColor = new Color(0.1d, 0.1d, 0.1d);
     private String title = "default title";
     private Shader shader = new Shader("shaders/Vertex.glsl", "shaders/Fragment.glsl");
-    private Camera camera = new Camera(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
+    private Renderer root = new Renderer(shader);
+    private Camera camera = new Camera(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), (float) windowSize[0] / (float) windowSize[1]);
 
 
     /**
@@ -26,7 +26,7 @@ public class Engine implements Runnable {
     public Engine() {
         main = new Thread(this, this.getClass().getSimpleName());
         window = new Window(windowSize[0], windowSize[1], title);
-        root = new Renderer(window, shader);
+        camera.setParent(root);
     }
 
     /**

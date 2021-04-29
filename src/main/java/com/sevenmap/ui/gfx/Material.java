@@ -1,7 +1,6 @@
 package com.sevenmap.ui.gfx;
 
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 import org.lwjgl.BufferUtils;
@@ -11,7 +10,7 @@ import org.lwjgl.opengl.GL12;
 import com.sevenmap.ui.utils.FileUtils;
 
 public class Material {
-    private final int BYTES_PER_PIXEL = 4;
+    private static final int BYTES_PER_PIXEL = 4;
     private int texID;
     private String path;
     private int width;
@@ -26,8 +25,26 @@ public class Material {
     }
 
     // setters and getters
+    
+    public int getTexID() {
+        return texID;
+    }
 
-    public int getTexID() {return texID;}
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     // other methods
 
@@ -37,14 +54,16 @@ public class Material {
      */
     public void create() {
         BufferedImage bi = FileUtils.loadImage(path);
-        int[] pixels = new int[bi.getWidth() * bi.getHeight()];
-        bi.getRGB(0, 0, bi.getWidth(), bi.getHeight(), pixels, 0, bi.getWidth());
+        width = bi.getWidth();
+        height = bi.getHeight();
+        int[] pixels = new int[width * height];
+        bi.getRGB(0, 0, width, height, pixels, 0, width);
 
-        ByteBuffer buffer = BufferUtils.createByteBuffer(bi.getWidth() * bi.getHeight() * BYTES_PER_PIXEL);
+        ByteBuffer buffer = BufferUtils.createByteBuffer(width * height * BYTES_PER_PIXEL);
 
-        for(int y = 0; y < bi.getHeight(); y++) {
-            for (int x = 0; x < bi.getWidth(); x++) {
-                int pixel = pixels[y * bi.getWidth() + x];
+        for(int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int pixel = pixels[y * width + x];
                 buffer.put((byte) ((pixel >> 16) & 0xFF)); // Red
                 buffer.put((byte) ((pixel >> 8) & 0xFF));  // Green
                 buffer.put((byte) (pixel & 0xFF));         // Blue
@@ -67,7 +86,7 @@ public class Material {
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
         
-        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA8, bi.getWidth(), bi.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer);
+        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA8, width, height, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer);
     }
 
     /**
