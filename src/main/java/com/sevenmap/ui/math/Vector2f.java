@@ -88,11 +88,28 @@ public class Vector2f implements Vector<Vector2f> {
 	
     /**
      * {@inheritDoc}
+     * @param value {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    public Vector2f multiply(float value) {
+        return new Vector2f(x * value, y * value);
+    }
+
+    /**
+     * {@inheritDoc}
      * @param vec {@inheritDoc}
      */
 	public Vector2f divide(Vector2f vec) {
 		return new Vector2f(x / vec.getX(), y / vec.getY());
 	}
+
+    /**
+     * {@inheritDoc}
+     * @param value {@inheritDoc}
+     */
+    public Vector2f divide(float value) {
+        return new Vector2f(x / value, y / value);
+    }
 
     /**
      * {@inheritDoc}

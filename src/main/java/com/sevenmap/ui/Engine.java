@@ -36,6 +36,13 @@ public class Engine implements Runnable {
         main.start();
     }
 
+    /**
+     * Stop the engine.
+     */
+    public void stop() {
+        throw new ExitOverrideException(0);
+    }
+
     public void run() {
         init();
         try {
@@ -46,7 +53,7 @@ public class Engine implements Runnable {
         } catch (ExitOverrideException e) {
             System.out.println(e.getMessage());
         }
-        stop();
+        stopInternals();
     }
 
     private void init() {
@@ -75,7 +82,7 @@ public class Engine implements Runnable {
     /**
      * Clean shutdown
      */
-    private void stop() {
+    private void stopInternals() {
         main.interrupt();
 
         // Hulk smash
