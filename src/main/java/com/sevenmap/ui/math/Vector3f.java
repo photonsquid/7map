@@ -90,10 +90,20 @@ public class Vector3f implements Vector<Vector3f> {
     /**
      * {@inheritDoc}
      * @param vec {@inheritDoc}
+     * @return {@inheritDoc}
      */
     public Vector3f multiply(Vector3f vec) {
 		return new Vector3f(x * vec.getX(), y * vec.getY(), z * vec.getZ());
 	}
+
+    /**
+     * {@inheritDoc}
+     * @param value {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    public Vector3f multiply(float value) {
+        return new Vector3f(x * value, y * value, z * value);
+    }
 	
     /**
      * {@inheritDoc}
@@ -102,6 +112,14 @@ public class Vector3f implements Vector<Vector3f> {
 	public Vector3f divide(Vector3f vec) {
 		return new Vector3f(x / vec.getX(), y / vec.getY(), z / vec.getZ());
 	}
+
+    /**
+     * {@inheritDoc}
+     * @param value {@inheritDoc}
+     */
+    public Vector3f divide(float value) {
+        return new Vector3f(x / value, y / value, z / value);
+    }
 
     /**
      * {@inheritDoc}
