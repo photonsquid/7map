@@ -2,7 +2,7 @@
 
 # 7map
 An app for editing and reading maps from your computer.<br>
-*Disclaimer : This project is still a work in progress, do not expect to be fully functional*
+*Disclaimer : This project is still a work in progress, do not expect it to be fully functional*
 
 ## Project advancement
 The 3D engine is ready and works pretty well, the data team is still working on the back-end (database management and element loading/unloading from the scene)<br>
