@@ -40,7 +40,7 @@ public class Vector3fTest {
     }
 
     @Test
-    public void normalizeTest() {
+        public void normalizeTest() {
         assertEquals(v1.normalize(), new Vector3f(a/v1.norm(), b/v1.norm(), c/v1.norm()));
     }
 

@@ -2,6 +2,9 @@ package com.sevenmap;
 
 import org.lwjgl.glfw.GLFW;
 
+import java.lang.System.Logger;
+import java.io.File;
+
 import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.ui.Engine;
 import com.sevenmap.ui.elements.Item;
@@ -42,6 +45,9 @@ public class App {
 
     private Item testElement = new Item(new Vector3f(0, 0, -1.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
 
+    public static Logger logger = null;
+
+   
     public void start() {
         init();
     }
