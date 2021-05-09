@@ -62,9 +62,9 @@ public class App {
         // test out node structure
         testElement.setParent(parentTestNode);
         testElement2.setParent(parentTestNode);
-        parentTestNode.setParent(engine.getRoot());
+        parentTestNode.setParent(engine.getSceneRoot());
         parentTestNode2.setParent(testElement);
-        engine.getRoot().tree();
+        engine.getSceneRoot().tree();
         
         // schedule movement macros
         engine.getWindow().onKeyDown(GLFW.GLFW_KEY_A, () -> 

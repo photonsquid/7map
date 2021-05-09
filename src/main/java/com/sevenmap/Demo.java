@@ -64,8 +64,8 @@ public class Demo {
                             new Vector3f(1, 1, 1),
                             surfaceMesh);
 
-        surfaceItem.setParent(engine.getRoot());
-        engine.getRoot().tree(); // debug
+        surfaceItem.setParent(engine.getSceneRoot());
+        engine.getSceneRoot().tree(); // debug
 
         // set up key bindings
         setup();

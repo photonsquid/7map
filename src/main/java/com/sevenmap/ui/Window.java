@@ -15,15 +15,17 @@ import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
-public class Window extends FrameObject {
+import imgui.ImGui;
+import imgui.gl3.ImGuiImplGl3;
+import imgui.glfw.ImGuiImplGlfw;
 
-    
+public class Window extends FrameObject {
     
     // functional attributes
     private String title;
     private long windowElement;
     private Input input;
-    private TaskMgr taskManager = new TaskMgr(); // unused
+    private TaskMgr taskManager = new TaskMgr();
 
     private int[] size = new int[2];
     private int[] posX = new int[1];
@@ -77,6 +79,12 @@ public class Window extends FrameObject {
         } else {
             GLFW.glfwSetWindowMonitor(windowElement, 0, posX[0], posY[0], size[0], size[1], 0);
         }
+    }
+    public long getWindowElement() {
+        return windowElement;
+    }
+    public void setWindowElement(long windowElement) {
+        this.windowElement = windowElement;
     }
 
     // other methods

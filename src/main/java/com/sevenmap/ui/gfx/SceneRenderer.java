@@ -13,14 +13,14 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-public class Renderer extends RootNode {
+public class SceneRenderer extends RootNode {
     private Shader shader;
 
     /**
      * Create a new Renderer object.
      * @param shader the shader which will be applied on each render call.
      */
-    public Renderer(Shader shader) {
+    public SceneRenderer(Shader shader) {
         this.shader = shader;
     }
 
