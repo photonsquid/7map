@@ -23,8 +23,8 @@ public class CameraTest {
         rot1 = new Vector3f(7.0f, 0.5f, 6.1f);
 
         // Declaring Cameras
-        cam0 = new Camera(pos0 , rot0);
-        cam1 = new Camera(pos1 , rot1);
+        cam0 = new Camera(pos0 , rot0, 1920f/1080f);
+        cam1 = new Camera(pos1 , rot1, 1920f/1080f);
     }
     
     @Test

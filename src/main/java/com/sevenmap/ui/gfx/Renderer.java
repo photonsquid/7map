@@ -1,7 +1,6 @@
 package com.sevenmap.ui.gfx;
 
 
-import com.sevenmap.ui.Window;
 import com.sevenmap.ui.elements.Camera;
 import com.sevenmap.ui.elements.Item;
 import com.sevenmap.ui.elements.RootNode;
@@ -16,15 +15,13 @@ import org.lwjgl.opengl.GL30;
 
 public class Renderer extends RootNode {
     private Shader shader;
-    private Window window;
 
     /**
      * Create a new Renderer object.
      * @param shader the shader which will be applied on each render call.
      */
-    public Renderer(Window window, Shader shader) {
+    public Renderer(Shader shader) {
         this.shader = shader;
-        this.window = window;
     }
 
     /**
@@ -51,7 +48,7 @@ public class Renderer extends RootNode {
         shader.bind(); // bind before drawing 
         shader.setUniform("model", Matrix4f.transform(element.getPos(), element.getRot(), element.getScale()));
         shader.setUniform("view", Matrix4f.view(camera.getPos(), camera.getRot()));
-        shader.setUniform("projection", window.getProjector());
+        shader.setUniform("projection", camera.getProjector());
         GL11.glDrawElements(GL11.GL_TRIANGLES, element.getMesh().getIndices().length, GL11.GL_UNSIGNED_INT, 0);
         shader.unbind(); // unbind after drawing (ready for the next shader to be applied)
         GL20.glDisableVertexAttribArray(0);
@@ -65,9 +62,7 @@ public class Renderer extends RootNode {
      * @param camera camera on which the children have to be rendered
      */
     public void render(Camera camera) {
-        children.forEach((Node node) -> {
-            renderChildren(node, camera);
-        });
+        shownChildren.forEach((Node node) -> renderChildren(node, camera));
     }
 
     /**
@@ -79,7 +74,7 @@ public class Renderer extends RootNode {
         if (node.hasMesh()) {
             render((Item) node, camera);
         } else {
-            node.getChildren().forEach((Node childnode) -> 
+            node.getShownChildren().forEach((Node childnode) -> 
                 renderChildren(childnode, camera));
         }
     }
@@ -88,9 +83,7 @@ public class Renderer extends RootNode {
      * Build all children meshes.
      */
     public void buildAll() {
-        children.forEach((Node node) -> {
-            buildChildren(node);
-        });
+        shownChildren.forEach(this::buildChildren);
     }
 
     /**
@@ -101,9 +94,7 @@ public class Renderer extends RootNode {
         if (node.hasMesh()) {
             ((Item) node).getMesh().build();
         } else {
-            node.getChildren().forEach((Node childnode) -> {
-                buildChildren(childnode);
-            });
+            node.getShownChildren().forEach(this::buildChildren);
         }
     }
 }
