@@ -35,12 +35,6 @@
   <dependencies>
 
     <dependency>
-      <groupId>org.liquidengine</groupId>
-      <artifactId>legui</artifactId>
-      <version>1.4.0</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-assembly-plugin</artifactId>
       <version>3.3.0</version>
@@ -381,17 +375,6 @@
       <version>2.12.3</version>
     </dependency>
   </dependencies>
-
-  <repositories>
-    <repository>
-      <id>so-releases</id>
-      <url>https://raw.githubusercontent.com/SpinyOwl/repo/releases</url>
-    </repository>
-    <repository>
-      <id>so-snapshots</id>
-      <url>https://raw.githubusercontent.com/SpinyOwl/repo/snapshots</url>
-    </repository>
-  </repositories>
 
   <build>
     <resources>
