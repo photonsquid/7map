@@ -1,4 +1,4 @@
-<img align="center" src="./doc/medias/logo_v1_x0.5.png" alt="drawing" width="200"/>  
+<img align="center" src="https://github.com/7map/7map/blob/main/doc/medias/logo_v1_x0.5.png" alt="drawing" width="200"/>  
 
 # 7map
 An app for editing and reading maps from your computer.<br>
@@ -11,11 +11,11 @@ The 3D engine is ready and works pretty well, the data team is still working on 
 
 **Demo.java** : a quick overview of the capabilities of the rendering engine
 
-![](./doc/medias/demo_screenshot01.png)
+![](https://github.com/7map/7map/blob/main/doc/medias/demo_screenshot01.png)
 
 **App.java** : Texture transparency tests (yes we did use the google maps logo, *ironic isn't it ?*)
 
-![](./doc/medias/app_screenshot01.png)
+![](https://github.com/7map/7map/blob/main/doc/medias/app_screenshot01.png)
 
 ## Installation
 
