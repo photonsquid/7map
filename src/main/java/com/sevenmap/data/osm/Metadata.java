@@ -14,18 +14,15 @@ public class Metadata {
   private Integer changeset;
   private Date timestamp;
 
+  private static final String defaultDate = "1900-01-01T00-00-00Z";
+
   public Metadata() {
     this.user = "";
     this.uid = 1;
     this.visible = false;
     this.version = 1;
     this.changeset = 1;
-    DateFormat dt = new SimpleDateFormat("dd-MM-yyyy:HH-mm-ss");
-    try {
-      this.timestamp = dt.parse("01-01-1900:00-00-00");
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
+    this.timestamp = parseDate(defaultDate);
   }
 
   public Metadata(String user, Integer uid, Boolean visible, Integer version, Integer changeset, Date timestamp) {
@@ -35,6 +32,15 @@ public class Metadata {
     this.version = version;
     this.changeset = changeset;
     this.timestamp = timestamp;
+  }
+
+  public Metadata(String user, Integer uid, Boolean visible, Integer version, Integer changeset, String timestamp) {
+    this.user = user;
+    this.uid = uid;
+    this.visible = visible;
+    this.version = version;
+    this.changeset = changeset;
+    this.timestamp = parseDate(timestamp);
   }
 
   public String getUser() {
@@ -117,6 +123,22 @@ public class Metadata {
   public Metadata timestamp(Date timestamp) {
     setTimestamp(timestamp);
     return this;
+  }
+
+  private Date parseDate(String timestamp) {
+    DateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    // TODO: handle other formats than T...Z
+    // cf https://www.w3.org/TR/NOTE-datetime
+    timestamp = timestamp.replace('T', ' ');
+    timestamp = timestamp.replace("Z", "");
+    try {
+      return dt.parse(timestamp);
+    } catch (ParseException e) {
+      // TODO: handleError
+      e.printStackTrace();
+      return new Date();
+    }
   }
 
   @Override

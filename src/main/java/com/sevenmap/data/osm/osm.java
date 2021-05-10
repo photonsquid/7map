@@ -41,19 +41,37 @@ public class osm {
     System.out.println("Version de l'API OSM : " + racine.getAttributeValue("version"));
     List<?> noeuds = racine.getContent(new ElementFilter("node"));
 
+    Nodes nodes = new Nodes();
+    // Boucler sur tous les noeuds
     Iterator<?> i = noeuds.iterator();
     while (i.hasNext()) {
       Element courant = (Element) i.next();
-      String id = courant.getAttributeValue("id");
-      if (id.equals("1831881213")) {
-        List<?> a = courant.getChildren("tag");
-        Iterator<?> j = a.iterator();
 
-        while (j.hasNext()) {
-          Element courantJ = (Element) j.next();
-          System.out.println(courantJ.getAttributeValue("k"));
-        }
+      // Extract data
+      Integer id = Integer.parseInt(courant.getAttributeValue("id"));
+      Double lat = Double.parseDouble(courant.getAttributeValue("lat"));
+      Double lon = Double.parseDouble(courant.getAttributeValue("lon"));
+      String user = courant.getAttributeValue("user");
+      Integer uid = Integer.parseInt(courant.getAttributeValue("uid"));
+      Boolean visible = Boolean.parseBoolean(courant.getAttributeValue("visible"));
+      Integer version = Integer.parseInt(courant.getAttributeValue("version"));
+      Integer changeset = Integer.parseInt(courant.getAttributeValue("changeset"));
+      String timestamp = courant.getAttributeValue("timestamp");
+      Tags tags = new Tags();
+
+      List<?> a = courant.getContent(new ElementFilter("tag"));
+      Iterator<?> j = a.iterator();
+
+      while (j.hasNext()) {
+        Element courantJ = (Element) j.next();
+        String key = courantJ.getAttributeValue("k");
+        String value = courantJ.getAttributeValue("v");
+        tags.addTag(key, value);
       }
+
+      // addNode
+      nodes.addNode(new Node(id, lat, lon, new Metadata(user, uid, visible, version, changeset, timestamp), tags));
+
     }
 
     // Pour chaque noeud, on crée un objet geojson que l'on envoie directement à la
