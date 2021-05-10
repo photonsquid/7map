@@ -1,12 +1,13 @@
 package com.sevenmap.ui.elements;
 
+import com.sevenmap.exceptions.IncorrectChildTypeError;
 import com.sevenmap.ui.gfx.Mesh;
 import com.sevenmap.ui.math.Vector3f;
 
 /**
  * A 3D object which can be rendered
  */
-public class Item extends Node {
+public class Item extends GeomNode {
 
     protected Vector3f scale;
     protected Mesh mesh;
@@ -60,13 +61,29 @@ public class Item extends Node {
     
     // other methods
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasMesh() {
         return true;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void destroy() {
         mesh.destroy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void compatibilityCheck(Node child) {
+        if (!(child instanceof GeomNode)) {
+            throw new IncorrectChildTypeError("Item element can only receive children of types GeomNode or lower.");
+        }
     }
 }

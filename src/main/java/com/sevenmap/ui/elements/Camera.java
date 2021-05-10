@@ -6,7 +6,7 @@ import com.sevenmap.ui.math.Vector3f;
 /**
  * Documentation required @l3alr0g
  */
-public class Camera extends Node {
+public class Camera extends GeomNode {
     private float fov = 70.0f;
     private float[] nearfar = {0.15f, 10_000.0f};
     private Matrix4f projector;
