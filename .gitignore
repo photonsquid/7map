@@ -13,4 +13,6 @@ LISEZ-MOI.txt
 # lwjgl auto-generated log files
 hs_err*
 .log
-# 
+
+# imgui config save file
+imgui.ini
