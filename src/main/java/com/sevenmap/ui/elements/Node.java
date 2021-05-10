@@ -6,7 +6,7 @@ public class Node extends RootNode {
     protected RootNode parent;
     
     public Node() {
-        name = "Node";
+        name = this.getClass().getSimpleName();
     }
 
     public Node(String name) {

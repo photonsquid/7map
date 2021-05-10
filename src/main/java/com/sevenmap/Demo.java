@@ -2,12 +2,15 @@ package com.sevenmap;
 
 import org.lwjgl.glfw.GLFW;
 
+import imgui.ImGui;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.sevenmap.ui.Engine;
+import com.sevenmap.ui.elements.GuiLayer;
 import com.sevenmap.ui.elements.Item;
 import com.sevenmap.ui.gfx.Mesh;
 import com.sevenmap.ui.gfx.Vertex;
@@ -18,6 +21,7 @@ public class Demo {
     private Engine engine = new Engine();
     private Mesh surfaceMesh;
     private Item surfaceItem;
+    private GuiLayer debugStats;
 
     /** A hashmap containing all the keybinds in this demo */
     private HashMap<Integer, Runnable> keybinds = new HashMap<>();
@@ -58,6 +62,13 @@ public class Demo {
 
         // instanciate mesh and item and reparent the item to the RootNode
         surfaceMesh = new Mesh(vertices, indices);
+        debugStats = new GuiLayer();
+        debugStats.addLogic(() -> {
+            if (ImGui.button("Show stats")) {
+                System.out.println("button pushed");
+            }
+        });
+        debugStats.setParent(engine.getGuiRoot());
         surfaceItem = new Item(
                             new Vector3f(- TILESIZE * SURFACESIZE / 2, -0.5f, - TILESIZE * SURFACESIZE / 2), 
                             new Vector3f(0, 0, 0),
@@ -65,7 +76,9 @@ public class Demo {
                             surfaceMesh);
 
         surfaceItem.setParent(engine.getSceneRoot());
-        engine.getSceneRoot().tree(); // debug
+        // debug
+        engine.getSceneRoot().tree();
+        engine.getGuiRoot().tree();
 
         // set up key bindings
         setup();

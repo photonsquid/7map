@@ -13,7 +13,8 @@ public class Item extends GeomNode {
     protected Mesh mesh;
 
     public Item (Vector3f position, Vector3f rotation) {
-        super(position, rotation, "Item");
+        super(position, rotation);
+        name = this.getClass().getSimpleName();
     }
 
     public Item (Vector3f position, Vector3f rotation, Vector3f scale, Mesh mesh) {

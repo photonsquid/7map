@@ -116,10 +116,18 @@ public class Engine implements Runnable {
     }
 
     /**
-     * Get the renderer associated to the engine instance.
+     * Get the scene renderer associated to the engine instance.
      * @return sceneRoot renderer
      */
     public SceneRenderer getSceneRoot() {
         return sceneRoot;
+    }
+
+    /**
+     * Get the gui renderer associated to the engine instance.
+     * @return guiRoot renderer
+     */
+    public GuiRenderer getGuiRoot() {
+        return guiRoot;
     }
 }

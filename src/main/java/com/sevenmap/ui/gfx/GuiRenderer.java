@@ -1,6 +1,9 @@
 package com.sevenmap.ui.gfx;
 
 import com.sevenmap.ui.Window;
+import com.sevenmap.ui.elements.GuiLayer;
+import com.sevenmap.ui.elements.GuiNode;
+import com.sevenmap.ui.elements.Node;
 import com.sevenmap.ui.elements.RootNode;
 
 import org.lwjgl.glfw.GLFW;
@@ -32,15 +35,7 @@ public class GuiRenderer extends RootNode {
         imGuiGlfw.newFrame();
         ImGui.newFrame();
 
-        // temporary
-
-        ImGui.begin("rknk");
-        if (ImGui.button("button helloooo")) {
-            System.out.println("boop");
-        }
-        ImGui.end();
-
-        // temporary
+        shownChildren.forEach((Node node) -> ((GuiNode) node).draw());
 
         ImGui.render();
         imGuiGl3.renderDrawData(ImGui.getDrawData());

@@ -10,7 +10,7 @@ public class GeomNode extends Node {
     public GeomNode(Vector3f position, Vector3f rotation) {
         this.position = position;
         this.rotation = rotation;
-        name = "GeomNode";
+        name = this.getClass().getSimpleName();
     }
 
     public GeomNode(Vector3f position, Vector3f rotation, String name) {

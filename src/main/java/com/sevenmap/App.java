@@ -2,12 +2,13 @@ package com.sevenmap;
 
 import org.lwjgl.glfw.GLFW;
 
+import imgui.ImGui;
+
 import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.ui.Engine;
 import com.sevenmap.ui.elements.GeomNode;
+import com.sevenmap.ui.elements.GuiNode;
 import com.sevenmap.ui.elements.Item;
-import com.sevenmap.ui.elements.Node;
-import com.sevenmap.ui.elements.colliders.GuiLayer;
 import com.sevenmap.ui.gfx.Material;
 import com.sevenmap.ui.gfx.Mesh;
 import com.sevenmap.ui.gfx.Vertex;
