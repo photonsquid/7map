@@ -6,12 +6,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+import com.sevenmap.data.osm.helpers.XMLClass;
+import com.sevenmap.data.osm.helpers.XMLField;
+
+@XMLClass
 public class Metadata {
+  @XMLField
   private String user;
+  @XMLField
   private Integer uid;
+  @XMLField
   private Boolean visible;
+  @XMLField
   private Integer version;
+  @XMLField
   private Integer changeset;
+  @XMLField
   private Date timestamp;
 
   private static final String defaultDate = "1900-01-01T00-00-00Z";

@@ -2,11 +2,22 @@ package com.sevenmap.data.osm;
 
 import java.util.Objects;
 
+import com.sevenmap.data.osm.helpers.XMLClass;
+import com.sevenmap.data.osm.helpers.XMLField;
+import com.sevenmap.data.osm.helpers.XMLSubField;
+
+@XMLClass
 public class Node implements hasTags {
+
+  @XMLField
   private Integer id;
+  @XMLField
   private Double lat;
+  @XMLField
   private Double lon;
+  @XMLField
   private Metadata met;
+  @XMLSubField
   private Tags tags;
 
   public Node(Integer id, Double lat, Double lon) {

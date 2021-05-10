@@ -2,6 +2,9 @@ package com.sevenmap.data.osm;
 
 import java.util.HashMap;
 
+import com.sevenmap.data.osm.helpers.XMLClass;
+
+@XMLClass
 public class Tags implements hasTags {
   private HashMap<String, String> tags;
 

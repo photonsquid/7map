@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
-import com.sevenmap.data.osm.helpers.extracter;
-
 import org.jdom.Element;
 import org.jdom.filter.ElementFilter;
 import org.jdom.filter.Filter;
@@ -44,11 +42,14 @@ public class osm {
     List<?> noeuds = racine.getContent(new ElementFilter("node"));
 
     Nodes nodes = new Nodes();
+
     // Boucler sur tous les noeuds
     Iterator<?> i = noeuds.iterator();
+
     while (i.hasNext()) {
       Element courant = (Element) i.next();
-      Node nn = extracter.extractData(i, Node.class);
+      // Root nn = extracter.extractData(racine, [Node.class, Relation.class,
+      // Way.class]);
       // Extract data
       Integer id = Integer.parseInt(courant.getAttributeValue("id"));
       Double lat = Double.parseDouble(courant.getAttributeValue("lat"));
