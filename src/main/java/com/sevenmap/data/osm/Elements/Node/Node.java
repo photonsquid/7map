@@ -1,24 +1,26 @@
-package com.sevenmap.data.osm;
+package com.sevenmap.data.osm.Elements.Node;
 
 import java.util.Objects;
 
-import com.sevenmap.data.osm.helpers.XMLClass;
-import com.sevenmap.data.osm.helpers.XMLField;
-import com.sevenmap.data.osm.helpers.XMLSubField;
+import com.sevenmap.data.osm.Elements.Metadata.Metadata;
+import com.sevenmap.data.osm.Elements.Tag.Tag;
+import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
+import com.sevenmap.data.osm.parser.Annotations.XMLClass;
+import com.sevenmap.data.osm.parser.Annotations.XMLElement;
 
-@XMLClass
-public class Node implements hasTags {
+@XMLClass(key = "node", id = "id")
+public class Node {
 
-  @XMLField
+  @XMLAttribute
   private Integer id;
-  @XMLField
+  @XMLAttribute
   private Double lat;
-  @XMLField
+  @XMLAttribute
   private Double lon;
-  @XMLField
+  @XMLAttribute
   private Metadata met;
-  @XMLSubField
-  private Tags tags;
+  @XMLElement
+  private Tag tags;
 
   public Node(Integer id, Double lat, Double lon) {
     this.id = id;
@@ -30,7 +32,7 @@ public class Node implements hasTags {
   public Node() {
   }
 
-  public Node(Integer id, Double lat, Double lon, Metadata met, Tags tags) {
+  public Node(Integer id, Double lat, Double lon, Metadata met, Tag tags) {
     this.id = id;
     this.lat = lat;
     this.lon = lon;
@@ -38,22 +40,12 @@ public class Node implements hasTags {
     this.tags = tags;
   }
 
-  public Tags getTags() {
+  public Tag getTags() {
     return this.tags;
   }
 
-  public void setTags(Tags tags) {
+  public void setTags(Tag tags) {
     this.tags = tags;
-  }
-
-  @Override
-  public boolean addTag(String key, String value) {
-    return this.tags.addTag(key, value);
-  }
-
-  @Override
-  public String getValueFromTag(String key) {
-    return this.tags.getValueByKey(key);
   }
 
   public Integer getId() {

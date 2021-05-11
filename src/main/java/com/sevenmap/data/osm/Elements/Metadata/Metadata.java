@@ -1,4 +1,4 @@
-package com.sevenmap.data.osm;
+package com.sevenmap.data.osm.Elements.Metadata;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -6,22 +6,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-import com.sevenmap.data.osm.helpers.XMLClass;
-import com.sevenmap.data.osm.helpers.XMLField;
+import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
+import com.sevenmap.data.osm.parser.Annotations.XMLClass;
 
-@XMLClass
+@XMLClass(isXMLAttribute = false)
 public class Metadata {
-  @XMLField
+  @XMLAttribute
   private String user;
-  @XMLField
+  @XMLAttribute
   private Integer uid;
-  @XMLField
+  @XMLAttribute
   private Boolean visible;
-  @XMLField
+  @XMLAttribute
   private Integer version;
-  @XMLField
+  @XMLAttribute
   private Integer changeset;
-  @XMLField
+  @XMLAttribute
   private Date timestamp;
 
   private static final String defaultDate = "1900-01-01T00-00-00Z";

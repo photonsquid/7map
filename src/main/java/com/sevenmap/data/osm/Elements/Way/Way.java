@@ -1,17 +1,24 @@
-package com.sevenmap.data.osm;
+package com.sevenmap.data.osm.Elements.Way;
 
+import java.util.HashMap;
 import java.util.Objects;
 
-public class Way implements hasTags, hasNodes {
+import com.sevenmap.data.osm.Elements.Metadata.Metadata;
+import com.sevenmap.data.osm.Elements.Node.Node;
+import com.sevenmap.data.osm.Elements.Tag.Tag;
+import com.sevenmap.data.osm.parser.Annotations.XMLClass;
+
+@XMLClass(key = "way", id = "id")
+public class Way {
   private Integer id;
   private Metadata met;
-  private Nodes nodes;
-  private Tags tags;
+  private HashMap<Integer, Node> nodes;
+  private Tag tags;
 
   public Way() {
   }
 
-  public Way(Integer id, Metadata met, Nodes nodes) {
+  public Way(Integer id, Metadata met, HashMap<Integer, Node> nodes) {
     this.id = id;
     this.met = met;
     this.nodes = nodes;
@@ -33,22 +40,12 @@ public class Way implements hasTags, hasNodes {
     this.met = met;
   }
 
-  public Nodes getNodes() {
+  public HashMap<Integer, Node> getNodes() {
     return this.nodes;
   }
 
-  public void setNodes(Nodes nodes) {
+  public void setNodes(HashMap<Integer, Node> nodes) {
     this.nodes = nodes;
-  }
-
-  @Override
-  public boolean addNode(Node nd) {
-    return this.nodes.addNode(nd);
-  }
-
-  @Override
-  public Node getNodeById(Integer id) {
-    return this.nodes.getNodeById(id);
   }
 
   public Way id(Integer id) {
@@ -61,7 +58,7 @@ public class Way implements hasTags, hasNodes {
     return this;
   }
 
-  public Way nodes(Nodes nodes) {
+  public Way nodes(HashMap<Integer, Node> nodes) {
     setNodes(nodes);
     return this;
   }
@@ -85,17 +82,6 @@ public class Way implements hasTags, hasNodes {
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", met='" + getMet() + "'" + ", nodes='" + getNodes() + "'" + "}";
-  }
-
-  @Override
-  public boolean addTag(String key, String value) {
-    return this.tags.addTag(key, value);
-  }
-
-  @Override
-
-  public String getValueFromTag(String key) {
-    return this.tags.getValueByKey(key);
   }
 
 }

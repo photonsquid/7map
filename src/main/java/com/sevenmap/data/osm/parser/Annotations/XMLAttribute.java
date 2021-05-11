@@ -1,4 +1,4 @@
-package com.sevenmap.data.osm.helpers;
+package com.sevenmap.data.osm.parser.Annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface XMLSubField {
-  String key() default "";
+public @interface XMLAttribute {
+  String name() default "";
+
+  Class<?> idType() default Object.class;
+
+  Class<?> valueType() default Object.class;
 }
