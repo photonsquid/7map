@@ -1,20 +1,24 @@
 package com.sevenmap.ui.elements;
 
+import com.sevenmap.exceptions.IncorrectChildTypeError;
+
 import imgui.ImGui;
 
 public class GuiLayer extends GuiNode {
-    private Runnable logic;
 
+    /**
+     * Create a new GuiLayer object with a default name.
+     */
     public GuiLayer() {
         name = this.getClass().getSimpleName();
     }
 
+    /**
+     * Create a new GuiLayer object with a chosen name.
+     * @param name the given name
+     */
     public GuiLayer(String name) {
         this.name = name;
-    }
-
-    public void addLogic(Runnable logic) {
-        this.logic = logic;
     }
 
     /**
@@ -22,28 +26,18 @@ public class GuiLayer extends GuiNode {
      */
     @Override
     public void draw() {
-        ImGui.begin("layer");
+        ImGui.begin(name);
         compute();
         ImGui.end();
     }
 
     /**
-     * Computer Layer logic and draw its children.
-     * <p>
-     * Override this function if you need to create your own Layer subclass (inheriting
-     * from GuiLayer),
-     * by default it iterates on the Layer's children and draws them
-     * <p/>
+     * {@inheritDoc}
      */
-    public void compute() {
-        if (logic != null) {
-            logic.run();
-        }
-        shownChildren.forEach((Node node) -> ((GuiNode) node).draw()); // do stuff
-    }
-
     @Override
     public void compatibilityCheck(Node child) {
-        // TODO
+        if (!(child instanceof GuiNode)) {
+            throw new IncorrectChildTypeError("GuiLayer element can only receive children of types GuiNode or lower.");
+        }
     }
 }

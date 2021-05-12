@@ -390,6 +390,7 @@
                 <include>**/*.glsl</include>
                 <include>**/*.jpg</include>
                 <include>**/*.png</include>
+                <include>**/*.ttf</include>
             </includes>
         </resource>
     </resources>

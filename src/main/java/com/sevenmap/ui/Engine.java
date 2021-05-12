@@ -21,7 +21,8 @@ public class Engine implements Runnable {
     private GuiRenderer guiRoot;
     private Camera camera = new Camera(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), (float) windowSize[0] / (float) windowSize[1]);
 
-
+    // stats : update time duration, render time duration
+    private long[] stats = new long[2];
     /**
      * Create a new Engine object which can be started up using {@link #start()}
      */
@@ -50,8 +51,12 @@ public class Engine implements Runnable {
         init();
         try {
             while(!window.shouldClose()) {
+                long time = System.nanoTime();
                 update();
+                stats[0] = System.nanoTime() - time;
+                time = System.nanoTime();
                 render();
+                stats[1] = System.nanoTime() - time;
             }
         } catch (ExitOverrideException e) {
             System.out.println(e.getMessage());
@@ -113,6 +118,14 @@ public class Engine implements Runnable {
      */
     public Camera getCamera() {
         return camera;
+    }
+
+    /**
+     * Get the engine's speed stats.
+     * @return stat array - this javadoc needs to be improved
+     */
+    public long[] getStats() {
+        return stats;
     }
 
     /**

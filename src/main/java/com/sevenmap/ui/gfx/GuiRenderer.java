@@ -1,7 +1,6 @@
 package com.sevenmap.ui.gfx;
 
 import com.sevenmap.ui.Window;
-import com.sevenmap.ui.elements.GuiLayer;
 import com.sevenmap.ui.elements.GuiNode;
 import com.sevenmap.ui.elements.Node;
 import com.sevenmap.ui.elements.RootNode;
@@ -19,22 +18,33 @@ public class GuiRenderer extends RootNode {
     private String glslVersion = "#version 460 core";
     private Window parentWindow;
     
+    /**
+     * Create a new GuiRenderer object.
+     */
     public GuiRenderer(Window window) {
+        name = this.getClass().getSimpleName();
         imGuiGlfw = new ImGuiImplGlfw();
         imGuiGl3 = new ImGuiImplGl3();
         parentWindow = window;
+        ImGui.createContext();
     }
 
+    /**
+     * Initialize renderer components.
+     */
     public void build() {
-        ImGui.createContext();
         imGuiGlfw.init(parentWindow.getWindowElement(), true);
         imGuiGl3.init(glslVersion);
     }
 
+    /**
+     * Render all children.
+     */
     public void render() {
         imGuiGlfw.newFrame();
         ImGui.newFrame();
 
+        // draw children
         shownChildren.forEach((Node node) -> ((GuiNode) node).draw());
 
         ImGui.render();

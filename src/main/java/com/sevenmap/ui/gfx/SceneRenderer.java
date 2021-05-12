@@ -22,6 +22,7 @@ public class SceneRenderer extends RootNode {
      * @param shader the shader which will be applied on each render call.
      */
     public SceneRenderer(Shader shader) {
+        name = this.getClass().getSimpleName();
         this.shader = shader;
     }
 
