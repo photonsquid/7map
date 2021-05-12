@@ -96,8 +96,9 @@ public abstract class RootNode {
      * @param child the child which is meant to be revealed
      */
     public void showChild(Node child) {
-        hiddenChildren.remove(child);
-        shownChildren.add(child);
+        if (hiddenChildren.remove(child)) {
+            shownChildren.add(child);
+        }
     }
 
     /**
@@ -105,8 +106,9 @@ public abstract class RootNode {
      * @param child the child which is meant to be hidden
      */
     public void hideChild(Node child) {
-        shownChildren.remove(child);
-        hiddenChildren.add(child);
+        if (shownChildren.remove(child)) {
+            hiddenChildren.add(child);
+        }
     }
 
     /**
