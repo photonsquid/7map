@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.sevenmap.ui.Engine;
-import com.sevenmap.ui.elements.GuiLayer;
 import com.sevenmap.ui.elements.GuiNode;
 import com.sevenmap.ui.elements.Item;
 import com.sevenmap.ui.gfx.Mesh;
