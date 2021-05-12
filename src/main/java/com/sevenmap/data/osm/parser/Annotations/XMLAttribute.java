@@ -10,6 +10,8 @@ import java.lang.annotation.Target;
 public @interface XMLAttribute {
   String name() default "";
 
+  boolean unique() default false;
+
   Class<?> idType() default Object.class;
 
   Class<?> valueType() default Object.class;

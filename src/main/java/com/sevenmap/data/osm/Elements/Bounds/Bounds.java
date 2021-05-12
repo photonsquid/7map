@@ -3,9 +3,7 @@ package com.sevenmap.data.osm.Elements.Bounds;
 import java.util.Objects;
 
 import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
-import com.sevenmap.data.osm.parser.Annotations.XMLClass;
 
-@XMLClass(key = "bounds")
 public class Bounds {
 
   @XMLAttribute

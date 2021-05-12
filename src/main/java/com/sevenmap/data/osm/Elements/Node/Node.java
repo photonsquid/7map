@@ -1,17 +1,16 @@
 package com.sevenmap.data.osm.Elements.Node;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import com.sevenmap.data.osm.Elements.Metadata.Metadata;
 import com.sevenmap.data.osm.Elements.Tag.Tag;
 import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
-import com.sevenmap.data.osm.parser.Annotations.XMLClass;
 import com.sevenmap.data.osm.parser.Annotations.XMLElement;
 
-@XMLClass(key = "node", id = "id")
 public class Node {
 
-  @XMLAttribute
+  @XMLAttribute(unique = true)
   private Integer id;
   @XMLAttribute
   private Double lat;
@@ -19,32 +18,17 @@ public class Node {
   private Double lon;
   @XMLAttribute
   private Metadata met;
-  @XMLElement
-  private Tag tags;
-
-  public Node(Integer id, Double lat, Double lon) {
-    this.id = id;
-    this.lat = lat;
-    this.lon = lon;
-    this.met = new Metadata();
-  }
+  @XMLElement(tag = "tag", valueType = Tag.class)
+  private ArrayList<Tag> tags;
 
   public Node() {
   }
 
-  public Node(Integer id, Double lat, Double lon, Metadata met, Tag tags) {
+  public Node(Integer id, Double lat, Double lon, Metadata met, ArrayList<Tag> tags) {
     this.id = id;
     this.lat = lat;
     this.lon = lon;
     this.met = met;
-    this.tags = tags;
-  }
-
-  public Tag getTags() {
-    return this.tags;
-  }
-
-  public void setTags(Tag tags) {
     this.tags = tags;
   }
 
@@ -80,6 +64,14 @@ public class Node {
     this.met = met;
   }
 
+  public ArrayList<Tag> getTags() {
+    return this.tags;
+  }
+
+  public void setTags(ArrayList<Tag> tags) {
+    this.tags = tags;
+  }
+
   public Node id(Integer id) {
     setId(id);
     return this;
@@ -100,6 +92,11 @@ public class Node {
     return this;
   }
 
+  public Node tags(ArrayList<Tag> tags) {
+    setTags(tags);
+    return this;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -109,18 +106,18 @@ public class Node {
     }
     Node node = (Node) o;
     return Objects.equals(id, node.id) && Objects.equals(lat, node.lat) && Objects.equals(lon, node.lon)
-        && Objects.equals(met, node.met);
+        && Objects.equals(met, node.met) && Objects.equals(tags, node.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, lat, lon, met);
+    return Objects.hash(id, lat, lon, met, tags);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", lat='" + getLat() + "'" + ", lon='" + getLon() + "'" + ", met='"
-        + getMet() + "'" + "}";
+        + getMet() + "'" + ", tags='" + getTags() + "'" + "}";
   }
 
 }

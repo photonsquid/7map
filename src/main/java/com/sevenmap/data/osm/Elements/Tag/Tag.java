@@ -8,9 +8,9 @@ import com.sevenmap.data.osm.parser.Annotations.XMLClass;
 @XMLClass(key = "tag")
 public class Tag {
 
-  @XMLAttribute
+  @XMLAttribute(name = "k")
   private String key;
-  @XMLAttribute
+  @XMLAttribute(name = "v")
   private String value;
 
   public Tag() {

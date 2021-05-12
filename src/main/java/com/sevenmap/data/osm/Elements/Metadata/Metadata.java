@@ -24,7 +24,7 @@ public class Metadata {
   @XMLAttribute
   private Date timestamp;
 
-  private static final String defaultDate = "1900-01-01T00-00-00Z";
+  private static final String defaultDate = "1900-01-01T00:00:00Z";
 
   public Metadata() {
     this.user = "";
@@ -105,6 +105,10 @@ public class Metadata {
     this.timestamp = timestamp;
   }
 
+  public void setTimestamp(String timestamp) {
+    this.timestamp = parseDate(timestamp);
+  }
+
   public Metadata user(String user) {
     setUser(user);
     return this;
@@ -135,7 +139,7 @@ public class Metadata {
     return this;
   }
 
-  private Date parseDate(String timestamp) {
+  public static Date parseDate(String timestamp) {
     DateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     // TODO: handle other formats than T...Z
