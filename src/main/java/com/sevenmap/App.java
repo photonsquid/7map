@@ -2,10 +2,13 @@ package com.sevenmap;
 
 import org.lwjgl.glfw.GLFW;
 
+import imgui.ImGui;
+
 import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.ui.Engine;
+import com.sevenmap.ui.elements.GeomNode;
+import com.sevenmap.ui.elements.GuiNode;
 import com.sevenmap.ui.elements.Item;
-import com.sevenmap.ui.elements.Node;
 import com.sevenmap.ui.gfx.Material;
 import com.sevenmap.ui.gfx.Mesh;
 import com.sevenmap.ui.gfx.Vertex;
@@ -49,8 +52,8 @@ public class App {
         init();
     }
 
-    private Node parentTestNode = new Node(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
-    private Node parentTestNode2 = new Node(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
+    private GeomNode parentTestNode = new GeomNode(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
+    private GeomNode parentTestNode2 = new GeomNode(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
 
     // testing only ---------------------------------
     
@@ -62,9 +65,9 @@ public class App {
         // test out node structure
         testElement.setParent(parentTestNode);
         testElement2.setParent(parentTestNode);
-        parentTestNode.setParent(engine.getRoot());
+        parentTestNode.setParent(engine.getSceneRoot());
         parentTestNode2.setParent(testElement);
-        engine.getRoot().tree();
+        engine.getSceneRoot().tree();
         
         // schedule movement macros
         engine.getWindow().onKeyDown(GLFW.GLFW_KEY_A, () -> 

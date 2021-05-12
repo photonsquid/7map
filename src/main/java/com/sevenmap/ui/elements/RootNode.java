@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.sevenmap.exceptions.IncorrectChildTypeError;
+
 /** */
 public abstract class RootNode {
     
@@ -26,7 +28,7 @@ public abstract class RootNode {
      * Add a child to a Node.
      * @param child the child to be added
      */
-    public void addChild(Node child) {
+    protected void addChild(Node child) {
         this.shownChildren.add(child);
     }
 
@@ -34,7 +36,7 @@ public abstract class RootNode {
      * Remove a child from a Node's children list
      * @param child
      */
-    public void delChild(RootNode child) {
+    protected void delChild(RootNode child) {
         if (!this.hiddenChildren.remove(child)) {
             this.shownChildren.remove(child);
         }
@@ -105,6 +107,22 @@ public abstract class RootNode {
     public void hideChild(Node child) {
         shownChildren.remove(child);
         hiddenChildren.add(child);
+    }
+
+    /**
+     * Check if the child can be affected to this object.
+     * This method is meant to be overriden by any class 
+     * inheriting from RootNode at some point.
+     * <p>
+     * The purpose of this class is to ensure the stability of the many
+     * casts used in subclasses (such as GeomNode)
+     * <p/>
+     * @param child the child on which the compatibility check has to be executed
+     */
+    public void compatibilityCheck(Node child) {
+        if (!(child instanceof Node)) {
+            throw new IncorrectChildTypeError("Node element can only receive children of types Node or lower.");
+        }
     }
 
     /**

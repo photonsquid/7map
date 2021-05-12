@@ -2,7 +2,8 @@ package com.sevenmap.ui;
 
 import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.ui.elements.Camera;
-import com.sevenmap.ui.gfx.Renderer;
+import com.sevenmap.ui.gfx.GuiRenderer;
+import com.sevenmap.ui.gfx.SceneRenderer;
 import com.sevenmap.ui.gfx.Shader;
 import com.sevenmap.ui.math.Vector3f;
 import com.sevenmap.ui.utils.Color;
@@ -16,17 +17,20 @@ public class Engine implements Runnable {
     private Color bgColor = new Color(0.1d, 0.1d, 0.1d);
     private String title = "default title";
     private Shader shader = new Shader("shaders/Vertex.glsl", "shaders/Fragment.glsl");
-    private Renderer root = new Renderer(shader);
+    private SceneRenderer sceneRoot = new SceneRenderer(shader);
+    private GuiRenderer guiRoot;
     private Camera camera = new Camera(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), (float) windowSize[0] / (float) windowSize[1]);
 
-
+    // stats : update time duration, render time duration
+    private long[] stats = new long[2];
     /**
      * Create a new Engine object which can be started up using {@link #start()}
      */
     public Engine() {
         main = new Thread(this, this.getClass().getSimpleName());
         window = new Window(windowSize[0], windowSize[1], title);
-        camera.setParent(root);
+        guiRoot = new GuiRenderer(window);
+        camera.setParent(sceneRoot);
     }
 
     /**
@@ -47,8 +51,12 @@ public class Engine implements Runnable {
         init();
         try {
             while(!window.shouldClose()) {
+                long time = System.nanoTime();
                 update();
+                stats[0] = System.nanoTime() - time;
+                time = System.nanoTime();
                 render();
+                stats[1] = System.nanoTime() - time;
             }
         } catch (ExitOverrideException e) {
             System.out.println(e.getMessage());
@@ -64,7 +72,10 @@ public class Engine implements Runnable {
         window.create();
 
         // build meshes
-        root.buildAll();
+        sceneRoot.buildAll();
+
+        // initialize ImGui
+        guiRoot.build();
 
         // create shaders
         shader.create();
@@ -75,7 +86,8 @@ public class Engine implements Runnable {
     }
 
     private void render() {
-        root.render(camera);
+        sceneRoot.render(camera);
+        guiRoot.render();
         window.swap();
     }
 
@@ -88,7 +100,8 @@ public class Engine implements Runnable {
         // Hulk smash
         window.destroy(); 
         shader.destroy();
-        root.destroy();
+        sceneRoot.destroy();
+        guiRoot.destroy();
     }
 
     /**
@@ -108,10 +121,26 @@ public class Engine implements Runnable {
     }
 
     /**
-     * Get the renderer associated to the engine instance.
-     * @return root renderer
+     * Get the engine's speed stats.
+     * @return stat array - this javadoc needs to be improved
      */
-    public Renderer getRoot() {
-        return root;
+    public long[] getStats() {
+        return stats;
+    }
+
+    /**
+     * Get the scene renderer associated to the engine instance.
+     * @return sceneRoot renderer
+     */
+    public SceneRenderer getSceneRoot() {
+        return sceneRoot;
+    }
+
+    /**
+     * Get the gui renderer associated to the engine instance.
+     * @return guiRoot renderer
+     */
+    public GuiRenderer getGuiRoot() {
+        return guiRoot;
     }
 }

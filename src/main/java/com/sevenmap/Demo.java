@@ -2,12 +2,16 @@ package com.sevenmap;
 
 import org.lwjgl.glfw.GLFW;
 
+import imgui.ImGui;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.sevenmap.ui.Engine;
+import com.sevenmap.ui.elements.GuiLayer;
+import com.sevenmap.ui.elements.GuiNode;
 import com.sevenmap.ui.elements.Item;
 import com.sevenmap.ui.gfx.Mesh;
 import com.sevenmap.ui.gfx.Vertex;
@@ -18,6 +22,7 @@ public class Demo {
     private Engine engine = new Engine();
     private Mesh surfaceMesh;
     private Item surfaceItem;
+    private GuiNode debugStats;
 
     /** A hashmap containing all the keybinds in this demo */
     private HashMap<Integer, Runnable> keybinds = new HashMap<>();
@@ -64,8 +69,11 @@ public class Demo {
                             new Vector3f(1, 1, 1),
                             surfaceMesh);
 
-        surfaceItem.setParent(engine.getRoot());
-        engine.getRoot().tree(); // debug
+        surfaceItem.setParent(engine.getSceneRoot());
+        createGui();
+        // debug
+        engine.getSceneRoot().tree();
+        engine.getGuiRoot().tree();
 
         // set up key bindings
         setup();
@@ -111,6 +119,16 @@ public class Demo {
         for (Map.Entry<Integer, Runnable> entry : keybinds.entrySet()) {
             engine.getWindow().onKeyDown(entry.getKey(), entry.getValue());
         }
+    }
+
+    private void createGui() {
+        // ImGui.getIO().getFonts().addFontFromFileTTF(Demo.class.getClassLoader().getResource("fonts/Raleway/static/Raleway-Regular.ttf").toString(), 20);
+        // ImGui.getIO().getFonts().addFontFromFileTTF("src/main/resources/fonts/Raleway/static/Raleway-Regular.ttf", 20);
+        debugStats = new GuiNode();
+        debugStats.addLogic(() -> {
+            ImGui.showDemoWindow();
+        });
+        debugStats.setParent(engine.getGuiRoot());
     }
 
     private float smoothstep(float x, float min, float max) {

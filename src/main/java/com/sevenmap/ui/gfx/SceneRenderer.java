@@ -5,6 +5,7 @@ import com.sevenmap.ui.elements.Camera;
 import com.sevenmap.ui.elements.Item;
 import com.sevenmap.ui.elements.RootNode;
 import com.sevenmap.ui.math.Matrix4f;
+import com.sevenmap.ui.elements.GeomNode;
 import com.sevenmap.ui.elements.Node;
 
 import org.lwjgl.opengl.GL11;
@@ -13,14 +14,15 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-public class Renderer extends RootNode {
+public class SceneRenderer extends RootNode {
     private Shader shader;
 
     /**
      * Create a new Renderer object.
      * @param shader the shader which will be applied on each render call.
      */
-    public Renderer(Shader shader) {
+    public SceneRenderer(Shader shader) {
+        name = this.getClass().getSimpleName();
         this.shader = shader;
     }
 
@@ -62,7 +64,7 @@ public class Renderer extends RootNode {
      * @param camera camera on which the children have to be rendered
      */
     public void render(Camera camera) {
-        shownChildren.forEach((Node node) -> renderChildren(node, camera));
+        shownChildren.forEach((Node node) -> renderChildren((GeomNode) node, camera));
     }
 
     /**
@@ -70,12 +72,12 @@ public class Renderer extends RootNode {
      * @param node starting node
      * @param camera camera on which the children have to be rendered
      */
-    private void renderChildren(Node node, Camera camera) {
+    private void renderChildren(GeomNode node, Camera camera) {
         if (node.hasMesh()) {
             render((Item) node, camera);
         } else {
             node.getShownChildren().forEach((Node childnode) -> 
-                renderChildren(childnode, camera));
+                renderChildren((GeomNode) childnode, camera));
         }
     }
 
@@ -91,7 +93,7 @@ public class Renderer extends RootNode {
      * @param node starting node
      */
     public void buildChildren(Node node) {
-        if (node.hasMesh()) {
+        if (((GeomNode) node).hasMesh()) {
             ((Item) node).getMesh().build();
         } else {
             node.getShownChildren().forEach(this::buildChildren);
