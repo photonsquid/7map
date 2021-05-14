@@ -7,24 +7,24 @@ import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
 public class Nd {
 
   @XMLAttribute(unique = true)
-  private Integer ref;
+  private long ref;
 
   public Nd() {
   }
 
-  public Nd(Integer ref) {
+  public Nd(long ref) {
     this.ref = ref;
   }
 
-  public Integer getRef() {
+  public long getRef() {
     return this.ref;
   }
 
-  public void setRef(Integer ref) {
+  public void setRef(long ref) {
     this.ref = ref;
   }
 
-  public Nd ref(Integer ref) {
+  public Nd ref(long ref) {
     setRef(ref);
     return this;
   }

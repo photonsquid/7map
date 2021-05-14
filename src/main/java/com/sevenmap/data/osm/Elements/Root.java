@@ -21,18 +21,19 @@ public class Root {
 
   @XMLElement
   private Bounds bounds;
+
   @XMLElement(tag = "node", valueType = Node.class)
-  private HashMap<Integer, Node> nodes;
+  private HashMap<Long, Node> nodes;
   @XMLElement(tag = "way", valueType = Way.class)
-  private HashMap<Integer, Way> ways;
+  private HashMap<Long, Way> ways;
   @XMLElement(tag = "relation", valueType = Relation.class)
-  private HashMap<Integer, Relation> relations;
+  private HashMap<Long, Relation> relations;
 
   public Root() {
   }
 
-  public Root(String version, String generator, Bounds bounds, HashMap<Integer, Node> nodes, HashMap<Integer, Way> ways,
-      HashMap<Integer, Relation> relations) {
+  public Root(String version, String generator, Bounds bounds, HashMap<Long, Node> nodes, HashMap<Long, Way> ways,
+      HashMap<Long, Relation> relations) {
     this.version = version;
     this.generator = generator;
     this.bounds = bounds;
@@ -65,27 +66,31 @@ public class Root {
     this.bounds = bounds;
   }
 
-  public HashMap<Integer, Node> getNodes() {
+  public HashMap<Long, Node> getNodes() {
     return this.nodes;
   }
 
-  public void setNodes(HashMap<Integer, Node> nodes) {
+  public void setNodes(HashMap<Long, Node> nodes) {
     this.nodes = nodes;
   }
 
-  public HashMap<Integer, Way> getWays() {
+  public HashMap<Long, Way>
+
+      getWays() {
     return this.ways;
   }
 
-  public void setWays(HashMap<Integer, Way> ways) {
+  public void setWays(HashMap<Long, Way> ways) {
     this.ways = ways;
   }
 
-  public HashMap<Integer, Relation> getRelations() {
+  public HashMap<Long, Relation>
+
+      getRelations() {
     return this.relations;
   }
 
-  public void setRelations(HashMap<Integer, Relation> relations) {
+  public void setRelations(HashMap<Long, Relation> relations) {
     this.relations = relations;
   }
 
@@ -104,17 +109,17 @@ public class Root {
     return this;
   }
 
-  public Root nodes(HashMap<Integer, Node> nodes) {
+  public Root nodes(HashMap<Long, Node> nodes) {
     setNodes(nodes);
     return this;
   }
 
-  public Root ways(HashMap<Integer, Way> ways) {
+  public Root ways(HashMap<Long, Way> ways) {
     setWays(ways);
     return this;
   }
 
-  public Root relations(HashMap<Integer, Relation> relations) {
+  public Root relations(HashMap<Long, Relation> relations) {
     setRelations(relations);
     return this;
   }

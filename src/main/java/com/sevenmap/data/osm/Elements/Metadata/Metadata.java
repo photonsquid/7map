@@ -14,13 +14,13 @@ public class Metadata {
   @XMLAttribute
   private String user;
   @XMLAttribute
-  private Integer uid;
+  private long uid;
   @XMLAttribute
   private Boolean visible;
   @XMLAttribute
-  private Integer version;
+  private long version;
   @XMLAttribute
-  private Integer changeset;
+  private long changeset;
   @XMLAttribute
   private Date timestamp;
 
@@ -35,7 +35,7 @@ public class Metadata {
     this.timestamp = parseDate(defaultDate);
   }
 
-  public Metadata(String user, Integer uid, Boolean visible, Integer version, Integer changeset, Date timestamp) {
+  public Metadata(String user, long uid, Boolean visible, long version, long changeset, Date timestamp) {
     this.user = user;
     this.uid = uid;
     this.visible = visible;
@@ -44,7 +44,7 @@ public class Metadata {
     this.timestamp = timestamp;
   }
 
-  public Metadata(String user, Integer uid, Boolean visible, Integer version, Integer changeset, String timestamp) {
+  public Metadata(String user, long uid, Boolean visible, long version, long changeset, String timestamp) {
     this.user = user;
     this.uid = uid;
     this.visible = visible;
@@ -61,11 +61,11 @@ public class Metadata {
     this.user = user;
   }
 
-  public Integer getUid() {
+  public long getUid() {
     return this.uid;
   }
 
-  public void setUid(Integer uid) {
+  public void setUid(long uid) {
     this.uid = uid;
   }
 
@@ -81,19 +81,19 @@ public class Metadata {
     this.visible = visible;
   }
 
-  public Integer getVersion() {
+  public long getVersion() {
     return this.version;
   }
 
-  public void setVersion(Integer version) {
+  public void setVersion(long version) {
     this.version = version;
   }
 
-  public Integer getChangeset() {
+  public long getChangeset() {
     return this.changeset;
   }
 
-  public void setChangeset(Integer changeset) {
+  public void setChangeset(long changeset) {
     this.changeset = changeset;
   }
 
@@ -114,7 +114,7 @@ public class Metadata {
     return this;
   }
 
-  public Metadata uid(Integer uid) {
+  public Metadata uid(long uid) {
     setUid(uid);
     return this;
   }
@@ -124,12 +124,12 @@ public class Metadata {
     return this;
   }
 
-  public Metadata version(Integer version) {
+  public Metadata version(long version) {
     setVersion(version);
     return this;
   }
 
-  public Metadata changeset(Integer changeset) {
+  public Metadata changeset(long changeset) {
     setChangeset(changeset);
     return this;
   }

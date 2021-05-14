@@ -12,7 +12,7 @@ import com.sevenmap.data.osm.parser.Annotations.XMLElement;
 public class Way {
 
   @XMLAttribute(unique = true)
-  private Integer id;
+  private long id;
   @XMLAttribute
   private Metadata met;
   @XMLElement(tag = "nd", valueType = Nd.class)
@@ -23,18 +23,18 @@ public class Way {
   public Way() {
   }
 
-  public Way(Integer id, Metadata met, ArrayList<Nd> nodes, ArrayList<Tag> tags) {
+  public Way(long id, Metadata met, ArrayList<Nd> nodes, ArrayList<Tag> tags) {
     this.id = id;
     this.met = met;
     this.nodes = nodes;
     this.tags = tags;
   }
 
-  public Integer getId() {
+  public long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -62,7 +62,7 @@ public class Way {
     this.tags = tags;
   }
 
-  public Way id(Integer id) {
+  public Way id(long id) {
     setId(id);
     return this;
   }

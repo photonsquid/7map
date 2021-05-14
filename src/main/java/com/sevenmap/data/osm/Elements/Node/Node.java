@@ -11,7 +11,7 @@ import com.sevenmap.data.osm.parser.Annotations.XMLElement;
 public class Node {
 
   @XMLAttribute(unique = true)
-  private Integer id;
+  private long id;
   @XMLAttribute
   private Double lat;
   @XMLAttribute
@@ -24,7 +24,7 @@ public class Node {
   public Node() {
   }
 
-  public Node(Integer id, Double lat, Double lon, Metadata met, ArrayList<Tag> tags) {
+  public Node(long id, Double lat, Double lon, Metadata met, ArrayList<Tag> tags) {
     this.id = id;
     this.lat = lat;
     this.lon = lon;
@@ -32,11 +32,11 @@ public class Node {
     this.tags = tags;
   }
 
-  public Integer getId() {
+  public long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -72,7 +72,7 @@ public class Node {
     this.tags = tags;
   }
 
-  public Node id(Integer id) {
+  public Node id(long id) {
     setId(id);
     return this;
   }

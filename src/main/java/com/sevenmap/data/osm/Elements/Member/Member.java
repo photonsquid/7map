@@ -8,14 +8,15 @@ public class Member {
   @XMLAttribute
   private String type;
   @XMLAttribute
-  private int ref;
+  private long ref;
   @XMLAttribute
-  private int role;
+  private long role;
+
 
   public Member() {
   }
 
-  public Member(String type, int ref, int role) {
+  public Member(String type, long ref, long role) {
     this.type = type;
     this.ref = ref;
     this.role = role;
@@ -29,19 +30,19 @@ public class Member {
     this.type = type;
   }
 
-  public int getRef() {
+  public long getRef() {
     return this.ref;
   }
 
-  public void setRef(int ref) {
+  public void setRef(long ref) {
     this.ref = ref;
   }
 
-  public int getRole() {
+  public long getRole() {
     return this.role;
   }
 
-  public void setRole(int role) {
+  public void setRole(long role) {
     this.role = role;
   }
 
@@ -50,25 +51,25 @@ public class Member {
     return this;
   }
 
-  public Member ref(int ref) {
+  public Member ref(long ref) {
     setRef(ref);
     return this;
   }
 
-  public Member role(int role) {
+  public Member role(long role) {
     setRole(role);
     return this;
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof Member)) {
-      return false;
-    }
-    Member member = (Member) o;
-    return Objects.equals(type, member.type) && ref == member.ref && role == member.role;
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Member)) {
+            return false;
+        }
+        Member member = (Member) o;
+        return Objects.equals(type, member.type) && ref == member.ref && role == member.role;
   }
 
   @Override
@@ -78,7 +79,12 @@ public class Member {
 
   @Override
   public String toString() {
-    return "{" + " type='" + getType() + "'" + ", ref='" + getRef() + "'" + ", role='" + getRole() + "'" + "}";
+    return "{" +
+      " type='" + getType() + "'" +
+      ", ref='" + getRef() + "'" +
+      ", role='" + getRole() + "'" +
+      "}";
   }
+  
 
 }

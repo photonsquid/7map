@@ -11,7 +11,7 @@ import com.sevenmap.data.osm.parser.Annotations.XMLElement;
 
 public class Relation {
   @XMLAttribute(unique = true)
-  private Integer id;
+  private long id;
   @XMLAttribute
   private Metadata met;
   @XMLElement(tag = "member", valueType = Member.class)
@@ -22,18 +22,18 @@ public class Relation {
   public Relation() {
   }
 
-  public Relation(Integer id, Metadata met, ArrayList<Member> members, ArrayList<Tag> tags) {
+  public Relation(long id, Metadata met, ArrayList<Member> members, ArrayList<Tag> tags) {
     this.id = id;
     this.met = met;
     this.members = members;
     this.tags = tags;
   }
 
-  public Integer getId() {
+  public long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -61,7 +61,7 @@ public class Relation {
     this.tags = tags;
   }
 
-  public Relation id(Integer id) {
+  public Relation id(long id) {
     setId(id);
     return this;
   }
