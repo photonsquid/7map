@@ -28,6 +28,18 @@ Les noms d'utilisateurs Github de chacun des membres sont listés ci-dessous.
 
 ### Partie ``rendering``
 
+**1ère itération :**
+
+Nous avons étudié en détail l'API de [LWJGL](https://www.lwjgl.org/) (librairie graphique java s'apparentant à OpenGL) afin de cerner les possibilités qu'elle nous offre. Par la suite, nous avons mis en place un moteur de rendu rudimentaire permettant l'affichage de figures en 3D et de textures.
+
+En l'état actuel des choses, l'application est une démonstration simple des capacités du moteur.
+
+Voici le diagramme UML qui lui est associé (pour plus de détail, il est préférable de s'appuyer sur la javadoc).
+
+![diagramm](../meetings/team-rendering/diagram.png)
+
+**2ème itération :** 
+
 - Nous avons ajouté une API pour Dear ImGui qui permet l'utilisation de menus
 dans le moteur. Elle sera utilisée par la suite dans le programme principal afin d'afficher l'interface utilisateur.
 - La transparence des textures sur les objets affichés en 3D est maintenant supportée.
