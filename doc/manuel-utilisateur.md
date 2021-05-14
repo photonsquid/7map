@@ -15,9 +15,9 @@
 
 Utiliser les touches `z`, `q`, `s`, `d`.
 
-### Orientier la caméra
+### Orienter la caméra
 
-Utiliser les touches fléchées `→`, `←`, `↑`, `↓` et les touches `E` et `A`.
+Utiliser les touches fléchées `→`, `←`, `↑`, `↓` pour s'orienter selon les axes haut-bas droite-gauche et les touches `E` et `A` pour tourner la caméra selon son axe de visée.
 
 ## Données
 

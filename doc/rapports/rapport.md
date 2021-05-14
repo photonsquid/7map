@@ -28,13 +28,13 @@ Les noms d'utilisateurs Github de chacun des membres sont listés ci-dessous.
 
 ### Partie ``rendering``
 
-Nous avons étudié en détail l'API de [LWJGL](https://www.lwjgl.org/) (librairie graphique java s'apparentant à OpenGL) afin de cerner les possibilités qu'elle nous offre. Par la suite, nous avons mis en place un moteur de rendu rudimentaire permettant l'affichage de figures en 3D et de textures.
-
-En l'état actuel des choses, l'application est une démonstration simple des capacités du moteur.
-
-Voici le diagramme UML qui lui est associé (pour plus de détail, il est préférable de s'appuyer sur la javadoc).
-
-![diagramm](./meetings/team-rendering/diagram.png)
+- Nous avons ajouté une API pour Dear ImGui qui permet l'utilisation de menus
+dans le moteur. Elle sera utilisée par la suite dans le programme principal afin d'afficher l'interface utilisateur.
+- La transparence des textures sur les objets affichés en 3D est maintenant supportée.
+- La caméra possède maintenant des methodes qui permettent de récupérer facilement son repère propre (pour calculer la direction de ses déplacements par exemple)
+- Nous avons créé un logger sur lequel nous travaillons encore
+- Les collisionneurs (colliders - ou objets détectant des collisions en 3D) ont été implémentés mais ne sont pas encore totalement fonctionnels. Ils permettent notamment de repérer les clics de souris sur un objet dans l'espace.
+- Une démonstration des capacités graphique a été créée, elle permet notamment de réaliser des expériences graphiques avant de les ajouter au fichier principal, sans altérer directement le code de l'application.
 
 ### Partie ``data``
 
