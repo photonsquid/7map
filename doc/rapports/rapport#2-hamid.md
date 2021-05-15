@@ -11,3 +11,7 @@
   - réunion chaque semaine pour discuter de l'avancement du projet.
   - autoformation sur l'utilisation de maven et ImGui.
   - implémentation des programmes de test.
+
+  > Fonctionnalités gérées actuellement : 
+  >
+  > - création des programmes de test pour chaque nouvelle classe.
