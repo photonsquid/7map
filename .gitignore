@@ -16,3 +16,4 @@ hs_err*
 
 # imgui config save file
 imgui.ini
+src/main/resources/maps/osm/n7.osm
