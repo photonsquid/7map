@@ -14,4 +14,4 @@
 
   > Fonctionnalités gérées actuellement : 
   >
-  > - création des programmes de test pour chaque nouvelle classe.
+  > - création des programmes de test pour les nouvelles classes.
