@@ -8,6 +8,6 @@
 | team                  | Rendering |
 
 # Liste des travaux réalisés a ce jour:
-  - réunion chaque semaine pour discuter de l'avencement du projet.
+  - réunion chaque semaine pour discuter de l'avancement du projet.
   - autoformation sur l'utilisation de maven et ImGui.
   - implémentation des programmes de test.
