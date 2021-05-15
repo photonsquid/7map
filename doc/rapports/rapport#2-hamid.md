@@ -7,7 +7,7 @@
 | Projet                |   7map    |
 | team                  | Rendering |
 
-# Liste des travaux réalisés a ce jour:
+# Liste des travaux réalisés à ce jour:
   - réunion chaque semaine pour discuter de l'avancement du projet.
   - autoformation sur l'utilisation de maven et ImGui.
   - implémentation des programmes de test.
