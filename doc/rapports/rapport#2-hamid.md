@@ -1,4 +1,4 @@
-# Rapport personnel - projet long : l'application 7map
+# Rapport personnel - projet long : l'application 7map.
 
 | Nom                   | OUKHNINI  | 
 | --------------------- | :-------: | 
