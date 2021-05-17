@@ -2,7 +2,8 @@ package com.sevenmap.ui.elements;
 
 import static org.junit.Assert.assertEquals;
 
-import com.sevenmap.ui.math.Vector3f;
+import com.sevenmap.spinel.elements.Camera;
+import com.sevenmap.spinel.math.Vector3f;
 
 import org.junit.Before;
 import org.junit.Test;

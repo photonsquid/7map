@@ -9,14 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sevenmap.ui.Engine;
-import com.sevenmap.ui.elements.GuiLayer;
-import com.sevenmap.ui.elements.GuiNode;
-import com.sevenmap.ui.elements.Item;
-import com.sevenmap.ui.gfx.Mesh;
-import com.sevenmap.ui.gfx.Vertex;
-import com.sevenmap.ui.math.Vector3f;
-import com.sevenmap.ui.utils.Color;
+import com.sevenmap.spinel.Engine;
+import com.sevenmap.spinel.elements.GuiNode;
+import com.sevenmap.spinel.elements.Item;
+import com.sevenmap.spinel.gfx.Mesh;
+import com.sevenmap.spinel.gfx.Vertex;
+import com.sevenmap.spinel.math.Vector3f;
+import com.sevenmap.spinel.utils.Color;
 
 public class Demo {
     private Engine engine = new Engine();

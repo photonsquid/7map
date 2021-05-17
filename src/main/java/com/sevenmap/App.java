@@ -2,19 +2,17 @@ package com.sevenmap;
 
 import org.lwjgl.glfw.GLFW;
 
-import imgui.ImGui;
 
 import com.sevenmap.exceptions.ExitOverrideException;
-import com.sevenmap.ui.Engine;
-import com.sevenmap.ui.elements.GeomNode;
-import com.sevenmap.ui.elements.GuiNode;
-import com.sevenmap.ui.elements.Item;
-import com.sevenmap.ui.gfx.Material;
-import com.sevenmap.ui.gfx.Mesh;
-import com.sevenmap.ui.gfx.Vertex;
-import com.sevenmap.ui.math.Vector2f;
-import com.sevenmap.ui.math.Vector3f;
-import com.sevenmap.ui.scheduling.events.MoveEvent;
+import com.sevenmap.spinel.Engine;
+import com.sevenmap.spinel.elements.GeomNode;
+import com.sevenmap.spinel.elements.Item;
+import com.sevenmap.spinel.gfx.Material;
+import com.sevenmap.spinel.gfx.Mesh;
+import com.sevenmap.spinel.gfx.Vertex;
+import com.sevenmap.spinel.math.Vector2f;
+import com.sevenmap.spinel.math.Vector3f;
+import com.sevenmap.spinel.scheduling.events.MoveEvent;
 
 
 /**

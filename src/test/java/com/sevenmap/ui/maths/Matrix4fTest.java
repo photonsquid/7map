@@ -5,8 +5,8 @@ package com.sevenmap.ui.maths;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.sevenmap.ui.math.Matrix4f;
-import com.sevenmap.ui.math.Vector3f;
+import com.sevenmap.spinel.math.Matrix4f;
+import com.sevenmap.spinel.math.Vector3f;
 
 import org.junit.Before;
 import org.junit.Test;
