@@ -98,9 +98,9 @@ public class Demo {
             engine.getCamera().setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceX().divide(5))));
         
         keybinds.put(GLFW.GLFW_KEY_Z, () -> 
-            engine.getCamera().setPos(engine.getCamera().getPos().getX(), engine.getCamera().getPos().getY() - 0.05f, engine.getCamera().getPos().getZ()));
+            engine.getCamera().setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceY().divide(5))));
         keybinds.put(GLFW.GLFW_KEY_X, () -> 
-            engine.getCamera().setPos(engine.getCamera().getPos().getX(), engine.getCamera().getPos().getY() + 0.05f, engine.getCamera().getPos().getZ()));
+            engine.getCamera().setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceY().divide(5))));
         keybinds.put(GLFW.GLFW_KEY_E, () -> 
             engine.getCamera().setRot(engine.getCamera().getRot().getX(), engine.getCamera().getRot().getY(), engine.getCamera().getRot().getZ() + 1f));
         keybinds.put(GLFW.GLFW_KEY_Q, () -> 

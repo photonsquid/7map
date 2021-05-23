@@ -128,7 +128,6 @@ public class GeomNode extends Node {
      * cartesian scene-specific frame of reference.
      * Note: Phi is the pitch angle
      * @return tangent vector
-     * @apiNote This method is untested, and might therefore give unexpected results
      */
     public Vector3f getReferenceY() {
         double phi = Math.toRadians(rotation.getX());
@@ -136,7 +135,7 @@ public class GeomNode extends Node {
         return new Vector3f(
             (float) - Math.sin(beta),
             (float) (Math.cos(phi) * Math.cos(beta)),
-            (float) - (Math.sin(phi) * Math.cos(beta))
+            (float) Math.sin(phi)
         );
     }
 
