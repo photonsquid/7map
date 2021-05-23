@@ -1,4 +1,4 @@
-package com.sevenmap.data.osm.api;
+package com.sevenmap.data.osm;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -13,7 +13,7 @@ import com.sevenmap.data.osm.parser.extracter;
 
 import org.jdom.input.SAXBuilder;
 
-public class OSMAPI {
+public class OSM {
   private Root rt;
   private Bounds bd;
   private File mapFile;
@@ -67,10 +67,10 @@ public class OSMAPI {
 
   }
 
-  public OSMAPI() {
+  public OSM() {
   }
 
-  public OSMAPI(Bounds bd, File mapFile) {
+  public OSM(Bounds bd, File mapFile) {
     this.bd = bd;
     this.mapFile = mapFile;
   }
@@ -99,17 +99,17 @@ public class OSMAPI {
     this.mapFile = mapFile;
   }
 
-  public OSMAPI rt(Root rt) {
+  public OSM rt(Root rt) {
     setRt(rt);
     return this;
   }
 
-  public OSMAPI bd(Bounds bd) {
+  public OSM bd(Bounds bd) {
     setBd(bd);
     return this;
   }
 
-  public OSMAPI mapFile(File mapFile) {
+  public OSM mapFile(File mapFile) {
     setMapFile(mapFile);
     return this;
   }
@@ -118,10 +118,10 @@ public class OSMAPI {
   public boolean equals(Object o) {
     if (o == this)
       return true;
-    if (!(o instanceof OSMAPI)) {
+    if (!(o instanceof OSM)) {
       return false;
     }
-    OSMAPI oSMAPI = (OSMAPI) o;
+    OSM oSMAPI = (OSM) o;
     return Objects.equals(rt, oSMAPI.rt) && Objects.equals(bd, oSMAPI.bd) && Objects.equals(mapFile, oSMAPI.mapFile);
   }
 
