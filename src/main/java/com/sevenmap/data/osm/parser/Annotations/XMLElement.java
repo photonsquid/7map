@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 public @interface XMLElement {
   String tag() default "";
 
-  Class<?> keyType() default long.class;
+  Class<?> keyType() default Long.class;
 
   Class<?> valueType() default String.class;
 }
