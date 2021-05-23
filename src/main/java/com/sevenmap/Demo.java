@@ -16,6 +16,7 @@ import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;
 import com.sevenmap.spinel.math.Vector3f;
 import com.sevenmap.spinel.utils.Color;
+import com.sevenmap.spinel.elements.colliders.PlaneCollider;
 import com.sevenmap.spinel.elements.PrototypeGuiN;
 
 
@@ -23,6 +24,8 @@ public class Demo {
     private Engine engine = new Engine();
     private Mesh surfaceMesh;
     private Item surfaceItem;
+    private PlaneCollider surfaceCollider;
+    private GuiNode debugStats;
 
     /** A hashmap containing all the keybinds in this demo */
     private HashMap<Integer, Runnable> keybinds = new HashMap<>();
@@ -68,10 +71,12 @@ public class Demo {
                             new Vector3f(0, 0, 0),
                             new Vector3f(1, 1, 1),
                             surfaceMesh);
-
+        surfaceCollider = new PlaneCollider(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
+        surfaceCollider.setParent(surfaceItem);
         surfaceItem.setParent(engine.getSceneRoot());
         createGui();
         // debug
+        // Collider.toggleDebug();
         engine.getSceneRoot().tree();
         engine.getGuiRoot().tree();
 
@@ -84,18 +89,18 @@ public class Demo {
 
     private void setup() {
         keybinds.put(GLFW.GLFW_KEY_A, () -> 
-            engine.getCamera().setPos(engine.getCamera().getPos().add(engine.getCamera().getTangent().divide(5))));
+            engine.getCamera().setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceZ().divide(5))));
         keybinds.put(GLFW.GLFW_KEY_D, () -> 
-            engine.getCamera().setPos(engine.getCamera().getPos().sub(engine.getCamera().getTangent().divide(5))));
+            engine.getCamera().setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceZ().divide(5))));
         keybinds.put(GLFW.GLFW_KEY_W, () -> 
-            engine.getCamera().setPos(engine.getCamera().getPos().add(engine.getCamera().getNormal().divide(5))));
+            engine.getCamera().setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceX().divide(5))));
         keybinds.put(GLFW.GLFW_KEY_S, () -> 
-            engine.getCamera().setPos(engine.getCamera().getPos().sub(engine.getCamera().getNormal().divide(5))));
+            engine.getCamera().setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceX().divide(5))));
         
         keybinds.put(GLFW.GLFW_KEY_Z, () -> 
-            engine.getCamera().setPos(engine.getCamera().getPos().getX(), engine.getCamera().getPos().getY() - 0.05f, engine.getCamera().getPos().getZ()));
+            engine.getCamera().setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceY().divide(5))));
         keybinds.put(GLFW.GLFW_KEY_X, () -> 
-            engine.getCamera().setPos(engine.getCamera().getPos().getX(), engine.getCamera().getPos().getY() + 0.05f, engine.getCamera().getPos().getZ()));
+            engine.getCamera().setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceY().divide(5))));
         keybinds.put(GLFW.GLFW_KEY_E, () -> 
             engine.getCamera().setRot(engine.getCamera().getRot().getX(), engine.getCamera().getRot().getY(), engine.getCamera().getRot().getZ() + 1f));
         keybinds.put(GLFW.GLFW_KEY_Q, () -> 
