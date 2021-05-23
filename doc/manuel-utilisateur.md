@@ -15,10 +15,10 @@
 
 Utiliser les touches `z`, `q`, `s`, `d`.
 
-### Orientier la caméra
+### Orienter la caméra
 
-Utiliser les touches fléchées `→`, `←`, `↑`, `↓` et les touches `E` et `A`.
+Utiliser les touches fléchées `→`, `←`, `↑`, `↓` pour s'orienter selon les axes haut-bas droite-gauche et les touches `E` et `A` pour tourner la caméra selon son axe de visée.
 
 ## Données
 
-Les données doivent être importées en [GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON)
+Les données sont au format [XML OSM](https://wiki.openstreetmap.org/wiki/OSM_XML), et peuvent être téléchargées gratuitement depuis via une [API REST](https://wiki.openstreetmap.org/wiki/API_v0.6#Retrieving_map_data_by_bounding_box:_GET_.2Fapi.2F0.6.2Fmap).

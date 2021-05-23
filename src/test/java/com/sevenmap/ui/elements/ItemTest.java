@@ -2,9 +2,10 @@ package com.sevenmap.ui.elements;
 
 import static org.junit.Assert.assertEquals;
 
-import com.sevenmap.ui.gfx.Mesh;
-import com.sevenmap.ui.gfx.Vertex;
-import com.sevenmap.ui.math.Vector3f;
+import com.sevenmap.spinel.elements.Item;
+import com.sevenmap.spinel.gfx.Mesh;
+import com.sevenmap.spinel.gfx.Vertex;
+import com.sevenmap.spinel.math.Vector3f;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,9 +41,9 @@ public class ItemTest{
       Vector3f pos = i.getPos();
       Vector3f rot = i.getRot();
       Vector3f sca = i.getScale();
-      assertEquals("this is a good constructor-pos-", i.position, pos);
-      assertEquals("this is a good constructor-rot-", i.rotation, rot);
-      assertEquals("this is a good constructor-sca-", i.scale, sca);
+      assertEquals("this is a good constructor-pos-", i.getPos(), pos);
+      assertEquals("this is a good constructor-rot-", i.getRot(), rot);
+      assertEquals("this is a good constructor-sca-", i.getScale(), sca);
       
       
   }
@@ -51,9 +52,9 @@ public class ItemTest{
       i.setPos(0.2f, 2.5f,1.2f);
       i.setRot(6.2f, 5.0f, 3.2f);
       i.setScale(3.6f, 8.4f, 6.1f);
-      assertEquals( i.position, new Vector3f(0.2f, 2.5f,1.2f));
-      assertEquals( i.rotation, new Vector3f(6.2f, 5.0f, 3.2f));
-      assertEquals( i.scale, new Vector3f(3.6f, 8.4f, 6.1f));
+      assertEquals( i.getPos(), new Vector3f(0.2f, 2.5f,1.2f));
+      assertEquals( i.getRot(), new Vector3f(6.2f, 5.0f, 3.2f));
+      assertEquals( i.getScale(), new Vector3f(3.6f, 8.4f, 6.1f));
   }
 
    

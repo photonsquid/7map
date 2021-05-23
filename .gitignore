@@ -18,3 +18,7 @@ hs_err*
 # big data files (contact @seba1204)
 src/main/resources/maps/osm/map.osm
 src/main/resources/maps/geojson/countries.geojson
+
+# imgui config save file
+imgui.ini
+src/main/resources/maps/osm/n7.osm
