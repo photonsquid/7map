@@ -24,24 +24,4 @@ public class Camera extends GeomNode {
     public void setProjector(Matrix4f projector) {
         this.projector = projector;
     }
-
-    public Vector3f getNormal() {
-        double theta = Math.toRadians(rotation.getY());
-        double phi = Math.toRadians(rotation.getX());
-        return new Vector3f(
-            (float) - (Math.sin(theta) * Math.cos(phi)),
-            (float) Math.sin(phi),
-            (float) - (Math.cos(theta) * Math.cos(phi))
-        );
-    }
-
-    public Vector3f getTangent() {
-        double theta = Math.toRadians(rotation.getY());
-        double beta = Math.toRadians(rotation.getZ());
-        return new Vector3f(
-            (float) - (Math.cos(theta) * Math.cos(beta)),
-            (float) - Math.sin(beta),
-            (float) (Math.sin(theta) * Math.cos(beta))
-        );
-    }
 }

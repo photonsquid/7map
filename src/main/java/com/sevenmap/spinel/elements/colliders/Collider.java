@@ -9,9 +9,9 @@ import com.sevenmap.spinel.elements.Item;
 import com.sevenmap.spinel.math.Vector3f;
 
 public abstract class Collider extends GeomNode {
-    private Consumer<Collider> logic;
-    private Item debugObject;
-    private static boolean debug;
+    protected Consumer<Collider> logic;
+    protected Item debugObject;
+    protected static boolean debug = false;
     private static List<Collider> instances = new ArrayList<>();
 
     /**
@@ -22,7 +22,6 @@ public abstract class Collider extends GeomNode {
     protected Collider(Vector3f position, Vector3f rotation) {
         super(position, rotation);
         instances.add(this);
-        debugObject.setParent(this);
     }
 
     /**
@@ -58,10 +57,18 @@ public abstract class Collider extends GeomNode {
     public static void toggleDebug() {
         debug = !debug;
         if (debug) {
-            instances.forEach(Collider::show);
+            instances.forEach((Collider c) -> c.debugObject.show());
         } else {
-            instances.forEach(Collider::hide);
+            instances.forEach((Collider c) -> c.debugObject.hide());
         }
+    }
+
+    /**
+     * Get collider debugObject Item.
+     * @return debug object
+     */
+    public Item getDebugObject() {
+        return debugObject;
     }
 
     @Override
