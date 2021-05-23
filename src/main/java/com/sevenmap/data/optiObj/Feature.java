@@ -1,6 +1,6 @@
 package com.sevenmap.data.optiObj;
 
-public class Feature{
+public class Feature {
     private boolean displayName;
     private String name;
     private Point[] p;
@@ -16,7 +16,7 @@ public class Feature{
         this.cat = cat;
         this.attribut = attribut;
     }
-    
+
     public Point[] getPoints() {
         return this.p;
     }

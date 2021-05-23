@@ -28,14 +28,14 @@ public class LightObj {
   }
 
   @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof LightObj)) {
-            return false;
-        }
-        LightObj lightObj = (LightObj) o;
-        return Objects.equals(osmMap, lightObj.osmMap);
+  public boolean equals(Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof LightObj)) {
+      return false;
+    }
+    LightObj lightObj = (LightObj) o;
+    return Objects.equals(osmMap, lightObj.osmMap);
   }
 
   @Override
@@ -45,9 +45,7 @@ public class LightObj {
 
   @Override
   public String toString() {
-    return "{" +
-      " osmMap='" + getOsmMap() + "'" +
-      "}";
+    return "{" + " osmMap='" + getOsmMap() + "'" + "}";
   }
 
 }
