@@ -4,7 +4,7 @@ import com.sevenmap.exceptions.IncorrectChildTypeError;
 
 public class Node extends RootNode {
     protected RootNode parent;
-    
+
     public Node() {
         name = this.getClass().getSimpleName();
     }
@@ -15,6 +15,7 @@ public class Node extends RootNode {
 
     /**
      * Reparent a Node to another Node element.
+     * 
      * @param parent the parent Node
      */
     public void setParent(RootNode parent) {
@@ -30,10 +31,31 @@ public class Node extends RootNode {
 
     /**
      * Get a Node's parent Node.
+     * 
      * @return the parent Node
      */
     public RootNode getParent() {
         return parent;
+    }
+
+    /**
+     * Mark the node as shown.
+     * <p>
+     * The node will no longer be rendered after this call.
+     * <p/>
+     */
+    public void show() {
+        parent.showChild(this);
+    }
+
+    /**
+     * Mark the node as hidden.
+     * <p>
+     * The node will no longer be rendered after this call.
+     * <p/>
+     */
+    public void hide() {
+        parent.hideChild(this);
     }
 
     /**

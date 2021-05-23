@@ -4,7 +4,7 @@ import com.sevenmap.exceptions.IncorrectChildTypeError;
 
 public class GuiNode extends Node {
     protected Runnable logic;
-    
+
     /**
      * Create a new GuiNode object with a default name.
      */
@@ -14,6 +14,7 @@ public class GuiNode extends Node {
 
     /**
      * Create a new GuiNode object with a chosen name.
+     * 
      * @param name the given name
      */
     public GuiNode(String name) {
@@ -32,12 +33,12 @@ public class GuiNode extends Node {
         this.logic = logic;
     }
 
-     /**
+    /**
      * Computer Layer logic and draw its children.
      * <p>
-     * Override this function if you need to create your own Layer subclass (inheriting
-     * from GuiLayer),
-     * by default it iterates on the Layer's children and draws them
+     * Override this function if you need to create your own Layer subclass
+     * (inheriting from GuiLayer), by default it iterates on the Layer's children
+     * and draws them
      * <p/>
      */
     public void compute() {

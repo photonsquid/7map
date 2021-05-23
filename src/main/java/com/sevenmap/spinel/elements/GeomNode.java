@@ -6,7 +6,7 @@ import com.sevenmap.spinel.math.Vector3f;
 public class GeomNode extends Node {
     protected Vector3f position;
     protected Vector3f rotation;
-    
+
     public GeomNode(Vector3f position, Vector3f rotation) {
         this.position = position;
         this.rotation = rotation;
@@ -20,21 +20,20 @@ public class GeomNode extends Node {
     }
 
     /**
-     * The renderer uses this method to distinguish a GeomNode from an
-     * Item.
-     * <p> 
-     * This isn't the most elegant solution ever, so suggestions are
-     * welcome.
+     * The renderer uses this method to distinguish a GeomNode from an Item.
+     * <p>
+     * This isn't the most elegant solution ever, so suggestions are welcome.
      * </p>
+     * 
      * @return
      */
     public boolean hasMesh() {
         return false;
     }
 
-
     /**
      * Get the GeomNode's position.
+     * 
      * @return position vector
      */
     public Vector3f getPos() {
@@ -43,6 +42,7 @@ public class GeomNode extends Node {
 
     /**
      * Get the GeomNode's rotation.
+     * 
      * @return rotation angle vector
      */
     public Vector3f getRot() {
@@ -51,6 +51,7 @@ public class GeomNode extends Node {
 
     /**
      * Set the GeomNode's position.
+     * 
      * @param x coordinate on the X axis
      * @param y coordinate on the Y axis
      * @param z coordinate on the Z axis
@@ -72,6 +73,7 @@ public class GeomNode extends Node {
 
     /**
      * Set the GeomNode's position.
+     * 
      * @param vect the position vector to be read
      */
     public void setPos(Vector3f vect) {
@@ -80,6 +82,7 @@ public class GeomNode extends Node {
 
     /**
      * Set the GeomNode's rotation.
+     * 
      * @param l coordinate on the X axis
      * @param m coordinate on the Y axis
      * @param n coordinate on the Z axis
@@ -101,18 +104,11 @@ public class GeomNode extends Node {
 
     /**
      * Set the GeomNode's rotation.
+     * 
      * @param vect the rotation vector to be read
      */
     public void setRot(Vector3f vect) {
         setRot(vect.getX(), vect.getY(), vect.getZ());
-    }
-
-    public void show() {
-        parent.showChild(this);
-    }
-
-    public void hide() {
-        parent.hideChild(this);
     }
 
     /**
@@ -125,4 +121,3 @@ public class GeomNode extends Node {
         }
     }
 }
-
