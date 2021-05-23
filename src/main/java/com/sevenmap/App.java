@@ -5,137 +5,124 @@ import java.io.File;
 import com.sevenmap.data.optiObj.LightObj;
 import com.sevenmap.data.osm.Elements.Bounds.Bounds;
 import com.sevenmap.data.osm.api.OSMAPI;
-import com.sevenmap.exceptions.ExitOverrideException;
-import com.sevenmap.spinel.Engine;
-import com.sevenmap.spinel.elements.GeomNode;
-import com.sevenmap.spinel.elements.Item;
-import com.sevenmap.spinel.gfx.Material;
-import com.sevenmap.spinel.gfx.Mesh;
-import com.sevenmap.spinel.gfx.Vertex;
-import com.sevenmap.spinel.math.Vector2f;
-import com.sevenmap.spinel.math.Vector3f;
-import com.sevenmap.spinel.scheduling.events.MoveEvent;
 
-import org.lwjgl.glfw.GLFW;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
 
 /**
  * Main application class.
  */
 public class App {
 
-    private Engine engine = new Engine();
+  // ========================== default values ==========================
+  private static String defaultMapFileName = "src/main/resources/maps/osm/n7.osm";
+  // Default bounds (arround ENSEEIHT school)
+  private static Double defaultMinLon = 1.45338;
+  private static Double defaultMaxLon = 1.45760;
+  private static Double defaultMinLat = 43.60116;
+  private static Double defaultMaxLat = 43.60297;
 
-    // testing only ---------------------------------
-    private Mesh mesh = new Mesh(new Vertex[] {
-            new Vertex(new Vector3f(-0.5f, 0.5f, 0.5f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)), // texture
-                                                                                                                   // coordinates
-                                                                                                                   // must
-                                                                                                                   // be
-                                                                                                                   // defined
-                                                                                                                   // counter
-                                                                                                                   // clockwise
-            new Vertex(new Vector3f(0.5f, 0.5f, 0.5f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(0.0f, 1.0f)),
-            new Vertex(new Vector3f(0.5f, -0.5f, 0.5f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(1.0f, 1.0f)),
-            new Vertex(new Vector3f(-0.5f, -0.5f, 0.5f), new Vector3f(0.0f, 0.0f, 1.0f), new Vector2f(1.0f, 0.0f)),
-            new Vertex(new Vector3f(-0.5f, 0.5f, -0.5f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)),
-            new Vertex(new Vector3f(0.5f, 0.5f, -0.5f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(0.0f, 1.0f)),
-            new Vertex(new Vector3f(0.5f, -0.5f, -0.5f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(1.0f, 1.0f)),
-            new Vertex(new Vector3f(-0.5f, -0.5f, -0.5f), new Vector3f(0.0f, 0.0f, 1.0f), new Vector2f(1.0f, 0.0f))
+  public static void main(String[] args) {
 
-    },
+    CommandLine cl = parseArgs(args);
 
-            new int[] { 0, 1, 2, 0, 3, 2, 4, 5, 6, 4, 7, 6 }, new Material("textures/logo.png"));
+    if (cl.hasOption("B")) {
+      // ========================== map loader ==========================
+      // This is supposed to be done once, when the user load a new map.
+      // ================================================================
 
-    private Item testElement = new Item(new Vector3f(0, 0, -1.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
-    private Item testElement2 = new Item(new Vector3f(0, 0, -4.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
+      // Create OSM Map
+      String fileName = cl.getOptionValue("F", defaultMapFileName);
+      Bounds N7Bounds = parseBounds(cl);
+      File n7Map = new File(fileName);
+      OSMAPI OSMMap = new OSMAPI(N7Bounds, n7Map);
 
-    public void start() {
-        init();
+      // Download new map
+      OSMMap.downloadMap();
+
+      // Parse data
+      OSMMap.parse();
+
+      // Convert into optimized files
+      LightObj ltObj = new LightObj(OSMMap);
+      ltObj.convertObj();
     }
 
-    private GeomNode parentTestNode = new GeomNode(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
-    private GeomNode parentTestNode2 = new GeomNode(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
+    // ======================== map displayer =========================
+    // This is done whenever the user want to display a map.
+    // ================================================================
 
-    // testing only ---------------------------------
+  }
 
-    /**
-     * App boot up sequence.
-     */
-    public void init() {
+  private static CommandLine parseArgs(String[] args) {
 
-        // test out node structure
-        testElement.setParent(parentTestNode);
-        testElement2.setParent(parentTestNode);
-        parentTestNode.setParent(engine.getSceneRoot());
-        parentTestNode2.setParent(testElement);
-        engine.getSceneRoot().tree();
+    CommandLine commandLine = null;
+    Option opBuilder = Option.builder("B").required(false).desc("Download and build the maps before display it")
+        .longOpt("build").build();
+    Option opMinLon = Option.builder("minLon").required(false)
+        .desc("Set minimum longitude bound to the new map to download. Only if there is -B option.")
+        .longOpt("maxLongitude").build();
+    Option opMaxLon = Option.builder("maxLon").required(false)
+        .desc("Set maximum longitude bound to the new map to download. Only if there is -B option.")
+        .longOpt("maxLongitude").build();
+    Option opMinLat = Option.builder("minLat").required(false)
+        .desc("Set minimum latitude bound to the new map to download. Only if there is -B option.")
+        .longOpt("maxLongitude").build();
+    Option opMaxLat = Option.builder("maxLat").required(false)
+        .desc("Set maximum latitude bound to the new map to download. Only if there is -B option.")
+        .longOpt("maxLongitude").build();
+    Options options = new Options();
+    CommandLineParser parser = new DefaultParser();
 
-        // schedule movement macros
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_A,
-                () -> engine.getCamera().setPos(engine.getCamera().getPos().getX() - 0.05f,
-                        engine.getCamera().getPos().getY(), engine.getCamera().getPos().getZ()));
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_D,
-                () -> engine.getCamera().setPos(engine.getCamera().getPos().getX() + 0.05f,
-                        engine.getCamera().getPos().getY(), engine.getCamera().getPos().getZ()));
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_W,
-                () -> engine.getCamera().setPos(engine.getCamera().getPos().getX(), engine.getCamera().getPos().getY(),
-                        engine.getCamera().getPos().getZ() - 0.05f));
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_S,
-                () -> engine.getCamera().setPos(engine.getCamera().getPos().getX(), engine.getCamera().getPos().getY(),
-                        engine.getCamera().getPos().getZ() + 0.05f));
+    options.addOption(opBuilder);
+    options.addOption(opMinLon);
+    options.addOption(opMaxLon);
+    options.addOption(opMinLat);
+    options.addOption(opMaxLat);
 
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_E,
-                () -> engine.getCamera().setRot(engine.getCamera().getRot().getX(), engine.getCamera().getRot().getY(),
-                        engine.getCamera().getRot().getZ() + 1f));
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_Q,
-                () -> engine.getCamera().setRot(engine.getCamera().getRot().getX(), engine.getCamera().getRot().getY(),
-                        engine.getCamera().getRot().getZ() - 1f));
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_UP,
-                () -> engine.getCamera().setRot(engine.getCamera().getRot().getX() + 1f,
-                        engine.getCamera().getRot().getY(), engine.getCamera().getRot().getZ()));
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_DOWN,
-                () -> engine.getCamera().setRot(engine.getCamera().getRot().getX() - 1f,
-                        engine.getCamera().getRot().getY(), engine.getCamera().getRot().getZ()));
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_LEFT,
-                () -> engine.getCamera().setRot(engine.getCamera().getRot().getX(),
-                        engine.getCamera().getRot().getY() + 1f, engine.getCamera().getRot().getZ()));
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_RIGHT,
-                () -> engine.getCamera().setRot(engine.getCamera().getRot().getX(),
-                        engine.getCamera().getRot().getY() - 1f, engine.getCamera().getRot().getZ()));
+    try {
+      commandLine = parser.parse(options, args);
 
-        // schedule engine.getWindow() closing when escape is pressed
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_ESCAPE, () -> {
-            throw new ExitOverrideException(0);
-        });
+      {
+        String[] remainder = commandLine.getArgs();
+        // TODO: replace by @kingussopp logger
+        System.out.print("Unhandled arguments: ");
+        for (String argument : remainder) {
+          System.out.print(argument);
+          System.out.print(" ");
+        }
 
-        // fullscreen
-        engine.getWindow().onKeyDown(GLFW.GLFW_KEY_F11,
-                () -> engine.getWindow().setFullscreen(!engine.getWindow().isFullscreen()));
+        System.out.println();
+      }
 
-        // event showcase
-        engine.getWindow().onEvent(new MoveEvent(engine),
-                () -> parentTestNode.setRot(testElement.getRot().add(new Vector3f(0, 0, 0.3f))));
+    } catch (org.apache.commons.cli.ParseException exception) {
+      System.out.print("Parse error: ");
+      System.out.println(exception.getMessage());
+    }
+    return commandLine;
+  }
 
-        engine.start();
+  private static Bounds parseBounds(CommandLine cl) {
+
+    // Set default bounds (arround ENSEEIHT school)
+    Double minLon = defaultMinLon;
+    Double maxLon = defaultMaxLon;
+    Double minLat = defaultMinLat;
+    Double maxLat = defaultMaxLat;
+
+    // If there is all four options, read them from args
+    if (cl.hasOption("minLon") & cl.hasOption("maxLon") & cl.hasOption("minLat") & cl.hasOption("maxLat")) {
+      minLon = Double.parseDouble(cl.getOptionValue("minLon", minLon.toString()));
+      maxLon = Double.parseDouble(cl.getOptionValue("maxLon", maxLon.toString()));
+      minLat = Double.parseDouble(cl.getOptionValue("minLat", minLat.toString()));
+      maxLat = Double.parseDouble(cl.getOptionValue("maxLat", maxLat.toString()));
     }
 
-    public static void main(String[] args) {
-        // Create OSM Map
-        Bounds N7Bounds = new Bounds(1.45338, 43.60116, 1.45760, 43.60297);
-        File n7Map = new File("src/main/resources/maps/osm/n7.osm");
-        OSMAPI OSMMap = new OSMAPI(N7Bounds, n7Map);
-
-        // Download new map
-        OSMMap.downloadMap();
-
-        // Parse data
-        OSMMap.parse();
-
-        // Convert into optimized files
-        LightObj ltObj = new LightObj(OSMMap);
-
-        //
-        new App().start();
-    }
+    // Return them
+    return new Bounds(minLon, maxLon, minLat, maxLat);
+  }
 
 }

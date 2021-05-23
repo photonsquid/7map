@@ -14,6 +14,18 @@ public class LightObj {
     this.osmMap = osmMap;
   }
 
+  public void convertObj() {
+    // Convert points from lat long to (x, y, z)
+    // Convert a list of nodes to a list of feature quickly displayable
+    // Parse styles.json and apply it to each objects
+
+  }
+
+  public void storeObj() {
+    // Store obj to database
+
+  }
+
   public OSMAPI getOsmMap() {
     return this.osmMap;
   }
