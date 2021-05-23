@@ -3,8 +3,8 @@ package com.sevenmap;
 import java.io.File;
 
 import com.sevenmap.data.optiObj.LightObj;
+import com.sevenmap.data.osm.OSM;
 import com.sevenmap.data.osm.Elements.Bounds.Bounds;
-import com.sevenmap.data.osm.api.OSMAPI;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -38,7 +38,7 @@ public class App {
       String fileName = cl.getOptionValue("F", defaultMapFileName);
       Bounds N7Bounds = parseBounds(cl);
       File n7Map = new File(fileName);
-      OSMAPI OSMMap = new OSMAPI(N7Bounds, n7Map);
+      OSM OSMMap = new OSM(N7Bounds, n7Map);
 
       // Download new map
       OSMMap.downloadMap();
@@ -49,6 +49,9 @@ public class App {
       // Convert into optimized files
       LightObj ltObj = new LightObj(OSMMap);
       ltObj.convertObj();
+
+      // Store this object to the database
+      ltObj.storeObj();
     }
 
     // ======================== map displayer =========================
