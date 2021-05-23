@@ -1,0 +1,72 @@
+@startuml
+
+class Type{
+  - type: String
+}
+
+class FeatureCollection{
+  - type: Type
+  - features : Feature[]
+}
+
+
+class Feature{
+  - type: Type
+  - geometry : Geometry[]
+}
+
+abstract Geometry{
+  - type: Type
+}
+
+class Geometry{
+  - type: Type
+}
+
+class GPoint{
+  - coordinate : CPoint
+}
+
+class CPoint{
+  - coordinate : Double[]
+}
+
+class GLineString{
+  - coordinate : CLineString
+}
+
+class CLineString{
+  - coordinate : CPoints[]
+}
+
+class GPolygon{
+  - coordinate : CPolygon
+}
+
+class CPolygon{
+  - coordinate : CLineString[]
+}
+
+class GMultiPolygon{
+  - coordinate : CMultiPolygon
+}
+
+class CMultiPolygon{
+  - coordinate : CPolygon[]
+}
+
+FeatureCollection -- Feature
+Feature -- Geometry
+Geometry <|-- GPoint
+GPoint -- CPoint
+GLineString -- CLineString
+CLineString -- CPoint
+Geometry <|-- GLineString
+Geometry <|-- GPolygon
+GPolygon -- CPolygon
+CPolygon -- CLineString
+Geometry <|-- GMultiPolygon
+GMultiPolygon -- CMultiPolygon
+CMultiPolygon -- CPolygon
+
+@enduml
