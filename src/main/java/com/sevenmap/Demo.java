@@ -16,12 +16,13 @@ import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;
 import com.sevenmap.spinel.math.Vector3f;
 import com.sevenmap.spinel.utils.Color;
+import com.sevenmap.spinel.elements.PrototypeGuiN;
+
 
 public class Demo {
     private Engine engine = new Engine();
     private Mesh surfaceMesh;
     private Item surfaceItem;
-    private GuiNode debugStats;
 
     /** A hashmap containing all the keybinds in this demo */
     private HashMap<Integer, Runnable> keybinds = new HashMap<>();
@@ -123,11 +124,14 @@ public class Demo {
     private void createGui() {
         // ImGui.getIO().getFonts().addFontFromFileTTF(Demo.class.getClassLoader().getResource("fonts/Raleway/static/Raleway-Regular.ttf").toString(), 20);
         // ImGui.getIO().getFonts().addFontFromFileTTF("src/main/resources/fonts/Raleway/static/Raleway-Regular.ttf", 20);
-        debugStats = new GuiNode();
-        debugStats.addLogic(() -> {
+        PrototypeGuiN debugStats = new PrototypeGuiN("Search bar");
+        debugStats.setParent(engine.getGuiRoot());
+
+        GuiNode testGuiNode= new GuiNode("Test GuiNode");
+        testGuiNode.addLogic(() -> {
             ImGui.showDemoWindow();
         });
-        debugStats.setParent(engine.getGuiRoot());
+        testGuiNode.setParent(engine.getGuiRoot());
     }
 
     private float smoothstep(float x, float min, float max) {

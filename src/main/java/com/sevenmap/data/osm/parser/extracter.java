@@ -9,13 +9,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.lang.model.util.ElementFilter;
-
 import com.sevenmap.data.osm.Elements.Metadata.Metadata;
 import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
 import com.sevenmap.data.osm.parser.Annotations.XMLElement;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.jdom.Element;
+import org.jdom.filter.ElementFilter;
 
 public class extracter {
 
