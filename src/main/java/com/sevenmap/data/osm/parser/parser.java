@@ -15,7 +15,6 @@ public class parser {
 
   public static void main(String[] args) {
 
-    // Download file from OSM API
     try (BufferedInputStream inputStream = new BufferedInputStream(
         // new
         // URL("https://api.openstreetmap.org/api/0.6/map?bbox=1.45338,43.60116,1.45760,43.60297").openStream());

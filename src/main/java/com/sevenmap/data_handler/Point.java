@@ -1,4 +1,4 @@
-package com.sevenmap.data.optiObj;
+package com.sevenmap.data_handler;
 
 public class Point {
   private float x;
