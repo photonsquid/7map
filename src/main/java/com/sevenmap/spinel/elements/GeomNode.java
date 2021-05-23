@@ -1,6 +1,7 @@
 package com.sevenmap.spinel.elements;
 
 import com.sevenmap.exceptions.IncorrectChildTypeError;
+import com.sevenmap.spinel.math.Vector;
 import com.sevenmap.spinel.math.Vector3f;
 
 public class GeomNode extends Node {
@@ -105,6 +106,53 @@ public class GeomNode extends Node {
      */
     public void setRot(Vector3f vect) {
         setRot(vect.getX(), vect.getY(), vect.getZ());
+    }
+    
+    /**
+     * Project the normal vector e_r into the 
+     * cartesian scene-specific frame of reference.
+     * @return normal vector e_r
+     */
+    public Vector3f getReferenceX() {
+        double theta = Math.toRadians(rotation.getY());
+        double phi = Math.toRadians(rotation.getX());
+        return new Vector3f(
+            (float) - (Math.sin(theta) * Math.cos(phi)),
+            (float) Math.sin(phi),
+            (float) - (Math.cos(theta) * Math.cos(phi))
+        );
+    }
+
+    /**
+     * Project the tangent vector e_phi into the 
+     * cartesian scene-specific frame of reference.
+     * Note: Phi is the pitch angle
+     * @return tangent vector
+     */
+    public Vector3f getReferenceY() {
+        double phi = Math.toRadians(rotation.getX());
+        double beta = Math.toRadians(rotation.getZ());
+        return new Vector3f(
+            (float) - Math.sin(beta),
+            (float) (Math.cos(phi) * Math.cos(beta)),
+            (float) Math.sin(phi)
+        );
+    }
+
+    /**
+     * Project the tangent vector e_theta into the 
+     * cartesian scene-specific frame of reference.
+     * Note: Theta is the yaw angle
+     * @return tangent vector
+     */
+    public Vector3f getReferenceZ() {
+        double theta = Math.toRadians(rotation.getY());
+        double beta = Math.toRadians(rotation.getZ());
+        return new Vector3f(
+            (float) - (Math.cos(theta) * Math.cos(beta)),
+            (float) - Math.sin(beta),
+            (float) (Math.sin(theta) * Math.cos(beta))
+        );
     }
 
     public void show() {

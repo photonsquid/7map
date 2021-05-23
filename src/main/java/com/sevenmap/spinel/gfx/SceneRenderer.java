@@ -75,10 +75,9 @@ public class SceneRenderer extends RootNode {
     private void renderChildren(GeomNode node, Camera camera) {
         if (node.hasMesh()) {
             render((Item) node, camera);
-        } else {
-            node.getShownChildren().forEach((Node childnode) -> 
-                renderChildren((GeomNode) childnode, camera));
         }
+        node.getShownChildren().forEach((Node childnode) -> 
+                renderChildren((GeomNode) childnode, camera));
     }
 
     /**
@@ -95,8 +94,7 @@ public class SceneRenderer extends RootNode {
     public void buildChildren(Node node) {
         if (((GeomNode) node).hasMesh()) {
             ((Item) node).getMesh().build();
-        } else {
-            node.getShownChildren().forEach(this::buildChildren);
         }
+        node.getShownChildren().forEach(this::buildChildren);
     }
 }

@@ -33,7 +33,7 @@ public abstract class RootNode {
     }
 
     /**
-     * Remove a child from a Node's children list
+     * Remove a child from a Node's shownChildren list
      * @param child
      */
     protected void delChild(RootNode child) {
@@ -43,8 +43,8 @@ public abstract class RootNode {
     }
 
     /**
-     * Get the Node's children.
-     * @return children ArrayList
+     * Get the Node's shownChildren.
+     * @return shownChildren ArrayList
      * @see {@link #getHiddenChildren()}
      * @see {@link #getShownChildren()}
      */
@@ -53,8 +53,8 @@ public abstract class RootNode {
     }
 
     /**
-     * Get the Node's visible children.
-     * @return visible children list
+     * Get the Node's visible shownChildren.
+     * @return visible shownChildren list
      * @see {@link #getChildren()}
      * @see {@link #getHiddenChildren()}
      */
@@ -63,8 +63,8 @@ public abstract class RootNode {
     }
 
     /**
-     * Get the Node's hidden children.
-     * @return hidden children list
+     * Get the Node's hidden shownChildren.
+     * @return hidden shownChildren list
      * @see {@link #getShownChildren()}
      * @see {@link #getChildren()}
      */
@@ -73,8 +73,8 @@ public abstract class RootNode {
     }
 
     /**
-     * Determine if the node has children or if not.
-     * @return true if the node does have children
+     * Determine if the node has shownChildren or if not.
+     * @return true if the node does have shownChildren
      */
     public boolean hasChildren() {
         return (shownChildren.size() + hiddenChildren.size() )> 0;
@@ -96,8 +96,9 @@ public abstract class RootNode {
      * @param child the child which is meant to be revealed
      */
     public void showChild(Node child) {
-        hiddenChildren.remove(child);
-        shownChildren.add(child);
+        if (hiddenChildren.remove(child)) {
+            shownChildren.add(child);
+        }
     }
 
     /**
@@ -105,8 +106,9 @@ public abstract class RootNode {
      * @param child the child which is meant to be hidden
      */
     public void hideChild(Node child) {
-        shownChildren.remove(child);
-        hiddenChildren.add(child);
+        if (shownChildren.remove(child)) {
+            hiddenChildren.add(child);
+        }
     }
 
     /**
@@ -121,7 +123,7 @@ public abstract class RootNode {
      */
     public void compatibilityCheck(Node child) {
         if (!(child instanceof Node)) {
-            throw new IncorrectChildTypeError("Node element can only receive children of types Node or lower.");
+            throw new IncorrectChildTypeError("Node element can only receive shownChildren of types Node or lower.");
         }
     }
 
@@ -143,11 +145,17 @@ public abstract class RootNode {
     }
 
     public void tree(String shift) {
-        List<Node> children = getChildren();
-        for (int i = 0; i < children.size(); i++) {
-            Node child = children.get(i);
-            System.out.printf("%s%s %s %s%n", shift, (i + 1 == children.size()) ? "└":"├", child.getID(), child.name);
-            child.tree(String.format("%s%s", shift, (i < children.size() - 1) ? "│ ":"  "));
+        List<Node> sChildren = getShownChildren();
+        for (int i = 0; i < sChildren.size(); i++) {
+            Node child = sChildren.get(i);
+            System.out.printf("%s%s %s %s (%s)%n", shift, (i + 1 == sChildren.size()) ? "└":"├", child.getID(), child.name, "shown");
+            child.tree(String.format("%s%s", shift, (i < sChildren.size() - 1) ? "│ ":"  "));
+        }
+        List<Node> hChildren = getHiddenChildren();
+        for (int i = 0; i < hChildren.size(); i++) {
+            Node child = hChildren.get(i);
+            System.out.printf("%s%s %s %s (%s)%n", shift, (i + 1 == hChildren.size()) ? "└":"├", child.getID(), child.name, "hidden");
+            child.tree(String.format("%s%s", shift, (i < hChildren.size() - 1) ? "│ ":"  "));
         }
     }
 }
