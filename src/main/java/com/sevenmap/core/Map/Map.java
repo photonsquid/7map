@@ -1,4 +1,4 @@
-package com.sevenmap.core.Map;
+package com.sevenmap.core.map;
 
 import java.io.File;
 

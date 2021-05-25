@@ -1,6 +1,6 @@
 package com.sevenmap.spinel.elements.gui;
 
-import com.sevenmap.core.UI.UI;
+import com.sevenmap.core.ui.UI;
 import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.scheduling.events.FileLoadedEvent;
