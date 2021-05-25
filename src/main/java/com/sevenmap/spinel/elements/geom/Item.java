@@ -1,6 +1,7 @@
-package com.sevenmap.spinel.elements;
+package com.sevenmap.spinel.elements.geom;
 
 import com.sevenmap.exceptions.IncorrectChildTypeError;
+import com.sevenmap.spinel.elements.Node;
 import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.math.Vector3f;
 
@@ -12,22 +13,22 @@ public class Item extends GeomNode {
     protected Vector3f scale;
     protected Mesh mesh;
 
-    public Item (Vector3f position, Vector3f rotation) {
+    public Item(Vector3f position, Vector3f rotation) {
         super(position, rotation);
         name = this.getClass().getSimpleName();
     }
 
-    public Item (Vector3f position, Vector3f rotation, Vector3f scale, Mesh mesh) {
+    public Item(Vector3f position, Vector3f rotation, Vector3f scale, Mesh mesh) {
         this(position, rotation);
         this.scale = scale;
         this.mesh = mesh;
     }
 
-    public Item (Vector3f position, Vector3f rotation, String name) {
+    public Item(Vector3f position, Vector3f rotation, String name) {
         super(position, rotation, name);
     }
 
-    public Item (Vector3f position, Vector3f rotation, Vector3f scale, Mesh mesh, String name) {
+    public Item(Vector3f position, Vector3f rotation, Vector3f scale, Mesh mesh, String name) {
         this(position, rotation, name);
         this.scale = scale;
         this.mesh = mesh;
@@ -37,6 +38,7 @@ public class Item extends GeomNode {
 
     /**
      * Get the Item's scale.
+     * 
      * @return scale vector
      */
     public Vector3f getScale() {
@@ -52,6 +54,7 @@ public class Item extends GeomNode {
 
     /**
      * Set the Item's scale.
+     * 
      * @param sx scale on the X axis
      * @param sy scale on the Y axis
      * @param sz scale on the Z axis
@@ -59,7 +62,7 @@ public class Item extends GeomNode {
     public void setScale(float sx, float sy, float sz) {
         scale.set(sx, sy, sz);
     }
-    
+
     // other methods
 
     /**
@@ -69,7 +72,7 @@ public class Item extends GeomNode {
     public boolean hasMesh() {
         return true;
     }
-    
+
     /**
      * {@inheritDoc}
      */

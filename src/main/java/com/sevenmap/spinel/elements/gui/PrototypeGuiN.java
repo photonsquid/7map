@@ -1,4 +1,4 @@
-package com.sevenmap.spinel.elements;
+package com.sevenmap.spinel.elements.gui;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiInputTextFlags;
@@ -26,5 +26,5 @@ public class PrototypeGuiN extends GuiNode {
         ImGui.text("text content");
         ImGui.end();
     }
-    
+
 }

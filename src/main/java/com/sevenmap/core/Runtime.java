@@ -20,6 +20,8 @@ public class Runtime {
         map.load(cl);
         gui.load(cl);
 
+        gui.ldFileChooser();
+
         engine.start();
     }
 }

@@ -1,6 +1,7 @@
-package com.sevenmap.spinel.elements;
+package com.sevenmap.spinel.elements.gui;
 
 import com.sevenmap.exceptions.IncorrectChildTypeError;
+import com.sevenmap.spinel.elements.Node;
 
 import imgui.ImGui;
 
@@ -15,6 +16,7 @@ public class GuiLayer extends GuiNode {
 
     /**
      * Create a new GuiLayer object with a chosen name.
+     * 
      * @param name the given name
      */
     public GuiLayer(String name) {

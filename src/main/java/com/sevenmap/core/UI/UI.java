@@ -1,27 +1,27 @@
 package com.sevenmap.core.UI;
 
 import com.sevenmap.core.Loadable;
-import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.spinel.Engine;
-import com.sevenmap.spinel.elements.GuiLayer;
-import com.sevenmap.spinel.elements.GuiNode;
 import com.sevenmap.spinel.elements.RootNode;
-import com.sevenmap.spinel.utils.FileChooser;
+import com.sevenmap.spinel.elements.gui.FileChooserGui;
+import com.sevenmap.spinel.elements.gui.GuiLayer;
+import com.sevenmap.spinel.elements.gui.GuiNode;
+import com.sevenmap.spinel.scheduling.events.FileLoadedEvent;
 
 import org.apache.commons.cli.CommandLine;
 
 import imgui.ImGui;
 import imgui.ImGuiStyle;
-import imgui.flag.ImGuiCond;
 
 public class UI extends Loadable {
-    private GuiNode mapLoadingLayer;
+    private FileChooserGui mapLoadingLayer;
     private GuiNode runtimeMenus;
     private GuiNode overlay;
     private GuiLayer searchBar;
-    private FileChooser fc;
-    private boolean isReactive = true;
     private Engine parentEngine;
+
+    private boolean isReactive = true;
+    private CommandLine clInput;
 
     /**
      * Create a new UI and initialize its components.
@@ -30,9 +30,9 @@ public class UI extends Loadable {
      */
     public UI(Engine engine) {
         parentEngine = engine;
-        RootNode root = engine.getGuiRoot();
+        RootNode root = parentEngine.getGuiRoot();
         setUpStyle();
-        mapLoadingLayer = new GuiNode("Map Loading");
+        mapLoadingLayer = new FileChooserGui(this, engine, "Map Loading");
         runtimeMenus = new GuiNode("Runtime Menus");
         overlay = new GuiNode("overlay");
         searchBar = new GuiLayer("Search bar");
@@ -53,45 +53,48 @@ public class UI extends Loadable {
      * {@inheritDoc}
      */
     public void load(CommandLine cl) {
+        clInput = cl;
         setUpContent();
     }
 
+    /**
+     * Load file chooser UI.
+     */
+    public void ldFileChooser() {
+        hideAll();
+        mapLoadingLayer.show();
+        parentEngine.getWindow().onEvent(new FileLoadedEvent(parentEngine), () -> {
+            ldMapDisplay();
+        });
+    }
+
+    public void ldMapDisplay() {
+        // TODO: Map display gui
+        System.out.println("loading map display");
+    }
+
+    /**
+     * Set up UI styles and themes.
+     */
     private void setUpStyle() {
         ImGuiStyle style = ImGui.getStyle();
         style.setWindowRounding(10);
     }
 
     private void setUpContent() {
-        mapLoadingLayer.addLogic(() -> {
-            int[] size = new int[] { 370, 95 };
-            ImGui.setNextWindowSize(size[0], size[1]);
-            ImGui.setNextWindowPos(ImGui.getMainViewport().getCenter().x - size[0] / 2,
-                    ImGui.getMainViewport().getCenter().y - size[1] / 2, ImGuiCond.Once);
-            ImGui.begin("Setting things up");
-            ImGui.alignTextToFramePadding();
-            ImGui.text("Load new map");
-
-            if (ImGui.button("Browse...") && isReactive) {
-                fc = new FileChooser();
-                toggleReactivity(); // block user interaction
-            }
-            ImGui.sameLine();
-            if (ImGui.button("exit")) {
-                throw new ExitOverrideException(0);
-            }
-            ImGui.end();
-
-            if (fc != null && fc.isDone() && !isReactive) { // disable overlay (interaction allowed)
-                toggleReactivity();
-            }
-        });
-
         overlay.addLogic(() -> {
             ImGui.setNextWindowSize(ImGui.getMainViewport().getSizeX(), ImGui.getMainViewport().getSizeY());
             ImGui.setNextWindowPos(0, 0);
         });
     }
 
+    /**
+     * Switch between non-reactive and reactive mode.
+     * <p>
+     * Toggles user input reactivity capabilities by setting up a layer on top of
+     * the elements already on screen
+     * <p/>
+     */
     public void toggleReactivity() {
         isReactive = !isReactive;
         if (isReactive) {
@@ -99,5 +102,19 @@ public class UI extends Loadable {
         } else {
             overlay.show();
         }
+    }
+
+    /**
+     * Returns true if the window reacts to user input.
+     */
+    public boolean isReactive() {
+        return isReactive;
+    }
+
+    private void hideAll() {
+        mapLoadingLayer.hide();
+        runtimeMenus.hide();
+        overlay.hide();
+        searchBar.hide();
     }
 }

@@ -2,7 +2,7 @@ package com.sevenmap.spinel;
 
 import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.exceptions.IllegalInstanceException;
-import com.sevenmap.spinel.elements.Camera;
+import com.sevenmap.spinel.elements.geom.Camera;
 import com.sevenmap.spinel.gfx.GuiRenderer;
 import com.sevenmap.spinel.gfx.SceneRenderer;
 import com.sevenmap.spinel.gfx.Shader;
@@ -194,7 +194,8 @@ public class Engine implements Runnable {
     }
 
     /**
-     * Get the active Engine instance. 
+     * Get the active Engine instance.
+     * 
      * @return
      */
     public static Engine getInstance() {

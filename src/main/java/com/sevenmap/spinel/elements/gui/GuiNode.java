@@ -1,6 +1,7 @@
-package com.sevenmap.spinel.elements;
+package com.sevenmap.spinel.elements.gui;
 
 import com.sevenmap.exceptions.IncorrectChildTypeError;
+import com.sevenmap.spinel.elements.Node;
 
 public class GuiNode extends Node {
     protected Runnable logic;
