@@ -1,4 +1,4 @@
-package com.sevenmap.core.UI;
+package com.sevenmap.core.ui;
 
 import com.sevenmap.core.Loadable;
 import com.sevenmap.spinel.Engine;
