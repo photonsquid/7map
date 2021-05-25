@@ -2,17 +2,24 @@ package com.sevenmap.core;
 
 import com.sevenmap.core.Map.Map;
 import com.sevenmap.core.UI.UI;
+import com.sevenmap.spinel.Engine;
 
 import org.apache.commons.cli.CommandLine;
 
 public class Runtime {
+    private Engine engine;
+    private UI gui;
+    private Map map;
 
-  public void load(CommandLine cl) {
+    public void load(CommandLine cl) {
 
-    UI gui = new UI();
-    Map map = new Map();
+        engine = new Engine();
+        gui = new UI(engine);
+        map = new Map();
 
-    map.load(cl);
-    gui.load(cl);
-  }
+        map.load(cl);
+        gui.load(cl);
+
+        engine.start();
+    }
 }

@@ -15,10 +15,6 @@ import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
-import imgui.ImGui;
-import imgui.gl3.ImGuiImplGl3;
-import imgui.glfw.ImGuiImplGlfw;
-
 public class Window extends FrameObject {
     
     // functional attributes
@@ -223,5 +219,13 @@ public class Window extends FrameObject {
 
     public Task scheduleTask(Runnable action) {
         return taskManager.add(new Event(this), action);
+    }
+
+    /**
+     * Add Runnable awaiting task to stack.
+     * @param awaiting the awaiting task, which will be executed on the next frame
+     */
+    public void stack(Runnable awaiting) {
+        taskManager.stack(awaiting);
     }
 }

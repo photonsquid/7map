@@ -1,7 +1,6 @@
 package com.sevenmap.spinel.elements;
 
 import com.sevenmap.exceptions.IncorrectChildTypeError;
-import com.sevenmap.spinel.math.Vector;
 import com.sevenmap.spinel.math.Vector3f;
 
 public class GeomNode extends Node {
