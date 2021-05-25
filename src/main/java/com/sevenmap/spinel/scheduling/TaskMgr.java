@@ -14,7 +14,11 @@ import com.sevenmap.spinel.scheduling.events.Event;
  */
 public class TaskMgr extends FrameObject {
     
+    /** A list of tasks which are executed on each frame if their respective Event is flagged as active */
     private Map<Event, List<Task>> tasks = new HashMap<>();
+    /** A stack used to store awaiting internal tasks (in order to avoid Threading conflicts) */
+    private List<Runnable> stack = new ArrayList<Runnable>();
+    /** A list of events which acts like a hashmap for tasks (avoid iterating on all tasks) */
     private List<Event> events;
 
     public TaskMgr() {
@@ -35,6 +39,7 @@ public class TaskMgr extends FrameObject {
     @Override
     public void update() {
         runTasks();
+        runStack();
     }
 
     /**
@@ -111,5 +116,21 @@ public class TaskMgr extends FrameObject {
      */
     public Map<Event, List<Task>> getTasks() {
         return tasks;
+    }
+
+    /**
+     * Add Runnable awaiting task to stack.
+     * @param awaiting the awaiting task, which will be executed on the next frame
+     */
+    public void stack(Runnable awaiting) {
+        stack.add(awaiting);
+    }
+
+    public void runStack() {
+        stack.forEach(Runnable::run);
+
+        if (stack.size() != 0) {
+            stack.clear();
+        }
     }
 }

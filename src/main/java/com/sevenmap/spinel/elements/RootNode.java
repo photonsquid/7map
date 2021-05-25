@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.sevenmap.exceptions.IncorrectChildTypeError;
+import com.sevenmap.spinel.Engine;
 
 /** */
 public abstract class RootNode {
@@ -29,7 +30,9 @@ public abstract class RootNode {
      * @param child the child to be added
      */
     protected void addChild(Node child) {
-        this.shownChildren.add(child);
+        Engine.getInstance().getWindow().stack(() -> {
+            this.shownChildren.add(child);
+        });
     }
 
     /**
@@ -37,9 +40,11 @@ public abstract class RootNode {
      * @param child
      */
     protected void delChild(RootNode child) {
-        if (!this.hiddenChildren.remove(child)) {
-            this.shownChildren.remove(child);
-        }
+        Engine.getInstance().getWindow().stack(() -> {
+            if (!this.hiddenChildren.remove(child)) {
+                this.shownChildren.remove(child);
+            }
+        });
     }
 
     /**
@@ -96,9 +101,11 @@ public abstract class RootNode {
      * @param child the child which is meant to be revealed
      */
     public void showChild(Node child) {
-        if (hiddenChildren.remove(child)) {
-            shownChildren.add(child);
-        }
+        Engine.getInstance().getWindow().stack(() -> {
+            if (hiddenChildren.remove(child)) {
+                shownChildren.add(child);
+            }
+        });
     }
 
     /**
@@ -106,9 +113,11 @@ public abstract class RootNode {
      * @param child the child which is meant to be hidden
      */
     public void hideChild(Node child) {
-        if (shownChildren.remove(child)) {
-            hiddenChildren.add(child);
-        }
+        Engine.getInstance().getWindow().stack(() -> {
+            if (shownChildren.remove(child)) {
+                hiddenChildren.add(child);
+            }
+        });
     }
 
     /**
@@ -129,6 +138,7 @@ public abstract class RootNode {
 
     /**
      * Destoy all child elements and the node itself.
+     * @implNote untested at runtime, might cause a threading exception
      */
     public void destroy() {
         this.hiddenChildren.forEach(Node::destroy);
