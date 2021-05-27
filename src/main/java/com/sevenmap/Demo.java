@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sevenmap.core.ui.PrototypeGuiN;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;
@@ -17,7 +18,6 @@ import com.sevenmap.spinel.utils.Color;
 import com.sevenmap.spinel.elements.colliders.PlaneCollider;
 import com.sevenmap.spinel.elements.geom.Item;
 import com.sevenmap.spinel.elements.gui.GuiNode;
-import com.sevenmap.spinel.elements.gui.PrototypeGuiN;
 
 public class Demo {
     private Engine engine = new Engine();

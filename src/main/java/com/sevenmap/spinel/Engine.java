@@ -193,6 +193,10 @@ public class Engine implements Runnable {
         return guiRoot;
     }
 
+    public boolean isRunning() {
+        return main.isAlive();
+    }
+
     /**
      * Get the active Engine instance.
      * 
@@ -201,4 +205,5 @@ public class Engine implements Runnable {
     public static Engine getInstance() {
         return instance;
     }
+
 }

@@ -1,4 +1,6 @@
-package com.sevenmap.spinel.elements.gui;
+package com.sevenmap.core.ui;
+
+import com.sevenmap.spinel.elements.gui.GuiNode;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiInputTextFlags;

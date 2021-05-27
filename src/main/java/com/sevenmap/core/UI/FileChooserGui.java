@@ -1,13 +1,14 @@
-package com.sevenmap.spinel.elements.gui;
+package com.sevenmap.core.ui;
 
-import com.sevenmap.core.ui.UI;
 import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.spinel.Engine;
+import com.sevenmap.spinel.elements.gui.GuiNode;
 import com.sevenmap.spinel.scheduling.events.FileLoadedEvent;
 import com.sevenmap.spinel.utils.FileChooser;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiCond;
+import imgui.flag.ImGuiWindowFlags;
 
 public class FileChooserGui extends GuiNode {
     private int[] size = new int[] { 370, 95 };
@@ -33,7 +34,8 @@ public class FileChooserGui extends GuiNode {
         ImGui.setNextWindowSize(size[0], size[1]);
         ImGui.setNextWindowPos(ImGui.getMainViewport().getCenter().x - size[0] / 2,
                 ImGui.getMainViewport().getCenter().y - size[1] / 2, ImGuiCond.Once);
-        ImGui.begin("Setting things up");
+        ImGui.begin("Setting things up",
+                ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse);
         ImGui.alignTextToFramePadding();
         ImGui.text("Load new map");
 
@@ -47,10 +49,13 @@ public class FileChooserGui extends GuiNode {
         }
         ImGui.end();
 
-        if (fc != null && fc.isDone() && !parentUI.isReactive()) { // disable overlay (interaction allowed)
+        if (fc != null && fc.isDone() && !parentUI.isReactive()) {
+            // disable overlay (interaction allowed)
             parentUI.toggleReactivity();
             filename = fc.getFilename();
-            parentEngine.getWindow().throwEvent(new FileLoadedEvent(parentEngine));
+            if (filename != null) {
+                parentEngine.getWindow().throwEvent(new FileLoadedEvent(parentEngine));
+            }
         }
     }
 
