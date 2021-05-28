@@ -1,4 +1,4 @@
-package com.sevenmap.data.osm.parser.Annotations;
+package com.sevenmap.data.parsers.osm.parser.Annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

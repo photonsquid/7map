@@ -1,8 +1,8 @@
-package com.sevenmap.data.osm.Elements.Member;
+package com.sevenmap.data.parsers.osm.Elements.Member;
 
 import java.util.Objects;
 
-import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
 
 public class Member {
   @XMLAttribute
@@ -11,7 +11,6 @@ public class Member {
   private long ref;
   @XMLAttribute
   private long role;
-
 
   public Member() {
   }
@@ -62,14 +61,14 @@ public class Member {
   }
 
   @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Member)) {
-            return false;
-        }
-        Member member = (Member) o;
-        return Objects.equals(type, member.type) && ref == member.ref && role == member.role;
+  public boolean equals(Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof Member)) {
+      return false;
+    }
+    Member member = (Member) o;
+    return Objects.equals(type, member.type) && ref == member.ref && role == member.role;
   }
 
   @Override
@@ -79,12 +78,7 @@ public class Member {
 
   @Override
   public String toString() {
-    return "{" +
-      " type='" + getType() + "'" +
-      ", ref='" + getRef() + "'" +
-      ", role='" + getRole() + "'" +
-      "}";
+    return "{" + " type='" + getType() + "'" + ", ref='" + getRef() + "'" + ", role='" + getRole() + "'" + "}";
   }
-  
 
 }

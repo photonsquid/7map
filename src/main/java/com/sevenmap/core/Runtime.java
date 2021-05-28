@@ -5,21 +5,19 @@ import com.sevenmap.core.ui.UI;
 import com.sevenmap.core.ui.events.FileLoadedEvent;
 import com.sevenmap.spinel.Engine;
 
-import org.apache.commons.cli.CommandLine;
-
 public class Runtime {
     private Engine engine;
     private UI gui;
     private Map map;
 
-    public void load(CommandLine cl) {
+    public void load(Props props) {
 
         engine = new Engine();
         gui = new UI(engine.getGuiRoot());
         map = new Map();
 
-        map.load(cl);
-        gui.load(cl);
+        map.load(props);
+        gui.load(props);
         gui.ldFileChooser();
         armEvents();
 

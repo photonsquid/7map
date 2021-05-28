@@ -1,4 +1,4 @@
-package com.sevenmap.data.osm.Elements.Metadata;
+package com.sevenmap.data.parsers.osm.Elements.Metadata;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -6,8 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
-import com.sevenmap.data.osm.parser.Annotations.XMLClass;
+import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.parser.Annotations.XMLClass;
 
 @XMLClass(isXMLAttribute = false)
 public class Metadata {

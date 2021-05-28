@@ -1,4 +1,4 @@
-package com.sevenmap.data.osm.parser;
+package com.sevenmap.data.parsers.osm.parser;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -9,15 +9,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.sevenmap.data.osm.Elements.Metadata.Metadata;
-import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
-import com.sevenmap.data.osm.parser.Annotations.XMLElement;
+import com.sevenmap.data.parsers.Parser;
+import com.sevenmap.data.parsers.osm.Elements.Metadata.Metadata;
+import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.parser.Annotations.XMLElement;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.jdom.Element;
 import org.jdom.filter.ElementFilter;
 
-public class extracter {
+public class extracter extends Parser {
 
   @SuppressWarnings("unchecked")
   private <K, V> HashMap<K, V> handleMap(XMLElement XML_Element, Element el, String tagName) {
@@ -250,21 +251,6 @@ public class extracter {
       valueCasted = Metadata.parseDate(valueToCast);
     }
     return (T) valueCasted;
-  }
-
-  // TODO: javadoc
-  @SuppressWarnings("unchecked")
-  private <T> T createObjectFrom(Class<T> className) {
-    Object obj = new Object();
-
-    // Initialize it
-    try {
-      obj = className.getDeclaredConstructor().newInstance();
-    } catch (Exception e) {
-      // TODO: handle exception
-    }
-
-    return (T) obj;
   }
 
   // TODO: javadoc

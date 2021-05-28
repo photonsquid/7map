@@ -1,13 +1,13 @@
-package com.sevenmap.data.osm.Elements.Relation;
+package com.sevenmap.data.parsers.osm.Elements.Relation;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import com.sevenmap.data.osm.Elements.Member.Member;
-import com.sevenmap.data.osm.Elements.Metadata.Metadata;
-import com.sevenmap.data.osm.Elements.Tag.Tag;
-import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
-import com.sevenmap.data.osm.parser.Annotations.XMLElement;
+import com.sevenmap.data.parsers.osm.Elements.Member.Member;
+import com.sevenmap.data.parsers.osm.Elements.Metadata.Metadata;
+import com.sevenmap.data.parsers.osm.Elements.Tag.Tag;
+import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.parser.Annotations.XMLElement;
 
 public class Relation {
   @XMLAttribute(unique = true)

@@ -1,4 +1,4 @@
-package com.sevenmap.data.osm;
+package com.sevenmap.data.parsers.osm;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
-import com.sevenmap.data.osm.Elements.Root;
-import com.sevenmap.data.osm.Elements.Bounds.Bounds;
-import com.sevenmap.data.osm.parser.extracter;
+import com.sevenmap.data.parsers.osm.Elements.Root;
+import com.sevenmap.data.parsers.osm.Elements.Bounds.Bounds;
+import com.sevenmap.data.parsers.osm.parser.extracter;
 
 import org.jdom.input.SAXBuilder;
 

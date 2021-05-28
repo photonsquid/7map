@@ -1,8 +1,8 @@
-package com.sevenmap.data.osm.Elements.Bounds;
+package com.sevenmap.data.parsers.osm.Elements.Bounds;
 
 import java.util.Objects;
 
-import com.sevenmap.data.osm.parser.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
 
 public class Bounds {
 
@@ -78,14 +78,15 @@ public class Bounds {
   }
 
   @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Bounds)) {
-            return false;
-        }
-        Bounds bounds = (Bounds) o;
-        return Objects.equals(minlat, bounds.minlat) && Objects.equals(maxlat, bounds.maxlat) && Objects.equals(minlon, bounds.minlon) && Objects.equals(maxlon, bounds.maxlon);
+  public boolean equals(Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof Bounds)) {
+      return false;
+    }
+    Bounds bounds = (Bounds) o;
+    return Objects.equals(minlat, bounds.minlat) && Objects.equals(maxlat, bounds.maxlat)
+        && Objects.equals(minlon, bounds.minlon) && Objects.equals(maxlon, bounds.maxlon);
   }
 
   @Override
@@ -95,12 +96,8 @@ public class Bounds {
 
   @Override
   public String toString() {
-    return "{" +
-      " minlat='" + getMinlat() + "'" +
-      ", maxlat='" + getMaxlat() + "'" +
-      ", minlon='" + getMinlon() + "'" +
-      ", maxlon='" + getMaxlon() + "'" +
-      "}";
+    return "{" + " minlat='" + getMinlat() + "'" + ", maxlat='" + getMaxlat() + "'" + ", minlon='" + getMinlon() + "'"
+        + ", maxlon='" + getMaxlon() + "'" + "}";
   }
 
 }

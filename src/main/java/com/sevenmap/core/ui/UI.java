@@ -1,11 +1,10 @@
 package com.sevenmap.core.ui;
 
 import com.sevenmap.core.Loadable;
+import com.sevenmap.core.Props;
 import com.sevenmap.core.ui.nodes.FileChooserGui;
 import com.sevenmap.spinel.elements.RootNode;
 import com.sevenmap.spinel.elements.gui.GuiLayer;
-
-import org.apache.commons.cli.CommandLine;
 
 public class UI extends Loadable {
     private FileChooserGui mapLoadingLayer;
@@ -13,7 +12,7 @@ public class UI extends Loadable {
     private GuiLayer searchBar;
 
     private boolean isReactive = true;
-    private CommandLine clInput;
+    private Props props;
 
     /**
      * Create a new UI and initialize its components.
@@ -38,8 +37,8 @@ public class UI extends Loadable {
     /**
      * {@inheritDoc}
      */
-    public void load(CommandLine cl) {
-        clInput = cl;
+    public void load(Props props) {
+        this.props = props;
     }
 
     /**

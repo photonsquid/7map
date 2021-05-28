@@ -4,33 +4,56 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import com.sevenmap.data.osm.OSM;
-import com.sevenmap.data.osm.Elements.Relation.Relation;
+import com.sevenmap.core.Props;
+import com.sevenmap.data.parsers.json.JsonParser;
+import com.sevenmap.data.parsers.osm.OSM;
+import com.sevenmap.data.parsers.osm.Elements.Root;
+import com.sevenmap.data.parsers.osm.Elements.Node.Node;
+import com.sevenmap.data.parsers.osm.Elements.Relation.Relation;
+import com.sevenmap.data.parsers.osm.Elements.Way.Way;
+import com.sevenmap.data.styles.Styles;
 
 public class LightObj {
   private OSM osmMap;
+  private Props props;
+  private HashMap<Long, Relation> rels;
+  private HashMap<Long, Way> ways;
+  private HashMap<Long, Node> nodes;
 
+  /**
+   * Create an object ready to be optimized
+   */
   public LightObj() {
   }
 
-  public LightObj(OSM osmMap) {
+  /**
+   * Create an object ready to be optimized
+   * 
+   * @param osmMap an 'non-optimized' OSM map
+   * @param props  genral properties of the App (settings files, ...)
+   */
+  public LightObj(OSM osmMap, Props props) {
     this.osmMap = osmMap;
+    this.props = props;
   }
 
-  // Convert a list of nodes to a list of feature quickly displayable
-
+  /**
+   * Convert a list of nodes to a list of feature quickly displayable
+   */
   public void parse() {
 
     // On définit les nouvelles coordonnées de chaque noeud.
-    HashMap<Long, Relation> rels = osmMap.getRt().getRelations();
+    Root rt = osmMap.getRt();
 
-    for (Map.Entry<Long, Relation> entry : rels.entrySet()) {
-      Long key = entry.getKey();
-      Relation rel = entry.getValue();
-      System.out.println(key.toString());
-    }
+    rels = rt.getRelations();
+    ways = rt.getWays();
+    nodes = rt.getNodes();
 
-    System.out.println("Coucou");
+    // Parse styles.json
+    Styles styles = JsonParser.parse(props.getSettingFile(), Styles.class);
+
+    // 1. iterate on all relations and build them
+    buildRelations(rt);
     // Construire =
     // Convert points from lat long to (x, y, z)
     // Parse styles.json and apply it to each objects
@@ -46,8 +69,26 @@ public class LightObj {
 
   }
 
+  /** Store optimized map to database */
   public void store() {
     // Store obj to database
+
+  }
+
+  private void buildRelations(Root rt) {
+    for (Map.Entry<Long, Relation> entry : rels.entrySet()) {
+      Long key = entry.getKey();
+      Relation rel = entry.getValue();
+      System.out.println(key.toString());
+    }
+
+  }
+
+  private void buildWays() {
+
+  }
+
+  private void buildNodes() {
 
   }
 
