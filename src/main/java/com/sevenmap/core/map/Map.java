@@ -4,7 +4,7 @@ import java.io.File;
 
 import com.sevenmap.core.Loadable;
 import com.sevenmap.core.Props;
-import com.sevenmap.data.optiObj.LightObj;
+import com.sevenmap.data.objset.LightObj;
 import com.sevenmap.data.parsers.osm.OSM;
 import com.sevenmap.data.parsers.osm.Elements.Bounds.Bounds;
 import com.sevenmap.spinel.math.Vector3f;

@@ -1,4 +1,4 @@
-package com.sevenmap.data.optiObj;
+package com.sevenmap.data.objset;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.sevenmap.data.optiObj;
+package com.sevenmap.data.objset;
 
 public class Category {
     private String name;

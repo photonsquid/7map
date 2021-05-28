@@ -1,4 +1,4 @@
-package com.sevenmap.data.optiObj;
+package com.sevenmap.data.objset;
 
 public class Image {
     private String path;
