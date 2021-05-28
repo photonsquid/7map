@@ -1,6 +1,7 @@
-package com.sevenmap.spinel.scheduling.events;
+package com.sevenmap.core.ui.events;
 
 import com.sevenmap.spinel.Engine;
+import com.sevenmap.spinel.scheduling.events.Event;
 
 public class FileLoadedEvent extends Event {
 
@@ -10,6 +11,6 @@ public class FileLoadedEvent extends Event {
 
     @Override
     public boolean equals(Object obj) {
-        return true;
+        return obj instanceof FileLoadedEvent;
     }
 }

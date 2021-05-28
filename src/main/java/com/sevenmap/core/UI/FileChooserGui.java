@@ -1,9 +1,9 @@
 package com.sevenmap.core.ui;
 
+import com.sevenmap.core.ui.events.FileLoadedEvent;
 import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.gui.GuiNode;
-import com.sevenmap.spinel.scheduling.events.FileLoadedEvent;
 import com.sevenmap.spinel.utils.FileChooser;
 
 import imgui.ImGui;
@@ -13,19 +13,16 @@ import imgui.flag.ImGuiWindowFlags;
 public class FileChooserGui extends GuiNode {
     private int[] size = new int[] { 370, 95 };
     private UI parentUI;
-    private Engine parentEngine;
     private FileChooser fc;
     private String filename;
 
-    public FileChooserGui(UI parentUI, Engine engine) {
+    public FileChooserGui(UI parentUI) {
         super();
-        parentEngine = engine;
         this.parentUI = parentUI;
     }
 
-    public FileChooserGui(UI parentUI, Engine engine, String name) {
+    public FileChooserGui(UI parentUI, String name) {
         super(name);
-        parentEngine = engine;
         this.parentUI = parentUI;
     }
 
@@ -54,7 +51,7 @@ public class FileChooserGui extends GuiNode {
             parentUI.toggleReactivity();
             filename = fc.getFilename();
             if (filename != null) {
-                parentEngine.getWindow().throwEvent(new FileLoadedEvent(parentEngine));
+                Engine.getInstance().getWindow().throwEvent(new FileLoadedEvent(Engine.getInstance()));
             }
         }
     }

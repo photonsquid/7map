@@ -1,10 +1,11 @@
 package com.sevenmap.core.ui;
 
 import com.sevenmap.core.Loadable;
+import com.sevenmap.core.ui.events.DbSearchEvent;
+import com.sevenmap.core.ui.events.FileLoadedEvent;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.RootNode;
 import com.sevenmap.spinel.elements.gui.GuiLayer;
-import com.sevenmap.spinel.scheduling.events.FileLoadedEvent;
 
 import org.apache.commons.cli.CommandLine;
 
@@ -26,7 +27,7 @@ public class UI extends Loadable {
         parentEngine = engine;
         RootNode root = parentEngine.getGuiRoot();
         new Style();
-        mapLoadingLayer = new FileChooserGui(this, engine, "Map Loading");
+        mapLoadingLayer = new FileChooserGui(this, "Map Loading");
         runtimeMenus = new RuntimeMenuGui("Runtime Menus");
         searchBar = new GuiLayer("Search bar");
 
@@ -44,7 +45,6 @@ public class UI extends Loadable {
      */
     public void load(CommandLine cl) {
         clInput = cl;
-        setUpContent();
     }
 
     /**
@@ -59,13 +59,12 @@ public class UI extends Loadable {
         });
     }
 
+    /**
+     * Load map display UI.
+     */
     public void ldMapDisplay() {
         mapLoadingLayer.hide();
         runtimeMenus.show();
-    }
-
-    private void setUpContent() {
-
     }
 
     /**
