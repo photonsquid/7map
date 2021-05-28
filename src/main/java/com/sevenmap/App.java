@@ -13,19 +13,14 @@ import org.apache.commons.cli.Options;
  */
 public class App {
 
-  // ========================== default values ==========================
-
   public static void main(String[] args) {
 
+    // Parse args from CLI
     CommandLine cl = parseArgs(args);
 
+    // Launch app
     Runtime rt = new Runtime();
     rt.load(cl);
-
-    // ======================== map displayer =========================
-    // This is done whenever the user want to display a map.
-    // ================================================================
-
   }
 
   private static CommandLine parseArgs(String[] args) {
@@ -61,14 +56,16 @@ public class App {
 
       {
         String[] remainder = commandLine.getArgs();
-        // TODO: replace by @kingussopp logger
-        System.out.print("Unhandled arguments: ");
-        for (String argument : remainder) {
-          System.out.print(argument);
-          System.out.print(" ");
-        }
+        if (remainder.length > 0) {
+          // TODO: replace by @kingussopp logger
+          System.out.print("Unhandled arguments: ");
+          for (String argument : remainder) {
+            System.out.print(argument);
+            System.out.print(" ");
+          }
 
-        System.out.println();
+          System.out.println();
+        }
       }
 
     } catch (org.apache.commons.cli.ParseException exception) {

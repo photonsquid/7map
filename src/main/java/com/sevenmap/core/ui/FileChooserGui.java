@@ -13,16 +13,19 @@ import imgui.flag.ImGuiWindowFlags;
 public class FileChooserGui extends GuiNode {
     private int[] size = new int[] { 370, 95 };
     private UI parentUI;
+    private Engine parentEngine;
     private FileChooser fc;
     private String filename;
 
-    public FileChooserGui(UI parentUI) {
+    public FileChooserGui(UI parentUI, Engine engine) {
         super();
+        parentEngine = engine;
         this.parentUI = parentUI;
     }
 
-    public FileChooserGui(UI parentUI, String name) {
+    public FileChooserGui(UI parentUI, Engine engine, String name) {
         super(name);
+        parentEngine = engine;
         this.parentUI = parentUI;
     }
 
@@ -51,7 +54,7 @@ public class FileChooserGui extends GuiNode {
             parentUI.toggleReactivity();
             filename = fc.getFilename();
             if (filename != null) {
-                Engine.getInstance().getWindow().throwEvent(new FileLoadedEvent(Engine.getInstance()));
+                parentEngine.getWindow().throwEvent(new FileLoadedEvent(parentEngine));
             }
         }
     }
