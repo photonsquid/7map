@@ -1,16 +1,16 @@
-package com.sevenmap.core.ui.events;
+package com.sevenmap.core.uitestf.events;
 
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.scheduling.events.Event;
 
-public class FileLoadedEvent extends Event {
+public class DbSearchEvent extends Event {
 
-    public FileLoadedEvent(Engine engine) {
+    public DbSearchEvent(Engine engine) {
         super(engine);
     }
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof FileLoadedEvent;
+        return obj instanceof DbSearchEvent;
     }
 }

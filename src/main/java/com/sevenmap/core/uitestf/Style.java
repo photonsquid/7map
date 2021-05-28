@@ -1,4 +1,4 @@
-package com.sevenmap.core.ui;
+package com.sevenmap.core.uitestf;
 
 import imgui.ImGui;
 import imgui.ImGuiStyle;

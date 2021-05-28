@@ -6,7 +6,10 @@
   ],
   "settings": {
     "java.configuration.updateBuildConfiguration": "automatic",
-    "conventionalCommits.scopes": ["rendering"],
+    "conventionalCommits.scopes": [
+      "rendering",
+      "core"
+    ],
     "java.dependency.packagePresentation": "hierarchical"
   }
 }
