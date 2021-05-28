@@ -1,4 +1,6 @@
-package com.sevenmap.core;
+package com.sevenmap.core.cli;
+
+import com.sevenmap.core.Props;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;

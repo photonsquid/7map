@@ -1,8 +1,8 @@
 package com.sevenmap;
 
-import com.sevenmap.core.CLI;
 import com.sevenmap.core.Props;
 import com.sevenmap.core.Runtime;
+import com.sevenmap.core.cli.CLI;
 
 /**
  * Main application class.
