@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "conventionalCommits.scopes": ["rendering"],
+    "java.dependency.packagePresentation": "hierarchical"
+  }
+}
