@@ -1,6 +1,6 @@
 package com.sevenmap.core;
 
-import com.sevenmap.core.mapp.Map;
+import com.sevenmap.core.map.Map;
 import com.sevenmap.core.ui.UI;
 import com.sevenmap.spinel.Engine;
 
