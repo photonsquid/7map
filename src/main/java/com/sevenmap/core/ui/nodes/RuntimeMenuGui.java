@@ -1,4 +1,4 @@
-package com.sevenmap.core.ui;
+package com.sevenmap.core.ui.nodes;
 
 import com.sevenmap.core.ui.events.DbSearchEvent;
 import com.sevenmap.spinel.Engine;
