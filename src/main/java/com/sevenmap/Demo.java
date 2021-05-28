@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sevenmap.core.uitestf.PrototypeGuiN;
+import com.sevenmap.core.ui.PrototypeGuiN;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;

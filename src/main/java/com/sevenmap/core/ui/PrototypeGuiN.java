@@ -1,4 +1,4 @@
-package com.sevenmap.core.uitestf;
+package com.sevenmap.core.ui;
 
 import com.sevenmap.spinel.elements.gui.GuiNode;
 
