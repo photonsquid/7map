@@ -3,6 +3,7 @@ package com.sevenmap.core.ui;
 import com.sevenmap.core.Loadable;
 import com.sevenmap.core.ui.events.DbSearchEvent;
 import com.sevenmap.core.ui.events.FileLoadedEvent;
+import com.sevenmap.core.ui.nodes.FileChooserGui;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.RootNode;
 import com.sevenmap.spinel.elements.gui.GuiLayer;

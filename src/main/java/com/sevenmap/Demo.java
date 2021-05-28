@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sevenmap.core.ui.PrototypeGuiN;
+import com.sevenmap.core.ui.nodes.PrototypeGui;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;
@@ -122,7 +122,7 @@ public class Demo {
         // 20);
         // ImGui.getIO().getFonts().addFontFromFileTTF("src/main/resources/fonts/Raleway/static/Raleway-Regular.ttf",
         // 20);
-        PrototypeGuiN debugStats = new PrototypeGuiN("Search bar");
+        PrototypeGui debugStats = new PrototypeGui("Search bar");
         debugStats.setParent(engine.getGuiRoot());
 
         GuiNode testGuiNode = new GuiNode("Test GuiNode");
