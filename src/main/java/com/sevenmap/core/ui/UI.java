@@ -1,10 +1,7 @@
 package com.sevenmap.core.ui;
 
 import com.sevenmap.core.Loadable;
-import com.sevenmap.core.ui.events.DbSearchEvent;
-import com.sevenmap.core.ui.events.FileLoadedEvent;
 import com.sevenmap.core.ui.nodes.FileChooserGui;
-import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.RootNode;
 import com.sevenmap.spinel.elements.gui.GuiLayer;
 
@@ -14,7 +11,6 @@ public class UI extends Loadable {
     private FileChooserGui mapLoadingLayer;
     private RuntimeMenuGui runtimeMenus;
     private GuiLayer searchBar;
-    private Engine parentEngine;
 
     private boolean isReactive = true;
     private CommandLine clInput;
@@ -24,9 +20,7 @@ public class UI extends Loadable {
      * 
      * @param engine The target engine
      */
-    public UI(Engine engine) {
-        parentEngine = engine;
-        RootNode root = parentEngine.getGuiRoot();
+    public UI(RootNode root) {
         new Style();
         mapLoadingLayer = new FileChooserGui(this, "Map Loading");
         runtimeMenus = new RuntimeMenuGui("Runtime Menus");
@@ -54,10 +48,6 @@ public class UI extends Loadable {
     public void ldFileChooser() {
         hideAll();
         mapLoadingLayer.show();
-        parentEngine.getWindow().onEvent(new FileLoadedEvent(parentEngine), () -> {
-            System.out.printf("User chose file %s", mapLoadingLayer.getFilename());
-            ldMapDisplay();
-        });
     }
 
     /**
@@ -90,5 +80,17 @@ public class UI extends Loadable {
         mapLoadingLayer.hide();
         runtimeMenus.hide();
         searchBar.hide();
+    }
+
+    public FileChooserGui getMapLoadingLayer() {
+        return mapLoadingLayer;
+    }
+
+    public RuntimeMenuGui getRuntimeMenus() {
+        return runtimeMenus;
+    }
+
+    public GuiLayer getSearchBar() {
+        return searchBar;
     }
 }
