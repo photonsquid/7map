@@ -2,7 +2,6 @@ package com.sevenmap.core.ui;
 
 import imgui.ImGui;
 import imgui.ImGuiStyle;
-import imgui.flag.ImGuiCol;
 
 public class Style {
     public Style() {

@@ -1,12 +1,12 @@
 package com.sevenmap.spinel;
 
-import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.exceptions.IllegalInstanceException;
 import com.sevenmap.spinel.elements.geom.Camera;
 import com.sevenmap.spinel.gfx.GuiRenderer;
 import com.sevenmap.spinel.gfx.SceneRenderer;
 import com.sevenmap.spinel.gfx.Shader;
 import com.sevenmap.spinel.math.Vector3f;
+import com.sevenmap.spinel.scheduling.events.ExitOverrideEvent;
 import com.sevenmap.spinel.utils.Color;
 
 public class Engine implements Runnable {
@@ -57,32 +57,31 @@ public class Engine implements Runnable {
      * Stop the engine.
      */
     public void stop() {
-        throw new ExitOverrideException(0);
+        window.throwEvent(new ExitOverrideEvent());
     }
 
     public void run() {
         init();
-        try {
-            while (!window.shouldClose()) {
-                if (paused) {
-                    try {
-                        synchronized (main) {
-                            main.wait();
-                        }
-                    } catch (InterruptedException e) {
-                        System.out.println("[Threading fatal error] Failed to pause main thread");
-                        break;
+        window.onEvent(new ExitOverrideEvent(), () -> {
+            window.setShouldClose(true);
+        });
+        while (!window.shouldClose()) {
+            if (paused) {
+                try {
+                    synchronized (main) {
+                        main.wait();
                     }
+                } catch (InterruptedException e) {
+                    System.out.println("[Threading fatal error] Failed to pause main thread");
+                    break;
                 }
-                long time = System.nanoTime();
-                update();
-                stats[0] = System.nanoTime() - time;
-                time = System.nanoTime();
-                render();
-                stats[1] = System.nanoTime() - time;
             }
-        } catch (ExitOverrideException e) {
-            System.out.println(e.getMessage());
+            long time = System.nanoTime();
+            update();
+            stats[0] = System.nanoTime() - time;
+            time = System.nanoTime();
+            render();
+            stats[1] = System.nanoTime() - time;
         }
         stopInternals();
     }

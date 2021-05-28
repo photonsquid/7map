@@ -2,9 +2,9 @@ package com.sevenmap.core.ui.nodes;
 
 import com.sevenmap.core.ui.UI;
 import com.sevenmap.core.ui.events.FileLoadedEvent;
-import com.sevenmap.exceptions.ExitOverrideException;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.gui.GuiNode;
+import com.sevenmap.spinel.scheduling.events.ExitOverrideEvent;
 import com.sevenmap.spinel.utils.FileChooser;
 
 import imgui.ImGui;
@@ -43,7 +43,7 @@ public class FileChooserGui extends GuiNode {
         }
         ImGui.sameLine();
         if (ImGui.button("exit")) {
-            throw new ExitOverrideException(0);
+            Engine.getInstance().stop();
         }
         ImGui.end();
 

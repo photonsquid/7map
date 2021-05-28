@@ -186,6 +186,15 @@ public class Window extends FrameObject {
     }
 
     /**
+     * Set window shouldclose attribute to status.
+     * 
+     * @param status true closes the window on the next frame
+     */
+    public void setShouldClose(boolean status) {
+        GLFW.glfwSetWindowShouldClose(windowElement, status);
+    }
+
+    /**
      * Destroy window element and its dependencies.
      */
     @Override

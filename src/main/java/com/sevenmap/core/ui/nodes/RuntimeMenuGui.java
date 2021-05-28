@@ -27,7 +27,7 @@ public class RuntimeMenuGui extends GuiNode {
 
         // Search bar
         ImGui.setNextWindowSize(600, 40);
-        ImGui.setNextWindowPos(10, 10);
+        ImGui.setNextWindowPos(10, 20);
         flags = ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize
                 | ImGuiWindowFlags.NoBackground | ImGuiInputTextFlags.EnterReturnsTrue;
         ImGui.begin("Search bar", flags);
@@ -51,8 +51,37 @@ public class RuntimeMenuGui extends GuiNode {
             // throw zoom out event
             Engine.getInstance().getWindow().throwEvent(new ZoomEvent(false));
         }
-
         ImGui.end();
+
+        if (ImGui.beginMainMenuBar()) {
+            if (ImGui.beginMenu("File")) {
+                if (ImGui.menuItem("New")) {
+                }
+                if (ImGui.menuItem("Open")) {
+                }
+                if (ImGui.menuItem("Save")) {
+                }
+                if (ImGui.menuItem("Exit")) {
+                }
+                ImGui.endMenu();
+            }
+            if (ImGui.beginMenu("Edit")) {
+                if (ImGui.menuItem("Cut")) {
+                }
+                if (ImGui.menuItem("Copy")) {
+                }
+                if (ImGui.menuItem("Paste")) {
+                }
+                ImGui.endMenu();
+            }
+            if (ImGui.beginMenu("View")) {
+                if (ImGui.menuItem("Fullscreen")) {
+                }
+                ImGui.endMenu();
+            }
+            ImGui.endMainMenuBar();
+        }
+
     }
 
     public String getSearchQuery() {
