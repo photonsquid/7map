@@ -1,6 +1,7 @@
 package com.sevenmap.core.ui.nodes;
 
 import com.sevenmap.core.ui.events.DbSearchEvent;
+import com.sevenmap.core.ui.events.ZoomEvent;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.gui.GuiNode;
 
@@ -44,9 +45,11 @@ public class RuntimeMenuGui extends GuiNode {
         ImGui.begin("Control buttons", flags);
         if (ImGui.button("+")) {
             // throw zoom in event
+            Engine.getInstance().getWindow().throwEvent(new ZoomEvent(true));
         }
         if (ImGui.button("-")) {
             // throw zoom out event
+            Engine.getInstance().getWindow().throwEvent(new ZoomEvent(false));
         }
 
         ImGui.end();
