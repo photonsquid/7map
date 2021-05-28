@@ -52,7 +52,7 @@ public class FileChooserGui extends GuiNode {
             parentUI.toggleReactivity();
             filename = fc.getFilename();
             if (filename != null) {
-                Engine.getInstance().getWindow().throwEvent(new FileLoadedEvent(Engine.getInstance()));
+                Engine.getInstance().getWindow().throwEvent(new FileLoadedEvent());
             }
         }
     }

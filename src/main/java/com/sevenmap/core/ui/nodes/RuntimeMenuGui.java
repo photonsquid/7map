@@ -22,12 +22,33 @@ public class RuntimeMenuGui extends GuiNode {
 
     @Override
     public void compute() {
+        int flags;
+
+        // Search bar
         ImGui.setNextWindowSize(600, 40);
         ImGui.setNextWindowPos(10, 10);
-        ImGui.begin("Search bar", ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize); // https://github.com/ocornut/imgui/issues/589
+        flags = ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize
+                | ImGuiWindowFlags.NoBackground | ImGuiInputTextFlags.EnterReturnsTrue;
+        ImGui.begin("Search bar", flags);
         if (ImGui.inputText("Search", content, ImGuiInputTextFlags.CallbackResize)) {
-            Engine.getInstance().getWindow().throwEvent(new DbSearchEvent(Engine.getInstance()));
+            Engine.getInstance().getWindow().throwEvent(new DbSearchEvent());
         }
+        ImGui.end();
+
+        // Control buttons
+        int size[] = new int[] { 70, 100 };
+        ImGui.setNextWindowSize(size[0], size[1]);
+        ImGui.setNextWindowPos(viewport.getSizeX() - size[0], viewport.getSizeY() - size[1]);
+        flags = ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize
+                | ImGuiWindowFlags.NoBackground;
+        ImGui.begin("Control buttons", flags);
+        if (ImGui.button("+")) {
+            // throw zoom in event
+        }
+        if (ImGui.button("-")) {
+            // throw zoom out event
+        }
+
         ImGui.end();
     }
 

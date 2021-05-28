@@ -9,14 +9,9 @@ public abstract class Event {
     protected final String id;
     protected Window windowInstance;
 
-    public Event(Window window) {
+    public Event() {
         id = String.format("E%s", lastID++);
-        this.windowInstance = window;
-    }
-
-    public Event(Engine engine) {
-        id = String.format("E%s", lastID++);
-        this.windowInstance = engine.getWindow();
+        windowInstance = Engine.getInstance().getWindow();
     }
 
     /**

@@ -8,7 +8,8 @@
     "java.configuration.updateBuildConfiguration": "automatic",
     "conventionalCommits.scopes": [
       "rendering",
-      "core"
+      "core",
+      "data"
     ],
     "java.dependency.packagePresentation": "hierarchical"
   }

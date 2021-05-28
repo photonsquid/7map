@@ -28,7 +28,7 @@ public class Runtime {
      * Arm all event triggers on startup.
      */
     private void armEvents() {
-        engine.getWindow().onEvent(new FileLoadedEvent(engine), () -> {
+        engine.getWindow().onEvent(new FileLoadedEvent(), () -> {
             System.out.printf("User chose file %s", gui.getMapLoadingLayer().getFilename());
             gui.ldMapDisplay();
         });

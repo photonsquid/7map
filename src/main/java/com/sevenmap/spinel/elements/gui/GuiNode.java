@@ -3,15 +3,12 @@ package com.sevenmap.spinel.elements.gui;
 import com.sevenmap.exceptions.IncorrectChildTypeError;
 import com.sevenmap.spinel.elements.Node;
 
+import imgui.ImGui;
+import imgui.ImGuiViewport;
+
 public class GuiNode extends Node {
     protected Runnable logic;
-
-    /**
-     * Create a new GuiNode object with a default name.
-     */
-    public GuiNode() {
-        name = this.getClass().getSimpleName();
-    }
+    protected ImGuiViewport viewport;
 
     /**
      * Create a new GuiNode object with a chosen name.
@@ -20,6 +17,14 @@ public class GuiNode extends Node {
      */
     public GuiNode(String name) {
         this.name = name;
+        viewport = ImGui.getMainViewport();
+    }
+
+    /**
+     * Create a new GuiNode object with a default name.
+     */
+    public GuiNode() {
+        this(GuiNode.class.getClass().getSimpleName());
     }
 
     /**
