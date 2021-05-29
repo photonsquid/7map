@@ -7,6 +7,8 @@ import java.util.stream.Stream;
 
 import com.sevenmap.exceptions.IncorrectChildTypeError;
 import com.sevenmap.spinel.Engine;
+import com.sevenmap.spinel.elements.geom.GeomNode;
+import com.sevenmap.spinel.elements.gui.GuiNode;
 
 /** */
 public abstract class RootNode {
@@ -188,8 +190,12 @@ public abstract class RootNode {
         List<Node> sChildren = getShownChildren();
         for (int i = 0; i < sChildren.size(); i++) {
             Node child = sChildren.get(i);
+            // "shown" if the child has a mesh, "empty" if not
+            String status = (child instanceof GeomNode) && ((GeomNode) child).hasMesh() || (child instanceof GuiNode)
+                    ? "shown"
+                    : "empty";
             System.out.printf("%s%s %s %s (%s)%n", shift, (i + 1 == sChildren.size()) ? "└" : "├", child.getID(),
-                    child.name, "shown");
+                    child.name, status);
             child.tree(String.format("%s%s", shift, (i < sChildren.size() - 1) ? "│ " : "  "));
         }
         List<Node> hChildren = getHiddenChildren();

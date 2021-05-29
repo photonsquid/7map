@@ -62,6 +62,7 @@ public class RuntimeMenuGui extends GuiNode {
                 if (ImGui.menuItem("Save")) {
                 }
                 if (ImGui.menuItem("Exit")) {
+                    Engine.getInstance().stop();
                 }
                 ImGui.endMenu();
             }
