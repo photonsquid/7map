@@ -1,16 +1,19 @@
 package com.sevenmap.spinel.utils;
 
 import java.awt.FileDialog;
+import java.io.File;
+import java.io.FilenameFilter;
 
 public class FileChooser implements Runnable {
     private Thread fileChooserThread;
 
     private String targetDir;
     private String filePattern;
-    private String filename;
+    private String file;
     private boolean isClosed = false;
 
-    public FileChooser() {
+    public FileChooser(String filePattern) {
+        this.filePattern = filePattern;
         fileChooserThread = new Thread(this, this.getClass().getSimpleName());
         fileChooserThread.start();
     }
@@ -22,7 +25,15 @@ public class FileChooser implements Runnable {
         if (targetDir != null)
             fd.setDirectory(targetDir);
         fd.setVisible(true);
-        filename = fd.getFile();
+        fd.setFilenameFilter(new FilenameFilter() {
+
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.matches(filePattern);
+            }
+
+        });
+        file = (fd.getFile() != null) ? new File(fd.getFile()).getAbsolutePath() : null;
         isClosed = true;
         fileChooserThread.interrupt();
     }
@@ -43,8 +54,8 @@ public class FileChooser implements Runnable {
         this.filePattern = filePattern;
     }
 
-    public String getFilename() {
-        return filename;
+    public String getFilePath() {
+        return file;
     }
 
     /**

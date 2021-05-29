@@ -4,7 +4,6 @@ import com.sevenmap.core.ui.UI;
 import com.sevenmap.core.ui.events.FileLoadedEvent;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.gui.GuiNode;
-import com.sevenmap.spinel.scheduling.events.ExitOverrideEvent;
 import com.sevenmap.spinel.utils.FileChooser;
 
 import imgui.ImGui;
@@ -38,7 +37,7 @@ public class FileChooserGui extends GuiNode {
         ImGui.text("Load new map");
 
         if (ImGui.button("Browse...") && parentUI.isReactive()) {
-            fc = new FileChooser();
+            fc = new FileChooser("*.osm");
             parentUI.toggleReactivity(); // block user interaction
         }
         ImGui.sameLine();
@@ -50,7 +49,7 @@ public class FileChooserGui extends GuiNode {
         if (fc != null && fc.isDone() && !parentUI.isReactive()) {
             // disable overlay (interaction allowed)
             parentUI.toggleReactivity();
-            filename = fc.getFilename();
+            filename = fc.getFilePath();
             if (filename != null) {
                 Engine.getInstance().getWindow().throwEvent(new FileLoadedEvent());
             }
