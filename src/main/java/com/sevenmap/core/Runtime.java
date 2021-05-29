@@ -15,6 +15,7 @@ public class Runtime {
 
     public void load(Props props) {
 
+        this.props = props;
         engine = new Engine();
         gui = new UI(engine.getGuiRoot(), props);
         map = new Map(props);
