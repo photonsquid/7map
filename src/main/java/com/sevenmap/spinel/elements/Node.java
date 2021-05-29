@@ -1,6 +1,6 @@
 package com.sevenmap.spinel.elements;
 
-import com.sevenmap.exceptions.IncorrectChildTypeError;
+import com.sevenmap.exceptions.IncorrectChildTypeException;
 
 public class Node extends RootNode {
     protected RootNode parent;
@@ -19,14 +19,16 @@ public class Node extends RootNode {
      * @param parent the parent Node
      */
     public void setParent(RootNode parent) {
-        parent.compatibilityCheck(this);
         // remove this object from the old parent's children list
         if (this.parent != null) {
             this.parent.delChild(this);
         }
         // add this object to the new parent's children list
         this.parent = parent;
-        this.parent.addChild(this);
+        if (this.parent != null) {
+            parent.compatibilityCheck(this);
+            this.parent.addChild(this);
+        }
     }
 
     /**
@@ -64,7 +66,7 @@ public class Node extends RootNode {
     @Override
     public void compatibilityCheck(Node child) {
         if (!(child instanceof Node)) {
-            throw new IncorrectChildTypeError("Node element can only receive children of types Node or lower.");
+            throw new IncorrectChildTypeException("Node element can only receive children of types Node or lower.");
         }
     }
 }

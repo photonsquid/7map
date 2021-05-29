@@ -1,6 +1,6 @@
 package com.sevenmap.spinel.elements.gui;
 
-import com.sevenmap.exceptions.IncorrectChildTypeError;
+import com.sevenmap.exceptions.IncorrectChildTypeException;
 import com.sevenmap.spinel.elements.Node;
 
 import imgui.ImGui;
@@ -39,7 +39,8 @@ public class GuiLayer extends GuiNode {
     @Override
     public void compatibilityCheck(Node child) {
         if (!(child instanceof GuiNode)) {
-            throw new IncorrectChildTypeError("GuiLayer element can only receive children of types GuiNode or lower.");
+            throw new IncorrectChildTypeException(
+                    "GuiLayer element can only receive children of types GuiNode or lower.");
         }
     }
 }

@@ -3,6 +3,7 @@ package com.sevenmap.data.objsept;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sevenmap.core.ui.Style;
 import com.sevenmap.data.styles.AssetStyle;
 import com.sevenmap.spinel.elements.geom.Item;
 import com.sevenmap.spinel.gfx.Mesh;
@@ -100,6 +101,10 @@ public class Portal {
                 Mesh roadMesh = new Mesh(vertices, indices);
                 Item roadItem = new Item(position, rotation, scale, roadMesh);
                 return roadItem;
+        }
+
+        public static Item loadPolygon(List<Vector3f> polygonData, Style AssetStyle) {
+                return null;
         }
 
 }

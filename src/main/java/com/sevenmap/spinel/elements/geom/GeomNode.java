@@ -1,6 +1,6 @@
 package com.sevenmap.spinel.elements.geom;
 
-import com.sevenmap.exceptions.IncorrectChildTypeError;
+import com.sevenmap.exceptions.IncorrectChildTypeException;
 import com.sevenmap.spinel.elements.Node;
 import com.sevenmap.spinel.math.Vector3f;
 
@@ -156,7 +156,8 @@ public class GeomNode extends Node {
     @Override
     public void compatibilityCheck(Node child) {
         if (!(child instanceof GeomNode)) {
-            throw new IncorrectChildTypeError("GeomNode element can only receive children of types GeomNode or lower.");
+            throw new IncorrectChildTypeException(
+                    "GeomNode element can only receive children of types GeomNode or lower.");
         }
     }
 }

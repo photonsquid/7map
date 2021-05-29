@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.sevenmap.exceptions.IncorrectChildTypeError;
+import com.sevenmap.exceptions.IncorrectChildTypeException;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.geom.GeomNode;
 import com.sevenmap.spinel.elements.gui.GuiNode;
@@ -164,7 +164,8 @@ public abstract class RootNode {
      */
     public void compatibilityCheck(Node child) {
         if (!(child instanceof Node)) {
-            throw new IncorrectChildTypeError("Node element can only receive shownChildren of types Node or lower.");
+            throw new IncorrectChildTypeException(
+                    "Node element can only receive shownChildren of types Node or lower.");
         }
     }
 
