@@ -79,7 +79,7 @@ public class Runtime {
             // Unload old map if any
             map.unload();
             // Setup fileName to props
-            props.MapFile(fileName);
+            props.setMapFile(fileName);
             // Warning the map API that it will be necessary to reload map from file
             props.hasToBuild(BUILD_TYPE.FROM_FILE);
             // Reload map

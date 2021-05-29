@@ -2,6 +2,7 @@ package com.sevenmap.core;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 import com.sevenmap.data.styles.Styles;
@@ -107,7 +108,8 @@ public class Props {
 
   public void setMapFile(String MapFilePath) {
     try {
-      this.MapFile = new URL(MapFilePath);
+      this.MapFile = Paths.get(MapFilePath).toUri().toURL();
+
     } catch (MalformedURLException e) {
       System.out.printf("Le cheminest invalide (%s)\n", MapFilePath);
       e.printStackTrace();
