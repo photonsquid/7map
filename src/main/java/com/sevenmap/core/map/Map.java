@@ -9,6 +9,8 @@ import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.geom.Item;
 
 public class Map extends Loadable {
+  private PlainMap<Long, Item> plainMap;
+
   public Map(Props props) {
     super(props);
   }
@@ -32,6 +34,15 @@ public class Map extends Loadable {
     // This is not supposed to be here...
     // ============================================================================
 
+  }
+
+  public void unload() {
+    Engine engine = Engine.getInstance();
+    for (PlainMap.Entry<Long, Item> entry : this.plainMap.entrySet()) {
+      Item road = entry.getValue();
+      road.setParent(null);
+    }
+    this.plainMap.clear();
   }
 
   /**
@@ -66,8 +77,8 @@ public class Map extends Loadable {
 
       // Cheat
       Engine engine = Engine.getInstance();
-      PlainMap<Long, Item> plainMan = mapSource.getGeneratedMap();
-      for (PlainMap.Entry<Long, Item> entry : plainMan.entrySet()) {
+      this.plainMap = mapSource.getGeneratedMap();
+      for (PlainMap.Entry<Long, Item> entry : this.plainMap.entrySet()) {
         Item road = entry.getValue();
         road.setParent(engine.getSceneRoot());
       }

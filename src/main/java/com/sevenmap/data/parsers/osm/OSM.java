@@ -3,6 +3,7 @@ package com.sevenmap.data.parsers.osm;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,7 +50,12 @@ public class OSM extends MapParser {
 
   public OSM(Props props) {
     super(props);
-    this.mapFile = new File(props.getMapFile());
+    try {
+      this.mapFile = new File(props.getMapFile().toURI());
+    } catch (URISyntaxException e) {
+      System.out.printf("Mauvaise URL (%s)\n", props.getMapFile().toString());
+      e.printStackTrace();
+    }
   }
 
   // <-------------------------------- Code logic ------------------------------->
@@ -64,11 +70,10 @@ public class OSM extends MapParser {
     // Open document
     SAXBuilder sxb = new SAXBuilder();
     try {
-      System.out.println(mapFile.getAbsolutePath());
       doc = sxb.build(mapFile);
     } catch (Exception e) {
       // TODO: handle error
-      System.out.println("erreur.");
+      System.out.printf("erreur. chemin invalide (%s)\n", mapFile.getAbsolutePath());
     }
 
     // Parse

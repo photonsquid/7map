@@ -76,7 +76,8 @@ public class Runtime {
             // TODO: change it to @kingussopp logger
             System.out.printf("User chose file %s", fileName);
             gui.ldMapDisplay();
-
+            // Unload old map if any
+            map.unload();
             // Setup fileName to props
             props.MapFile(fileName);
             // Warning the map API that it will be necessary to reload map from file
@@ -106,6 +107,7 @@ public class Runtime {
         engine.getWindow().onEvent(new FileOpeningEvent(), () -> {
             // TODO : unload graphical components
             gui.ldFileChooser();
+
         });
     }
 }

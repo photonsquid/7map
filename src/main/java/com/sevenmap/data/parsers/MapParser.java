@@ -48,7 +48,7 @@ public abstract class MapParser extends Parser {
   final public void downloadMap() {
     // Download file from any url
     if (props.hasToBuild().equals(BUILD_TYPE.FROM_URL)) {
-      String fileName = props.getMapFile();
+      String fileName = props.getMapFile().toString();
       if (fileName == null) {
         fileName = getFileNameFromUrl(props.getDownloadURL());
       }
@@ -70,7 +70,9 @@ public abstract class MapParser extends Parser {
         while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
           fileOS.write(data, 0, byteContent);
         }
+        fileOS.close();
       } catch (IOException ex) {
+      } finally {
       }
       // TODO handle exception
     }
@@ -144,7 +146,7 @@ public abstract class MapParser extends Parser {
     String extension = null;
     if (props.hasToBuild().equals(BUILD_TYPE.FROM_FILE)) {
       // get extension of file
-      extension = FilenameUtils.getExtension(props.getMapFile());
+      extension = FilenameUtils.getExtension(props.getMapFile().toString());
 
     } else if (props.hasToBuild().equals(BUILD_TYPE.FROM_URL)) {
       extension = FilenameUtils.getExtension(getFileNameFromUrl(props.getDownloadURL()));

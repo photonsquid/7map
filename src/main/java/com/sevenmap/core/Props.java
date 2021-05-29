@@ -1,5 +1,6 @@
 package com.sevenmap.core;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -12,11 +13,11 @@ public class Props {
   }
 
   private String SettingFile;
-  private String MapFile;
+  private URL MapFile;
+  private URL defaultMapFile;
   private String AppDataPath;
   private String OSM_API_ROOT_URL;
   private String DatabseURL;
-  private String defaultMapFileString;
   private BUILD_TYPE hasToBuild;
   // Default bounds (arround ENSEEIHT school)
   private Double defaultMinLon;
@@ -43,8 +44,7 @@ public class Props {
    * It will have a method to load it from a local file.
    */
   public Props() {
-    URL resource = this.getClass().getClassLoader().getResource("maps/osm/n7.osm");
-    this.defaultMapFileString = resource.getPath();
+    this.defaultMapFile = this.getClass().getClassLoader().getResource("maps/osm/n7.osm");
     this.OSM_API_ROOT_URL = "https://api.openstreetmap.org/api/0.6/map?bbox=";
 
     this.defaultMinLon = 1.45338;
@@ -93,12 +93,33 @@ public class Props {
     this.AppDataPath = AppDataPath;
   }
 
-  public String getMapFile() {
-    return defaultValue(this.MapFile, this.defaultMapFileString);
+  // public String getMapFile() {
+  // return defaultValue(this.MapFile, this.defaultMapFileString);
+  // }
+
+  public URL getMapFile() {
+    return defaultValue(this.MapFile, this.defaultMapFile);
   }
 
-  public void setMapFile(String MapFile) {
+  public void setMapFile(URL MapFile) {
     this.MapFile = MapFile;
+  }
+
+  public void setMapFile(String MapFilePath) {
+    try {
+      this.MapFile = new URL(MapFilePath);
+    } catch (MalformedURLException e) {
+      System.out.printf("Le cheminest invalide (%s)\n", MapFilePath);
+      e.printStackTrace();
+    }
+  }
+
+  public URL getDefaultMapFile() {
+    return this.defaultMapFile;
+  }
+
+  public void setDefaultMapFile(URL defaultMapFile) {
+    this.defaultMapFile = defaultMapFile;
   }
 
   public String getOSM_API_ROOT_URL() {
@@ -115,14 +136,6 @@ public class Props {
 
   public void setDatabseURL(String DatabseURL) {
     this.DatabseURL = DatabseURL;
-  }
-
-  public String getDefaultMapFileString() {
-    return this.defaultMapFileString;
-  }
-
-  public void setDefaultMapFileString(String defaultMapFileString) {
-    this.defaultMapFileString = defaultMapFileString;
   }
 
   public BUILD_TYPE hasToBuild() {
@@ -222,7 +235,12 @@ public class Props {
     return this;
   }
 
-  public Props MapFile(String MapFile) {
+  public Props MapFile(URL MapFile) {
+    setMapFile(MapFile);
+    return this;
+  }
+
+  public Props MapFile(String MapFilePath) {
     setMapFile(MapFile);
     return this;
   }
@@ -237,8 +255,8 @@ public class Props {
     return this;
   }
 
-  public Props defaultMapFileString(String defaultMapFileString) {
-    setDefaultMapFileString(defaultMapFileString);
+  public Props defaultMapFileString(URL defaultMapFileString) {
+    setDefaultMapFile(defaultMapFileString);
     return this;
   }
 
@@ -311,29 +329,29 @@ public class Props {
     Props props = (Props) o;
     return Objects.equals(SettingFile, props.SettingFile) && Objects.equals(MapFile, props.MapFile)
         && Objects.equals(OSM_API_ROOT_URL, props.OSM_API_ROOT_URL) && Objects.equals(DatabseURL, props.DatabseURL)
-        && Objects.equals(defaultMapFileString, props.defaultMapFileString)
-        && Objects.equals(hasToBuild, props.hasToBuild) && Objects.equals(defaultMinLon, props.defaultMinLon)
-        && Objects.equals(defaultMaxLon, props.defaultMaxLon) && Objects.equals(defaultMinLat, props.defaultMinLat)
-        && Objects.equals(defaultMaxLat, props.defaultMaxLat) && Objects.equals(minLon, props.minLon)
-        && Objects.equals(maxLon, props.maxLon) && Objects.equals(minLat, props.minLat)
-        && Objects.equals(maxLat, props.maxLat) && Objects.equals(styles, props.styles);
+        && Objects.equals(defaultMapFile, props.defaultMapFile) && Objects.equals(hasToBuild, props.hasToBuild)
+        && Objects.equals(defaultMinLon, props.defaultMinLon) && Objects.equals(defaultMaxLon, props.defaultMaxLon)
+        && Objects.equals(defaultMinLat, props.defaultMinLat) && Objects.equals(defaultMaxLat, props.defaultMaxLat)
+        && Objects.equals(minLon, props.minLon) && Objects.equals(maxLon, props.maxLon)
+        && Objects.equals(minLat, props.minLat) && Objects.equals(maxLat, props.maxLat)
+        && Objects.equals(styles, props.styles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(SettingFile, MapFile, OSM_API_ROOT_URL, DatabseURL, defaultMapFileString, hasToBuild,
-        defaultMinLon, defaultMaxLon, defaultMinLat, defaultMaxLat, minLon, maxLon, minLat, maxLat, styles);
+    return Objects.hash(SettingFile, MapFile, OSM_API_ROOT_URL, DatabseURL, defaultMapFile, hasToBuild, defaultMinLon,
+        defaultMaxLon, defaultMinLat, defaultMaxLat, minLon, maxLon, minLat, maxLat, styles);
   }
 
   @Override
   public String toString() {
     return "{" + " SettingFile='" + getSettingFile() + "'" + ", MapFile='" + getMapFile() + "'" + ", OSM_API_ROOT_URL='"
-        + getOSM_API_ROOT_URL() + "'" + ", DatabseURL='" + getDatabseURL() + "'" + ", defaultMapFileString='"
-        + getDefaultMapFileString() + "'" + ", hasToBuild='" + hasToBuild() + "'" + ", defaultMinLon='"
-        + getDefaultMinLon() + "'" + ", defaultMaxLon='" + getDefaultMaxLon() + "'" + ", defaultMinLat='"
-        + getDefaultMinLat() + "'" + ", defaultMaxLat='" + getDefaultMaxLat() + "'" + ", minLon='" + getMinLon() + "'"
-        + ", maxLon='" + getMaxLon() + "'" + ", minLat='" + getMinLat() + "'" + ", maxLat='" + getMaxLat() + "'"
-        + ", styles='" + getStyles() + "'" + "}";
+        + getOSM_API_ROOT_URL() + "'" + ", DatabseURL='" + getDatabseURL() + "'" + ", defaultMapFile='"
+        + getDefaultMapFile() + "'" + ", hasToBuild='" + hasToBuild() + "'" + ", defaultMinLon='" + getDefaultMinLon()
+        + "'" + ", defaultMaxLon='" + getDefaultMaxLon() + "'" + ", defaultMinLat='" + getDefaultMinLat() + "'"
+        + ", defaultMaxLat='" + getDefaultMaxLat() + "'" + ", minLon='" + getMinLon() + "'" + ", maxLon='" + getMaxLon()
+        + "'" + ", minLat='" + getMinLat() + "'" + ", maxLat='" + getMaxLat() + "'" + ", styles='" + getStyles() + "'"
+        + "}";
   }
 
 }
