@@ -3,16 +3,16 @@ package com.sevenmap.data.styles;
 import java.util.Objects;
 
 public class AssetStyle {
-  private Integer k;
-  private Integer v;
+  private String k;
+  private String v;
   private Integer borderThickness;
-  private Integer borderColor;
-  private Integer color;
+  private String borderColor;
+  private String color;
 
   public AssetStyle() {
   }
 
-  public AssetStyle(Integer k, Integer v, Integer borderThickness, Integer borderColor, Integer color) {
+  public AssetStyle(String k, String v, Integer borderThickness, String borderColor, String color) {
     this.k = k;
     this.v = v;
     this.borderThickness = borderThickness;
@@ -20,19 +20,19 @@ public class AssetStyle {
     this.color = color;
   }
 
-  public Integer getK() {
+  public String getK() {
     return this.k;
   }
 
-  public void setK(Integer k) {
+  public void setK(String k) {
     this.k = k;
   }
 
-  public Integer getV() {
+  public String getV() {
     return this.v;
   }
 
-  public void setV(Integer v) {
+  public void setV(String v) {
     this.v = v;
   }
 
@@ -44,28 +44,28 @@ public class AssetStyle {
     this.borderThickness = borderThickness;
   }
 
-  public Integer getBorderColor() {
+  public String getBorderColor() {
     return this.borderColor;
   }
 
-  public void setBorderColor(Integer borderColor) {
+  public void setBorderColor(String borderColor) {
     this.borderColor = borderColor;
   }
 
-  public Integer getColor() {
+  public String getColor() {
     return this.color;
   }
 
-  public void setColor(Integer color) {
+  public void setColor(String color) {
     this.color = color;
   }
 
-  public AssetStyle k(Integer k) {
+  public AssetStyle k(String k) {
     setK(k);
     return this;
   }
 
-  public AssetStyle v(Integer v) {
+  public AssetStyle v(String v) {
     setV(v);
     return this;
   }
@@ -75,12 +75,12 @@ public class AssetStyle {
     return this;
   }
 
-  public AssetStyle borderColor(Integer borderColor) {
+  public AssetStyle borderColor(String borderColor) {
     setBorderColor(borderColor);
     return this;
   }
 
-  public AssetStyle color(Integer color) {
+  public AssetStyle color(String color) {
     setColor(color);
     return this;
   }

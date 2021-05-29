@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.sevenmap.core.ui.nodes.PrototypeGui;
 import com.sevenmap.data.objsept.Portal;
+import com.sevenmap.data.styles.AssetStyle;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.colliders.PlaneCollider;
 import com.sevenmap.spinel.elements.geom.Item;
@@ -80,7 +81,12 @@ public class Demo {
         roadData.add(new Vector3f(6, 0, 4));
         roadData.add(new Vector3f(7, 0, 9));
 
-        Item road = Portal.loadRoad(roadData);
+        AssetStyle roadStyle = new AssetStyle();
+        roadStyle.setColor("#2980b9");
+        roadStyle.setBorderColor("#2c3e50");
+        roadStyle.borderThickness(12);
+
+        Item road = Portal.loadRoad(roadData, roadStyle);
         road.setParent(engine.getSceneRoot());
 
         engine.getSceneRoot().tree();
