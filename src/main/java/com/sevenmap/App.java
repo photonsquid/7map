@@ -59,8 +59,6 @@ public class App {
         private Item testElement2 = new Item(new Vector3f(0, 0, -4.0f), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1),
                         mesh);
 
-        public static Logger logger = null;
-
         public void start() {
                 init();
         }
