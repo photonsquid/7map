@@ -17,18 +17,15 @@ public class MeshTest {
     private Mesh mesh4;
     
 
+
     private Vertex[] vertices1;
     private Vertex[] vertices2;
     
-
     private int[] indices1;
     private int[] indices2;
    
-
     private List<Vertex> verticesList1;
     private List<Vertex> verticesList2;
-
-    
 
     protected List<Integer> indicesList1;
     protected List<Integer> indicesList2;
