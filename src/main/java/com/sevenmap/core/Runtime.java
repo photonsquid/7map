@@ -6,6 +6,7 @@ import com.sevenmap.core.Props.BUILD_TYPE;
 import com.sevenmap.core.map.Map;
 import com.sevenmap.core.ui.UI;
 import com.sevenmap.core.ui.events.FileLoadedEvent;
+import com.sevenmap.core.ui.events.FileOpeningEvent;
 import com.sevenmap.core.ui.events.ZoomEvent;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.math.Vector3f;
@@ -99,6 +100,10 @@ public class Runtime {
             props.zommOut();
             // update map
             map.update();
+        });
+        engine.getWindow().onEvent(new FileOpeningEvent(), () -> {
+            // TODO : unload graphical components
+            gui.ldFileChooser();
         });
     }
 }

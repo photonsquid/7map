@@ -22,7 +22,6 @@ public class UI extends Loadable {
      */
     public UI(RootNode root, Props props) {
         super(props);
-        new Style();
         mapLoadingLayer = new FileChooserGui(this, "Map Loading");
         runtimeMenus = new RuntimeMenuGui("Runtime Menus");
         searchBar = new GuiLayer("Search bar");
@@ -41,6 +40,7 @@ public class UI extends Loadable {
      */
     @Override
     public void load() {
+        new Style();
     }
 
     /**
