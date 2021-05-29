@@ -3,6 +3,7 @@ package com.sevenmap.data.objsept;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sevenmap.data.styles.AssetStyle;
 import com.sevenmap.spinel.elements.geom.Item;
 import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;
@@ -11,12 +12,12 @@ import com.sevenmap.spinel.utils.Color;
 
 public class Portal {
 
-        public static Item loadRoad(List<Vector3f> roadData) {
+        public static Item loadRoad(List<Vector3f> roadData, AssetStyle style) {
                 float roadWidth = 0.1f;
                 float borderWidth = 0.05f; // fixed atm, should be deduced from road importance
 
-                Color roadColor = new Color(255, 255, 255);
-                Color borderColor = new Color(255, 0, 0);
+                Color roadColor = new Color(style.getColor());
+                Color borderColor = new Color(style.getBorderColor());
 
                 Vector3f position = new Vector3f(0, 0, 0);
                 Vector3f rotation = new Vector3f(0, 0, 0);
