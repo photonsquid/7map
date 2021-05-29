@@ -33,7 +33,7 @@ public class Runtime {
      */
     private void armEvents() {
         engine.getWindow().onEvent(new FileLoadedEvent(), () -> {
-            String fileName = gui.getMapLoadingLayer().getFilename();
+            String fileName = gui.getMapLoadingLayer().getFilePath();
 
             // TODO: change it to @kingussopp logger
             System.out.printf("User chose file %s", fileName);

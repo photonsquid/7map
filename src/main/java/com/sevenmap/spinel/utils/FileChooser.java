@@ -33,7 +33,7 @@ public class FileChooser implements Runnable {
             }
 
         });
-        file = (fd.getFile() != null) ? new File(fd.getFile()).getAbsolutePath() : null;
+        file = fd.getDirectory() + fd.getFile();
         isClosed = true;
         fileChooserThread.interrupt();
     }

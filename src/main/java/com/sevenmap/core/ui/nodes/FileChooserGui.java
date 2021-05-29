@@ -14,7 +14,7 @@ public class FileChooserGui extends GuiNode {
     private int[] size = new int[] { 370, 95 };
     private UI parentUI;
     private FileChooser fc;
-    private String filename;
+    private String file;
 
     public FileChooserGui(UI parentUI) {
         super();
@@ -49,14 +49,14 @@ public class FileChooserGui extends GuiNode {
         if (fc != null && fc.isDone() && !parentUI.isReactive()) {
             // disable overlay (interaction allowed)
             parentUI.toggleReactivity();
-            filename = fc.getFilePath();
-            if (filename != null) {
+            file = fc.getFilePath();
+            if (file != null) {
                 Engine.getInstance().getWindow().throwEvent(new FileLoadedEvent());
             }
         }
     }
 
-    public String getFilename() {
-        return filename;
+    public String getFilePath() {
+        return file;
     }
 }
