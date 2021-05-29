@@ -8,6 +8,7 @@ import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;
 import com.sevenmap.spinel.math.Vector3f;
 
+@Deprecated
 public class Convertor {
 
         /**

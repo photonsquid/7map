@@ -1,5 +1,6 @@
 package com.sevenmap.data.objset;
 
+@Deprecated
 public class Feature {
     private boolean displayName;
     private String name;
