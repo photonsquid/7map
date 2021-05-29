@@ -1,9 +1,9 @@
-package com.sevenmap.data.parsers.osm.Elements.Tag;
+package com.sevenmap.data.parsers.osm.Structure.Tag;
 
 import java.util.Objects;
 
-import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
-import com.sevenmap.data.parsers.osm.parser.Annotations.XMLClass;
+import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.Annotations.XMLClass;
 
 @XMLClass(key = "tag")
 public class Tag {

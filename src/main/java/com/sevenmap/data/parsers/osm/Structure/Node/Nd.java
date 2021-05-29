@@ -1,8 +1,8 @@
-package com.sevenmap.data.parsers.osm.Elements.Node;
+package com.sevenmap.data.parsers.osm.Structure.Node;
 
 import java.util.Objects;
 
-import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
 
 public class Nd {
 

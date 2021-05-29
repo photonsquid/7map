@@ -1,4 +1,4 @@
-package com.sevenmap.core.map;
+package com.sevenmap.data.objsept;
 
 import java.util.Objects;
 

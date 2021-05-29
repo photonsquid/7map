@@ -1,7 +1,7 @@
 [
   {
-    "k": "highway",
-    "v": "residential",
+    "k": "type",
+    "v": "route",
     "borderThickness": 12,
     "borderColor": "#2c3e50",
     "color": "#2980b9"

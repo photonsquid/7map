@@ -1,69 +1,87 @@
 package com.sevenmap.core.map;
 
-import java.io.File;
-
 import com.sevenmap.core.Loadable;
 import com.sevenmap.core.Props;
-import com.sevenmap.data.objset.LightObj;
-import com.sevenmap.data.parsers.osm.OSM;
-import com.sevenmap.data.parsers.osm.Elements.Bounds.Bounds;
-import com.sevenmap.spinel.math.Vector3f;
+import com.sevenmap.core.Props.BUILD_TYPE;
+import com.sevenmap.data.parsers.MapParser;
 
 public class Map extends Loadable {
   private Props props;
 
-  public void load(Props props) {
-    if (props.hasToBuild()) {
-      // ========================== map loader ==========================
-      // This is supposed to be done once, when the user load a new map.
-      // ================================================================
+  public Map(Props props) {
+    this.props = props;
+  }
 
-      // Create OSM Map
-      File n7Map = new File(props.getMapFile());
-      OSM OSMMap = new OSM(parseBounds(), n7Map);
+  /**
+   * run {@link #build()} if {@link #props}.hasToBuild is not
+   * {@link BUILD_TYPE.NULL}. Then display the map from its default zoom level.
+   */
+  public void load() {
+    // =============================== map builder ================================
+    // This is supposed to be done once, when the user load a new map.
+    // Build a plainMap from a file.
+    // ============================================================================
+    build();
+
+    // Here, there is supposed to be a map loaded in database whose setup are in
+    // props.
+
+    // ================================ map loader ================================
+    // This is supposed to be done once, when the user load a new map.
+    // ============================================================================
+  }
+
+  /**
+   * This method is similar to {@link #load}, but props are reloaded from
+   * parameter
+   * 
+   * @param props new props to affect to the Map object
+   */
+  public void load(Props props) {
+    this.props = props;
+    load();
+  }
+
+  /**
+   * TODO
+   */
+  public void update() {
+    // TODO
+  }
+
+  /**
+   * Build a map from {@code props.MapFile} if {@code props.hasToBuild} is true.
+   * <br>
+   * Set {@code props.hasToBuild} to false.
+   */
+  public void build() {
+    if (props.hasToBuild().equals(Props.BUILD_TYPE.FROM_FILE) || props.hasToBuild().equals(Props.BUILD_TYPE.FROM_URL)) {
+
+      // Create an OSM Map
+      MapParser mapSource = MapParser.GenerateRightMapType(props);
 
       // Download new map
-      OSMMap.downloadMap();
+      mapSource.downloadMap();
 
       // Parse data
-      OSMMap.parse();
+      mapSource.parse();
 
-      // Convert into optimized files
-      LightObj ltObj = new LightObj(OSMMap, props);
-      ltObj.parse();
+      // Build map
+      mapSource.build();
 
       // Store this object to the database
-      ltObj.store();
+      mapSource.store();
     }
-
   }
 
-  public static Vector3f GeoCoord2SpinelCoord(GeographicCoord coords) {
-    Double x_proj = Math.cos(0.0) * (coords.getLat());
-    Double y_proj = coords.getLat();
+  // <--------------------------- Getter and setters --------------------------->
 
-    Float x = x_proj.floatValue();
-    Float y = y_proj.floatValue();
-    Float z = 0f;
-
-    return new Vector3f(x, y, z);
+  public Props getProps() {
+    return this.props;
   }
 
-  public static GeographicCoord SpinelCoord2GeoCoord(Vector3f vect) {
-    Double lat = (double) vect.getX();
-    Double lon = (double) vect.getY();
-    return new GeographicCoord(lat, lon);
-  }
-
-  private Bounds parseBounds() {
-
-    Double minLon = props.getMinLon();
-    Double maxLon = props.getMaxLon();
-    Double minLat = props.getMinLat();
-    Double maxLat = props.getMaxLat();
-
-    // Return them
-    return new Bounds(minLon, maxLon, minLat, maxLat);
+  public void setProps(Props props) {
+    this.props = props;
   }
 
 }

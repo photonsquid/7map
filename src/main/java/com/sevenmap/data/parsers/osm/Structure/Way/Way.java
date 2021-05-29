@@ -1,13 +1,13 @@
-package com.sevenmap.data.parsers.osm.Elements.Way;
+package com.sevenmap.data.parsers.osm.Structure.Way;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import com.sevenmap.data.parsers.osm.Elements.Metadata.Metadata;
-import com.sevenmap.data.parsers.osm.Elements.Node.Nd;
-import com.sevenmap.data.parsers.osm.Elements.Tag.Tag;
-import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
-import com.sevenmap.data.parsers.osm.parser.Annotations.XMLElement;
+import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.Annotations.XMLElement;
+import com.sevenmap.data.parsers.osm.Structure.Metadata.Metadata;
+import com.sevenmap.data.parsers.osm.Structure.Node.Nd;
+import com.sevenmap.data.parsers.osm.Structure.Tag.Tag;
 
 public class Way {
 

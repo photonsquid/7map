@@ -1,8 +1,8 @@
-package com.sevenmap.data.parsers.osm.Elements.Bounds;
+package com.sevenmap.data.parsers.osm.Structure.Bounds;
 
 import java.util.Objects;
 
-import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
 
 public class Bounds {
 

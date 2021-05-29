@@ -1,51 +1,55 @@
 package com.sevenmap.data.styles;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Styles {
-  private Integer st;
+public class Styles extends ArrayList<Styles> {
+  private AssetStyle stlyes;
 
   public Styles() {
   }
 
-  public Styles(Integer st) {
-    this.st = st;
+  public Styles(AssetStyle stlyes) {
+    this.stlyes = stlyes;
   }
 
-  public Integer getSt() {
-    return this.st;
+  public AssetStyle getStlyes() {
+    return this.stlyes;
   }
 
-  public void setSt(Integer st) {
-    this.st = st;
+  public void setStlyes(AssetStyle stlyes) {
+    this.stlyes = stlyes;
   }
 
-  public Styles st(Integer st) {
-    setSt(st);
+  public Styles stlyes(AssetStyle stlyes) {
+    setStlyes(stlyes);
     return this;
   }
 
+  public AssetStyle findStyle(String type) {
+    // TODO
+    return new AssetStyle();
+  }
+
   @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Styles)) {
-            return false;
-        }
-        Styles styles = (Styles) o;
-        return Objects.equals(st, styles.st);
+  public boolean equals(Object o) {
+    if (o == this)
+      return true;
+    if (!(o instanceof Styles)) {
+      return false;
+    }
+    Styles styles = (Styles) o;
+    return Objects.equals(stlyes, styles.stlyes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(st);
+    return Objects.hashCode(stlyes);
   }
 
   @Override
   public String toString() {
-    return "{" +
-      " st='" + getSt() + "'" +
-      "}";
+    return "{" + " stlyes='" + getStlyes() + "'" + "}";
   }
 
 }

@@ -1,15 +1,15 @@
-package com.sevenmap.data.parsers.osm.Elements;
+package com.sevenmap.data.parsers.osm.Structure;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-import com.sevenmap.data.parsers.osm.Elements.Bounds.Bounds;
-import com.sevenmap.data.parsers.osm.Elements.Node.Node;
-import com.sevenmap.data.parsers.osm.Elements.Relation.Relation;
-import com.sevenmap.data.parsers.osm.Elements.Way.Way;
-import com.sevenmap.data.parsers.osm.parser.Annotations.XMLAttribute;
-import com.sevenmap.data.parsers.osm.parser.Annotations.XMLClass;
-import com.sevenmap.data.parsers.osm.parser.Annotations.XMLElement;
+import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
+import com.sevenmap.data.parsers.osm.Annotations.XMLClass;
+import com.sevenmap.data.parsers.osm.Annotations.XMLElement;
+import com.sevenmap.data.parsers.osm.Structure.Bounds.Bounds;
+import com.sevenmap.data.parsers.osm.Structure.Node.Node;
+import com.sevenmap.data.parsers.osm.Structure.Relation.Relation;
+import com.sevenmap.data.parsers.osm.Structure.Way.Way;
 
 @XMLClass(key = "osm")
 public class Root {
