@@ -25,12 +25,6 @@ package com.sevenmap {
         }
     }
     package exceptions {
-        class IllegalInstanceException {
-        }
-        class IncorrectChildTypeError {
-        }
-        class InitError {
-        }
     }
 
     package spinel {
@@ -52,11 +46,6 @@ package com.sevenmap {
         }
     }
 }
-
-
-
-
-
 
 
 @enduml
