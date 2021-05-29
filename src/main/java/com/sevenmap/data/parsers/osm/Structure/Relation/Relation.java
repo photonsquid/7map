@@ -5,11 +5,12 @@ import java.util.Objects;
 
 import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
 import com.sevenmap.data.parsers.osm.Annotations.XMLElement;
+import com.sevenmap.data.parsers.osm.Structure.HasTag;
 import com.sevenmap.data.parsers.osm.Structure.Member.Member;
 import com.sevenmap.data.parsers.osm.Structure.Metadata.Metadata;
 import com.sevenmap.data.parsers.osm.Structure.Tag.Tag;
 
-public class Relation {
+public class Relation implements HasTag {
   @XMLAttribute(unique = true)
   private long id;
   @XMLAttribute

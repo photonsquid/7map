@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.sevenmap.core.Props;
+import com.sevenmap.data.objsept.GeographicCoord;
+import com.sevenmap.data.objsept.PlainMap;
 import com.sevenmap.data.objsept.Portal;
 import com.sevenmap.data.parsers.MapParser;
 import com.sevenmap.data.parsers.json.JsonParser;
@@ -21,11 +23,14 @@ import com.sevenmap.data.parsers.osm.Annotations.XMLElement;
 import com.sevenmap.data.parsers.osm.Structure.Root;
 import com.sevenmap.data.parsers.osm.Structure.Member.Member;
 import com.sevenmap.data.parsers.osm.Structure.Metadata.Metadata;
+import com.sevenmap.data.parsers.osm.Structure.Node.Nd;
 import com.sevenmap.data.parsers.osm.Structure.Node.Node;
 import com.sevenmap.data.parsers.osm.Structure.Relation.Relation;
 import com.sevenmap.data.parsers.osm.Structure.Way.Way;
 import com.sevenmap.data.styles.AssetStyle;
 import com.sevenmap.data.styles.Styles;
+import com.sevenmap.spinel.elements.geom.Item;
+import com.sevenmap.spinel.math.Vector3f;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.jdom.Element;
@@ -269,14 +274,18 @@ public class OSM extends MapParser {
     HashMap<Long, Relation> rels = rt.getRelations();
     HashMap<Long, Way> ways = rt.getWays();
     HashMap<Long, Node> nodes = rt.getNodes();
+    generatedMap = new PlainMap<Long, Item>();
 
     // Parse styles.json
-    if (props.getStyles() == null) {
-      this.props.setStyles(JsonParser.parse(props.getSettingFile(), Styles.class));
+    if (props.getStyles().size() == 0) {
+      String filePath = props.getAppDataPath() + props.getSettingFile();
+      Styles st = JsonParser.parse(filePath, Styles.class);
+      this.props.setStyles(st);
     }
 
     // 1. iterate on all relations and build them
     buildRelations(rels);
+    buildWays(ways);
     // Construire =
     // Convert points from lat long to (x, y, z)
     // Parse styles.json and apply it to each objects
@@ -302,7 +311,7 @@ public class OSM extends MapParser {
     // 1. Itérer sur toutes relations et les construire :
     // 1.1 construire les routes
     // 1.2 si les routes ou points utilisés n'ont pas d'autres références, ils
-    // doivent être supprimés du root pour ne pas être rendu deux fois.
+    // doivent être supprimés de la racine pour ne pas être rendu deux fois.
     for (Map.Entry<Long, Relation> entry : rels.entrySet()) {
       Long id = entry.getKey();
       Relation rel = entry.getValue();
@@ -310,16 +319,19 @@ public class OSM extends MapParser {
       String type = rel.findTag("type").getValue();
 
       AssetStyle st = props.getStyles().findStyle(type);
-      ArrayList<Member> mbs = rel.getMembers();
 
-      Portal points = new Portal();
+      // We don't want to handle objects that we didn't implement yet
+      if (st != null) {
 
-      for (Member mb : mbs) {
-        // Retrieve the member in the actual Root object
-        Object obj = findObject(rt, mb.getType(), mb.getRef());
-        if (obj instanceof Way) {
-          Way wy = (Way) obj;
-          buildWay(wy, st);
+        ArrayList<Member> mbs = rel.getMembers();
+
+        for (Member mb : mbs) {
+          // Retrieve the member in the actual Root object
+          Object obj = findObject(rt, mb.getType(), mb.getRef());
+          if (obj instanceof Way) {
+            Way wy = (Way) obj;
+            buildWay(wy);
+          }
         }
       }
 
@@ -327,11 +339,45 @@ public class OSM extends MapParser {
 
   }
 
-  private void buildWays(Root rt) {
+  private void buildWays(HashMap<Long, Way> ways) {
+    for (Map.Entry<Long, Way> entry : ways.entrySet()) {
+      Long id = entry.getKey();
+      Way wy = entry.getValue();
+
+      String type = "route";
+
+      AssetStyle st = props.getStyles().findStyle(type);
+
+      // We don't want to handle objects that we didn't implemented yet
+      if (st != null) {
+
+        ArrayList<Nd> nds = wy.getNodes();
+
+        ArrayList<Vector3f> listPoints = new ArrayList<Vector3f>();
+        for (Nd nb : nds) {
+          // Retrieve the member in the actual Root object
+          Object obj = findObject(rt, "node", nb.getRef());
+          if (obj instanceof Node) {
+            Node node = (Node) obj;
+            GeographicCoord coords = new GeographicCoord(node.getLat(), node.getLon());
+            listPoints.add(GeoCoord2SpinelCoord(coords));
+          }
+        }
+        if (listPoints.get(0).equals(listPoints.get(listPoints.size() - 1))) {
+          // C'est un polygone
+        } else {
+          generatedMap.put(id, Portal.loadRoad(listPoints, st));
+        }
+      }
+
+    }
+  }
+
+  private void buildWay(Way wy) {
 
   }
 
-  private void buildWay(Way wy, AssetStyle st) {
+  private void buildNode(Node nd) {
 
   }
 
@@ -403,7 +449,8 @@ public class OSM extends MapParser {
     field = getProperty(obj, propertyName, field);
 
     // TODO handle not found
-    return field.get(keyV);
+    V a = field.get(keyV);
+    return a;
 
   }
 

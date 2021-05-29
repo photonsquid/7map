@@ -5,11 +5,12 @@ import java.util.Objects;
 
 import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
 import com.sevenmap.data.parsers.osm.Annotations.XMLElement;
+import com.sevenmap.data.parsers.osm.Structure.HasTag;
 import com.sevenmap.data.parsers.osm.Structure.Metadata.Metadata;
 import com.sevenmap.data.parsers.osm.Structure.Node.Nd;
 import com.sevenmap.data.parsers.osm.Structure.Tag.Tag;
 
-public class Way {
+public class Way implements HasTag{
 
   @XMLAttribute(unique = true)
   private long id;
@@ -60,6 +61,21 @@ public class Way {
 
   public void setTags(ArrayList<Tag> tags) {
     this.tags = tags;
+  }
+
+  /**
+   * find a tag by its key
+   * 
+   * @param key key of the tag you're searching for
+   * @return first Tag in list with key, null if not found
+   */
+  public Tag findTag(String key) {
+    for (Tag tag : this.tags) {
+      if (tag.getKey().equals(key)) {
+        return tag;
+      }
+    }
+    return null;
   }
 
   public Way id(long id) {
