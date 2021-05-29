@@ -33,7 +33,11 @@ public class FileChooser implements Runnable {
             }
 
         });
-        file = fd.getDirectory() + fd.getFile();
+        if (fd.getDirectory() == null || fd.getFile() == null) {
+            file = null;
+        } else {
+            file = fd.getDirectory() + fd.getFile();
+        }
         isClosed = true;
         fileChooserThread.interrupt();
     }
