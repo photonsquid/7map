@@ -1,9 +1,9 @@
 package com.sevenmap.data.parsers.osm;
 
 import java.io.File;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +40,6 @@ import org.jdom.input.SAXBuilder;
 
 public class OSM extends MapParser {
   private Root rt;
-  private File mapFile;
 
   private static org.jdom.Document doc;
 
@@ -50,12 +49,6 @@ public class OSM extends MapParser {
 
   public OSM(Props props) {
     super(props);
-    try {
-      this.mapFile = new File(props.getMapFile().toURI());
-    } catch (URISyntaxException e) {
-      System.out.printf("Mauvaise URL (%s)\n", props.getMapFile().toString());
-      e.printStackTrace();
-    }
   }
 
   // <-------------------------------- Code logic ------------------------------->
@@ -70,10 +63,18 @@ public class OSM extends MapParser {
     // Open document
     SAXBuilder sxb = new SAXBuilder();
     try {
-      doc = sxb.build(mapFile);
+      // if it is a reboot, load demo from jar file:
+      if (props.getMapFile() == null) {
+
+        InputStream is = getClass().getResourceAsStream(props.getDefaultMapFile());
+        doc = sxb.build(is);
+      } else {
+        File mapFile = new File(props.getMapFile());
+        doc = sxb.build(mapFile);
+      }
     } catch (Exception e) {
       // TODO: handle error
-      System.out.printf("erreur. chemin invalide (%s)\n", mapFile.getAbsolutePath());
+      System.out.printf("erreur. chemin invalide (%s)\n", props.getMapFile());
     }
 
     // Parse
