@@ -13,7 +13,7 @@ import org.apache.commons.cli.Options;
 
 public class CLI {
 
-  public static Props parseArgs(String[] args) {
+  public static void parseArgs(String[] args, Props props) {
 
     CommandLine commandLine = null;
     Option opBuilder = Option.builder("B").required(false).desc("Force rebuild map from file.").longOpt("build")
@@ -63,8 +63,6 @@ public class CLI {
       System.out.println(exception.getMessage());
     }
 
-    Props props = new Props();
-
     if (commandLine.hasOption("minLon")) {
       props.setMinLon(Double.parseDouble(commandLine.getOptionValue("minLon")));
       props.setHasToBuild(BUILD_TYPE.FROM_URL);
@@ -105,8 +103,6 @@ public class CLI {
     if (commandLine.hasOption("B")) {
       props.setHasToBuild(BUILD_TYPE.FROM_FILE);
     }
-
-    return props;
   }
 
 }

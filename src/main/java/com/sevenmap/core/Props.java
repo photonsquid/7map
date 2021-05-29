@@ -55,6 +55,14 @@ public class Props {
 
     this.zoom = 1; // unzoomed to the max
     this.AppDataPath = System.getProperty("user.home") + "/.7map/";
+
+    SettingFile = "settings.json";
+    MapFile = null;
+    DatabseURL = "";
+    hasToBuild = BUILD_TYPE.NONE;
+
+    styles = new Styles();
+
   }
 
   // <-------------------------------- Code logic ------------------------------->

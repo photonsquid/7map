@@ -6,8 +6,6 @@ import com.sevenmap.core.Props.BUILD_TYPE;
 import com.sevenmap.data.parsers.MapParser;
 
 public class Map extends Loadable {
-  private Props props;
-
   public Map(Props props) {
     super(props);
   }

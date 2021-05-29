@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 
 import com.sevenmap.core.Props;
@@ -45,35 +46,36 @@ public abstract class MapParser extends Parser {
    */
   final public void downloadMap() {
     // Download file from any url
-    String fileName = props.getMapFile();
-    if (fileName == null) {
-      fileName = getFileNameFromUrl(props.getDownloadURL());
-    }
-    String filePath = props.getAppDataPath() + "maps/" + fileName;
-    File mapFile = new File(filePath);
-
-    while (mapFile.exists()) {
-      Double nb = Math.random() * 9;
-      filePath = filePath + nb;
-      mapFile = new File(filePath);
-    }
-
-    try {
-      mapFile.createNewFile();
-      FileOutputStream fileOS = new FileOutputStream(mapFile);
-      BufferedInputStream inputStream = new BufferedInputStream(props.getDownloadURL().openStream());
-      byte data[] = new byte[1024];
-      int byteContent;
-      while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
-        fileOS.write(data, 0, byteContent);
+    if (props.hasToBuild().equals(BUILD_TYPE.FROM_URL)) {
+      String fileName = props.getMapFile();
+      if (fileName == null) {
+        fileName = getFileNameFromUrl(props.getDownloadURL());
       }
-    } catch (IOException ex) {
+      String filePath = props.getAppDataPath() + "maps/" + fileName;
+      File mapFile = new File(filePath);
+
+      while (mapFile.exists()) {
+        Double nb = Math.random() * 9;
+        filePath = filePath + nb;
+        mapFile = new File(filePath);
+      }
+
+      try {
+        mapFile.createNewFile();
+        FileOutputStream fileOS = new FileOutputStream(mapFile);
+        BufferedInputStream inputStream = new BufferedInputStream(props.getDownloadURL().openStream());
+        byte data[] = new byte[1024];
+        int byteContent;
+        while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
+          fileOS.write(data, 0, byteContent);
+        }
+      } catch (IOException ex) {
+      }
       // TODO handle exception
     }
-
   }
 
-  public static void generateURL() throws MalformedURLException {
+  public static URL generateURL(Props props) throws MalformedURLException {
     // TODO change it to unimplementedMethodException
     // note pour @seba1204 :
     // Je ne peux pas mettre une méthode static et abstraite...

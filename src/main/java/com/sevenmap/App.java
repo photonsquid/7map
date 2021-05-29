@@ -10,9 +10,11 @@ import com.sevenmap.core.cli.CLI;
 public class App {
 
   public static void main(String[] args) {
+    // Create new props
+    Props props = new Props();
 
     // Parse args from CLI
-    Props props = CLI.parseArgs(args);
+    CLI.parseArgs(args, props);
 
     // Launch app
     Runtime rt = new Runtime();

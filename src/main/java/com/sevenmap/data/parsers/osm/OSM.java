@@ -19,7 +19,6 @@ import com.sevenmap.data.parsers.json.JsonParser;
 import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
 import com.sevenmap.data.parsers.osm.Annotations.XMLElement;
 import com.sevenmap.data.parsers.osm.Structure.Root;
-import com.sevenmap.data.parsers.osm.Structure.Bounds.Bounds;
 import com.sevenmap.data.parsers.osm.Structure.Member.Member;
 import com.sevenmap.data.parsers.osm.Structure.Metadata.Metadata;
 import com.sevenmap.data.parsers.osm.Structure.Node.Node;
@@ -36,8 +35,6 @@ import org.jdom.input.SAXBuilder;
 public class OSM extends MapParser {
   private Root rt;
   private File mapFile;
-  private Bounds bd;
-  private Props props;
 
   private static org.jdom.Document doc;
 
@@ -46,12 +43,7 @@ public class OSM extends MapParser {
   }
 
   public OSM(Props props) {
-    Double minLon = props.getMinLon();
-    Double maxLon = props.getMaxLon();
-    Double minLat = props.getMinLat();
-    Double maxLat = props.getMaxLat();
-
-    this.bd = new Bounds(minLon, maxLon, minLat, maxLat);
+    super(props);
     this.mapFile = new File(props.getMapFile());
   }
 
