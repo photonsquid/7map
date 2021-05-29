@@ -64,6 +64,7 @@ public class OSM extends MapParser {
     // Open document
     SAXBuilder sxb = new SAXBuilder();
     try {
+      System.out.println(mapFile.getAbsolutePath());
       doc = sxb.build(mapFile);
     } catch (Exception e) {
       // TODO: handle error
@@ -360,7 +361,8 @@ public class OSM extends MapParser {
           if (obj instanceof Node) {
             Node node = (Node) obj;
             GeographicCoord coords = new GeographicCoord(node.getLat(), node.getLon());
-            listPoints.add(GeoCoord2SpinelCoord(coords));
+            Vector3f v3 = GeoCoord2SpinelCoord(coords);
+            listPoints.add(v3);
           }
         }
         if (listPoints.get(0).equals(listPoints.get(listPoints.size() - 1))) {

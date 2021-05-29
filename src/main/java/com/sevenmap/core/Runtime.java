@@ -1,17 +1,23 @@
 package com.sevenmap.core;
 
+import java.util.HashMap;
+
 import com.sevenmap.core.Props.BUILD_TYPE;
 import com.sevenmap.core.map.Map;
 import com.sevenmap.core.ui.UI;
 import com.sevenmap.core.ui.events.FileLoadedEvent;
 import com.sevenmap.core.ui.events.ZoomEvent;
 import com.sevenmap.spinel.Engine;
+import com.sevenmap.spinel.math.Vector3f;
+
+import org.lwjgl.glfw.GLFW;
 
 public class Runtime {
     private Engine engine;
     private UI gui;
     private Map map;
     private Props props;
+    private HashMap<Integer, Runnable> keybinds = new HashMap<>();
 
     public void load(Props props) {
         this.props = props;
@@ -25,7 +31,36 @@ public class Runtime {
         gui.ldFileChooser();
         armEvents();
 
+        engine.getSceneRoot().tree();
+        engine.getGuiRoot().tree();
+        setup();
+        engine.getCamera().setRot(new Vector3f(-90, 0, 0));
+        engine.getCamera().setPos(new Vector3f(0, 10, 0));
         engine.start();
+    }
+
+    private void setup() {
+        keybinds.put(GLFW.GLFW_KEY_RIGHT, () -> engine.getCamera()
+                .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceZ().divide(8))));
+        keybinds.put(GLFW.GLFW_KEY_LEFT, () -> engine.getCamera()
+                .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceZ().divide(8))));
+        keybinds.put(GLFW.GLFW_KEY_Q, () -> engine.getCamera()
+                .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceX().divide(8))));
+        keybinds.put(GLFW.GLFW_KEY_W, () -> engine.getCamera()
+                .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceX().divide(8))));
+
+        keybinds.put(GLFW.GLFW_KEY_UP, () -> engine.getCamera()
+                .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceY().divide(8))));
+        keybinds.put(GLFW.GLFW_KEY_DOWN, () -> engine.getCamera()
+                .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceY().divide(8))));
+
+        // stopping the engine
+        keybinds.put(GLFW.GLFW_KEY_ESCAPE, () -> engine.stop());
+
+        // apply key bindings
+        for (java.util.Map.Entry<Integer, Runnable> entry : keybinds.entrySet()) {
+            engine.getWindow().onKeyDown(entry.getKey(), entry.getValue());
+        }
     }
 
     /**

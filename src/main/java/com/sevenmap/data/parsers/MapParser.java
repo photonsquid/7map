@@ -110,11 +110,12 @@ public abstract class MapParser extends Parser {
    */
   public static Vector3f GeoCoord2SpinelCoord(GeographicCoord coords) {
     Double x_proj = Math.cos(0.0) * (coords.getLat());
-    Double y_proj = coords.getLat();
-
-    Float x = x_proj.floatValue();
-    Float y = y_proj.floatValue();
-    Float z = 0f;
+    Double y_proj = coords.getLon();
+    Float xtemp = x_proj.floatValue() - 43.60f;
+    Float ytemp = y_proj.floatValue() - 1.45f;
+    Float x = 10000 * xtemp - 22;
+    Float y = 0f;
+    Float z = 10000 * ytemp - 35;
 
     return new Vector3f(x, y, z);
   }
@@ -127,7 +128,7 @@ public abstract class MapParser extends Parser {
    */
   public static GeographicCoord SpinelCoord2GeoCoord(Vector3f vect) {
     Double lat = (double) vect.getX();
-    Double lon = (double) vect.getY();
+    Double lon = (double) vect.getZ();
     return new GeographicCoord(lat, lon);
   }
 

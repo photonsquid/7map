@@ -68,18 +68,14 @@ public class Demo {
         surfaceCollider = new PlaneCollider(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
         surfaceCollider.setParent(surfaceItem);
         surfaceItem.setParent(engine.getSceneRoot());
-        surfaceItem.hide();
+        // surfaceItem.hide();
         createGui();
         // debug
         // Collider.toggleDebug();
 
         List<Vector3f> roadData = new ArrayList<>();
-        roadData.add(new Vector3f(1, 0, 1));
-        roadData.add(new Vector3f(1, 0, 2));
-        roadData.add(new Vector3f(2, 0, 3));
-        roadData.add(new Vector3f(3, 0, 3));
-        roadData.add(new Vector3f(6, 0, 4));
-        roadData.add(new Vector3f(7, 0, 9));
+        roadData.add(new Vector3f(0, 0, 0));
+        roadData.add(new Vector3f(4000, 0, 6000));
 
         AssetStyle roadStyle = new AssetStyle();
         roadStyle.setColor("#2980b9");
