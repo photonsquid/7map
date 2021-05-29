@@ -9,9 +9,8 @@ public abstract class Loadable {
   }
 
   /**
-   * An object extending from {@code Loadable} must define a load method.
-   * 
-   * @param cl command line arguments
+   * An object extending from {@code Loadable} must define a load method. <br>
+   * But what is the point if you don't use it ?
    */
   public abstract void load();
 

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sevenmap.core.Props;
-import com.sevenmap.data.objsept.Convertor;
+import com.sevenmap.data.objsept.Portal;
 import com.sevenmap.data.parsers.MapParser;
 import com.sevenmap.data.parsers.json.JsonParser;
 import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
@@ -320,7 +320,7 @@ public class OSM extends MapParser {
       AssetStyle st = props.getStyles().findStyle(type);
       ArrayList<Member> mbs = rel.getMembers();
 
-      Convertor points = new Convertor();
+      Portal points = new Portal();
 
       for (Member mb : mbs) {
         // Retrieve the member in the actual Root object

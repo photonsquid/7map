@@ -5,10 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import com.sevenmap.core.Props;
@@ -23,6 +19,7 @@ import org.apache.commons.io.FilenameUtils;
 
 public abstract class MapParser extends Parser {
 
+  // <-------------------------------- Attibutes -------------------------------->
   protected Props props;
   protected PlainMap generatedMap;
 
@@ -36,13 +33,31 @@ public abstract class MapParser extends Parser {
   // <-------------------------------- Code logic ------------------------------->
 
   /**
-   * Download a map from an URL<br>
-   * {@code downloadURL} has to be set in props !
+   * <ul>
+   * <li>Download a map from an URL</li>
+   * <li>{@code props.downloadURL} has to be set in props !</li>
+   * <li>{@code props.hasToBuild} has to be set to
+   * {@code Props.BUILD_TYPE.FROM_URL} !</li>
+   * <li>Download it into {@code props.getAppDataPath() + "maps/"}</li>
+   * <li>if {@code Props.MapFile} is null, or the file already exists use name
+   * from server.</li>
+   * </ul>
    */
   final public void downloadMap() {
-    // Download file from OSM API
-    String fileName = props.getAppDataPath() + "maps/" + FilenameUtils.getName(props.getDownloadURL().getPath());
-    File mapFile = new File(fileName);
+    // Download file from any url
+    String fileName = props.getMapFile();
+    if (fileName == null) {
+      fileName = getFileNameFromUrl(props.getDownloadURL());
+    }
+    String filePath = props.getAppDataPath() + "maps/" + fileName;
+    File mapFile = new File(filePath);
+
+    while (mapFile.exists()) {
+      Double nb = Math.random() * 9;
+      filePath = filePath + nb;
+      mapFile = new File(filePath);
+    }
+
     try {
       mapFile.createNewFile();
       FileOutputStream fileOS = new FileOutputStream(mapFile);
@@ -78,7 +93,10 @@ public abstract class MapParser extends Parser {
    * Has to be exectuted after parsing and building map !
    */
   final public void store() {
+    if (generatedMap != null) {
 
+      // TODO
+    }
   };
 
   /**
@@ -125,26 +143,7 @@ public abstract class MapParser extends Parser {
       extension = FilenameUtils.getExtension(props.getMapFile());
 
     } else if (props.hasToBuild().equals(BUILD_TYPE.FROM_URL)) {
-      try {
-
-        URL obj = props.getDownloadURL();
-        URLConnection conn = obj.openConnection();
-        Map<String, List<String>> map = conn.getHeaderFields();
-
-        List<String> contentDisposition = map.get("Content-Disposition");
-        if (contentDisposition == null) {
-          // TODO: throw error : it is not a downloadable file;
-        } else {
-          for (String header : contentDisposition) {
-            if (header.startsWith("filename=")) {
-              extension = FilenameUtils.getExtension(header);
-            }
-          }
-        }
-
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      extension = FilenameUtils.getExtension(getFileNameFromUrl(props.getDownloadURL()));
     }
 
     if (extension == null) {
@@ -166,7 +165,6 @@ public abstract class MapParser extends Parser {
   }
 
   // <--------------------------- Getter and setters ---------------------------->
-
   public Props getProps() {
     return this.props;
   }
@@ -181,7 +179,6 @@ public abstract class MapParser extends Parser {
   }
 
   // <---------------------------- Object overrides ----------------------------->
-
   @Override
   public String toString() {
     return "{" + " props='" + getProps() + "'" + "}";

@@ -1,6 +1,10 @@
 package com.sevenmap.data.parsers;
 
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Map;
 
 public abstract class Parser {
 
@@ -87,6 +91,37 @@ public abstract class Parser {
     }
 
     return returnValue;
+  }
+
+  /**
+   * Ask the server for the filename of the file to download from the url
+   * 
+   * @param url giving a file when downloading
+   * @return filename of the file to download from the url, null if any
+   */
+  protected static String getFileNameFromUrl(URL url) {
+    String filename = null;
+    try {
+      URLConnection conn = url.openConnection();
+      Map<String, List<String>> map = conn.getHeaderFields();
+
+      List<String> contentDisposition = map.get("Content-Disposition");
+      if (contentDisposition == null) {
+        // TODO: throw error : it is not a downloadable file;
+      } else {
+        for (String header : contentDisposition) {
+          String tag = "filename=";
+          if (header.startsWith(tag)) {
+            filename = header.substring(tag.length());
+          }
+        }
+      }
+
+    } catch (Exception e) {
+      // TODO: handle errors
+      e.printStackTrace();
+    }
+    return filename;
   }
 
 }
