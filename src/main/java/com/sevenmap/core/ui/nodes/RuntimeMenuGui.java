@@ -1,6 +1,7 @@
 package com.sevenmap.core.ui.nodes;
 
 import com.sevenmap.core.ui.events.DbSearchEvent;
+import com.sevenmap.core.ui.events.FileOpeningEvent;
 import com.sevenmap.core.ui.events.ZoomEvent;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.gui.GuiNode;
@@ -56,10 +57,13 @@ public class RuntimeMenuGui extends GuiNode {
         if (ImGui.beginMainMenuBar()) {
             if (ImGui.beginMenu("File")) {
                 if (ImGui.menuItem("New")) {
+                    System.out.println("Not implemented yet");
                 }
                 if (ImGui.menuItem("Open")) {
+                    Engine.getInstance().getWindow().throwEvent(new FileOpeningEvent());
                 }
                 if (ImGui.menuItem("Save")) {
+                    System.out.println("Not implemented yet");
                 }
                 if (ImGui.menuItem("Exit")) {
                     Engine.getInstance().stop();

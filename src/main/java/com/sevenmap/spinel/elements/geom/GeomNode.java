@@ -15,6 +15,9 @@ public class GeomNode extends Node {
     public GeomNode(Vector3f position, Vector3f rotation, String name) {
         this.position = position;
         this.rotation = rotation;
+        /**
+         * the flag is true if the Node is instanciated before the Engine has started
+         */
         this.flag = !(Engine.getInstance() != null && Engine.getInstance().isRunning());
         this.name = name;
     }
