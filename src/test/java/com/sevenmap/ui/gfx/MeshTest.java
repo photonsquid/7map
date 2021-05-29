@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 import java.util.List;
 import java.util.Arrays;
 import com.sevenmap.ui.math.Vector3f;
