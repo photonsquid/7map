@@ -8,14 +8,11 @@ public abstract class Loadable {
     this.props = props;
   }
 
-  public Loadable() {
-  }
-
   /**
    * An object extending from {@code Loadable} must define a load method.
    * 
    * @param cl command line arguments
    */
-  public abstract void load(Props props);
+  public abstract void load();
 
 }

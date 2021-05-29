@@ -9,13 +9,14 @@ public class Map extends Loadable {
   private Props props;
 
   public Map(Props props) {
-    this.props = props;
+    super(props);
   }
 
   /**
    * run {@link #build()} if {@link #props}.hasToBuild is not
    * {@link BUILD_TYPE.NULL}. Then display the map from its default zoom level.
    */
+  @Override
   public void load() {
     // =============================== map builder ================================
     // This is supposed to be done once, when the user load a new map.
@@ -29,17 +30,6 @@ public class Map extends Loadable {
     // ================================ map loader ================================
     // This is supposed to be done once, when the user load a new map.
     // ============================================================================
-  }
-
-  /**
-   * This method is similar to {@link #load}, but props are reloaded from
-   * parameter
-   * 
-   * @param props new props to affect to the Map object
-   */
-  public void load(Props props) {
-    this.props = props;
-    load();
   }
 
   /**

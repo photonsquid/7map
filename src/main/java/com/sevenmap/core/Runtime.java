@@ -16,11 +16,11 @@ public class Runtime {
     public void load(Props props) {
 
         engine = new Engine();
-        gui = new UI(engine.getGuiRoot());
+        gui = new UI(engine.getGuiRoot(), props);
         map = new Map(props);
 
-        map.load(props);
-        gui.load(props);
+        map.load();
+        gui.load();
         gui.ldFileChooser();
         armEvents();
 

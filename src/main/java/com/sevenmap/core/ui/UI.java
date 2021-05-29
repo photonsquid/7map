@@ -20,7 +20,8 @@ public class UI extends Loadable {
      * 
      * @param engine The target engine
      */
-    public UI(RootNode root) {
+    public UI(RootNode root, Props props) {
+        super(props);
         new Style();
         mapLoadingLayer = new FileChooserGui(this, "Map Loading");
         runtimeMenus = new RuntimeMenuGui("Runtime Menus");
@@ -38,8 +39,8 @@ public class UI extends Loadable {
     /**
      * {@inheritDoc}
      */
-    public void load(Props props) {
-        this.props = props;
+    @Override
+    public void load() {
     }
 
     /**
