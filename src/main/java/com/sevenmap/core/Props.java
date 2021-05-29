@@ -1,8 +1,6 @@
 package com.sevenmap.core;
 
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 import com.sevenmap.data.styles.Styles;
@@ -14,8 +12,8 @@ public class Props {
   }
 
   private String SettingFile;
-  private URL MapFile;
-  private URL defaultMapFile;
+  private String MapFile;
+  private String defaultMapFile;
   private String AppDataPath;
   private String OSM_API_ROOT_URL;
   private String DatabseURL;
@@ -45,7 +43,7 @@ public class Props {
    * It will have a method to load it from a local file.
    */
   public Props() {
-    this.defaultMapFile = this.getClass().getClassLoader().getResource("maps/osm/n7.osm");
+    this.defaultMapFile = "/maps/osm/n7.osm";
     this.OSM_API_ROOT_URL = "https://api.openstreetmap.org/api/0.6/map?bbox=";
 
     this.defaultMinLon = 1.45338;
@@ -94,34 +92,86 @@ public class Props {
     this.AppDataPath = AppDataPath;
   }
 
-  // public String getMapFile() {
-  // return defaultValue(this.MapFile, this.defaultMapFileString);
-  // }
-
-  public URL getMapFile() {
-    return defaultValue(this.MapFile, this.defaultMapFile);
+  public Props(String SettingFile, String MapFile, String defaultMapFile, String AppDataPath, String OSM_API_ROOT_URL,
+      String DatabseURL, BUILD_TYPE hasToBuild, Double defaultMinLon, Double defaultMaxLon, Double defaultMinLat,
+      Double defaultMaxLat, Double minLon, Double maxLon, Double minLat, Double maxLat, Styles styles, Integer zoom,
+      Integer zoomStep, URL downloadURL) {
+    this.SettingFile = SettingFile;
+    this.MapFile = MapFile;
+    this.defaultMapFile = defaultMapFile;
+    this.AppDataPath = AppDataPath;
+    this.OSM_API_ROOT_URL = OSM_API_ROOT_URL;
+    this.DatabseURL = DatabseURL;
+    this.hasToBuild = hasToBuild;
+    this.defaultMinLon = defaultMinLon;
+    this.defaultMaxLon = defaultMaxLon;
+    this.defaultMinLat = defaultMinLat;
+    this.defaultMaxLat = defaultMaxLat;
+    this.minLon = minLon;
+    this.maxLon = maxLon;
+    this.minLat = minLat;
+    this.maxLat = maxLat;
+    this.styles = styles;
+    this.zoom = zoom;
+    this.zoomStep = zoomStep;
+    this.downloadURL = downloadURL;
   }
 
-  public void setMapFile(URL MapFile) {
+  public String getMapFile() {
+    return this.MapFile;
+  }
+
+  public void setMapFile(String MapFile) {
     this.MapFile = MapFile;
   }
 
-  public void setMapFile(String MapFilePath) {
-    try {
-      this.MapFile = Paths.get(MapFilePath).toUri().toURL();
-
-    } catch (MalformedURLException e) {
-      System.out.printf("Le cheminest invalide (%s)\n", MapFilePath);
-      e.printStackTrace();
-    }
-  }
-
-  public URL getDefaultMapFile() {
+  public String getDefaultMapFile() {
     return this.defaultMapFile;
   }
 
-  public void setDefaultMapFile(URL defaultMapFile) {
+  public void setDefaultMapFile(String defaultMapFile) {
     this.defaultMapFile = defaultMapFile;
+  }
+
+  public Integer getZoom() {
+    return this.zoom;
+  }
+
+  public void setZoom(Integer zoom) {
+    this.zoom = zoom;
+  }
+
+  public Integer getZoomStep() {
+    return this.zoomStep;
+  }
+
+  public void setZoomStep(Integer zoomStep) {
+    this.zoomStep = zoomStep;
+  }
+
+  public Props defaultMapFile(String defaultMapFile) {
+    setDefaultMapFile(defaultMapFile);
+    return this;
+  }
+
+  public Props AppDataPath(String AppDataPath) {
+    setAppDataPath(AppDataPath);
+    return this;
+  }
+
+  public Props zoom(Integer zoom) {
+    setZoom(zoom);
+    return this;
+  }
+
+  public Props zoomStep(Integer zoomStep) {
+    setZoomStep(zoomStep);
+    return this;
+  }
+
+  public Props downloadURL(URL downloadURL) {
+    setDownloadURL(downloadURL);
+    return this;
   }
 
   public String getOSM_API_ROOT_URL() {
@@ -237,12 +287,7 @@ public class Props {
     return this;
   }
 
-  public Props MapFile(URL MapFile) {
-    setMapFile(MapFile);
-    return this;
-  }
-
-  public Props MapFile(String MapFilePath) {
+  public Props MapFile(String MapFile) {
     setMapFile(MapFile);
     return this;
   }
@@ -257,7 +302,7 @@ public class Props {
     return this;
   }
 
-  public Props defaultMapFileString(URL defaultMapFileString) {
+  public Props defaultMapFileString(String defaultMapFileString) {
     setDefaultMapFile(defaultMapFileString);
     return this;
   }

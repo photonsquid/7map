@@ -146,7 +146,11 @@ public abstract class MapParser extends Parser {
     String extension = null;
     if (props.hasToBuild().equals(BUILD_TYPE.FROM_FILE)) {
       // get extension of file
-      extension = FilenameUtils.getExtension(props.getMapFile().toString());
+      String path = props.getMapFile();
+      if (path == null) {
+        path = props.getDefaultMapFile();
+      }
+      extension = FilenameUtils.getExtension(path);
 
     } else if (props.hasToBuild().equals(BUILD_TYPE.FROM_URL)) {
       extension = FilenameUtils.getExtension(getFileNameFromUrl(props.getDownloadURL()));

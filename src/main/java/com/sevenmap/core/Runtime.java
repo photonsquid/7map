@@ -72,18 +72,19 @@ public class Runtime {
     private void armEvents() {
         engine.getWindow().onEvent(new FileLoadedEvent(), () -> {
             String fileName = gui.getMapLoadingLayer().getFilePath();
-
-            // TODO: change it to @kingussopp logger
-            System.out.printf("User chose file %s", fileName);
-            gui.ldMapDisplay();
-            // Unload old map if any
-            map.unload();
-            // Setup fileName to props
-            props.setMapFile(fileName);
-            // Warning the map API that it will be necessary to reload map from file
-            props.hasToBuild(BUILD_TYPE.FROM_FILE);
-            // Reload map
-            map.load();
+            if (fileName != null) {
+                // TODO: change it to @kingussopp logger
+                System.out.printf("User chose file %s\n", fileName);
+                gui.ldMapDisplay();
+                // Unload old map if any
+                map.unload();
+                // Setup fileName to props
+                props.setMapFile(fileName);
+                // Warning the map API that it will be necessary to reload map from file
+                props.hasToBuild(BUILD_TYPE.FROM_FILE);
+                // Reload map
+                map.load();
+            }
         });
         engine.getWindow().onEvent(new ZoomEvent(true), () -> {
 

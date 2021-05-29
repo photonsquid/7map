@@ -21,6 +21,7 @@ public class Map extends Loadable {
    */
   @Override
   public void load() {
+
     // =============================== map builder ================================
     // This is supposed to be done once, when the user load a new map.
     // Build a plainMap from a file.
