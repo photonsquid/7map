@@ -9,7 +9,6 @@ import com.sevenmap.spinel.math.Vector3f;
  * A 3D object which can be rendered
  */
 public class Item extends GeomNode {
-
     protected Vector3f scale;
     protected Mesh mesh;
 

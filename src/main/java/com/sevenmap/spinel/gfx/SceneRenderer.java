@@ -95,6 +95,7 @@ public class SceneRenderer extends RootNode {
      * @param node starting node
      */
     public void buildChildren(Node node) {
+        ((GeomNode) node).setFlag(true);
         if (((GeomNode) node).hasMesh()) {
             ((Item) node).getMesh().build();
         }

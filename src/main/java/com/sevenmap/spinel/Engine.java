@@ -199,7 +199,7 @@ public class Engine implements Runnable {
     /**
      * Get the active Engine instance.
      * 
-     * @return
+     * @return active engine instance
      */
     public static Engine getInstance() {
         return instance;

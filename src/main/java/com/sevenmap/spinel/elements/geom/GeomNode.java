@@ -1,23 +1,34 @@
 package com.sevenmap.spinel.elements.geom;
 
 import com.sevenmap.exceptions.IncorrectChildTypeException;
+import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.Node;
+import com.sevenmap.spinel.elements.RootNode;
 import com.sevenmap.spinel.math.Vector3f;
 
 public class GeomNode extends Node {
     protected Vector3f position;
     protected Vector3f rotation;
-
-    public GeomNode(Vector3f position, Vector3f rotation) {
-        this.position = position;
-        this.rotation = rotation;
-        name = this.getClass().getSimpleName();
-    }
+    /** @see #getFlag() */
+    protected boolean flag;
 
     public GeomNode(Vector3f position, Vector3f rotation, String name) {
         this.position = position;
         this.rotation = rotation;
+        this.flag = !(Engine.getInstance() != null && Engine.getInstance().isRunning());
         this.name = name;
+    }
+
+    public GeomNode(Vector3f position, Vector3f rotation) {
+        this(position, rotation, GeomNode.class.getClass().getSimpleName());
+    }
+
+    @Override
+    public void setParent(RootNode parent) {
+        super.setParent(parent);
+        if (parent != null && !flag) {
+            Engine.getInstance().getSceneRoot().buildChildren(this);
+        }
     }
 
     /**
@@ -148,6 +159,25 @@ public class GeomNode extends Node {
         double beta = Math.toRadians(rotation.getZ());
         return new Vector3f((float) -(Math.cos(theta) * Math.cos(beta)), (float) -Math.sin(beta),
                 (float) (Math.sin(theta) * Math.cos(beta)));
+    }
+
+    /**
+     * Returns true if the Item has been already built (False by default).
+     * 
+     * @return flag
+     */
+    public boolean getFlag() {
+        return flag;
+    }
+
+    /**
+     * Flag the Item as already built by the engine / not built yet.
+     * 
+     * @param status value to be affected to flag
+     * @return
+     */
+    public void setFlag(boolean status) {
+        this.flag = status;
     }
 
     /**

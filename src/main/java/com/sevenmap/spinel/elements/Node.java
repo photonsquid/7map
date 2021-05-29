@@ -23,12 +23,14 @@ public class Node extends RootNode {
         if (this.parent != null) {
             this.parent.delChild(this);
         }
+
         // add this object to the new parent's children list
-        this.parent = parent;
-        if (this.parent != null) {
+        if (parent != null) {
             parent.compatibilityCheck(this);
-            this.parent.addChild(this);
+            parent.addChild(this);
         }
+        this.parent = parent;
+
     }
 
     /**
