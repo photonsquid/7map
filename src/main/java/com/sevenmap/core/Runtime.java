@@ -41,9 +41,11 @@ public class Runtime {
     }
 
     private void setup() {
-        keybinds.put(GLFW.GLFW_KEY_RIGHT, () -> engine.getCamera()
-                .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceZ().divide(8))));
+
+        // setup key events
         keybinds.put(GLFW.GLFW_KEY_LEFT, () -> engine.getCamera()
+                .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceZ().divide(8))));
+        keybinds.put(GLFW.GLFW_KEY_RIGHT, () -> engine.getCamera()
                 .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceZ().divide(8))));
         keybinds.put(GLFW.GLFW_KEY_Q, () -> engine.getCamera()
                 .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceX().divide(8))));

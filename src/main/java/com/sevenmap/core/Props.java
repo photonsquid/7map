@@ -43,7 +43,8 @@ public class Props {
    * It will have a method to load it from a local file.
    */
   public Props() {
-    this.defaultMapFileString = "src/main/resources/maps/osm/n7.osm";
+    URL resource = this.getClass().getClassLoader().getResource("maps/osm/n7.osm");
+    this.defaultMapFileString = resource.getPath();
     this.OSM_API_ROOT_URL = "https://api.openstreetmap.org/api/0.6/map?bbox=";
 
     this.defaultMinLon = 1.45338;

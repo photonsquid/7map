@@ -421,6 +421,7 @@
           <include>**/*.jpg</include>
           <include>**/*.png</include>
           <include>**/*.ttf</include>
+          <include>**/*.osm</include>
         </includes>
       </resource>
     </resources>
