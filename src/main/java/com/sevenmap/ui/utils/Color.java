@@ -83,7 +83,7 @@ public class Color {
             
          } else {
             // TODO: return an error
-            System.out.println("NO MATCH");
+            System.out.printf("NO MATCH");
          }
 
       }

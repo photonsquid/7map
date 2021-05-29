@@ -1,25 +1,29 @@
+package com.sevenmap;
 import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
+//import java.util.logging.FileHandler;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+//import java.util.logging.SimpleFormatter;
+//import java.io.PrintStream;
+//import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+//import java.util.*;
 public class logger {
-    public static void main(String[] args) {
-        Logger logger = Logger.getLogger("login");
-        FileHandler fileHandler;
-        try {
-          fileHandler = new FileHandler("C:\\logfile.log", true);
-          logger.addHandler(fileHandler);
-          logger.setLevel(Level.ALL);
-          SimpleFormatter formatter = new SimpleFormatter();
-          fileHandler.setFormatter(formatter);
-          logger.log(Level.WARNING, "Warning message");
-          logger.log(Level.SEVERE, "Severe message");
-          logger.log(Level.INFO, "Info message from Throwable object", new Throwable("Throwable exception"));
-      } catch (SecurityException se) {
-          System.out.println("SecurityException was catched " + se.getMessage());
-      } catch (IOException ioe) {
-          System.out.println("IOException was catchted " + ioe.getMessage());
-      }
+
+    //List<String> L = new ArrayList<String>();        
+    public void log(String niveau ,String format ,Object ... args) throws IOException{
+        if (niveau == "File"){
+            FileWriter writer = new FileWriter("7map.txt");
+            PrintWriter printer = new PrintWriter(writer);
+            printer.printf(format, args);
+            printer.close();
+            writer.close();
+        }else if(niveau == "Console"){
+            System.out.printf(format, args);
+        }else{
+            System.out.println("no output as you are in message free mode");
+        }
     }
+     
 }

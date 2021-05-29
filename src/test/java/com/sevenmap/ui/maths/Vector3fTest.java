@@ -6,7 +6,7 @@ import com.sevenmap.ui.math.Vector3f;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.lwjgl.system.CallbackI.B;
+//import org.lwjgl.system.CallbackI.B;
 
 public class Vector3fTest {
     private Vector3f v1, v2;

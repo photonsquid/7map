@@ -124,6 +124,15 @@ public class App {
     }
 
     public static void main(String[] args) {
+        
+        if (args[args.length-1]=="-n"){
+
+        }else if(args[args.length-1]=="-f"){
+            File myObj = new File("C:\\Users\\Desktop\\7map_logger.txt");
+            for(i=0 , i<)
+        }
+        
+
         new App().start();
     }
 
