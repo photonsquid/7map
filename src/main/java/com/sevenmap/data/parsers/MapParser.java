@@ -14,6 +14,7 @@ import com.sevenmap.data.objsept.GeographicCoord;
 import com.sevenmap.data.objsept.PlainMap;
 import com.sevenmap.data.parsers.geojson.GeoJson;
 import com.sevenmap.data.parsers.osm.OSM;
+import com.sevenmap.spinel.elements.geom.Item;
 import com.sevenmap.spinel.math.Vector3f;
 
 import org.apache.commons.io.FilenameUtils;
@@ -22,7 +23,7 @@ public abstract class MapParser extends Parser {
 
   // <-------------------------------- Attibutes -------------------------------->
   protected Props props;
-  protected PlainMap generatedMap;
+  protected PlainMap<Long, Item> generatedMap;
 
   // <------------------------------- Constructor ------------------------------->
   public MapParser() {
@@ -178,6 +179,14 @@ public abstract class MapParser extends Parser {
   public MapParser props(Props props) {
     setProps(props);
     return this;
+  }
+
+  public PlainMap<Long, Item> getGeneratedMap() {
+    return this.generatedMap;
+  }
+
+  public void setGeneratedMap(PlainMap<Long, Item> generatedMap) {
+    this.generatedMap = generatedMap;
   }
 
   // <---------------------------- Object overrides ----------------------------->

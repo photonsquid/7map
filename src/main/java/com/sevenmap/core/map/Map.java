@@ -3,7 +3,10 @@ package com.sevenmap.core.map;
 import com.sevenmap.core.Loadable;
 import com.sevenmap.core.Props;
 import com.sevenmap.core.Props.BUILD_TYPE;
+import com.sevenmap.data.objsept.PlainMap;
 import com.sevenmap.data.parsers.MapParser;
+import com.sevenmap.spinel.Engine;
+import com.sevenmap.spinel.elements.geom.Item;
 
 public class Map extends Loadable {
   public Map(Props props) {
@@ -25,9 +28,10 @@ public class Map extends Loadable {
     // Here, there is supposed to be a map loaded in database whose setup are in
     // props.
 
-    // ================================ map loader ================================
-    // This is supposed to be done once, when the user load a new map.
+    // =============================== map displayer ==============================
+    // This is not supposed to be here...
     // ============================================================================
+
   }
 
   /**
@@ -59,6 +63,14 @@ public class Map extends Loadable {
 
       // Store this object to the database
       mapSource.store();
+
+      // Cheat
+      Engine engine = Engine.getInstance();
+      PlainMap<Long, Item> plainMan = mapSource.getGeneratedMap();
+      for (PlainMap.Entry<Long, Item> entry : plainMan.entrySet()) {
+        Item road = entry.getValue();
+        road.setParent(engine.getSceneRoot());
+      }
     }
   }
 
