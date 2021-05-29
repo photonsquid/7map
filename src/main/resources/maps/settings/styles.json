@@ -1,0 +1,9 @@
+[
+  {
+    "k": "highway",
+    "v": "residential",
+    "borderThickness": 12,
+    "borderColor": "#2c3e50",
+    "color": "#2980b9"
+  }
+]

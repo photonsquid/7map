@@ -2,7 +2,8 @@ package com.sevenmap.ui.elements;
 
 import static org.junit.Assert.assertEquals;
 
-import com.sevenmap.ui.math.Vector3f;
+import com.sevenmap.spinel.elements.Camera;
+import com.sevenmap.spinel.math.Vector3f;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,14 +30,14 @@ public class CameraTest {
     
     @Test
     public void testPos(){
-        assertEquals(cam0.position, pos0);
-        assertEquals(cam1.position, pos1);
+        assertEquals(cam0.getPos(), pos0);
+        assertEquals(cam1.getPos(), pos1);
     }
 
     @Test
     public void testRot() {
-        assertEquals(cam1.rotation, rot1);
-        assertEquals(cam0.rotation, rot0);
+        assertEquals(cam1.getRot(), rot1);
+        assertEquals(cam0.getRot(), rot0);
     }
     
 }

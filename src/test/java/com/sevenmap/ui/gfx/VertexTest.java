@@ -2,9 +2,10 @@ package com.sevenmap.ui.gfx;
 
 import static org.junit.Assert.assertEquals;
 
-import com.sevenmap.ui.math.Vector2f;
-import com.sevenmap.ui.math.Vector3f;
-import com.sevenmap.ui.utils.Color;
+import com.sevenmap.spinel.gfx.Vertex;
+import com.sevenmap.spinel.math.Vector2f;
+import com.sevenmap.spinel.math.Vector3f;
+import com.sevenmap.spinel.utils.Color;
 
 import org.junit.Before;
 import org.junit.Test;
