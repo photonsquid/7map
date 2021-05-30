@@ -5,8 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.sevenmap.spinel.elements.geom.GeomNode;
 import com.sevenmap.spinel.math.Vector3f;
-      
+
 public class GeomNodeTest {
 
     protected Vector3f pos1;
@@ -30,12 +31,13 @@ public class GeomNodeTest {
     protected Vector3f rot8;
     protected Vector3f rot9;
     protected Vector3f rot10;
-    
+
     protected GeomNode n1;
     protected GeomNode n2;
     protected GeomNode n3, n4, n5, n6, n7, n10;
-	@Before
-	public void setUp() throws Exception {
+
+    @Before
+    public void setUp() throws Exception {
         // initialize positions.
         pos1 = new Vector3f(1.0f, 1.0f, 1.0f);
         pos2 = new Vector3f(2.0f, 2.0f, 2.0f);
@@ -47,7 +49,7 @@ public class GeomNodeTest {
         pos8 = new Vector3f(8.0f, 8.0f, 8.0f);
         pos9 = new Vector3f(9.0f, 9.0f, 9.0f);
         pos10 = new Vector3f(10.0f, 10.0f, 10.0f);
-       
+
         // initialize rotations.
         rot1 = new Vector3f(1.0f, 1.0f, 1.0f);
         rot2 = new Vector3f(2.0f, 2.0f, 2.0f);
@@ -68,37 +70,37 @@ public class GeomNodeTest {
         n5 = new GeomNode(pos5, rot5, "Node n5");
         n6 = new GeomNode(pos6, rot6, "Node n6");
         n7 = new GeomNode(pos7, rot7, "Node n7");
-        
-	}
 
-	@Test
-    public void gettersTest(){
+    }
+
+    @Test
+    public void gettersTest() {
         // getPos.
         assertEquals(n1.getPos(), pos1);
         assertEquals(n5.getPos(), pos5);
         assertEquals(n7.getPos(), pos7);
-        
+
         // getRot.
         assertEquals(n5.getRot(), rot5);
         assertEquals(n2.getRot(), rot3);
     }
 
-	@Test
-    public void settersTest(){
+    @Test
+    public void settersTest() {
         // setPos.
         n1.setPos(1.1f, 1.5f, 1.0f);
         assertEquals(new Vector3f(1.1f, 1.5f, 1.0f), n1.getPos());
 
         n2.setPos(new Vector3f(1.0f, 1.0f, 1.0f));
-        assertEquals(new Vector3f(1.0f, 1.0f, 1.0f), n2.getPos() );
+        assertEquals(new Vector3f(1.0f, 1.0f, 1.0f), n2.getPos());
 
         // setRot.
         n1.setRot(0.1f, 0.5f, 1.0f);
-        assertEquals(new Vector3f(0.1f, 0.5f, 1.0f),n1.getRot() );
+        assertEquals(new Vector3f(0.1f, 0.5f, 1.0f), n1.getRot());
 
         n2.setRot(new Vector3f(1.0f, 1.0f, 1.0f));
-        assertEquals(new Vector3f(1.0f, 1.0f, 1.0f),n2.getRot());
+        assertEquals(new Vector3f(1.0f, 1.0f, 1.0f), n2.getRot());
 
-	}
+    }
 
 }
