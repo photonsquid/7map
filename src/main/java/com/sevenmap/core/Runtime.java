@@ -39,7 +39,8 @@ public class Runtime {
         setup();
         engine.getCamera().setRot(new Vector3f(-90, 0, 0));
         engine.getCamera().setPos(new Vector3f(0, 10, 0));
-        engine.getWindow().setBgColor(new Color("#ecf0f1"));
+        String backGroundColor = props.getStyles().findGuiStyle(props.getTheme()).getBackgroundColor();
+        engine.getWindow().setBgColor(new Color(backGroundColor));
         engine.start();
     }
 
