@@ -18,7 +18,6 @@ import com.sevenmap.data.objsept.GeographicCoord;
 import com.sevenmap.data.objsept.PlainMap;
 import com.sevenmap.data.objsept.Portal;
 import com.sevenmap.data.parsers.MapParser;
-import com.sevenmap.data.parsers.json.JsonParser;
 import com.sevenmap.data.parsers.osm.Annotations.XMLAttribute;
 import com.sevenmap.data.parsers.osm.Annotations.XMLElement;
 import com.sevenmap.data.parsers.osm.Structure.Root;
@@ -29,7 +28,6 @@ import com.sevenmap.data.parsers.osm.Structure.Node.Node;
 import com.sevenmap.data.parsers.osm.Structure.Relation.Relation;
 import com.sevenmap.data.parsers.osm.Structure.Way.Way;
 import com.sevenmap.data.styles.AssetStyle;
-import com.sevenmap.data.styles.Styles;
 import com.sevenmap.spinel.elements.geom.Item;
 import com.sevenmap.spinel.math.Vector3f;
 
@@ -283,12 +281,7 @@ public class OSM extends MapParser {
     HashMap<Long, Node> nodes = rt.getNodes();
     generatedMap = new PlainMap<Long, Item>();
 
-    // Parse styles.json
-    if (props.getStyles() == null) {
-      String filePath = props.getAppDataPath() + props.getSettingFile();
-      Styles st = JsonParser.parse(filePath, Styles.class);
-      this.props.setStyles(st);
-    }
+    
 
     // 1. iterate on all relations and build them
     buildRelations(rels);

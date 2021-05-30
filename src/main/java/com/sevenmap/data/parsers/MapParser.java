@@ -13,7 +13,9 @@ import com.sevenmap.core.Props.BUILD_TYPE;
 import com.sevenmap.data.objsept.GeographicCoord;
 import com.sevenmap.data.objsept.PlainMap;
 import com.sevenmap.data.parsers.geojson.GeoJson;
+import com.sevenmap.data.parsers.json.JsonParser;
 import com.sevenmap.data.parsers.osm.OSM;
+import com.sevenmap.data.styles.Styles;
 import com.sevenmap.spinel.elements.geom.Item;
 import com.sevenmap.spinel.math.Vector3f;
 
@@ -92,6 +94,15 @@ public abstract class MapParser extends Parser {
   public abstract void parse();
 
   public abstract void build();
+
+  public static final void loadSettings(Props props) {
+    // Parse styles.json
+    if (props.getStyles() == null) {
+      String filePath = props.getAppDataPath() + props.getSettingFile();
+      Styles st = JsonParser.parse(filePath, Styles.class);
+      props.setStyles(st);
+    }
+  }
 
   /**
    * Store the generated map into the database. <br>

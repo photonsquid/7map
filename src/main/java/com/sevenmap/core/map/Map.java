@@ -43,12 +43,14 @@ public class Map extends Loadable {
   }
 
   public void unload() {
-    Engine engine = Engine.getInstance();
-    for (PlainMap.Entry<Long, Item> entry : this.plainMap.entrySet()) {
-      Item road = entry.getValue();
-      road.setParent(null);
+    if (this.plainMap != null) {
+      Engine engine = Engine.getInstance();
+      for (PlainMap.Entry<Long, Item> entry : this.plainMap.entrySet()) {
+        Item road = entry.getValue();
+        road.setParent(null);
+      }
+      this.plainMap.clear();
     }
-    this.plainMap.clear();
   }
 
   /**
@@ -64,6 +66,10 @@ public class Map extends Loadable {
    * Set {@code props.hasToBuild} to false.
    */
   public void build() {
+
+    // On load les settings pas défaut
+    MapParser.loadSettings(props);
+
     if (props.hasToBuild().equals(Props.BUILD_TYPE.FROM_FILE) || props.hasToBuild().equals(Props.BUILD_TYPE.FROM_URL)) {
 
       // Create an OSM Map
