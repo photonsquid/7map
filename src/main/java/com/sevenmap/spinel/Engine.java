@@ -44,6 +44,8 @@ public class Engine implements Runnable {
         window = new Window(windowSize[0], windowSize[1], title);
         guiRoot = new GuiRenderer(window);
         camera.setParent(sceneRoot);
+        // initialize window background color
+        window.setBgColor(bgColor);
     }
 
     /**
@@ -90,7 +92,6 @@ public class Engine implements Runnable {
         System.out.printf("[%s] Booting up application...%n", Engine.class.getSimpleName());
 
         // initialize essentials
-        window.setBgColor(bgColor);
         window.create();
 
         // build meshes
