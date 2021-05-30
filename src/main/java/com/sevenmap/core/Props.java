@@ -3,6 +3,7 @@ package com.sevenmap.core;
 import java.net.URL;
 import java.util.Objects;
 
+import com.sevenmap.data.parsers.osm.Structure.Bounds.Bounds;
 import com.sevenmap.data.styles.Styles;
 
 public class Props {
@@ -75,6 +76,16 @@ public class Props {
   }
 
   // <--------------------------- Getter and setters --------------------------->
+  public Bounds getBounds() {
+    return new Bounds(minLat, maxLat, minLon, maxLon);
+  }
+
+  public void setBounds(Bounds bd) {
+    this.minLat = bd.getMinlat();
+    this.maxLat = bd.getMaxlat();
+    this.minLon = bd.getMinlon();
+    this.maxLon = bd.getMaxlon();
+  }
 
   public String getSettingFile() {
     return this.SettingFile;

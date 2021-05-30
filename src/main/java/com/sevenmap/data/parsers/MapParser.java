@@ -110,16 +110,18 @@ public abstract class MapParser extends Parser {
    * @param coords geopgraphic coordinates to convert
    * @return Vector3f of coordinates converted
    */
-  public static Vector3f GeoCoord2SpinelCoord(GeographicCoord coords) {
+  public Vector3f GeoCoord2SpinelCoord(GeographicCoord coords) {
     Double x_proj = Math.cos(0.0) * (coords.getLat());
     Double y_proj = coords.getLon();
-    Float xtemp = x_proj.floatValue() - 43.60f;
-    Float ytemp = y_proj.floatValue() - 1.45f;
-    Float x = 10000 * xtemp - 22;
-    Float y = 0f;
-    Float z = 10000 * ytemp - 35;
+    Double xtemp = x_proj - props.getMinLat();
+    Double ytemp = y_proj - props.getMinLon();
+    Double xOffset = (props.getMaxLat() - props.getMinLat()) / 2d;
+    Double yOffset = (props.getMaxLon() - props.getMinLon()) / 2d;
+    Double Coef = 12000d;
+    Double x = Coef * xtemp - xOffset;
+    Double y = Coef * ytemp - yOffset;
 
-    return new Vector3f(x, y, z);
+    return new Vector3f(x.floatValue(), 0f, y.floatValue());
   }
 
   /**
