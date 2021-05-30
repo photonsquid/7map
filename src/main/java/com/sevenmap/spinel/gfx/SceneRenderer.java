@@ -1,11 +1,10 @@
 package com.sevenmap.spinel.gfx;
 
-
-import com.sevenmap.spinel.elements.Camera;
-import com.sevenmap.spinel.elements.GeomNode;
-import com.sevenmap.spinel.elements.Item;
 import com.sevenmap.spinel.elements.Node;
 import com.sevenmap.spinel.elements.RootNode;
+import com.sevenmap.spinel.elements.geom.Camera;
+import com.sevenmap.spinel.elements.geom.GeomNode;
+import com.sevenmap.spinel.elements.geom.Item;
 import com.sevenmap.spinel.math.Matrix4f;
 
 import org.lwjgl.opengl.GL11;
@@ -19,6 +18,7 @@ public class SceneRenderer extends RootNode {
 
     /**
      * Create a new Renderer object.
+     * 
      * @param shader the shader which will be applied on each render call.
      */
     public SceneRenderer(Shader shader) {
@@ -28,6 +28,7 @@ public class SceneRenderer extends RootNode {
 
     /**
      * Render a specific element.
+     * 
      * @param element
      */
     public void render(Item element, Camera camera) {
@@ -38,16 +39,16 @@ public class SceneRenderer extends RootNode {
         GL20.glEnableVertexAttribArray(2);
 
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, element.getMesh().getIBO());
-        
+
         if (element.getMesh().getMaterial() != null) {
             shader.setUniform("textureSample", 1);
-            GL13.glActiveTexture(GL13.GL_TEXTURE0); 
+            GL13.glActiveTexture(GL13.GL_TEXTURE0);
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, element.getMesh().getMaterial().getTexID()); // bind texture
         } else {
             shader.setUniform("textureSample", 0);
         }
-        
-        shader.bind(); // bind before drawing 
+
+        shader.bind(); // bind before drawing
         shader.setUniform("model", Matrix4f.transform(element.getPos(), element.getRot(), element.getScale()));
         shader.setUniform("view", Matrix4f.view(camera.getPos(), camera.getRot()));
         shader.setUniform("projection", camera.getProjector());
@@ -61,6 +62,7 @@ public class SceneRenderer extends RootNode {
 
     /**
      * Render all children.
+     * 
      * @param camera camera on which the children have to be rendered
      */
     public void render(Camera camera) {
@@ -69,15 +71,15 @@ public class SceneRenderer extends RootNode {
 
     /**
      * Render all children recursively.
-     * @param node starting node
+     * 
+     * @param node   starting node
      * @param camera camera on which the children have to be rendered
      */
     private void renderChildren(GeomNode node, Camera camera) {
         if (node.hasMesh()) {
             render((Item) node, camera);
         }
-        node.getShownChildren().forEach((Node childnode) -> 
-                renderChildren((GeomNode) childnode, camera));
+        node.getShownChildren().forEach((Node childnode) -> renderChildren((GeomNode) childnode, camera));
     }
 
     /**
@@ -89,9 +91,11 @@ public class SceneRenderer extends RootNode {
 
     /**
      * Build all children meshes recursively.
+     * 
      * @param node starting node
      */
     public void buildChildren(Node node) {
+        ((GeomNode) node).setFlag(true);
         if (((GeomNode) node).hasMesh()) {
             ((Item) node).getMesh().build();
         }

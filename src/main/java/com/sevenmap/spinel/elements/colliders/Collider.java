@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.sevenmap.spinel.elements.GeomNode;
-import com.sevenmap.spinel.elements.Item;
+import com.sevenmap.spinel.elements.geom.GeomNode;
+import com.sevenmap.spinel.elements.geom.Item;
 import com.sevenmap.spinel.math.Vector3f;
 
 public abstract class Collider extends GeomNode {
@@ -16,6 +16,7 @@ public abstract class Collider extends GeomNode {
 
     /**
      * Create a new Collider object with a default name.
+     * 
      * @param position the collider's position
      * @param rotation the collider's rotation
      */
@@ -26,9 +27,10 @@ public abstract class Collider extends GeomNode {
 
     /**
      * Create a new Collider object with a chosen name.
+     * 
      * @param position the collider's position
      * @param rotation the collider's rotation
-     * @param name the given name
+     * @param name     the given name
      */
     protected Collider(Vector3f position, Vector3f rotation, String name) {
         this(position, rotation);
@@ -42,11 +44,12 @@ public abstract class Collider extends GeomNode {
     /**
      * Check for existing collisions and execute associated logic lambdas.
      * <p>
-     * By default, this method is empty, any subtype of Collider must override
-     * it in order to actually be able to do something.
+     * By default, this method is empty, any subtype of Collider must override it in
+     * order to actually be able to do something.
      * </p>
      */
-    public void update() {}
+    public void update() {
+    }
 
     /**
      * Enable/disable debug mode.
@@ -65,6 +68,7 @@ public abstract class Collider extends GeomNode {
 
     /**
      * Get collider debugObject Item.
+     * 
      * @return debug object
      */
     public Item getDebugObject() {

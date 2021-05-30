@@ -2,7 +2,7 @@ package com.sevenmap.spinel.elements;
 
 import static org.junit.Assert.assertEquals;
 
-import com.sevenmap.spinel.elements.Camera;
+import com.sevenmap.spinel.elements.geom.Camera;
 import com.sevenmap.spinel.math.Vector3f;
 
 import org.junit.Before;

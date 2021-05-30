@@ -1,9 +1,9 @@
 package com.sevenmap.spinel.gfx;
 
 import com.sevenmap.spinel.Window;
-import com.sevenmap.spinel.elements.GuiNode;
 import com.sevenmap.spinel.elements.Node;
 import com.sevenmap.spinel.elements.RootNode;
+import com.sevenmap.spinel.elements.gui.GuiNode;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -17,7 +17,7 @@ public class GuiRenderer extends RootNode {
     private final ImGuiImplGl3 imGuiGl3;
     private String glslVersion = "#version 460 core";
     private Window parentWindow;
-    
+
     /**
      * Create a new GuiRenderer object.
      */
