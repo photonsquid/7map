@@ -7,8 +7,6 @@
 
 ## Travaux réalisés à la deuxiéme itération
 
-
-
 - terminer la classe "logger" qui permet de choisir 3 modes d'apparition des messages(console,fichier,sans messages).
 
   > Fonctionnalités gérées actuellement : 
