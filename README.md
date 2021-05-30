@@ -16,7 +16,7 @@ An app for editing and reading maps from your computer.
 
 ## Project advancement
 
-The App is able to display map in OSM format.
+The App is able to display maps in OSM format.
 
 ## Screenshots
 
