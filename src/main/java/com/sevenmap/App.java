@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.sevenmap.core.Props;
 import com.sevenmap.core.Runtime;
@@ -31,6 +34,16 @@ public class App {
   }
 
   private static void createStyleJson(Props props) {
+
+    Path mainPath = Paths.get(props.getAppDataPath());
+
+    if (!Files.exists(mainPath)) {
+      try {
+        Files.createDirectories(mainPath);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
     File f = new File(props.getAppDataPath() + props.getSettingFile());
     if (!f.exists()) {
       InputStream stream = null;
