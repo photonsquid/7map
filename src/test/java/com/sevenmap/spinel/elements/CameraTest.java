@@ -1,4 +1,4 @@
-package com.sevenmap.ui.elements;
+package com.sevenmap.spinel.elements;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,7 +15,8 @@ public class CameraTest {
     private Vector3f pos0, rot0, pos1, rot1;
 
     @Before
-    public void init() {
+    public void setUp() {
+
         // Declaring vectors
         pos0 = new Vector3f(3.5f, 2.5f, 1.5f);
         rot0 = new Vector3f(2.0f, 3.0f, 4.0f);

@@ -1,4 +1,4 @@
-package com.sevenmap.ui.maths;
+package com.sevenmap.spinel.maths;
 
 import static org.junit.Assert.assertEquals;
 

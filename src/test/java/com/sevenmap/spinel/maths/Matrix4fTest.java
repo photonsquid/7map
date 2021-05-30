@@ -1,4 +1,4 @@
-package com.sevenmap.ui.maths;
+package com.sevenmap.spinel.maths;
 
 //import org.junit.Assert;
 

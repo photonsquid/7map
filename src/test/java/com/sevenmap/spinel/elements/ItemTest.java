@@ -1,4 +1,4 @@
-package com.sevenmap.ui.elements;
+package com.sevenmap.spinel.elements;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,7 +18,7 @@ public class ItemTest {
   private int[] ListeTest;
 
   @Before
-  public void init() {
+  public void setUp() {
     // Declaring the Vector3f test
     v1 = new Vector3f(0.2f, 2.5f, 1.2f);
     v2 = new Vector3f(6.2f, 5.0f, 3.2f);
