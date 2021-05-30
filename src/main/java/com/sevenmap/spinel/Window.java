@@ -5,6 +5,7 @@ import com.sevenmap.spinel.math.Vector3f;
 import com.sevenmap.spinel.scheduling.Task;
 import com.sevenmap.spinel.scheduling.TaskMgr;
 import com.sevenmap.spinel.scheduling.events.ButtonEvent;
+import com.sevenmap.spinel.scheduling.events.EmptyEvent;
 import com.sevenmap.spinel.scheduling.events.Event;
 import com.sevenmap.spinel.scheduling.events.KeyEvent;
 import com.sevenmap.spinel.utils.Color;
@@ -15,12 +16,8 @@ import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
-import imgui.ImGui;
-import imgui.gl3.ImGuiImplGl3;
-import imgui.glfw.ImGuiImplGlfw;
-
 public class Window extends FrameObject {
-    
+
     // functional attributes
     private String title;
     private long windowElement;
@@ -39,9 +36,10 @@ public class Window extends FrameObject {
 
     /**
      * Create a new window element from scratch
-     * @param width width of the window (px)
+     * 
+     * @param width  width of the window (px)
      * @param height height of the window (px)
-     * @param title title (displayed on top)
+     * @param title  title (displayed on top)
      */
     public Window(int width, int height, String title) {
         this.size[0] = width;
@@ -58,18 +56,23 @@ public class Window extends FrameObject {
     public Input getInput() {
         return input;
     }
+
     public Color getBgColor() {
         return bgColor;
     }
+
     public void setBgColor(double r, double g, double b) {
         bgColor.set(r, g, b);
     }
+
     public void setBgColor(Color color) {
         bgColor.set(color);
     }
+
     public boolean isFullscreen() {
         return isFullscreen;
     }
+
     public void setFullscreen(boolean value) {
         isFullscreen = value;
         isResized = true;
@@ -80,15 +83,17 @@ public class Window extends FrameObject {
             GLFW.glfwSetWindowMonitor(windowElement, 0, posX[0], posY[0], size[0], size[1], 0);
         }
     }
+
     public long getWindowElement() {
         return windowElement;
     }
+
     public void setWindowElement(long windowElement) {
         this.windowElement = windowElement;
     }
 
     // other methods
-    
+
     /**
      * Create the window and initialize its components
      */
@@ -97,7 +102,8 @@ public class Window extends FrameObject {
         if (!GLFW.glfwInit()) { // glfw not initialized
             throw new InitError("Illegal attempt to create Window class while GLFW hasn't been initialized yet");
         }
-        windowElement = GLFW.glfwCreateWindow(size[0], size[1], title, isFullscreen ? GLFW.glfwGetPrimaryMonitor() : 0, 0); // actually create the window element
+        windowElement = GLFW.glfwCreateWindow(size[0], size[1], title, isFullscreen ? GLFW.glfwGetPrimaryMonitor() : 0,
+                0); // actually create the window element
 
         if (windowElement == 0) {
             throw new InitError("Window was not properly initialized");
@@ -114,7 +120,7 @@ public class Window extends FrameObject {
         GL11.glEnable(GL11.GL_ALPHA_TEST);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.0f);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        
+
         // set up callbacks
         createCallBacks();
 
@@ -128,7 +134,7 @@ public class Window extends FrameObject {
      * Set up all the defined CallBacks inside JWGL.
      */
     private void createCallBacks() {
-        sizeCB = new GLFWWindowSizeCallback(){
+        sizeCB = new GLFWWindowSizeCallback() {
             @Override
             public void invoke(long window, int width, int height) {
                 size[0] = width;
@@ -144,10 +150,10 @@ public class Window extends FrameObject {
     }
 
     /**
-     * Update the {@code windowElement}. 
+     * Update the {@code windowElement}.
      * <p>
-     * Should be called on each frame, as this method handles 
-     * all the user inputs and graphical updating routines.
+     * Should be called on each frame, as this method handles all the user inputs
+     * and graphical updating routines.
      * </p>
      */
     @Override
@@ -180,6 +186,15 @@ public class Window extends FrameObject {
     }
 
     /**
+     * Set window shouldclose attribute to status.
+     * 
+     * @param status true closes the window on the next frame
+     */
+    public void setShouldClose(boolean status) {
+        GLFW.glfwSetWindowShouldClose(windowElement, status);
+    }
+
+    /**
      * Destroy window element and its dependencies.
      */
     @Override
@@ -190,30 +205,33 @@ public class Window extends FrameObject {
         GLFW.glfwDestroyWindow(windowElement);
         GLFW.glfwTerminate();
     }
-    
+
     /**
      * Schedule Runnable action executed on key press interrupt.
-     * @param key key code
+     * 
+     * @param key    key code
      * @param action lambda runnable
      * @return generated {@code task} object
      */
     public Task onKeyDown(int key, Runnable action) {
-        return taskManager.add(new KeyEvent(this, key), action);
+        return taskManager.add(new KeyEvent(key), action);
     }
 
     /**
      * Schedule Runnable action executed on mouse button press interrupt.
+     * 
      * @param button key code
      * @param action lambda runnable
      * @return generated {@code task} object
      */
     public Task onButtonDown(int button, Runnable action) {
-        return taskManager.add(new ButtonEvent(this, button), action);
+        return taskManager.add(new ButtonEvent(button), action);
     }
 
     /**
      * Schedule Runnable action executed on event activity.
-     * @param event the triggering event
+     * 
+     * @param event  the triggering event
      * @param action lambda runnable
      * @return generated {@code task} object
      */
@@ -221,7 +239,25 @@ public class Window extends FrameObject {
         return taskManager.add(event, action);
     }
 
+    /**
+     * Set all tasks matching this event to active for one frame.
+     * 
+     * @param event the event which will temporarily be set to active
+     */
+    public void throwEvent(Event event) {
+        taskManager.flagActive(event);
+    }
+
     public Task scheduleTask(Runnable action) {
-        return taskManager.add(new Event(this), action);
+        return taskManager.add(new EmptyEvent(), action);
+    }
+
+    /**
+     * Add Runnable awaiting task to stack.
+     * 
+     * @param awaiting the awaiting task, which will be executed on the next frame
+     */
+    public void stack(Runnable awaiting) {
+        taskManager.stack(awaiting);
     }
 }
