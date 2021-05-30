@@ -5,8 +5,8 @@
 - [Rapport de l'application 7map](#rapport-de-lapplication-7map)
   - [Sommaire](#sommaire)
   - [Organisation et répartition du travail](#organisation-et-répartition-du-travail)
-    - [Partie ``rendering``](#partie-rendering)
-    - [Partie ``data``](#partie-data)
+    - [Partie `rendering`](#partie-rendering)
+    - [Partie `data`](#partie-data)
       - [1ère itération](#1ère-itération)
       - [2ème itération](#2ème-itération)
 
@@ -22,13 +22,13 @@ Une équipe a été affectée à chaque partie.
 Nous avons décidé de travailler avec git et Github pour des raisons de praticité.
 Les noms d'utilisateurs Github de chacun des membres sont listés ci-dessous.
 
-|             Team Rendering             |         Team Data          |
-| :------------------------------------: | :------------------------: |
-|    Philippe Negrel-Jerzy (@l3alr0g)    |   Félix Parain (@FaislX)   |
-|       Hamid Oukhnini (@Mmzhk21)        | Selma Oujid  (@selmaoujid) |
-| Mohamed M'Hand Ouammi    (@kingussopp) | Sébastien Pont (@seba1204) |
+|           Team Rendering            |         Team Data          |
+| :---------------------------------: | :------------------------: |
+|  Philippe Negrel-Jerzy (@l3alr0g)   |   Félix Parain (@FaislX)   |
+|      Hamid Oukhnini (@Mmzhk21)      | Selma Oujid (@selmaoujid)  |
+| Mohamed M'Hand Ouammi (@kingussopp) | Sébastien Pont (@seba1204) |
 
-### Partie ``rendering``
+### Partie `rendering`
 
 **1ère itération :**
 
@@ -40,17 +40,25 @@ Voici le diagramme UML qui lui est associé (pour plus de détail, il est préf�
 
 ![diagramm](../meetings/team-rendering/diagram.png)
 
-**2ème itération :** 
+**2ème itération :**
 
 - Nous avons ajouté une API pour Dear ImGui qui permet l'utilisation de menus
-dans le moteur. Elle sera utilisée par la suite dans le programme principal afin d'afficher l'interface utilisateur.
+  dans le moteur. Elle sera utilisée par la suite dans le programme principal afin d'afficher l'interface utilisateur.
 - La transparence des textures sur les objets affichés en 3D est maintenant supportée.
 - La caméra possède maintenant des methodes qui permettent de récupérer facilement son repère propre (pour calculer la direction de ses déplacements par exemple)
 - Nous avons créé un logger sur lequel nous travaillons encore
 - Les collisionneurs (colliders - ou objets détectant des collisions en 3D) ont été implémentés mais ne sont pas encore totalement fonctionnels. Ils permettent notamment de repérer les clics de souris sur un objet dans l'espace.
 - Une démonstration des capacités graphique a été créée, elle permet notamment de réaliser des expériences graphiques avant de les ajouter au fichier principal, sans altérer directement le code de l'application.
 
-### Partie ``data``
+**3ème itération**
+
+- Nous avons réalisé un important travail d'optimisation afin de rendre le moteur 3D plus stable et plus robuste.
+- Une interface utilisateur basique a été ajoutée de façon a pouvoir charger des fichiers.
+- Nous avons également travaillé en collaboration avec la team data sur le paquet core qui fait le lien entre les paquets data et rendering, et contient le squelette du programme principal.
+- Des méthodes permettant de convertir aisément des données brutes de la base de donnée en objets 3D ont été ajoutées.
+- De nombreuses classes de tests, ainsi qu'un logger sont maintenant implémentés.
+
+### Partie `data`
 
 #### 1ère itération
 
