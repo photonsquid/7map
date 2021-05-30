@@ -351,12 +351,11 @@ public class OSM extends MapParser {
       Long id = entry.getKey();
       Way wy = entry.getValue();
 
-      String type = "route";
-
-      AssetStyle st = props.getStyles().findStyle(type);
+      AssetStyle routeStyle = props.getStyles().findStyle("route");
+      AssetStyle polyStyle = props.getStyles().findStyle("poly");
 
       // We don't want to handle objects that we didn't implemented yet
-      if (st != null) {
+      if (routeStyle != null && polyStyle != null) {
 
         ArrayList<Nd> nds = wy.getNodes();
 
@@ -372,9 +371,9 @@ public class OSM extends MapParser {
           }
         }
         if (listPoints.get(0).equals(listPoints.get(listPoints.size() - 1))) {
-          // C'est un polygone
+          generatedMap.put(id, Portal.loadRoad(listPoints, polyStyle));
         } else {
-          generatedMap.put(id, Portal.loadRoad(listPoints, st));
+          generatedMap.put(id, Portal.loadRoad(listPoints, routeStyle));
         }
       }
 

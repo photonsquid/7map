@@ -10,10 +10,12 @@ import com.sevenmap.core.ui.events.FileOpeningEvent;
 import com.sevenmap.core.ui.events.ZoomEvent;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.math.Vector3f;
+import com.sevenmap.spinel.utils.Color;
 
 import org.lwjgl.glfw.GLFW;
 
 public class Runtime {
+    private final Float zoomCoef = 30f;
     private Engine engine;
     private UI gui;
     private Map map;
@@ -37,25 +39,45 @@ public class Runtime {
         setup();
         engine.getCamera().setRot(new Vector3f(-90, 0, 0));
         engine.getCamera().setPos(new Vector3f(0, 10, 0));
+        engine.getWindow().setBgColor(new Color("#ecf0f1"));
         engine.start();
     }
 
     private void setup() {
 
-        // setup key events
-        keybinds.put(GLFW.GLFW_KEY_LEFT, () -> engine.getCamera()
-                .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceZ().divide(8))));
-        keybinds.put(GLFW.GLFW_KEY_RIGHT, () -> engine.getCamera()
-                .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceZ().divide(8))));
-        keybinds.put(GLFW.GLFW_KEY_Q, () -> engine.getCamera()
-                .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceX().divide(8))));
-        keybinds.put(GLFW.GLFW_KEY_W, () -> engine.getCamera()
-                .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceX().divide(8))));
+        // Déplacement
+        keybinds.put(GLFW.GLFW_KEY_LEFT, () -> {
+            Float zoom = engine.getCamera().getPos().getY() / zoomCoef;
+            engine.getCamera()
+                    .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceZ().divide(1 / zoom)));
+        });
+        keybinds.put(GLFW.GLFW_KEY_RIGHT, () -> {
+            Float zoom = engine.getCamera().getPos().getY() / zoomCoef;
+            engine.getCamera()
+                    .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceZ().divide(1 / zoom)));
+        });
+        keybinds.put(GLFW.GLFW_KEY_UP, () -> {
+            Float zoom = engine.getCamera().getPos().getY() / zoomCoef;
+            engine.getCamera()
+                    .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceY().divide(1 / zoom)));
+        });
+        keybinds.put(GLFW.GLFW_KEY_DOWN, () -> {
+            Float zoom = engine.getCamera().getPos().getY() / zoomCoef;
+            engine.getCamera()
+                    .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceY().divide(1 / zoom)));
+        });
 
-        keybinds.put(GLFW.GLFW_KEY_UP, () -> engine.getCamera()
-                .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceY().divide(8))));
-        keybinds.put(GLFW.GLFW_KEY_DOWN, () -> engine.getCamera()
-                .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceY().divide(8))));
+        // Zoom
+        keybinds.put(GLFW.GLFW_KEY_Q, () -> {
+            Float zoom = engine.getCamera().getPos().getY() / zoomCoef;
+            engine.getCamera()
+                    .setPos(engine.getCamera().getPos().add(engine.getCamera().getReferenceX().divide(1 / zoom)));
+        });
+        keybinds.put(GLFW.GLFW_KEY_W, () -> {
+            Float zoom = engine.getCamera().getPos().getY() / zoomCoef;
+            engine.getCamera()
+                    .setPos(engine.getCamera().getPos().sub(engine.getCamera().getReferenceX().divide(1 / zoom)));
+        });
 
         // stopping the engine
         keybinds.put(GLFW.GLFW_KEY_ESCAPE, () -> engine.stop());

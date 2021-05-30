@@ -10,7 +10,7 @@ import com.sevenmap.data.parsers.osm.Structure.Metadata.Metadata;
 import com.sevenmap.data.parsers.osm.Structure.Node.Nd;
 import com.sevenmap.data.parsers.osm.Structure.Tag.Tag;
 
-public class Way implements HasTag{
+public class Way implements HasTag {
 
   @XMLAttribute(unique = true)
   private long id;

@@ -4,6 +4,13 @@
     "v": "route",
     "borderThickness": 12,
     "borderColor": "#2c3e50",
-    "color": "#2980b9"
+    "color": "#2c3e50"
+  },
+  {
+    "k": "type",
+    "v": "poly",
+    "borderThickness": 12,
+    "borderColor": "#7f8c8d",
+    "color": "#7f8c8d"
   }
 ]

@@ -422,6 +422,7 @@
           <include>**/*.png</include>
           <include>**/*.ttf</include>
           <include>**/*.osm</include>
+          <include>**/*.json</include>
         </includes>
       </resource>
     </resources>
