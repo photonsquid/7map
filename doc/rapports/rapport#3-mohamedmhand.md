@@ -7,7 +7,7 @@
 
 ## Travaux réalisés à la deuxiéme itération
 
-- création des dernières classes test pour l'application "7map"
+
 
 - terminer la classe "logger" qui permet de choisir 3 modes d'apparition des messages(console,fichier,sans messages).
 
