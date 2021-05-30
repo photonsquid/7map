@@ -276,7 +276,7 @@ public class OSM extends MapParser {
    */
   public void build() {
 
-    // On définit les nouvelles coordonnées de chaque noeud.
+    props.setBounds(rt.getBounds());
 
     HashMap<Long, Relation> rels = rt.getRelations();
     HashMap<Long, Way> ways = rt.getWays();
