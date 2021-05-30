@@ -6,9 +6,8 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
-
 public class Input {
-    
+
     private GLFWKeyCallback keyCB;
     private GLFWCursorPosCallback cursorPosCB;
     private GLFWMouseButtonCallback mouseClickCB;
@@ -17,17 +16,19 @@ public class Input {
     private boolean[] keyStates = new boolean[GLFW.GLFW_KEY_LAST];
     private boolean[] mouseBStates = new boolean[GLFW.GLFW_MOUSE_BUTTON_LAST];
     private double[] mousePos = new double[2];
-    private double[] scrollOffset = {0.0d, 0.0d};
+    private double[] scrollOffset = { 0.0d, 0.0d };
 
     public Input() {
-        keyCB = new GLFWKeyCallback(){ // invoke will be executed on any kb event
+        keyCB = new GLFWKeyCallback() { // invoke will be executed on any kb event
             @Override
             public void invoke(long window, int key, int scancode, int action, int mods) {
-                keyStates[key] = (action != GLFW.GLFW_RELEASE);
+                if (0 < key && key < GLFW.GLFW_KEY_LAST) {
+                    keyStates[key] = (action != GLFW.GLFW_RELEASE);
+                } // else ignore
             }
         };
 
-        cursorPosCB = new GLFWCursorPosCallback(){
+        cursorPosCB = new GLFWCursorPosCallback() {
             @Override
             public void invoke(long window, double xpos, double ypos) {
                 mousePos[0] = xpos;
@@ -35,14 +36,14 @@ public class Input {
             }
         };
 
-        mouseClickCB = new GLFWMouseButtonCallback(){
+        mouseClickCB = new GLFWMouseButtonCallback() {
             @Override
             public void invoke(long window, int button, int action, int mods) {
                 mouseBStates[button] = (action != GLFW.GLFW_RELEASE);
             }
         };
 
-        mouseScrollCB = new GLFWScrollCallback(){
+        mouseScrollCB = new GLFWScrollCallback() {
             @Override
             public void invoke(long window, double xoffset, double yoffset) {
                 scrollOffset[0] += xoffset;
@@ -51,7 +52,7 @@ public class Input {
         };
     }
 
-    // getters and setters 
+    // getters and setters
     public double getMouseX() {
         return mousePos[0];
     }
@@ -71,7 +72,7 @@ public class Input {
     public double[] getMousePos() {
         return mousePos;
     }
-    
+
     public GLFWKeyCallback getKeyCB() {
         return keyCB;
     }
@@ -101,8 +102,10 @@ public class Input {
     }
 
     /**
-     * Determine if the provided key is pressed (using standard GLFW predefined keys recommended).
-     * @param key key code 
+     * Determine if the provided key is pressed (using standard GLFW predefined keys
+     * recommended).
+     * 
+     * @param key key code
      * @return true if the key is down
      */
     public boolean isKeyDown(int key) {
@@ -110,8 +113,10 @@ public class Input {
     }
 
     /**
-     * Determine if the provided mouse button is pressed (using standard GLFW predefined buttons recommended).
-     * @param button button code 
+     * Determine if the provided mouse button is pressed (using standard GLFW
+     * predefined buttons recommended).
+     * 
+     * @param button button code
      * @return true if the button is down
      */
     public boolean isButtonDown(int button) {

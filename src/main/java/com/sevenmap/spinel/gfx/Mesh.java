@@ -15,7 +15,7 @@ public class Mesh {
     private int[] indices;
     private Material material;
     /**Vertex array object */
-    private int vao; 
+    private int vao;
     /**Position buffer object */
     private int pbo;
     /**Indices buffer object */

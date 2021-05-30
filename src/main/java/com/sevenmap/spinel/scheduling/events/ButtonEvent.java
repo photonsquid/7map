@@ -1,28 +1,14 @@
 package com.sevenmap.spinel.scheduling.events;
 
-import com.sevenmap.spinel.Engine;
-import com.sevenmap.spinel.Window;
-
 public class ButtonEvent extends Event {
     private int button;
 
     /**
      * Create a new Button event.
-     * @param window the window instance the event should be bound to
+     * 
      * @param button the button keycode
      */
-    public ButtonEvent(Window window, int button) {
-        super(window);
-        this.button = button;
-    }
-
-    /**
-     * Create a new Button event.
-     * @param engine the engine instance containing the window the event should be bound to
-     * @param button the button keycode
-     */
-    public ButtonEvent(Engine engine, int button) {
-        super(engine);
+    public ButtonEvent(int button) {
         this.button = button;
     }
 
@@ -56,8 +42,5 @@ public class ButtonEvent extends Event {
             return false;
         return true;
     }
-
-   
-    
 
 }

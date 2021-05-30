@@ -1,0 +1,51 @@
+@startuml diagram
+
+package com.sevenmap {
+    class App {
+        + {static} main(String[] args) : void
+    }
+    package core {
+        package cli {
+        }
+        package map {
+        }
+        package ui {
+        }
+        class Runtime {
+        }
+        class Loadable {
+        }
+    }
+    package data {
+        package objsept {
+        }
+        package parsers {
+        }
+        package styles {
+        }
+    }
+    package exceptions {
+    }
+
+    package spinel {
+        package elements {
+        }
+        package gfx {
+        }
+        package math {
+        }
+        package scheduling {
+        }
+        package utils {
+        }
+        class Engine implements java.lang.Runnable {
+        }
+        class Input {
+        }
+        class Window {
+        }
+    }
+}
+
+
+@enduml
