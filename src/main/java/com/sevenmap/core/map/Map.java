@@ -37,6 +37,11 @@ public class Map extends Loadable {
 
   }
 
+  public void reload() {
+    unload();
+    load();
+  }
+
   public void unload() {
     Engine engine = Engine.getInstance();
     for (PlainMap.Entry<Long, Item> entry : this.plainMap.entrySet()) {
