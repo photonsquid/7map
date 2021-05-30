@@ -13,5 +13,5 @@
 
   > Fonctionnalités gérées actuellement : 
   >
-  > - les classes test du team rendering avec "Hamid Oukhnini"
+  > 
   > - la classe "logger"
