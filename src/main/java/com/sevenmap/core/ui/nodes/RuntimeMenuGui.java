@@ -1,10 +1,13 @@
 package com.sevenmap.core.ui.nodes;
 
+import com.sevenmap.core.ui.UI;
 import com.sevenmap.core.ui.events.DbSearchEvent;
-import com.sevenmap.core.ui.events.FileOpeningEvent;
+import com.sevenmap.core.ui.events.FileLoadedEvent;
+import com.sevenmap.core.ui.events.ToggleThemeEvent;
 import com.sevenmap.core.ui.events.ZoomEvent;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.gui.GuiNode;
+import com.sevenmap.spinel.utils.FileChooser;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiInputTextFlags;
@@ -14,12 +17,20 @@ import imgui.type.ImString;
 public class RuntimeMenuGui extends GuiNode {
 
     ImString content = new ImString("");
+    private FileChooser fc;
+    private UI parentUI;
+    private boolean isDarkTheme;
+    private String file;
 
-    public RuntimeMenuGui() {
+    public RuntimeMenuGui(UI parentUI) {
+        super();
+        this.parentUI = parentUI;
     }
 
-    public RuntimeMenuGui(String name) {
+    public RuntimeMenuGui(UI parentUI, String name, Boolean isDarkTheme) {
         super(name);
+        this.parentUI = parentUI;
+        this.isDarkTheme = isDarkTheme;
     }
 
     @Override
@@ -59,8 +70,9 @@ public class RuntimeMenuGui extends GuiNode {
                 if (ImGui.menuItem("New")) {
                     System.out.println("Not implemented yet");
                 }
-                if (ImGui.menuItem("Open")) {
-                    Engine.getInstance().getWindow().throwEvent(new FileOpeningEvent());
+                if (ImGui.menuItem("Open") && parentUI.isReactive()) {
+                    fc = new FileChooser("*.osm");
+                    parentUI.toggleReactivity(); // block user interaction
                 }
                 if (ImGui.menuItem("Save")) {
                     System.out.println("Not implemented yet");
@@ -82,15 +94,30 @@ public class RuntimeMenuGui extends GuiNode {
             if (ImGui.beginMenu("View")) {
                 if (ImGui.menuItem("Fullscreen")) {
                 }
+                if (ImGui.menuItem(isDarkTheme ? "Light theme" : "Dark theme")) {
+                    isDarkTheme = !isDarkTheme;
+                    Engine.getInstance().getWindow().throwEvent(new ToggleThemeEvent());
+                }
                 ImGui.endMenu();
             }
             ImGui.endMainMenuBar();
         }
-
+        if (fc != null && fc.isDone() && !parentUI.isReactive()) {
+            // disable overlay (interaction allowed)
+            parentUI.toggleReactivity();
+            file = fc.getFilePath();
+            if (file != null) {
+                Engine.getInstance().getWindow().throwEvent(new FileLoadedEvent());
+            }
+        }
     }
 
     public String getSearchQuery() {
         return content.toString();
+    }
+
+    public String getFilePath() {
+        return file;
     }
 
 }

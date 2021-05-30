@@ -6,7 +6,7 @@ import com.sevenmap.core.Props.BUILD_TYPE;
 import com.sevenmap.core.map.Map;
 import com.sevenmap.core.ui.UI;
 import com.sevenmap.core.ui.events.FileLoadedEvent;
-import com.sevenmap.core.ui.events.FileOpeningEvent;
+import com.sevenmap.core.ui.events.ToggleThemeEvent;
 import com.sevenmap.core.ui.events.ZoomEvent;
 import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.math.Vector3f;
@@ -31,7 +31,7 @@ public class Runtime {
 
         map.load();
         gui.load();
-        gui.ldFileChooser();
+        gui.ldMapDisplay();
         armEvents();
 
         engine.getSceneRoot().tree();
@@ -39,7 +39,8 @@ public class Runtime {
         setup();
         engine.getCamera().setRot(new Vector3f(-90, 0, 0));
         engine.getCamera().setPos(new Vector3f(0, 10, 0));
-        engine.getWindow().setBgColor(new Color("#ecf0f1"));
+        String backGroundColor = props.getStyles().findGuiStyle(props.getTheme()).getWindowbg();
+        engine.getWindow().setBgColor(new Color(backGroundColor));
         engine.start();
     }
 
@@ -93,19 +94,17 @@ public class Runtime {
      */
     private void armEvents() {
         engine.getWindow().onEvent(new FileLoadedEvent(), () -> {
-            String fileName = gui.getMapLoadingLayer().getFilePath();
+            String fileName = gui.getRuntimeMenus().getFilePath();
             if (fileName != null) {
                 // TODO: change it to @kingussopp logger
                 System.out.printf("User chose file %s\n", fileName);
                 gui.ldMapDisplay();
-                // Unload old map if any
-                map.unload();
                 // Setup fileName to props
                 props.setMapFile(fileName);
                 // Warning the map API that it will be necessary to reload map from file
                 props.hasToBuild(BUILD_TYPE.FROM_FILE);
                 // Reload map
-                map.load();
+                map.reload();
             }
         });
         engine.getWindow().onEvent(new ZoomEvent(true), () -> {
@@ -127,10 +126,17 @@ public class Runtime {
             // update map
             map.update();
         });
-        engine.getWindow().onEvent(new FileOpeningEvent(), () -> {
-            // TODO : unload graphical components
-            gui.ldFileChooser();
-
+        engine.getWindow().onEvent(new ToggleThemeEvent(), () -> {
+            if (props.getTheme().equals("dark")) {
+                props.setTheme("light");
+            } else {
+                props.setTheme("dark");
+            }
+            props.hasToBuild(BUILD_TYPE.FROM_FILE);
+            String backGroundColor = props.getStyles().findGuiStyle(props.getTheme()).getWindowbg();
+            engine.getWindow().setBgColor(new Color(backGroundColor));
+            gui.load();
+            map.reload();
         });
     }
 }

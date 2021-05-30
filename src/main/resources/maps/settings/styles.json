@@ -1,16 +1,132 @@
-[
-  {
-    "k": "type",
-    "v": "route",
-    "borderThickness": 12,
-    "borderColor": "#2c3e50",
-    "color": "#2c3e50"
-  },
-  {
-    "k": "type",
-    "v": "poly",
-    "borderThickness": 12,
-    "borderColor": "#7f8c8d",
-    "color": "#7f8c8d"
-  }
-]
+{
+  "themes": [
+    {
+      "name": "dark",
+      "data": [
+        {
+          "k": "type",
+          "v": "route",
+          "borderThickness": 12,
+          "borderColor": "#ecf0f1",
+          "color": "#ecf0f1"
+        },
+        {
+          "k": "type",
+          "v": "poly",
+          "borderThickness": 12,
+          "borderColor": "#7f8c8d",
+          "color": "#7f8c8d"
+        }
+      ],
+      "gui": {
+        "text": "#ecf0f1",
+        "textdisabled": "#bdc3c7",
+        "windowbg": "#2c3e50",
+        "childwindowbg": "#34495e",
+        "popupbg": "#34495e",
+        "border": "#2c3e50",
+        "bordershadow": "#2c3e50",
+        "framebg": "#2980b9",
+        "framebghovered": "#2980b9",
+        "framebgactive": "#2980b9",
+        "titlebg": "#2980b9",
+        "titlebgactive": "#2980b9",
+        "titlebgcollapsed": "#2980b9",
+        "menubarbg": "#2980b9",
+        "scrollbarbg": "#2980b9",
+        "scrollbargrab": "#2980b9",
+        "scrollbargrabhovered": "#2980b9",
+        "scrollbargrabactive": "#2980b9",
+        "combobg": "#2980b9",
+        "checkmark": "#27ae60",
+        "slidergrab": "#2980b9",
+        "slidergrabactive": "#2980b9",
+        "button": "#2980b9",
+        "buttonhovered": "#27ae60",
+        "buttonactive": "#27ae60",
+        "header": "#8e44ad",
+        "headerhovered": "#8e44ad",
+        "headeractive": "#8e44ad",
+        "separator": "#95a5a6",
+        "separatorhovered": "#95a5a6",
+        "separatoractive": "#95a5a6",
+        "resizegrip": "#95a5a6",
+        "resizegriphovered": "#95a5a6",
+        "resizegripactive": "#95a5a6",
+        "closebutton": "#c0392b",
+        "closebuttonhovered": "#c0392b",
+        "closebuttonactive": "#c0392b",
+        "plotlines": "#16a085",
+        "plotlineshovered": "#16a085",
+        "plothistogram": "#1abc9c",
+        "plothistogramhovered": "#1abc9c",
+        "textselectedbg": "#7f8c8d",
+        "modalwindowdarkening": "#f39c12"
+      }
+    },
+    {
+      "name": "light",
+      "data": [
+        {
+          "k": "type",
+          "v": "route",
+          "borderThickness": 12,
+          "borderColor": "#2c3e50",
+          "color": "#2c3e50"
+        },
+        {
+          "k": "type",
+          "v": "poly",
+          "borderThickness": 12,
+          "borderColor": "#95a5a6",
+          "color": "#95a5a6"
+        }
+      ],
+      "gui": {
+        "text": "#34495e",
+        "textdisabled": "#95a5a6",
+        "windowbg": "#ecf0f1",
+        "childwindowbg": "#d6d6d6",
+        "popupbg": "#d6d6d6",
+        "border": "#ecf0f1",
+        "bordershadow": "#ecf0f1",
+        "framebg": "#3498db",
+        "framebghovered": "#3498db",
+        "framebgactive": "#3498db",
+        "titlebg": "#3498db",
+        "titlebgactive": "#3498db",
+        "titlebgcollapsed": "#3498db",
+        "menubarbg": "#3498db",
+        "scrollbarbg": "#3498db",
+        "scrollbargrab": "#3498db",
+        "scrollbargrabhovered": "#3498db",
+        "scrollbargrabactive": "#3498db",
+        "combobg": "#3498db",
+        "checkmark": "#2ecc71",
+        "slidergrab": "#3498db",
+        "slidergrabactive": "#3498db",
+        "button": "#3498db",
+        "buttonhovered": "#2ecc71",
+        "buttonactive": "#2ecc71",
+        "header": "#879a9c",
+        "headerhovered": "#879a9c",
+        "headeractive": "#879a9c",
+        "separator": "#95a5a6",
+        "separatorhovered": "#95a5a6",
+        "separatoractive": "#95a5a6",
+        "resizegrip": "#95a5a6",
+        "resizegriphovered": "#95a5a6",
+        "resizegripactive": "#95a5a6",
+        "closebutton": "#e74c3c",
+        "closebuttonhovered": "#e74c3c",
+        "closebuttonactive": "#e74c3c",
+        "plotlines": "#16a085",
+        "plotlineshovered": "#16a085",
+        "plothistogram": "#1abc9c",
+        "plothistogramhovered": "#1abc9c",
+        "textselectedbg": "#7f8c8d",
+        "modalwindowdarkening": "#f39c12"
+      }
+    }
+  ]
+}

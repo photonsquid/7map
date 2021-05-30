@@ -284,7 +284,7 @@ public class OSM extends MapParser {
     generatedMap = new PlainMap<Long, Item>();
 
     // Parse styles.json
-    if (props.getStyles().size() == 0) {
+    if (props.getStyles() == null) {
       String filePath = props.getAppDataPath() + props.getSettingFile();
       Styles st = JsonParser.parse(filePath, Styles.class);
       this.props.setStyles(st);
@@ -324,8 +324,7 @@ public class OSM extends MapParser {
       Relation rel = entry.getValue();
 
       String type = rel.findTag("type").getValue();
-
-      AssetStyle st = props.getStyles().findStyle(type);
+      AssetStyle st = props.getStyles().findStyle(type, props.getTheme());
 
       // We don't want to handle objects that we didn't implement yet
       if (st != null) {
@@ -351,8 +350,10 @@ public class OSM extends MapParser {
       Long id = entry.getKey();
       Way wy = entry.getValue();
 
-      AssetStyle routeStyle = props.getStyles().findStyle("route");
-      AssetStyle polyStyle = props.getStyles().findStyle("poly");
+      String theme = props.getTheme();
+
+      AssetStyle routeStyle = props.getStyles().findStyle("route", theme);
+      AssetStyle polyStyle = props.getStyles().findStyle("poly", theme);
 
       // We don't want to handle objects that we didn't implemented yet
       if (routeStyle != null && polyStyle != null) {

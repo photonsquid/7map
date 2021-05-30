@@ -2,18 +2,15 @@ package com.sevenmap.core.ui;
 
 import com.sevenmap.core.Loadable;
 import com.sevenmap.core.Props;
-import com.sevenmap.core.ui.nodes.FileChooserGui;
 import com.sevenmap.core.ui.nodes.RuntimeMenuGui;
 import com.sevenmap.spinel.elements.RootNode;
 import com.sevenmap.spinel.elements.gui.GuiLayer;
 
 public class UI extends Loadable {
-    private FileChooserGui mapLoadingLayer;
     private RuntimeMenuGui runtimeMenus;
     private GuiLayer searchBar;
 
     private boolean isReactive = true;
-    private Props props;
 
     /**
      * Create a new UI and initialize its components.
@@ -22,15 +19,12 @@ public class UI extends Loadable {
      */
     public UI(RootNode root, Props props) {
         super(props);
-        mapLoadingLayer = new FileChooserGui(this, "Map Loading");
-        runtimeMenus = new RuntimeMenuGui("Runtime Menus");
+        runtimeMenus = new RuntimeMenuGui(this, "Runtime Menus", props.getTheme().equals("dark"));
         searchBar = new GuiLayer("Search bar");
 
-        mapLoadingLayer.setParent(root);
         runtimeMenus.setParent(root);
         searchBar.setParent(root);
 
-        mapLoadingLayer.hide();
         runtimeMenus.hide();
         searchBar.hide();
     }
@@ -40,22 +34,13 @@ public class UI extends Loadable {
      */
     @Override
     public void load() {
-        new Style();
-    }
-
-    /**
-     * Load file chooser UI.
-     */
-    public void ldFileChooser() {
-        hideAll();
-        mapLoadingLayer.show();
+        new Style(props);
     }
 
     /**
      * Load map display UI.
      */
     public void ldMapDisplay() {
-        mapLoadingLayer.hide();
         runtimeMenus.show();
     }
 
@@ -75,16 +60,6 @@ public class UI extends Loadable {
      */
     public boolean isReactive() {
         return isReactive;
-    }
-
-    private void hideAll() {
-        mapLoadingLayer.hide();
-        runtimeMenus.hide();
-        searchBar.hide();
-    }
-
-    public FileChooserGui getMapLoadingLayer() {
-        return mapLoadingLayer;
     }
 
     public RuntimeMenuGui getRuntimeMenus() {

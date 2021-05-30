@@ -31,6 +31,7 @@ public class Props {
   private Double maxLat;
 
   private Styles styles;
+  private String theme;
 
   private Integer zoom;
   private Integer zoomStep;
@@ -62,7 +63,7 @@ public class Props {
     DatabseURL = "";
     hasToBuild = BUILD_TYPE.NONE;
 
-    styles = new Styles();
+    theme = "dark";
 
   }
 
@@ -87,6 +88,14 @@ public class Props {
     this.maxLon = bd.getMaxlon();
   }
 
+  public String getTheme() {
+    return this.theme;
+  }
+
+  public void setTheme(String theme) {
+    this.theme = theme;
+  }
+
   public String getSettingFile() {
     return this.SettingFile;
   }
@@ -101,31 +110,6 @@ public class Props {
 
   public void setAppDataPath(String AppDataPath) {
     this.AppDataPath = AppDataPath;
-  }
-
-  public Props(String SettingFile, String MapFile, String defaultMapFile, String AppDataPath, String OSM_API_ROOT_URL,
-      String DatabseURL, BUILD_TYPE hasToBuild, Double defaultMinLon, Double defaultMaxLon, Double defaultMinLat,
-      Double defaultMaxLat, Double minLon, Double maxLon, Double minLat, Double maxLat, Styles styles, Integer zoom,
-      Integer zoomStep, URL downloadURL) {
-    this.SettingFile = SettingFile;
-    this.MapFile = MapFile;
-    this.defaultMapFile = defaultMapFile;
-    this.AppDataPath = AppDataPath;
-    this.OSM_API_ROOT_URL = OSM_API_ROOT_URL;
-    this.DatabseURL = DatabseURL;
-    this.hasToBuild = hasToBuild;
-    this.defaultMinLon = defaultMinLon;
-    this.defaultMaxLon = defaultMaxLon;
-    this.defaultMinLat = defaultMinLat;
-    this.defaultMaxLat = defaultMaxLat;
-    this.minLon = minLon;
-    this.maxLon = maxLon;
-    this.minLat = minLat;
-    this.maxLat = maxLat;
-    this.styles = styles;
-    this.zoom = zoom;
-    this.zoomStep = zoomStep;
-    this.downloadURL = downloadURL;
   }
 
   public String getMapFile() {
