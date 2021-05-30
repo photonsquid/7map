@@ -55,9 +55,9 @@ Ou via l'interface graphique en cliquant sur le bouton `Browse`, ou `File > Open
 
 ## Option du CLI
 
- - `-B` ou `--build` Forcer le chargement d'une carte. Si aucun chemin n'est donné, via l'option `-F`, la carte par défaut sera affichée.
- - `-F` ou `--fileName` `[path/to/map.osm]`  Charge le fichier passé en paramètre contenant les données d'une carte OSM et le compile pour l'affichage.
- - `-U` ou `--url` `[url/of/a/osm/file]`  Télécharge le fichier *.osm et le compile pour l'affichage.
+- `-B` ou `--build` Forcer le chargement d'une carte. Si aucun chemin n'est donné, via l'option `-F`, la carte par défaut sera affichée.
+- `-F` ou `--fileName` `[path/to/map.osm]`  Charge le fichier passé en paramètre contenant les données d'une carte OSM et le compile pour l'affichage.
+- `-U` ou `--url` `[url/of/a/osm/file]`  Télécharge le fichier *.osm et le compile pour l'affichage.
 
 ## Éditer les styles de la carte
 
