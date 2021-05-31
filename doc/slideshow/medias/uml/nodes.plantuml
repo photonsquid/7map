@@ -1,0 +1,26 @@
+@startuml nodes
+
+package elements {
+    class RootNode {}
+    class Node extends RootNode {}
+    package gui {
+        class GuiLayer extends GuiNode {}
+        class GuiNode extends Node {}
+    }
+    package geom {
+        class GeomNode extends Node {}
+        class Item extends GeomNode {}
+        class Camera extends GeomNode {}
+    }
+
+
+}
+package gfx {
+    class GuiRenderer {}
+    class SceneRenderer {}
+}
+
+GuiRenderer --|> RootNode
+SceneRenderer --|> RootNode
+
+@enduml

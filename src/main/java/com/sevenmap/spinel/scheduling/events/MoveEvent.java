@@ -1,8 +1,5 @@
 package com.sevenmap.spinel.scheduling.events;
 
-import com.sevenmap.spinel.Engine;
-import com.sevenmap.spinel.Window;
-
 import org.lwjgl.glfw.GLFW;
 
 public class MoveEvent extends Event {

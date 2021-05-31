@@ -52,7 +52,7 @@ public class TaskMgr extends FrameObject {
     }
 
     /**
-     * Add an event to the [@code tasks] list.
+     * Add an event to the {@code tasks} list.
      * 
      * @param event event type
      * @return associated {@code List<Task>} task ArrayList

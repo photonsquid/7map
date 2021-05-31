@@ -1,0 +1,16 @@
+@startuml events
+package scheduling {
+    class TaskMgr {}
+    class Task {}
+    package events {
+        class Event {}
+        class EmptyEvent extends Event {}
+        class ButtonEvent extends Event {}
+        class ExitOverrideEvent extends Event {}
+    }
+}
+
+TaskMgr *-- Task
+TaskMgr *-- Event
+
+@enduml

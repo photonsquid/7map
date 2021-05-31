@@ -1,24 +1,19 @@
 @startuml spinel
 package spinel{
-    package "utils" {}
-    package "scheduling" {}
-    package "math" {}
-    package "gfx" {}
-    package "elements" {}
-    class "Window"
-    class "Input"
-    class "Engine"
+    package utils {}
+    package scheduling {}
+    package math {}
+    package gfx {}
+    package elements {
+    }
+    class Window
+    class Input
+    class Engine implements java.lang.Runnable
 
     utils <-[hidden]- Window
     math <-[hidden]- Engine
-    scheduling <-[hidden]- Input
+    elements <-[hidden]- Input
 }
-
-package java.lang {
-    interface Runnable
-}
-
-Engine .left.|> Runnable
 
 
 

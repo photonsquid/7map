@@ -1,0 +1,22 @@
+@startuml eventSequence
+
+participant EngineThread
+participant UserThread
+participant Window
+participant TaskMgr
+EngineThread -> Event : isActive()
+EngineThread <- Event : user-defined
+note left: frame 0
+EngineThread -> Event : isForcedActive()
+EngineThread <- Event : false
+UserThread -> Window : throwEvent(Event)
+Window -> TaskMgr : flagActive(Event)
+TaskMgr -> Event : setForcedActive(true)
+EngineThread -> Event : isActive()
+EngineThread <- Event : user-defined
+note left: frame 1
+EngineThread -> Event : isForcedActive()
+EngineThread <- Event : true
+
+
+@enduml
