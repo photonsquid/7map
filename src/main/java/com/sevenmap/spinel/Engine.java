@@ -2,12 +2,12 @@ package com.sevenmap.spinel;
 
 import com.sevenmap.exceptions.IllegalInstanceException;
 import com.sevenmap.spinel.elements.geom.Camera;
+import com.sevenmap.spinel.gfx.Color;
 import com.sevenmap.spinel.gfx.GuiRenderer;
 import com.sevenmap.spinel.gfx.SceneRenderer;
 import com.sevenmap.spinel.gfx.Shader;
 import com.sevenmap.spinel.math.Vector3f;
 import com.sevenmap.spinel.scheduling.events.ExitOverrideEvent;
-import com.sevenmap.spinel.utils.Color;
 
 public class Engine implements Runnable {
     private static Engine instance;

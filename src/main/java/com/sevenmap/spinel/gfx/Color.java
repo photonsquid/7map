@@ -1,4 +1,4 @@
-package com.sevenmap.spinel.utils;
+package com.sevenmap.spinel.gfx;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

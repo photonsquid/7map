@@ -9,8 +9,8 @@ import com.sevenmap.core.ui.events.FileLoadedEvent;
 import com.sevenmap.core.ui.events.ToggleThemeEvent;
 import com.sevenmap.core.ui.events.ZoomEvent;
 import com.sevenmap.spinel.Engine;
+import com.sevenmap.spinel.gfx.Color;
 import com.sevenmap.spinel.math.Vector3f;
-import com.sevenmap.spinel.utils.Color;
 
 import org.lwjgl.glfw.GLFW;
 

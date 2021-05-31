@@ -1,10 +1,10 @@
 package com.sevenmap.spinel.elements.colliders;
 
 import com.sevenmap.spinel.elements.geom.Item;
+import com.sevenmap.spinel.gfx.Color;
 import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;
 import com.sevenmap.spinel.math.Vector3f;
-import com.sevenmap.spinel.utils.Color;
 
 public class PlaneCollider extends Collider {
     private static float size = 40;

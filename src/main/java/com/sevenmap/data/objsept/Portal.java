@@ -6,10 +6,10 @@ import java.util.List;
 import com.sevenmap.core.ui.Style;
 import com.sevenmap.data.styles.AssetStyle;
 import com.sevenmap.spinel.elements.geom.Item;
+import com.sevenmap.spinel.gfx.Color;
 import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;
 import com.sevenmap.spinel.math.Vector3f;
-import com.sevenmap.spinel.utils.Color;
 
 public class Portal {
 
