@@ -12,10 +12,10 @@ import com.sevenmap.spinel.Engine;
 import com.sevenmap.spinel.elements.colliders.PlaneCollider;
 import com.sevenmap.spinel.elements.geom.Item;
 import com.sevenmap.spinel.elements.gui.GuiNode;
+import com.sevenmap.spinel.gfx.Color;
 import com.sevenmap.spinel.gfx.Mesh;
 import com.sevenmap.spinel.gfx.Vertex;
 import com.sevenmap.spinel.math.Vector3f;
-import com.sevenmap.spinel.utils.Color;
 
 import org.lwjgl.glfw.GLFW;
 

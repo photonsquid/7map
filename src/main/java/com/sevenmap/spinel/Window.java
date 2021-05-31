@@ -1,6 +1,7 @@
 package com.sevenmap.spinel;
 
 import com.sevenmap.exceptions.InitError;
+import com.sevenmap.spinel.gfx.Color;
 import com.sevenmap.spinel.math.Vector3f;
 import com.sevenmap.spinel.scheduling.Task;
 import com.sevenmap.spinel.scheduling.TaskMgr;
@@ -8,7 +9,6 @@ import com.sevenmap.spinel.scheduling.events.ButtonEvent;
 import com.sevenmap.spinel.scheduling.events.EmptyEvent;
 import com.sevenmap.spinel.scheduling.events.Event;
 import com.sevenmap.spinel.scheduling.events.KeyEvent;
-import com.sevenmap.spinel.utils.Color;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
