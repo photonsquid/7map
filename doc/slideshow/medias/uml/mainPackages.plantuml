@@ -1,0 +1,32 @@
+@startuml mainPackages
+package src{
+    together {
+        package main.java.com.sevenmap{
+            together {
+                package "spinel" {}
+                package "data" {}
+            }
+            together {
+                package "core" {}
+                class App{
+                    + main()
+                }
+            }
+            
+            spinel <-- core
+            data <-- core
+            core <-right- App
+        }
+
+        package test.java.com.sevenmap {
+            package "spinel" as testSpinnel {}
+            package "data" as testData  {}
+            package "core" as testCore {}
+            testData <-[hidden]- testCore
+        }
+    }
+}
+
+
+
+@enduml

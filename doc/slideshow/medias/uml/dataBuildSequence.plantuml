@@ -1,0 +1,13 @@
+@startuml dataBuildSequenceOSM
+
+Map -> OSMParser : parse(props)
+OSMParser <-> OSMParser --++ : XML -> OSM
+
+OSMParser -> ObjseptParser ++ : parse(Coords, Style)
+OSMParser <- ObjseptParser -- : Items (spinel)
+
+activate OSMParser
+deactivate OSMParser
+Map <- OSMParser -- : PlainMap
+
+@enduml

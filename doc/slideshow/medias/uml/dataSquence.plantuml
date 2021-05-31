@@ -1,0 +1,10 @@
+@startuml parsingWorkflow
+
+Runtime -> props : initialize()
+Runtime -> StylesParser ++ : load()
+props <- StylesParser -- : styles
+Runtime -> Map: load(props)
+Map -> MapParser ++: parse(props)
+Runtime <- MapParser --: PlainMap
+
+@enduml

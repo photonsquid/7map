@@ -1,0 +1,44 @@
+@startuml data
+package data{
+    package "parsers" {
+        abstract Parser
+
+        class JsonParser
+        class XMLParser
+        abstract MapParser
+        class "StyleParser"
+        class "OSMParser"
+        class "GeojsonParser"
+        class "ObjseptParser"
+
+        JsonParser -right-|>Parser
+        XMLParser -left-|>Parser
+        MapParser -up-|>Parser
+        OSMParser -left-|>MapParser
+        GeojsonParser -right-|>MapParser
+        OSMParser -up->XMLParser
+        GeojsonParser -up->JsonParser
+        StyleParser -down-|>JsonParser
+        ObjseptParser -down-|>Parser
+    }
+    together {
+        package "objespt" as strucObjsept {}
+        package "geojson" as strucGeojson {}
+        package "osm" as strucOSM {}
+        package "styles" as strucStyle {}
+    }
+    
+    strucGeojson <-[hidden]- strucOSM
+    strucOSM <-[hidden]- strucStyle
+    strucStyle <-[hidden]- strucObjsept
+
+}   
+
+' GeojsonParser <-- strucGeojson
+' OSMParser <-- strucOSM
+' StyleParser <-- strucStyle
+
+
+
+
+@enduml

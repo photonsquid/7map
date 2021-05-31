@@ -1,0 +1,25 @@
+@startuml spinel
+package spinel{
+    package "utils" {}
+    package "scheduling" {}
+    package "math" {}
+    package "gfx" {}
+    package "elements" {}
+    class "Window"
+    class "Input"
+    class "Engine"
+
+    utils <-[hidden]- Window
+    math <-[hidden]- Engine
+    scheduling <-[hidden]- Input
+}
+
+package java.lang {
+    interface Runnable
+}
+
+Engine .left.|> Runnable
+
+
+
+@enduml
