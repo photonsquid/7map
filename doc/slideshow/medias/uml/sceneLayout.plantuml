@@ -1,0 +1,9 @@
+@startmindmap a
+* SceneRenderer
+** Node
+*** GeomNode
+**** Item
+*** GeomNode
+**** Item
+** Camera
+@endmindmap

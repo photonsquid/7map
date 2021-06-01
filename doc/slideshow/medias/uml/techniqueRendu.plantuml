@@ -1,0 +1,8 @@
+@startuml actor
+
+(*) -right-> "First Action" 
+(*) -right-> "SAction"
+"First Action" -right-> (*)
+
+"First Action" -[hidden]-> SAction
+@enduml

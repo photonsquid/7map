@@ -49,4 +49,3 @@
 
 - Enfin, aucun moteur 3D n'est complet sans une api d'affichage de menus et de texte, c'est pourquoi on a choisi d'intégrer dear ImGui (prononcer "dier aiemgyui") pour pouvoir facilement intéragir avec l'utilisateur
 - expliciter le schéma d'arborescence
-

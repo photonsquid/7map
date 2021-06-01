@@ -1,0 +1,11 @@
+@startmindmap sceneLayoutGUI
+* GuiRenderer
+** Node
+*** GuiNode
+**** GuiLayer
+**** GuiLayer
+*** GuiNode
+**** GuiLayer
+**** GuiLayer
+** GuiLayer
+@endmindmap

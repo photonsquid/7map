@@ -3,8 +3,8 @@
 Map -> OSMParser : parse(props)
 OSMParser <-> OSMParser --++ : XML -> OSM
 
-OSMParser -> ObjseptParser ++ : parse(Coords, Style)
-OSMParser <- ObjseptParser -- : Items (spinel)
+OSMParser -> PortalParser ++ : parse(Coords, Style)
+OSMParser <- PortalParser -- : Items (spinel)
 
 activate OSMParser
 deactivate OSMParser
