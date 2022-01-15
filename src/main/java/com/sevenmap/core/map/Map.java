@@ -5,8 +5,8 @@ import com.sevenmap.core.Props;
 import com.sevenmap.core.Props.BUILD_TYPE;
 import com.sevenmap.data.objsept.PlainMap;
 import com.sevenmap.data.parsers.MapParser;
-import com.sevenmap.spinel.Engine;
-import com.sevenmap.spinel.elements.geom.Item;
+import io.github.spinel.Engine;
+import io.github.spinel.elements.geom.Item;
 
 public class Map extends Loadable {
   private PlainMap<Long, Item> plainMap;

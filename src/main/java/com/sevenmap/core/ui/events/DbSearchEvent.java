@@ -1,7 +1,7 @@
 package com.sevenmap.core.ui.events;
 
-import com.sevenmap.spinel.Engine;
-import com.sevenmap.spinel.scheduling.events.Event;
+import io.github.spinel.Engine;
+import io.github.spinel.scheduling.events.Event;
 
 public class DbSearchEvent extends Event {
 

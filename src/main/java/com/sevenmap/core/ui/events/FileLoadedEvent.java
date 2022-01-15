@@ -1,6 +1,6 @@
 package com.sevenmap.core.ui.events;
 
-import com.sevenmap.spinel.scheduling.events.Event;
+import io.github.spinel.scheduling.events.Event;
 
 public class FileLoadedEvent extends Event {
 

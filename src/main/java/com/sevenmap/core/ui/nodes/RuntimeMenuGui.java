@@ -5,9 +5,9 @@ import com.sevenmap.core.ui.events.DbSearchEvent;
 import com.sevenmap.core.ui.events.FileLoadedEvent;
 import com.sevenmap.core.ui.events.ToggleThemeEvent;
 import com.sevenmap.core.ui.events.ZoomEvent;
-import com.sevenmap.spinel.Engine;
-import com.sevenmap.spinel.elements.gui.GuiNode;
-import com.sevenmap.spinel.utils.FileChooser;
+import io.github.spinel.Engine;
+import io.github.spinel.elements.gui.GuiNode;
+import io.github.spinel.utils.FileChooser;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiInputTextFlags;

@@ -2,8 +2,8 @@ package com.sevenmap.core.ui;
 
 import com.sevenmap.core.Props;
 import com.sevenmap.data.styles.GuiStyle;
-import com.sevenmap.spinel.gfx.Color;
-import com.sevenmap.spinel.math.Vector3f;
+import io.github.spinel.gfx.Color;
+import io.github.spinel.math.vector.Vector3f;
 
 import imgui.ImGui;
 import imgui.ImGuiStyle;

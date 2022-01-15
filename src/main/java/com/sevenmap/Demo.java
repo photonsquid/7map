@@ -8,14 +8,14 @@ import java.util.Map;
 import com.sevenmap.core.ui.nodes.PrototypeGui;
 import com.sevenmap.data.objsept.Portal;
 import com.sevenmap.data.styles.AssetStyle;
-import com.sevenmap.spinel.Engine;
-import com.sevenmap.spinel.elements.colliders.PlaneCollider;
-import com.sevenmap.spinel.elements.geom.Item;
-import com.sevenmap.spinel.elements.gui.GuiNode;
-import com.sevenmap.spinel.gfx.Color;
-import com.sevenmap.spinel.gfx.Mesh;
-import com.sevenmap.spinel.gfx.Vertex;
-import com.sevenmap.spinel.math.Vector3f;
+import io.github.spinel.Engine;
+import io.github.spinel.elements.colliders.PlaneCollider;
+import io.github.spinel.elements.geom.Item;
+import io.github.spinel.elements.gui.GuiNode;
+import io.github.spinel.gfx.Color;
+import io.github.spinel.gfx.Mesh;
+import io.github.spinel.gfx.Vertex;
+import io.github.spinel.math.vector.Vector3f;
 
 import org.lwjgl.glfw.GLFW;
 
