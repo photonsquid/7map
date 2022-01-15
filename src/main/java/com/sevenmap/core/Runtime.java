@@ -8,10 +8,9 @@ import com.sevenmap.core.ui.UI;
 import com.sevenmap.core.ui.events.FileLoadedEvent;
 import com.sevenmap.core.ui.events.ToggleThemeEvent;
 import com.sevenmap.core.ui.events.ZoomEvent;
-import com.sevenmap.spinel.Engine;
-import com.sevenmap.spinel.gfx.Color;
-import com.sevenmap.spinel.math.Vector3f;
-
+import io.github.spinel.Engine;
+import io.github.spinel.gfx.Color;
+import io.github.spinel.math.vector.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 public class Runtime {

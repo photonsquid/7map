@@ -28,8 +28,8 @@ import com.sevenmap.data.parsers.osm.Structure.Node.Node;
 import com.sevenmap.data.parsers.osm.Structure.Relation.Relation;
 import com.sevenmap.data.parsers.osm.Structure.Way.Way;
 import com.sevenmap.data.styles.AssetStyle;
-import com.sevenmap.spinel.elements.geom.Item;
-import com.sevenmap.spinel.math.Vector3f;
+import io.github.spinel.elements.geom.Item;
+import io.github.spinel.math.vector.Vector3f;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.jdom.Element;
@@ -280,8 +280,6 @@ public class OSM extends MapParser {
     HashMap<Long, Way> ways = rt.getWays();
     HashMap<Long, Node> nodes = rt.getNodes();
     generatedMap = new PlainMap<Long, Item>();
-
-    
 
     // 1. iterate on all relations and build them
     buildRelations(rels);

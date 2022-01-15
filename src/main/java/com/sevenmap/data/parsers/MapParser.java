@@ -16,8 +16,8 @@ import com.sevenmap.data.parsers.geojson.GeoJson;
 import com.sevenmap.data.parsers.json.JsonParser;
 import com.sevenmap.data.parsers.osm.OSM;
 import com.sevenmap.data.styles.Styles;
-import com.sevenmap.spinel.elements.geom.Item;
-import com.sevenmap.spinel.math.Vector3f;
+import io.github.spinel.elements.geom.Item;
+import io.github.spinel.math.vector.Vector3f;
 
 import org.apache.commons.io.FilenameUtils;
 

@@ -3,8 +3,8 @@ package com.sevenmap.core.ui;
 import com.sevenmap.core.Loadable;
 import com.sevenmap.core.Props;
 import com.sevenmap.core.ui.nodes.RuntimeMenuGui;
-import com.sevenmap.spinel.elements.RootNode;
-import com.sevenmap.spinel.elements.gui.GuiLayer;
+import io.github.spinel.elements.RootNode;
+import io.github.spinel.elements.gui.GuiLayer;
 
 public class UI extends Loadable {
     private RuntimeMenuGui runtimeMenus;

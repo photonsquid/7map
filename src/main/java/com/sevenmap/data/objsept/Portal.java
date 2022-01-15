@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.sevenmap.core.ui.Style;
 import com.sevenmap.data.styles.AssetStyle;
-import com.sevenmap.spinel.elements.geom.Item;
-import com.sevenmap.spinel.gfx.Color;
-import com.sevenmap.spinel.gfx.Mesh;
-import com.sevenmap.spinel.gfx.Vertex;
-import com.sevenmap.spinel.math.Vector3f;
+import io.github.spinel.elements.geom.Item;
+import io.github.spinel.gfx.Color;
+import io.github.spinel.gfx.Mesh;
+import io.github.spinel.gfx.Vertex;
+import io.github.spinel.math.vector.Vector3f;
 
 public class Portal {
 
@@ -41,14 +41,14 @@ public class Portal {
 
                         // create vertices
                         // - left border
-                        vertices.add(new Vertex(roadData.get(i).add(lateral.multiply(roadWidth / 2 + borderWidth)),
+                        vertices.add(new Vertex(roadData.get(i).add(lateral.product(roadWidth / 2 + borderWidth)),
                                         borderColor));
                         // - left roadside
-                        vertices.add(new Vertex(roadData.get(i).add(lateral.multiply(roadWidth / 2)), roadColor));
+                        vertices.add(new Vertex(roadData.get(i).add(lateral.product(roadWidth / 2)), roadColor));
                         // - right roadside
-                        vertices.add(new Vertex(roadData.get(i).add(lateral.multiply(-roadWidth / 2)), roadColor));
+                        vertices.add(new Vertex(roadData.get(i).add(lateral.product(-roadWidth / 2)), roadColor));
                         // - right border
-                        vertices.add(new Vertex(roadData.get(i).add(lateral.multiply(-roadWidth / 2 - borderWidth)),
+                        vertices.add(new Vertex(roadData.get(i).add(lateral.product(-roadWidth / 2 - borderWidth)),
                                         borderColor));
 
                         // left border quad
@@ -85,16 +85,16 @@ public class Portal {
                 // orthogonal vector (normalized)
                 Vector3f lateral = new Vector3f(a, b, c);
                 vertices.add(new Vertex(
-                                roadData.get(roadData.size() - 1).add(lateral.multiply(roadWidth / 2 + borderWidth)),
+                                roadData.get(roadData.size() - 1).add(lateral.product(roadWidth / 2 + borderWidth)),
                                 borderColor)); // left border
-                vertices.add(new Vertex(roadData.get(roadData.size() - 1).add(lateral.multiply(roadWidth / 2)),
+                vertices.add(new Vertex(roadData.get(roadData.size() - 1).add(lateral.product(roadWidth / 2)),
                                 roadColor)); // left
                                              // roadside
-                vertices.add(new Vertex(roadData.get(roadData.size() - 1).add(lateral.multiply(-roadWidth / 2)),
+                vertices.add(new Vertex(roadData.get(roadData.size() - 1).add(lateral.product(-roadWidth / 2)),
                                 roadColor)); // right
                                              // roadside
                 vertices.add(new Vertex(
-                                roadData.get(roadData.size() - 1).add(lateral.multiply(-roadWidth / 2 - borderWidth)),
+                                roadData.get(roadData.size() - 1).add(lateral.product(-roadWidth / 2 - borderWidth)),
                                 borderColor)); // right border
 
                 // create mesh and Item
