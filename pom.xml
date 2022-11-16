@@ -19,7 +19,7 @@
     <imgui.java.version>1.82.2</imgui.java.version>
     <lwjgl.natives>natives-windows</lwjgl.natives>
 
-    <jackson.version>2.12.3</jackson.version>
+    <jackson.version>2.12.7.1</jackson.version>
   </properties>
 
   <dependencies>
