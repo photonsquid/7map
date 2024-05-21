@@ -16,6 +16,10 @@ An app for editing and reading maps from your computer.
 
 ## Project advancement
 
+> ⚠️ Important note
+> 
+> This project is archived and will no longer be updated nor improved from now on. The code remains free to access and reuse if needed, but no technical support will be provided.
+
 The App is able to display maps in OSM format.
 
 ## Screenshots
